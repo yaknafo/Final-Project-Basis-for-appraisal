@@ -38,6 +38,15 @@ namespace BasisForAppraisal_finalProject.Controllers
             var q = b.GetFormWithQuestion(id);
             return View(q);
         }
+        
+       public void deleteQustion(int formID, int quesNumber)
+        {
+            var b = new FormManager();
+            b.deleteQustion(formID, quesNumber);
+
+        }
+
+
 
 	}
 }

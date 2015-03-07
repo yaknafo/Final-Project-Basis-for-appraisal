@@ -9,8 +9,8 @@
             @Html.DisplayFor(x => x.QuestionId)
             @Html.EditorFor(x => x.Title)
             </div>
-            @Html.ActionLink("Edit", "Add", new { @id = Model.QuestionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.QuestionId })
+            @Html.ActionLink("Edit", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) |
+            @Html.ActionLink("Delete", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
         <tr dir="rtl">
 
             <br />
