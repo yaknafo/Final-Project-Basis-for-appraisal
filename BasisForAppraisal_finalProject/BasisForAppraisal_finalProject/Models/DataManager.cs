@@ -52,6 +52,44 @@ namespace BasisForAppraisal_finalProject.Models
             return form;
         }
 
-     
+        //--------------------------------   SAVE Method -----------------------------
+
+        public void saveAnswerToDB(List<tbl_IntentionalAnswer> answers)
+        {
+            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(answers);
+            manager.SubmitChanges();
+        }
+
+        public void saveFormToDB(tblForm form)
+        {
+            manager.tblForms.InsertOnSubmit(form);
+            manager.SubmitChanges();
+        }
+
+
+        public void saveQuestionToDB(tbl_IntentionalQuestion question)
+        {
+            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
+            manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
+            manager.SubmitChanges();
+        }
+
+
+        //////////////////////////////////////////////////////////////////////////Delete method////////////////////////////////////////
+        /// <summary>
+        /// delte question from specfic form and specfic question
+        /// 
+        /// <param name="formID"></param> 
+        /// <param name="quesNumber"></param>
+        public void deleteQustion(int formID, int quesNumber)
+        {
+            // find the record to delete from the right form and right ques number
+            var questionToDelete = manager.tbl_IntentionalQuestions.Where(a => a.FormId == formID && a.FormId == quesNumber).FirstOrDefault();
+            var answersToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.FormId == quesNumber);
+            manager.tbl_IntentionalQuestions.DeleteOnSubmit(questionToDelete);
+            manager.tbl_IntentionalAnswers.DeleteAllOnSubmit(answersToDelete);
+            manager.SubmitChanges();
+
+        }
     }
 }

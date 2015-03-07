@@ -16,9 +16,28 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var b = new DataManager();
             var q = b.GetFormWithQuestion(1);
-            
-          
             return View(q);
         }
+
+        public ActionResult addQuestion(int id)
+        {
+            var b = new DataManager();
+            var q = b.GetFormWithQuestion(id);
+            var newQuestion = new tbl_IntentionalQuestion(3,id,3);
+            newQuestion.createAnswersToQuestion(3);
+        
+            b.saveQuestionToDB(newQuestion);
+            return RedirectToAction("Index", new { id = id });
+            
+        }
+
+        [HttpPost]
+        public ActionResult Index(int id)
+        {
+            var b = new DataManager();
+            var q = b.GetFormWithQuestion(id);
+            return View(q);
+        }
+
 	}
 }
