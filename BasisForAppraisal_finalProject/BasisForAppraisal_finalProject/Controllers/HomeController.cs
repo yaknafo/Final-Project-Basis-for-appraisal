@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BasisForAppraisal_finalProject.DBML;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -10,6 +11,8 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         public ActionResult Index()
         {
+            var g = new DbmlBFADataContext();
+            
             return View();
         }
 
