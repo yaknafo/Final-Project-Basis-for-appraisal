@@ -23,5 +23,11 @@ namespace BasisForAppraisal_finalProject.Models
             var newQuestion = new tbl_IntentionalQuestion(3, formId, numberOfTheQuestion);
             manager.saveQuestionToDB(newQuestion);
         }
+        public void deleteQustion(int formID, int quesNumber)
+        {
+            DataManager db =  new DataManager();
+            db.deleteQustion(formID, quesNumber);
+        }
+
     }
 }
