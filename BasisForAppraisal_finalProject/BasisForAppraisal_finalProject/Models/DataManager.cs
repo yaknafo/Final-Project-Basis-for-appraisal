@@ -51,5 +51,27 @@ namespace BasisForAppraisal_finalProject.Models
             form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
             return form;
         }
+
+        //--------------------------------   SAVE Method -----------------------------
+
+        public void saveAnswerToDB(List<tbl_IntentionalAnswer> answers)
+        {
+            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(answers);
+            manager.SubmitChanges();
+        }
+
+        public void saveFormToDB(tblForm form)
+        {
+            manager.tblForms.InsertOnSubmit(form);
+            manager.SubmitChanges();
+        }
+
+
+        public void saveQuestionToDB(tbl_IntentionalQuestion question)
+        {
+            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
+            manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
+            manager.SubmitChanges();
+        }
     }
 }
