@@ -100,6 +100,11 @@ namespace BasisForAppraisal_finalProject.DBML
              }
 
          }
+
+        // public string Title { get; set; }
+
+         public int formId { get; set; }
+
       
 
          public List<tbl_IntentionalQuestion> GetAllQuestions()

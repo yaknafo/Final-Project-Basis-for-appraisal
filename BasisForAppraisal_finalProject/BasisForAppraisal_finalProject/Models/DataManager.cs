@@ -75,6 +75,32 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
 
+        private void SaveQuestionToDB(List<tbl_IntentionalQuestion> questions)
+        {
+            // get all the new question from the list
+            var newQuestios = questions.Where(x => !manager.tbl_IntentionalQuestions.Contains(x));
+
+            // save all the answer of the question
+            foreach (tbl_IntentionalQuestion q in newQuestios)
+                saveAnswerToDB(q.Answers);
+
+            // save all the new question
+            manager.tbl_IntentionalQuestions.InsertAllOnSubmit(newQuestios);
+        
+        }
+
+        /// <summary>
+        /// sace form include qustions and answers to db
+        /// </summary>
+        /// <param name="form"></param>
+        public void SaveFormToDB(tblForm form)
+        {
+            SaveQuestionToDB(form.Questions);
+            manager.tblForms.InsertOnSubmit(form);
+            manager.SubmitChanges();
+        }
+
+
         //////////////////////////////////////////////////////////////////////////Delete method////////////////////////////////////////
         /// <summary>
         /// delte question from specfic form and specfic question

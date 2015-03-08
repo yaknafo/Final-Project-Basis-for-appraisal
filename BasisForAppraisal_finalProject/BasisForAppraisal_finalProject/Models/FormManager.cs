@@ -23,6 +23,21 @@ namespace BasisForAppraisal_finalProject.Models
             var newQuestion = new tbl_IntentionalQuestion(3, formId, numberOfTheQuestion);
             manager.saveQuestionToDB(newQuestion);
         }
+
+        public void addQuestionToForm(tbl_IntentionalQuestion question)
+        {
+            var manager = new DataManager();
+            manager.saveQuestionToDB(question);
+        }
+
+        public void SaveForm(int formId)
+        {
+            var manager = new DataManager();
+      
+            //manager.saveQuestionToDB(newQuestion);
+        }
+
+   
         public void deleteQustion(int formID, int quesNumber)
         {
             DataManager db =  new DataManager();

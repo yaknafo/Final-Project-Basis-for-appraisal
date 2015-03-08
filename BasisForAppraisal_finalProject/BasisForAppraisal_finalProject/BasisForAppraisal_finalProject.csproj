@@ -234,6 +234,8 @@
     <Content Include="Views\MainFormCreator\EditorTemplates\tbl_IntentionalAnswer.cshtml" />
     <Content Include="Views\MainFormCreator\Index.cshtml" />
     <Content Include="Views\MainFormCreator\EditorTemplates\tbl_IntentionalQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\addNewQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\EditorTemplates\tblForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewFolder1\" />
