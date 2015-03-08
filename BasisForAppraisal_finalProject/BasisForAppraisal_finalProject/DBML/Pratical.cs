@@ -26,6 +26,7 @@ namespace BasisForAppraisal_finalProject.DBML
             this.QuestionId = numberOfQuestoin;
             this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
             this._tblForm = default(EntityRef<tblForm>);
+            createAnswersToQuestion(numberOfAnswers);
         }
 
         /// <summary>

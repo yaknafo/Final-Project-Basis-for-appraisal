@@ -3,26 +3,29 @@
     ViewBag.Title = "Index";
 }
 
-<div style="text-align: right; border: 1px solid silver; margin-left:78%; margin-top:15%; position:fixed">
-    @using (Html.BeginForm("addQuestion", "MainFormCreator", new { @id = Model.FormId }))
+
+
+
+    <div style="text-align: right; border: 1px solid silver; margin-left:78%; margin-top:15%; position:fixed">
+        @using (Html.BeginForm("addQuestion", "MainFormCreator", new { @id = Model.FormId }))
 {
 
     <input id="AddButton" type="submit" value="הוסף שאלה" style="font-size: 36px; width:200px;" />
 
 }
-</div>
-<div id="Panel" style="border: groove;  width:85%; ">
-    <h2 id="bla" style=" text-align: center">@Model.FormName</h2>
-    <br />
-    <table class="table">
+    </div>
+    <div id="Panel" style="border: groove;  width:85%; ">
+        <h2 id="bla" style=" text-align: center">@Model.FormName</h2>
+        <br />
+        <table class="table">
 
-        @for (int i = 0; i < Model.Questions.Count(); i++)
+            @for (int i = 0; i < Model.Questions.Count(); i++)
         {
             <tr>
-                @Html.EditorFor(x => x.Questions[i])
-            </tr>
+                    @Html.EditorFor(x => x.Questions[i])
+                </tr>
         }
 
-    </table>
-    </div>
+        </table>
+        </div>
 

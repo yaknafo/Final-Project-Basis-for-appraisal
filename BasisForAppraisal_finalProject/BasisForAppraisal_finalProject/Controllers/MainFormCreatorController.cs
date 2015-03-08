@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
+using System.Threading.Tasks;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -12,6 +13,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         //
         // GET: /MainFormCreator/
+        [HttpGet]
         public ActionResult Index()
         {
             var b = new DataManager();
@@ -21,12 +23,9 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         public ActionResult addQuestion(int id)
         {
-            var b = new DataManager();
-            var q = b.GetFormWithQuestion(id);
-            var newQuestion = new tbl_IntentionalQuestion(3,id,3);
-            newQuestion.createAnswersToQuestion(3);
-        
-            b.saveQuestionToDB(newQuestion);
+            var formManager = new FormManager();
+            Task taskA = Task.Factory.StartNew(() => formManager.addQuestionToForm(id));
+            taskA.Wait();
             return RedirectToAction("Index", new { id = id });
             
         }
@@ -39,5 +38,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(q);
         }
 
+
+       
 	}
 }
