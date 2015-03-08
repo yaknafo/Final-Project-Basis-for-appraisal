@@ -1,0 +1,52 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+@{
+    ViewBag.Title = "tbl_IntentionalQuestion";
+}
+
+   
+    <table class="table" dir="rtl">
+        <div dir="rtl">
+            @Html.DisplayFor(x => x.QuestionId)
+            @Html.EditorFor(x => x.Title)
+            </div>
+            @Html.ActionLink("Edit", "Add", new { @id = Model.QuestionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.QuestionId })
+        <tr dir="rtl">
+
+            <br />
+            <br />
+            @for (int i = 0; i < Model.Answers.Count(); i++)
+            {
+                <th dir="rtl">
+                    @Html.EditorFor(x => x.Answers[i])
+                </th>
+            }
+
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

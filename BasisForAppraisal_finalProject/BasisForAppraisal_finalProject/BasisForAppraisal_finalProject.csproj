@@ -161,18 +161,21 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainFormCreatorController.cs" />
     <Compile Include="DBML\BFADataBasedbml.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BFADataBasedbml.dbml</DependentUpon>
     </Compile>
     <Compile Include="DBML\DbmlBFADataContext.cs" />
+    <Compile Include="DBML\Pratical.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PartialIntentionalAnswer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -227,9 +230,13 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\MainFormCreator\EditorTemplates\tbl_IntentionalAnswer.cshtml" />
+    <Content Include="Views\MainFormCreator\Index.cshtml" />
+    <Content Include="Views\MainFormCreator\EditorTemplates\tbl_IntentionalQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewFolder1\" />
+    <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

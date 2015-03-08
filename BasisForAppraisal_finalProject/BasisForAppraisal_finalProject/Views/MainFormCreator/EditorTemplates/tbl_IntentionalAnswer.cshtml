@@ -1,0 +1,12 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalAnswer
+@{
+    ViewBag.Title = "tbl_IntentionalAnswer";
+}
+
+@Html.TextAreaFor(x => x.Text, new { style = "height: 200px;  width:150px;" })
+
+<br />
+<div class="large-1 columns" style="margin-left: 70px;">
+    @Html.CheckBoxFor(x => x.AnswerOption.Value, new { style = "marginTop = 550px" })
+</div>
+

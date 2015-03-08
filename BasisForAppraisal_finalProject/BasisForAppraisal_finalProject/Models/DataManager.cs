@@ -28,5 +28,28 @@ namespace BasisForAppraisal_finalProject.Models
              get { return manager.tbl_IntentionalAnswers; }
          }
 
+         public Table<tblForm> Forms
+         {
+             get { return manager.tblForms; }
+         }
+
+         public Table<tbl_IntentionalQuestion> IntentionalQuestion
+         {
+             get { return manager.tbl_IntentionalQuestions; }
+         }
+
+        public tbl_IntentionalQuestion GetQuestionWithAnswers(int fid, int qid)
+         {
+             var question = manager.tbl_IntentionalQuestions.Where(x => x.FormId == fid && x.QuestionId == qid).First();
+             question.GetAllAnswers();
+             return question;
+         }
+
+        public tblForm GetFormWithQuestion(int fid)
+        {
+            var form = manager.tblForms.Where(x => x.FormId == fid).First();
+            form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
+            return form;
+        }
     }
 }
