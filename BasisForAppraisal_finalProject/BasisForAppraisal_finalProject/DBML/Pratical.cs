@@ -103,7 +103,7 @@ namespace BasisForAppraisal_finalProject.DBML
 
         // public string Title { get; set; }
 
-         public int formId { get; set; }
+       
 
       
 

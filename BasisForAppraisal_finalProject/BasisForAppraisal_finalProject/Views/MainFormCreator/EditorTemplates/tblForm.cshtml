@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "tblForm";
 }
-
+@Html.HiddenFor(x => x.formId)
+@Html.HiddenFor(x => x.FormName)
 <div id="Panel" style="border: groove;  width:85%; ">
     <h2 id="bla" style=" text-align: center">@Model.FormName</h2>
     <br />

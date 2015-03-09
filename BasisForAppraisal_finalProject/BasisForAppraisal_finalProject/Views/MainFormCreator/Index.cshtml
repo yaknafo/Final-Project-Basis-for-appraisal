@@ -14,13 +14,13 @@
 
 }
 </div>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Index", "MainFormCreator", FormMethod.Post))
         {
-       
+            @Html.EditorForModel()
             <input type="submit" value="שמור טופס" style="font-size: 36px; width:200px;" />
 
         }
        
-@Html.EditorForModel()
+
  
 

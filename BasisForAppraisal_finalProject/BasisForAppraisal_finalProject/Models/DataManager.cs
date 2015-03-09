@@ -47,7 +47,7 @@ namespace BasisForAppraisal_finalProject.Models
 
         public tblForm GetFormWithQuestion(int fid)
         {
-            var form = manager.tblForms.Where(x => x.FormId == fid).First();
+            var form = manager.tblForms.Where(x => x.formId == fid).First();
             form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
             return form;
         }

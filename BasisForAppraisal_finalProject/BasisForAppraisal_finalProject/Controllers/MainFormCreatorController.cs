@@ -42,7 +42,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpGet]
         public ActionResult addNewQuestion(int formId=1)
         {
-            return View(new tbl_IntentionalQuestion(3, formId, 4));
+            return View(new tbl_IntentionalQuestion(3, formId, 1));
 
         }
 
