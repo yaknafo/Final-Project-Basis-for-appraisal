@@ -2,7 +2,11 @@
 @{
     ViewBag.Title = "tbl_IntentionalAnswer";
 }
-
+@Html.HiddenFor(x => x.FormId)
+@Html.HiddenFor(x => x.QuestionId)
+@Html.HiddenFor(x => x.AnswerId)
+@Html.HiddenFor(x => x.Score)
+@Html.HiddenFor(x => x.AnswerOption)
 @Html.TextAreaFor(x => x.Text, new { style = "height: 200px;  width:150px;" })
 
 <br />

@@ -112,8 +112,8 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnFormIdChanging(int value);
-    partial void OnFormIdChanged();
+    partial void OnformIdChanging(int value);
+    partial void OnformIdChanged();
     partial void OnFormNameChanging(string value);
     partial void OnFormNameChanged();
     #endregion
@@ -124,8 +124,8 @@ namespace BasisForAppraisal_finalProject.DBML
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int FormId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="FormId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int formId
 		{
 			get
 			{
@@ -135,11 +135,11 @@ namespace BasisForAppraisal_finalProject.DBML
 			{
 				if ((this._FormId != value))
 				{
-					this.OnFormIdChanging(value);
+					this.OnformIdChanging(value);
 					this.SendPropertyChanging();
 					this._FormId = value;
-					this.SendPropertyChanged("FormId");
-					this.OnFormIdChanged();
+					this.SendPropertyChanged("formId");
+					this.OnformIdChanged();
 				}
 			}
 		}
@@ -164,7 +164,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="FormId", OtherKey="FormId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="formId", OtherKey="FormId")]
 		public EntitySet<tbl_IntentionalQuestion> tbl_IntentionalQuestions
 		{
 			get
@@ -322,7 +322,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_IntentionalQuestion", Storage="_tblForm", ThisKey="FormId", OtherKey="FormId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_IntentionalQuestion", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
 		public tblForm tblForm
 		{
 			get
@@ -345,7 +345,7 @@ namespace BasisForAppraisal_finalProject.DBML
 					if ((value != null))
 					{
 						value.tbl_IntentionalQuestions.Add(this);
-						this._FormId = value.FormId;
+						this._FormId = value.formId;
 					}
 					else
 					{

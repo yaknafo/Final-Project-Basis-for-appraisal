@@ -2,9 +2,9 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=LENOVO-PC-YAIR;Initial Catalog=BasisForAppraisalDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BasisForAppraisalDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblForm" Member="tblForms">
     <Type Name="tblForm">
-      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FormId" Member="formId" Storage="_FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FormName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="tblForm_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="FormId" OtherKey="FormId" Type="tbl_IntentionalQuestion" />
+      <Association Name="tblForm_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="formId" OtherKey="FormId" Type="tbl_IntentionalQuestion" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
@@ -13,7 +13,7 @@
       <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
       <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers" ThisKey="FormId,QuestionId" OtherKey="FormId,QuestionId" Type="tbl_IntentionalAnswer" />
-      <Association Name="tblForm_tbl_IntentionalQuestion" Member="tblForm" ThisKey="FormId" OtherKey="FormId" Type="tblForm" IsForeignKey="true" />
+      <Association Name="tblForm_tbl_IntentionalQuestion" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers">

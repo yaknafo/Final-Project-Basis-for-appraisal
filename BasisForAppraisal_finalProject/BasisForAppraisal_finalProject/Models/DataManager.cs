@@ -47,7 +47,7 @@ namespace BasisForAppraisal_finalProject.Models
 
         public tblForm GetFormWithQuestion(int fid)
         {
-            var form = manager.tblForms.Where(x => x.FormId == fid).First();
+            var form = manager.tblForms.Where(x => x.formId == fid).First();
             form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
             return form;
         }
@@ -71,6 +71,32 @@ namespace BasisForAppraisal_finalProject.Models
         {
             manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
             manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
+            manager.SubmitChanges();
+        }
+
+
+        private void SaveQuestionToDB(List<tbl_IntentionalQuestion> questions)
+        {
+            // get all the new question from the list
+            var newQuestios = questions.Where(x => !manager.tbl_IntentionalQuestions.Contains(x));
+
+            // save all the answer of the question
+            foreach (tbl_IntentionalQuestion q in newQuestios)
+                saveAnswerToDB(q.Answers);
+
+            // save all the new question
+            manager.tbl_IntentionalQuestions.InsertAllOnSubmit(newQuestios);
+        
+        }
+
+        /// <summary>
+        /// sace form include qustions and answers to db
+        /// </summary>
+        /// <param name="form"></param>
+        public void SaveFormToDB(tblForm form)
+        {
+            SaveQuestionToDB(form.Questions);
+            manager.tblForms.InsertOnSubmit(form);
             manager.SubmitChanges();
         }
 

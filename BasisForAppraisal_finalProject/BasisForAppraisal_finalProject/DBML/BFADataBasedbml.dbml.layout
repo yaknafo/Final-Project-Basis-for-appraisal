@@ -20,14 +20,14 @@
         <elementListCompartment Id="e73032cd-16ac-4617-b6db-274d30bde6c4" absoluteBounds="6.015, 1.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 1.59699625651042); (3.125 : 1.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 1.59699625651042); (3.125 : 1.59699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tblForm/tblForm_tbl_IntentionalQuestion" />
       <nodes>
         <classShapeMoniker Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" />
         <classShapeMoniker Id="a6695223-a236-401d-a265-7fbf30d93214" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.125 : 1.69314697265625); (6 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.125 : 1.69314697265625); (6 : 1.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalQuestion/tbl_IntentionalQuestion_tbl_IntentionalAnswer" />
       <nodes>
         <classShapeMoniker Id="a6695223-a236-401d-a265-7fbf30d93214" />

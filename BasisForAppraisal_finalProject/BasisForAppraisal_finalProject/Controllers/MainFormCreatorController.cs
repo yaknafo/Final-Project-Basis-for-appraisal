@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
+using System.Threading.Tasks;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -12,7 +13,16 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         //
         // GET: /MainFormCreator/
+        [HttpGet]
         public ActionResult Index()
+        {
+            var b = new DataManager();
+            var q = b.GetFormWithQuestion(1);
+            return View(q);
+        }
+
+        [HttpPost]
+        public ActionResult Index(tblForm t)
         {
             var b = new DataManager();
             var q = b.GetFormWithQuestion(1);
@@ -21,23 +31,47 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         public ActionResult addQuestion(int id)
         {
-            var b = new DataManager();
-            var q = b.GetFormWithQuestion(id);
-            var newQuestion = new tbl_IntentionalQuestion(3,id,3);
-            newQuestion.createAnswersToQuestion(3);
-        
-            b.saveQuestionToDB(newQuestion);
+            var formManager = new FormManager();
+            Task taskA = Task.Factory.StartNew(() => formManager.addQuestionToForm(id));
+            taskA.Wait();
             return RedirectToAction("Index", new { id = id });
             
         }
 
-        [HttpPost]
-        public ActionResult Index(int id)
+       
+        [HttpGet]
+        public ActionResult addNewQuestion(int formId=1)
         {
-            var b = new DataManager();
-            var q = b.GetFormWithQuestion(id);
-            return View(q);
+            return View(new tbl_IntentionalQuestion(3, formId, 1));
+
         }
+
+        [HttpPost]
+        public ActionResult addNewQuestion(tbl_IntentionalQuestion question)
+        {
+            var formManager = new FormManager();
+            Task taskA = Task.Factory.StartNew(() => formManager.addQuestionToForm(question));
+            taskA.Wait();
+            return RedirectToAction("Index", new { id = question.FormId });
+
+        }
+
+
+        [HttpPost]
+        public ActionResult saveForm(tblForm f)
+        {
+            
+            return RedirectToAction("Index", new { id = 1 });
+
+        }
+
+        //[HttpPost]
+        //public ActionResult Index(int id)
+        //{
+        //    var b = new DataManager();
+        //    var q = b.GetFormWithQuestion(id);
+        //    return View(q);
+        //}
         
        public void deleteQustion(int formID, int quesNumber)
         {
@@ -48,5 +82,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
 
 
+
+       
 	}
 }
