@@ -62,15 +62,19 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void saveFormToDB(tblForm form)
         {
-            manager.tblForms.InsertOnSubmit(form);
+            var changeForm = manager.tblForms.Where(x => x.formId == form.formId).First();
+            changeForm.FormName = form.FormName;
+           
             manager.SubmitChanges();
         }
 
 
         public void saveQuestionToDB(tbl_IntentionalQuestion question)
         {
-            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
             manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
+            manager.SubmitChanges();
+            question.Answers.ForEach(x => x.QuestionId = question.QuestionId);
+            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
             manager.SubmitChanges();
         }
 
@@ -95,8 +99,7 @@ namespace BasisForAppraisal_finalProject.Models
         /// <param name="form"></param>
         public void SaveFormToDB(tblForm form)
         {
-            SaveQuestionToDB(form.Questions);
-            manager.tblForms.InsertOnSubmit(form);
+            manager.tblForms.Attach(form);
             manager.SubmitChanges();
         }
 

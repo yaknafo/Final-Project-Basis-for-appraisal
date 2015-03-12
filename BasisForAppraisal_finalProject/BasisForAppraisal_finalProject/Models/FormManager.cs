@@ -20,21 +20,38 @@ namespace BasisForAppraisal_finalProject.Models
             var manager = new DataManager();
             var form = manager.GetFormWithQuestion(formId);
             var numberOfTheQuestion = form.Questions.Count()+1;
-            var newQuestion = new tbl_IntentionalQuestion(3, formId, numberOfTheQuestion);
+            var newQuestion = new tbl_IntentionalQuestion(3, formId);
             manager.saveQuestionToDB(newQuestion);
         }
 
-        public void addQuestionToForm(tbl_IntentionalQuestion question)
+        /// <summary>
+        /// this method attach question to from without save the question in the DB
+        /// </summary>
+        /// <param name="formId"></param>
+        /// <param name="numberOfTheQuestion"></param>
+        /// <returns></returns>
+        public tblForm GetQuestionToForm(int formId, tbl_IntentionalQuestion question)
+        {
+
+            var manager = new DataManager();
+            var form = manager.GetFormWithQuestion(formId);
+            form.Questions.Add(question);
+            return form;
+          
+        }
+
+        public void SaveQuestionToForm(tbl_IntentionalQuestion question)
         {
             var manager = new DataManager();
             manager.saveQuestionToDB(question);
+            question.tblForm.AddedNewQuestion();
         }
 
-        public void SaveForm(int formId)
+        public void SaveForm(tblForm form)
         {
             var manager = new DataManager();
-      
-            //manager.saveQuestionToDB(newQuestion);
+
+            manager.saveFormToDB(form);
         }
 
    

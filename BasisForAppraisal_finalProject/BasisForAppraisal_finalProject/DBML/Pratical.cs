@@ -19,11 +19,10 @@ namespace BasisForAppraisal_finalProject.DBML
         /// <param name="numberOfAnswers"></param>
         /// <param name="formId"></param>
         /// <param name="numberOfQuestoin"></param>
-        public tbl_IntentionalQuestion(int numberOfAnswers, int formId,int numberOfQuestoin):base()
+        public tbl_IntentionalQuestion(int numberOfAnswers, int formId):base()
         {
           
             this.FormId = formId;
-            this.QuestionId = numberOfQuestoin;
             this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
             this._tblForm = default(EntityRef<tblForm>);
             createAnswersToQuestion(numberOfAnswers);
@@ -41,8 +40,7 @@ namespace BasisForAppraisal_finalProject.DBML
             {
                var temp = new tbl_IntentionalAnswer
                 {
-                    AnswerId = i,
-                    QuestionId = this.QuestionId,
+       
                     FormId = this.FormId,
                     Text = string.Empty,
                     Score = 0,
@@ -90,6 +88,22 @@ namespace BasisForAppraisal_finalProject.DBML
 
          private List<tbl_IntentionalQuestion> questions= new List<tbl_IntentionalQuestion>();
 
+         private tbl_IntentionalQuestion newQuestion;
+
+         public tbl_IntentionalQuestion NewQuestion
+         {
+             get
+             {
+
+                 return newQuestion ?? new tbl_IntentionalQuestion(3, 1);
+                
+             }
+             set
+             {
+                 newQuestion = value;
+             }
+
+         }
         
          public List<tbl_IntentionalQuestion> Questions
          {
@@ -101,16 +115,31 @@ namespace BasisForAppraisal_finalProject.DBML
 
          }
 
-        // public string Title { get; set; }
+         /// <summary>
+         /// get a new number for Question in form
+         /// </summary>
+         /// <returns></returns>
+        public int getNUmberForNewQuestion()
+         {
+             return tbl_IntentionalQuestions.Max(x => x.QuestionId);
+         }
 
        
-
-      
-
          public List<tbl_IntentionalQuestion> GetAllQuestions()
          {
              var manager = new DataManager();
              return manager.IntentionalQuestion.Where(x => x.FormId == this._FormId).ToList();
+         }
+
+         public tbl_IntentionalQuestion GetNewQuestion()
+         {
+             var num = this.Questions.Max(x => x.QuestionId);
+             return new tbl_IntentionalQuestion( formId, num +1);
+         }
+
+         public void AddedNewQuestion()
+         {
+             NewQuestion = null;
          }
     }
 }

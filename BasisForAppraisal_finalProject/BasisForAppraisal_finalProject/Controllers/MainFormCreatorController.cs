@@ -22,56 +22,28 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(tblForm t)
-        {
-            var b = new DataManager();
-            var q = b.GetFormWithQuestion(1);
-            return View(q);
-        }
-
-        public ActionResult addQuestion(int id)
+        public ActionResult Index(tblForm form)
         {
             var formManager = new FormManager();
-            Task taskA = Task.Factory.StartNew(() => formManager.addQuestionToForm(id));
+            Task taskA = Task.Factory.StartNew(() => formManager.SaveForm(form));
             taskA.Wait();
-            return RedirectToAction("Index", new { id = id });
-            
-        }
-
-       
-        [HttpGet]
-        public ActionResult addNewQuestion(int formId=1)
-        {
-            return View(new tbl_IntentionalQuestion(3, formId, 1));
-
+            return View(form);
         }
 
         [HttpPost]
-        public ActionResult addNewQuestion(tbl_IntentionalQuestion question)
-        {
-            var formManager = new FormManager();
-            Task taskA = Task.Factory.StartNew(() => formManager.addQuestionToForm(question));
-            taskA.Wait();
-            return RedirectToAction("Index", new { id = question.FormId });
-
-        }
-
-
-        [HttpPost]
-        public ActionResult saveForm(tblForm f)
+        public ActionResult addNewQuestion(tblForm form)
         {
             
-            return RedirectToAction("Index", new { id = 1 });
+            var formManager = new FormManager();
+            Task taskA = Task.Factory.StartNew(() => formManager.SaveQuestionToForm(form.NewQuestion));
+            taskA.Wait();
+            return RedirectToAction("Index", new { id = form.formId });
 
         }
 
-        //[HttpPost]
-        //public ActionResult Index(int id)
-        //{
-        //    var b = new DataManager();
-        //    var q = b.GetFormWithQuestion(id);
-        //    return View(q);
-        //}
+      
+
+
         
        public void deleteQustion(int formID, int quesNumber)
         {
