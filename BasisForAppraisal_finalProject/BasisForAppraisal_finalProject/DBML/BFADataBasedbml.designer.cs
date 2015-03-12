@@ -268,7 +268,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-
+		
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_QuestionId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
 		public int QuestionId
 		{
@@ -480,7 +480,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-
+		
         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_AnswerId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
 		public int AnswerId
 		{

@@ -10,9 +10,9 @@ namespace BasisForAppraisal_finalProject.Models
     public class DataManager
     {
 
-      BFADataBasedbmlDataContext manager = new BFADataBasedbmlDataContext();
+        BFADataBasedbmlDataContext manager = new BFADataBasedbmlDataContext();
 
-         public DataManager()
+        public DataManager()
         {
             this.manager = DbmlBFADataContext.GetDataContextInstance();
             var cultureinfo = new System.Globalization.CultureInfo("en-US");
@@ -20,34 +20,34 @@ namespace BasisForAppraisal_finalProject.Models
             System.Threading.Thread.CurrentThread.CurrentUICulture = cultureinfo;
         }
 
-         /// <summary>
-         /// get method for all tables
-         /// </summary>
-         public Table<tbl_IntentionalAnswer> IntentionalAnswer
-         {
-             get { return manager.tbl_IntentionalAnswers; }
-         }
+        /// <summary>
+        /// get method for all tables
+        /// </summary>
+        public Table<tbl_IntentionalAnswer> IntentionalAnswer
+        {
+            get { return manager.tbl_IntentionalAnswers; }
+        }
 
-         public Table<tblForm> Forms
-         {
-             get { return manager.tblForms; }
-         }
+        public Table<tblForm> Forms
+        {
+            get { return manager.tblForms; }
+        }
 
-         public Table<tbl_IntentionalQuestion> IntentionalQuestion
-         {
-             get { return manager.tbl_IntentionalQuestions; }
-         }
+        public Table<tbl_IntentionalQuestion> IntentionalQuestion
+        {
+            get { return manager.tbl_IntentionalQuestions; }
+        }
 
         public tbl_IntentionalQuestion GetQuestionWithAnswers(int fid, int qid)
-         {
-             var question = manager.tbl_IntentionalQuestions.Where(x => x.FormId == fid && x.QuestionId == qid).First();
-             question.GetAllAnswers();
-             return question;
-         }
+        {
+            var question = manager.tbl_IntentionalQuestions.Where(x => x.FormId == fid && x.QuestionId == qid).First();
+            question.GetAllAnswers();
+            return question;
+        }
 
         public tblForm GetFormWithQuestion(int fid)
         {
-            var form = manager.tblForms.Where(x => x.formId == fid).First();
+            var form = manager.tblForms.Where(x => x.formId== fid).FirstOrDefault();
             form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
             return form;
         }
@@ -90,7 +90,7 @@ namespace BasisForAppraisal_finalProject.Models
 
             // save all the new question
             manager.tbl_IntentionalQuestions.InsertAllOnSubmit(newQuestios);
-        
+
         }
 
         /// <summary>
@@ -113,10 +113,10 @@ namespace BasisForAppraisal_finalProject.Models
         public void deleteQustion(int formID, int quesNumber)
         {
             // find the record to delete from the right form and right ques number
-            var questionToDelete = manager.tbl_IntentionalQuestions.Where(a => a.FormId == formID && a.FormId == quesNumber).FirstOrDefault();
-            var answersToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.FormId == quesNumber);
-            manager.tbl_IntentionalQuestions.DeleteOnSubmit(questionToDelete);
+            var questionToDelete = manager.tbl_IntentionalQuestions.Where(a => a.FormId == formID && a.QuestionId == quesNumber).FirstOrDefault();
+            var answersToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.QuestionId == quesNumber);
             manager.tbl_IntentionalAnswers.DeleteAllOnSubmit(answersToDelete);
+            manager.tbl_IntentionalQuestions.DeleteOnSubmit(questionToDelete);
             manager.SubmitChanges();
 
         }
