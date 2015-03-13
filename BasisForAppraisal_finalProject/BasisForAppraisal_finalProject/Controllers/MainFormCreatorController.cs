@@ -52,9 +52,5 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-
-
-
-       
 	}
 }

@@ -2,13 +2,15 @@
 @{
     ViewBag.Title = "tbl_IntentionalQuestion";
 }
-
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
    
+
     <table class="table" dir="rtl">
         <div dir="rtl">
             @Html.HiddenFor(x => x.FormId)
-            @Html.EditorFor(x => x.QuestionId)
-            @Html.EditorFor(x => x.Title)
+            <h4>שאלה</h4>
+            @Html.TextAreaFor(x => x.Title, new { style = "height: 60px;  width:300px;" })
             </div>
             @Html.ActionLink("Edit", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) |
             @Html.ActionLink("Delete", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
@@ -20,6 +22,7 @@
             {
                 <th dir="rtl">
                     @Html.EditorFor(x => x.Answers[i])
+                    @*@Html.RadioButton("templateId", new { value = Model.Answers[i].AnswerOption, @name = "a", @id = "s", @class ="d" })*@
                 </th>
             }
 

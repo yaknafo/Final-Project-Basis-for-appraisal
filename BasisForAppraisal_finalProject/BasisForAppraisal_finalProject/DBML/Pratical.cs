@@ -80,6 +80,25 @@ namespace BasisForAppraisal_finalProject.DBML
      
     }
 
+
+    public partial class tbl_IntentionalAnswer
+    {
+        private bool answerOptionWrapper = false;
+
+        public bool AnswerOptionWrapper
+        {
+            get
+            {
+                return AnswerOption.Value;
+            }
+            set
+            {
+                
+                AnswerOption = value;
+            }
+        }
+    }
+
     /// <summary>
     /// partial class tblForm
     /// </summary>
