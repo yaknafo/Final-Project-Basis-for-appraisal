@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BasisForAppraisal_finalProject.DBML;
+using BasisForAppraisal_finalProject.Models;
 
 namespace BasisForAppraisal_finalProject.ViewModel
 {
@@ -14,11 +15,14 @@ namespace BasisForAppraisal_finalProject.ViewModel
         public List<tbl_IntentionalQuestion> IntentionalQuestions {set; get;}
 
         private tbl_IntentionalQuestion newQuestion;
- 
+
+        public int formId { set; get; }
+
         public FormViewModel (tblForm form)
 	{
             this.form= form;
             this.IntentionalQuestions= form.Questions;
+            this.formId = form.formId;
 	}
 
         public FormViewModel()
@@ -33,7 +37,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
             get
             {
 
-                return newQuestion ?? new tbl_IntentionalQuestion(3, 1);
+                return newQuestion ?? new tbl_IntentionalQuestion(3, formId);
 
             }
             set
@@ -42,6 +46,9 @@ namespace BasisForAppraisal_finalProject.ViewModel
             }
 
         }
+
+
+     
 
     }
 }

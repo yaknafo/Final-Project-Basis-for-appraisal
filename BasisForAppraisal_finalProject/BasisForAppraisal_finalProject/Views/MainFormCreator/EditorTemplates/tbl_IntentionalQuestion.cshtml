@@ -22,15 +22,15 @@
             {
                 <th dir="rtl">
                     @Html.EditorFor(x => x.Answers[i])
-                    @*@Html.RadioButton("templateId", new { value = Model.Answers[i].AnswerOption, @name = "a", @id = "s", @class ="d" })*@
+                        @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 20%; margin-top: 10px;" })
                 </th>
+
+
+
             }
 
         </tr>
     </table>
-
-
-
 
 
 

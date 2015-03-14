@@ -13,6 +13,8 @@ namespace BasisForAppraisal_finalProject.DBML
     /// </summary>
     public partial class tbl_IntentionalQuestion
     {
+        public int selectedAnswer { set; get; }
+
         /// <summary>
         /// counstrator costume 
         /// </summary>
