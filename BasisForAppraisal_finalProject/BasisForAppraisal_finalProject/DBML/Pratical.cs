@@ -93,7 +93,7 @@ namespace BasisForAppraisal_finalProject.DBML
             }
             set
             {
-                
+                answerOptionWrapper = value;
                 AnswerOption = value;
             }
         }
@@ -130,6 +130,10 @@ namespace BasisForAppraisal_finalProject.DBML
              {
                  questions = GetAllQuestions();
                  return questions;
+             }
+             set
+             {
+                 questions = value;
              }
 
          }

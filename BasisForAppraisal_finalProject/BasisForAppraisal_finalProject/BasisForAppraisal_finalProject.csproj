@@ -179,6 +179,7 @@
     <Compile Include="Models\PartialIntentionalAnswer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\FormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -236,9 +237,11 @@
     <Content Include="Views\MainFormCreator\EditorTemplates\tbl_IntentionalQuestion.cshtml" />
     <Content Include="Views\MainFormCreator\addNewQuestion.cshtml" />
     <Content Include="Views\MainFormCreator\EditorTemplates\tblForm.cshtml" />
+    <Content Include="Views\MainFormCreator\a.cshtml" />
+    <Content Include="Views\MainFormCreator\c.cshtml" />
+    <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NewFolder1\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
+using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Models;
 using System.Threading.Tasks;
 
@@ -31,13 +32,13 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult addNewQuestion(tblForm form)
+        public ActionResult addNewQuestion(FormViewModel form)
         {
             
             var formManager = new FormManager();
             Task taskA = Task.Factory.StartNew(() => formManager.SaveQuestionToForm(form.NewQuestion));
             taskA.Wait();
-            return RedirectToAction("Index", new { id = form.formId });
+            return RedirectToAction("IntentionalFormWorkshop");
 
         }
 
@@ -51,6 +52,41 @@ namespace BasisForAppraisal_finalProject.Controllers
             b.deleteQustion(formID, quesNumber);
 
         }
+
+       //
+       // GET: /MainFormCreator/
+       [HttpGet]
+       public ActionResult c()
+       {
+           var b = new DataManager();
+           var q = b.GetFormWithQuestion(1);
+           var t = new ViewModel.FormViewModel(q);
+           return View(t);
+       }
+
+       [HttpPost]
+       public ActionResult c(FormViewModel q)
+       {
+         
+           return View(q);
+       }
+
+
+       [HttpGet]
+       public ActionResult IntentionalFormWorkshop()
+       {
+           var b = new DataManager();
+           var q = b.GetFormWithQuestion(1);
+           var t = new ViewModel.FormViewModel(q);
+           return View(t);
+       }
+
+       [HttpPost]
+       public ActionResult IntentionalFormWorkshop(FormViewModel formViewModel)
+       {
+           return View(formViewModel);
+       }
+
 
 	}
 }
