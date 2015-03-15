@@ -66,6 +66,7 @@ namespace BasisForAppraisal_finalProject.Controllers
            return View(t);
        }
 
+
        [HttpPost]
        public ActionResult IntentionalFormWorkshop(FormViewModel formViewModel)
        {
@@ -74,6 +75,13 @@ namespace BasisForAppraisal_finalProject.Controllers
            return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
        }
 
-
+       [HttpGet]
+       public ActionResult preview(int formid=1 )
+       {
+           var b = new DataManager();
+           var q = b.GetFormWithQuestion(formid);
+           var t = new ViewModel.FormViewModel(q);
+           return View(t);
+       }
 	}
 }

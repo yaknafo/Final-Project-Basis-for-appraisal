@@ -13,7 +13,7 @@
             <h4>שאלה</h4>
             @Html.TextAreaFor(x => x.Title, new { style = "height: 60px;  width:300px;" })
             </div>
-            @Html.ActionLink("Edit", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) |
+            @Html.ActionLink("Edit", "", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) |
             @Html.ActionLink("Delete", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
         <tr dir="rtl">
 
