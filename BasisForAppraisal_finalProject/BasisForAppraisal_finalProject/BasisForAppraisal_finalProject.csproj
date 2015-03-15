@@ -238,7 +238,6 @@
     <Content Include="Views\MainFormCreator\addNewQuestion.cshtml" />
     <Content Include="Views\MainFormCreator\EditorTemplates\tblForm.cshtml" />
     <Content Include="Views\MainFormCreator\a.cshtml" />
-    <Content Include="Views\MainFormCreator\c.cshtml" />
     <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
   </ItemGroup>
   <ItemGroup>

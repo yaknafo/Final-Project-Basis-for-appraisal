@@ -53,27 +53,12 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-       //
-       // GET: /MainFormCreator/
-       [HttpGet]
-       public ActionResult c()
-       {
-           var b = new DataManager();
-           var q = b.GetFormWithQuestion(1);
-           var t = new ViewModel.FormViewModel(q);
-           return View(t);
-       }
+    
 
-       [HttpPost]
-       public ActionResult c(FormViewModel q)
-       {
-         
-           return View(q);
-       }
 
 
        [HttpGet]
-       public ActionResult IntentionalFormWorkshop()
+       public ActionResult IntentionalFormWorkshop(int id =1)
        {
            var b = new DataManager();
            var q = b.GetFormWithQuestion(1);
@@ -84,7 +69,9 @@ namespace BasisForAppraisal_finalProject.Controllers
        [HttpPost]
        public ActionResult IntentionalFormWorkshop(FormViewModel formViewModel)
        {
-           return View(formViewModel);
+           var manager = new FormManager();
+           manager.UpdateQuestionsToForm(formViewModel.IntentionalQuestions);
+           return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
        }
 
 

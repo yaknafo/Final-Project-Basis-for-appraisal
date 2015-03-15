@@ -61,5 +61,12 @@ namespace BasisForAppraisal_finalProject.Models
             db.deleteQustion(formID, quesNumber);
         }
 
+        public void UpdateQuestionsToForm(List<tbl_IntentionalQuestion> questions)
+        {
+            var manager = new DataManager();
+            manager.UpdateQuestionsToDB(questions);
+           
+        }
+
     }
 }

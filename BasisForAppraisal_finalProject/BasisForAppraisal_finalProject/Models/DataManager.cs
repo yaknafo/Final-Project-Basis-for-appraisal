@@ -79,7 +79,7 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
 
-        private void SaveQuestionToDB(List<tbl_IntentionalQuestion> questions)
+        public void SaveQuestionsToDB(List<tbl_IntentionalQuestion> questions)
         {
             // get all the new question from the list
             var newQuestios = questions.Where(x => !manager.tbl_IntentionalQuestions.Contains(x));
@@ -120,5 +120,63 @@ namespace BasisForAppraisal_finalProject.Models
             manager.SubmitChanges();
 
         }
+
+
+        //------------------------------------------------   Update Method -----------------------------------------------------------//
+
+        /// <summary>
+        /// update all the question in the form 
+        /// </summary>
+        /// <param name="questions"></param>
+        public void UpdateQuestionsToDB(List<tbl_IntentionalQuestion> questions)
+        {
+            foreach (tbl_IntentionalQuestion q in questions)
+            {
+                // get pointer in DB
+                var updateQuestoin = manager.tbl_IntentionalQuestions.Where(x => x.QuestionId == q.QuestionId).FirstOrDefault();
+
+                // check if exist
+                if (updateQuestoin == null)
+                    throw new Exception(string.Format("Question id = {0} cant be update, the question does not exist in the dataBase", q.QuestionId));
+             
+                // setting the title of the question
+                updateQuestoin.Title = q.Title;
+                
+                var answerAndNewAnswer = q.Answers.Zip(updateQuestoin.Answers, (o, n) => new { newAnswer = o, oldAnswer = n });
+
+                foreach (var nw in answerAndNewAnswer)
+                {
+                    UpdateAnswerToDB(nw.oldAnswer, nw.newAnswer);
+                    manager.SubmitChanges();
+                }
+
+                manager.SubmitChanges();
+            }
+        }
+
+
+        /// <summary>
+        /// up date answer
+        /// </summary>
+        /// <param name="answer"></param>
+        /// <param name="newAnswer"></param>
+        public void UpdateAnswerToDB(tbl_IntentionalAnswer answer, tbl_IntentionalAnswer newAnswer)
+        {
+            // getting pointer to the dataBase
+            var updateAnswer = manager.tbl_IntentionalAnswers.Where(x => x.AnswerId == answer.AnswerId).FirstOrDefault();
+           
+            // check if exist
+            if (updateAnswer == null)
+                throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
+
+            // setting the data for the new answer
+            updateAnswer.Text = newAnswer.Text;
+            updateAnswer.Score = newAnswer.Score;
+            updateAnswer.AnswerOption = newAnswer.AnswerOption;
+
+            // save change to db
+            manager.SubmitChanges();
+        }
+
     }
 }
