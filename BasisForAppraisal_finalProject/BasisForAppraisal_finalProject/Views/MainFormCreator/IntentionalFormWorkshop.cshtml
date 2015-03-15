@@ -8,19 +8,24 @@
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script>
-    $(".alert alert-success").alert();
-    window.setTimeout(function () { $(".alert alert-success").alert('close'); }, 2000);
-</script>
 
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () { $("#success-alert").fadeOut(1500); }, 2500)
+        $('#btnclick').click(function () {
+            $('#testdiv').show();
+            setTimeout(function () { $("#testdiv").fadeOut(1500); }, 2500)
+        })
+    })
+</script>
 
 
  @if (TempData["Success"] != null)
 {
   
    <div class="alert alert-success" id="success-alert">
-    <strong>Success! </strong>
-    Product have added to your wishlist.
+    <strong dir="rtl">שמירה בוצעה בהצלחה! </strong>
 </div>
 }
  
@@ -80,22 +85,22 @@
         
         <div class=" modal-content" style="width:95%">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:2%; margin-top:1%;" st><span aria-hidden="true">&times;</span></button>
-    <div class="modal-header" style="width:95%"></div>
-     <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-right:50%; color:blue;">מצב תצוגה</h4>
-
-    @using (Html.BeginForm())
+            <div class="modal-header" style="width:95%"></div>
+            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-right:50%; color:blue;">מצב תצוגה</h4>
+            
+            @using (Html.BeginForm())
             {
         <div id="Panel" style="width: 90%; margin-left:2%">
             <div class="panel panel-default" style="margin-left:0%;width: 100%;">
                 <div class=" panel-heading" style="margin-left:0%;width: 100%;">
-                    @Html.EditorFor(x => x.form)
-                    @Html.EditorFor(a => a.IntentionalQuestions)
+                @Html.EditorFor(x => x.form)
+                @Html.EditorFor(a => a.IntentionalQuestions)
 
                 </div>
             </div>
         </div>
-    }
+            }
+        </div>
     </div>
- </div>
 </div>
 
