@@ -42,14 +42,15 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-      
 
 
-        
-       public void deleteQustion(int formID, int quesNumber)
+
+
+        public ActionResult deleteQustion(int formID, int quesNumber)
         {
             var b = new FormManager();
             b.deleteQustion(formID, quesNumber);
+            return RedirectToAction("IntentionalFormWorkshop");
 
         }
 
