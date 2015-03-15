@@ -70,7 +70,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        public ActionResult IntentionalFormWorkshop(FormViewModel formViewModel)
        {
            var manager = new FormManager();
-           manager.UpdateQuestionsToForm(formViewModel.IntentionalQuestions);
+           manager.UpdateForm(formViewModel);
            return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
        }
 

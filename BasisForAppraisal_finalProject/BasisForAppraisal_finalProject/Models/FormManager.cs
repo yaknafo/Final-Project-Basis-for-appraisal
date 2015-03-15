@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BasisForAppraisal_finalProject.DBML;
+using BasisForAppraisal_finalProject.ViewModel;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -66,6 +67,14 @@ namespace BasisForAppraisal_finalProject.Models
             var manager = new DataManager();
             manager.UpdateQuestionsToDB(questions);
            
+        }
+
+        public void UpdateForm(FormViewModel form)
+        {
+            var manager = new DataManager();
+            manager.UpdateFormToDB(form.form);
+            manager.UpdateQuestionsToDB(form.IntentionalQuestions);
+
         }
 
     }

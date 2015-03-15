@@ -93,16 +93,7 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
-        /// <summary>
-        /// sace form include qustions and answers to db
-        /// </summary>
-        /// <param name="form"></param>
-        public void SaveFormToDB(tblForm form)
-        {
-            manager.tblForms.Attach(form);
-            manager.SubmitChanges();
-        }
-
+       
 
         //////////////////////////////////////////////////////////////////////////Delete method////////////////////////////////////////
         /// <summary>
@@ -123,6 +114,18 @@ namespace BasisForAppraisal_finalProject.Models
 
 
         //------------------------------------------------   Update Method -----------------------------------------------------------//
+
+        /// <summary>
+        /// save form include qustions and answers to db
+        /// </summary>
+        /// <param name="form"></param>
+        public void UpdateFormToDB(tblForm form)
+        {
+            var formUpdate=manager.tblForms.Where(f => f.formId== form.formId).FirstOrDefault();
+            formUpdate.FormName = form.FormName;
+            manager.SubmitChanges();
+        }
+
 
         /// <summary>
         /// update all the question in the form 
