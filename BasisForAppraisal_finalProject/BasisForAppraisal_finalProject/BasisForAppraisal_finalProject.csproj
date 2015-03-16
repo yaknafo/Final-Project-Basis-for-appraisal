@@ -241,6 +241,7 @@
     <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="photos\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>

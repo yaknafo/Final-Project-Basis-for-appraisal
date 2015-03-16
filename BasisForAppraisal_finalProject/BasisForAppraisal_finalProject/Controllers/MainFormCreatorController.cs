@@ -71,6 +71,8 @@ namespace BasisForAppraisal_finalProject.Controllers
        {
            var manager = new FormManager();
            manager.UpdateForm(formViewModel);
+         
+               TempData["Success"] = "Success message text.";
            return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
        }
 

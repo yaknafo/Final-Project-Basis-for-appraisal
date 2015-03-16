@@ -5,20 +5,47 @@
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(".alert alert-success").alert();
+    window.setTimeout(function () { $(".alert alert-success").alert('close'); }, 2000);
+</script>
 
 
-<div style="text-align: right; border: 1px solid silver; margin-left:78%; margin-top:15%; position:fixed">
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 200px;  background-color: AppWorkspace"><img src="~/addQues.png" /></button>
+
+ @if (TempData["Success"] != null)
+{
+  
+   <div class="alert alert-success" id="success-alert">
+    <strong>Success! </strong>
+    Product have added to your wishlist.
+</div>
+}
+ 
+
+<div style="text-align: right; margin-left:79%; margin-top:17%; position:fixed">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
+    <img src="~/photos/addQues.png" /></button>
 </div>
  
-<div id="Panel" style="border: groove;  width:85%; ">
     @using (Html.BeginForm())
     {
-        @Html.EditorFor(x => x.form)
-        @Html.EditorFor(a => a.IntentionalQuestions)
-        <button type="submit" class="btn btn-primary">שמור שאלות</button>
-    }
-</div>
+        <div style=" margin-left: 93%; margin-top: 10%; ">
+            <button type="submit" class="btn btn-primary btn-lg" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
+         </div>
+        <div id="Panel" style="width: 90%;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Html.EditorFor(x => x.form)
+                    @Html.EditorFor(a => a.IntentionalQuestions)
+                    </div>
+                </div>
+            </div>
+        
+        
+     }
 
 
 <!-- Modal -->
