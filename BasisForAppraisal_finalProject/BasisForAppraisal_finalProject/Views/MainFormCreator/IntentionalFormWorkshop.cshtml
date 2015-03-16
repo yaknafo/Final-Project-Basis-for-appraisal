@@ -38,14 +38,14 @@
         <div id="Panel" style="width: 90%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    @Html.EditorFor(x => x.form)
-                    @Html.EditorFor(a => a.IntentionalQuestions)
+        @Html.EditorFor(x => x.form)
+        @Html.EditorFor(a => a.IntentionalQuestions)
                     </div>
                 </div>
             </div>
         
         
-     }
+    }
 
 
 <!-- Modal -->
@@ -70,6 +70,28 @@
 
 
         </div>
+    </div>
+</div>
+
+                                                     <!-- popup preview -->
+<div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog" style="width:95%">
+        <div class=" modal-content" style="width:95%">
+            <div class="modal-header" style="width:95%"></div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:0%; margin-top:0%;" st><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-right:50%; color:blue;">מצב תצוגה</h4>
+            
+            @using (Html.BeginForm())
+            {
+                @Html.EditorFor(x => x.form)
+                @Html.EditorFor(a => a.IntentionalQuestions)
+
+            }
+
+
+
+        </div>
+
     </div>
 </div>
 
