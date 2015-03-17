@@ -86,15 +86,19 @@
         <div class=" modal-content" style="width:95%">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:2%; margin-top:1%;" st><span aria-hidden="true">&times;</span></button>
             <div class="modal-header" style="width:95%"></div>
-            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-right:50%; color:blue;">מצב תצוגה</h4>
+            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:blue;">מצב תצוגה</h4>
             
             @using (Html.BeginForm())
             {
         <div id="Panel" style="width: 90%; margin-left:2%">
             <div class="panel panel-default" style="margin-left:0%;width: 100%;">
                 <div class=" panel-heading" style="margin-left:0%;width: 100%;">
-                @Html.EditorFor(x => x.form)
-                @Html.EditorFor(a => a.IntentionalQuestions)
+                
+                    <h4 style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:darkblue;font-weight:bold;">@Model.form.FormName</h4>
+                    @foreach(BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion question in Model.IntentionalQuestions)
+                    {
+                        Html.RenderPartial("~/Views/MainFormCreator/_intetionalQusestionPartial.cshtml", question);
+                    }
 
                 </div>
             </div>
