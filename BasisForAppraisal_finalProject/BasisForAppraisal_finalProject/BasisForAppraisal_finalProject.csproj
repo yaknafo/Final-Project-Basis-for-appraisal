@@ -189,7 +189,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
+    <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\saveForm.png" />
+    <Content Include="photos\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="DBML\BFADataBasedbml.dbml">
