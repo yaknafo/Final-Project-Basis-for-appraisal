@@ -48,6 +48,10 @@ namespace BasisForAppraisal_finalProject.Models
         public tblForm GetFormWithQuestion(int fid)
         {
             var form = manager.tblForms.Where(x => x.formId== fid).FirstOrDefault();
+
+            if (form == null)
+                throw new Exception("form with number number: " + fid + " mot exist in DB");
+
             form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
             return form;
         }
@@ -94,7 +98,17 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
        
-
+        /// <summary>
+        /// save new form in data base
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
+        public int AddForm(tblForm form)
+        {
+            manager.tblForms.InsertOnSubmit(form);
+            manager.SubmitChanges();
+            return form.formId;
+        }
         //////////////////////////////////////////////////////////////////////////Delete method////////////////////////////////////////
         /// <summary>
         /// delte question from specfic form and specfic question

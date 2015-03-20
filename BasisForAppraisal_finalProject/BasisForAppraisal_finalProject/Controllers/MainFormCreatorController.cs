@@ -38,7 +38,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             var formManager = new FormManager();
             Task taskA = Task.Factory.StartNew(() => formManager.SaveQuestionToForm(form.NewQuestion));
             taskA.Wait();
-            return RedirectToAction("IntentionalFormWorkshop");
+            return RedirectToAction("IntentionalFormWorkshop", new { id = form.formId });
 
         }
 
@@ -54,15 +54,10 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-    
-
-
-
-       [HttpGet]
-       public ActionResult IntentionalFormWorkshop(int id =1)
+       public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();
-           var q = b.GetFormWithQuestion(1);
+           var q = b.GetFormWithQuestion(id);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
        }

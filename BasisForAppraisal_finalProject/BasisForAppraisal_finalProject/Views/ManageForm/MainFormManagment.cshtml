@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tblForm>
+
+@{
+    ViewBag.Title = "MainFormManagment";
+}
+
+<div dir="rtl" style="text-align:center;">
+    <h2>ניהול טפסים</h2>
+
+    <div style="margin-right:90%; margin-top:5%">
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="width:150px;"><img src="~/photos/NewForm.png" /></button>
+    </div>
+
+
+    <div class="panel panel-default" dir="rtl" style="width:75%; margin-right:30%; margin-top:5%; margin-bottom:30%; text-align:center">
+        <!-- Default panel contents -->
+
+        <div class="panel-heading" style="padding-bottom: 10px; font-size: 22px; ">רשימת טפסים</div>
+
+        <!-- Table -->
+        <table class="table-bordered" align="right" style="width:100%;">
+            <tr style=" font-size:20px;">
+                <td align="center">מספר</td>
+                <td align="center">שם</td>
+            </tr>
+                @foreach (BasisForAppraisal_finalProject.DBML.tblForm f in Model)
+{
+    <tr>
+        <td align="center">@f.formId</td>
+        <td align="center">@Html.ActionLink(f.FormName, "Edit", new { @id = f.formId })</td>
+    </tr>
+}
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" dir="rtl">שאלה חדשה</h4>
+                        </div>
+                    @using (Html.BeginForm("addNewForm", "ManageForm", FormMethod.Get))
+                {  <div class="modal-body">
+                       <button type="submit" class="btn btn-primary">שאלת מכוון</button>
+                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+           
+        </table>
+    </div>
+

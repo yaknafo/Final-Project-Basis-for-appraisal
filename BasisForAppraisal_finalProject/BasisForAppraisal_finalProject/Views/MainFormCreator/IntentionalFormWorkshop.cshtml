@@ -29,19 +29,20 @@
 </div>
 }
  
-
+                                                                <!-- Add button -->
 <div style="text-align: right; margin-left:79%; margin-top:17%; position:fixed">
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
-
     <img src="~/photos/addQues.png" /></button>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Preview" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
-        <img src="~/photos/addQues.png" />
+
+                                                                 <!-- Preview button -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Preview" style =" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
+        <img src="~/photos/previewForm.png" />
     </button>
 </div>
  
     @using (Html.BeginForm())
     {
-        <div style=" margin-left: 93%; margin-top: 10%; ">
+        <div style=" margin-left: 93%; margin-top: 13.5%; ">
             <button type="submit" class="btn btn-primary btn-lg" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
          </div>
         <div id="Panel" style="width: 90%;">

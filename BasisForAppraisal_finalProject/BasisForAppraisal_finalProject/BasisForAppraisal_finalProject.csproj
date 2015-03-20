@@ -162,6 +162,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainFormCreatorController.cs" />
+    <Compile Include="Controllers\ManageFormController.cs" />
     <Compile Include="DBML\BFADataBasedbml.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +181,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
+    <Compile Include="ViewModel\ManageFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -189,7 +191,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
-    <Content Include="photos\logosmall.jpg" />
+    <Content Include="photos\NewForm.png" />
+    <Content Include="photos\previewForm.png" />
     <Content Include="photos\saveForm.png" />
     <Content Include="photos\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -243,6 +246,7 @@
     <Content Include="Views\MainFormCreator\EditorTemplates\tblForm.cshtml" />
     <Content Include="Views\MainFormCreator\a.cshtml" />
     <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
+    <Content Include="Views\ManageForm\MainFormManagment.cshtml" />
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
