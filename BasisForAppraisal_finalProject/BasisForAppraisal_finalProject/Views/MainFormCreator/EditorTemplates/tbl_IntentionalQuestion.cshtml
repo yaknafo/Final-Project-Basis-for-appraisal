@@ -15,8 +15,8 @@
             </div>
        
         
-            @Html.ActionLink("Edit", "", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) 
-            @Html.ActionLink("Delete", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
+            @Html.ActionLink("ערוך", "", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) |
+            @Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
           
         
         <tr dir="rtl">

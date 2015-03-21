@@ -1,4 +1,5 @@
 ﻿@model BasisForAppraisal_finalProject.ViewModel.FormViewModel
+ @using BasisForAppraisal_finalProject.ViewModel
 
 @{
     ViewBag.Title = "IntentionalFormWorkshop";
@@ -95,7 +96,7 @@
     <div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
         <div class="modal-dialog" style="width:95%">
 
-            <div class=" modal-content" style="width:95%">
+            <div class=" modal-content" style="width:93%">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:2%; margin-top:1%;" st><span aria-hidden="true">&times;</span></button>
                 <div class="modal-header" style="width:95%"></div>
                 <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:blue;">מצב תצוגה</h4>
@@ -106,10 +107,12 @@
                         <div class="panel panel-default" style="margin-left:0%;width: 100%;">
                             <div class=" panel-heading" style="margin-left:0%;width: 100%;">
 
-                                <h4 style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:darkblue;font-weight:bold;">@Model.form.FormName</h4>
-                                @foreach (BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion question in Model.IntentionalQuestions)
+                                <u style="font-size:xx-large;  text-shadow:inherit; margin-left:40%; color:darkblue;font-weight:bold;">@Model.form.FormName</u>
+                                <br />
+                                
+                                @for (int i = 0; i < Model.IntentionalQuestions.Count;i++ )
                                 {
-                                    Html.RenderPartial("~/Views/MainFormCreator/_intetionalQusestionPartial.cshtml", question);
+                                    Html.RenderPartial("~/Views/MainFormCreator/_intetionalQusestionPartial.cshtml", new QuestionPreview(Model.IntentionalQuestions[i],i+1));
                                 }
                             </div>
                         </div>
@@ -131,8 +134,7 @@
             @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
             {  <div class="modal-body">
                 @Html.HiddenFor(s => s.formId)
-                @Html.re
-            </div>
+               </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">שמור שאלה</button>

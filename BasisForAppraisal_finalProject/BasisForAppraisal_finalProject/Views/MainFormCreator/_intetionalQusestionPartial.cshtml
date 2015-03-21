@@ -1,27 +1,27 @@
-﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+﻿@model BasisForAppraisal_finalProject.ViewModel.QuestionPreview
 @{
     ViewBag.Title = "tbl_IntentionalQuestion";
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<h4 style="font-weight:bold">@Model.Title</h4>
+<h4 style="font-weight:bold" dir="rtl">@Model.numberOfQuestion . @Model.question.Title</h4>
 <table class="table" dir="rtl">
     <th>
-        @for (int i = 0; i < Model.Answers.Count(); i++)
+        @for (int i = 0; i < Model.question.Answers.Count(); i++)
         {
-            @Html.TextAreaFor(x => x.Answers[i].Text, new { style = "height: 200px;  width:200px;margin-left:10%; ", disabled = "disabled" })
+           
+            @Html.TextAreaFor(x => x.question.Answers[i].Text, new { style = "height: 200px;  width:200px;margin-left:10%; ", disabled = "disabled" })
         }
         <br />
-        @for (int i = 0; i < Model.Answers.Count(); i++)
+        @for (int i = 0; i < Model.question.Answers.Count(); i++)
         {
-            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-right: 6%;margin-left: 20%; margin-top: 10px;"})
+            @Html.RadioButtonFor(a => a.question.selectedAnswer, Model.question.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-right: 10%;margin-left: 18%; margin-top: 10px;color:black ", disabled = "disabled" })
         }
     </th>
-
-
+   
+    
 
 
 
 </table>
-
 
