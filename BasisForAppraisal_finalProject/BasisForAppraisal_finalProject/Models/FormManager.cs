@@ -41,6 +41,10 @@ namespace BasisForAppraisal_finalProject.Models
           
         }
 
+        /// <summary>
+        /// save new question in form  
+        /// </summary>
+        /// <param name="question"></param>
         public void SaveQuestionToForm(tbl_IntentionalQuestion question)
         {
             var manager = new DataManager();
@@ -48,6 +52,10 @@ namespace BasisForAppraisal_finalProject.Models
             question.tblForm.AddedNewQuestion();
         }
 
+        /// <summary>
+        /// save form with all is change that been made in the workshope
+        /// </summary>
+        /// <param name="form"></param>
         public void SaveForm(tblForm form)
         {
             var manager = new DataManager();
@@ -55,26 +63,40 @@ namespace BasisForAppraisal_finalProject.Models
             manager.saveFormToDB(form);
         }
 
-   
+        /// <summary>
+        /// delete question
+        /// </summary>
+        /// <param name="formID"></param>
+        /// <param name="quesNumber"></param>
         public void deleteQustion(int formID, int quesNumber)
         {
             DataManager db =  new DataManager();
             db.deleteQustion(formID, quesNumber);
         }
 
-        public void UpdateQuestionsToForm(List<tbl_IntentionalQuestion> questions)
-        {
-            var manager = new DataManager();
-            manager.UpdateQuestionsToDB(questions);
-           
-        }
+       
 
+        /// <summary>
+        /// update form with all his change that had been made in the workshope
+        /// </summary>
+        /// <param name="form"></param>
         public void UpdateForm(FormViewModel form)
         {
             var manager = new DataManager();
             manager.UpdateFormToDB(form.form);
             manager.UpdateQuestionsToDB(form.IntentionalQuestions);
 
+        }
+
+        /// <summary>
+        ///  add new form to DB
+        /// </summary>
+        /// <returns></returns>
+        public int AddNewForm()
+        {
+            var manager = new DataManager();
+            var newform= new tblForm{ FormName="טופס חדש"};
+           return manager.AddForm(newform);
         }
 
     }

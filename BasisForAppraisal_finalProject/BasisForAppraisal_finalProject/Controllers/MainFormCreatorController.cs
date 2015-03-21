@@ -41,10 +41,6 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("IntentionalFormWorkshop");
 
         }
-
-      
-
-
         
        public void deleteQustion(int formID, int quesNumber)
         {
@@ -53,15 +49,10 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-    
-
-
-
-       [HttpGet]
-       public ActionResult IntentionalFormWorkshop(int id =1)
+       public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();
-           var q = b.GetFormWithQuestion(1);
+           var q = b.GetFormWithQuestion(id);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
        }
