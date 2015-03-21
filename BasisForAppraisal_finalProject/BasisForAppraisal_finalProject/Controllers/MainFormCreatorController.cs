@@ -38,11 +38,10 @@ namespace BasisForAppraisal_finalProject.Controllers
             var formManager = new FormManager();
             Task taskA = Task.Factory.StartNew(() => formManager.SaveQuestionToForm(form.NewQuestion));
             taskA.Wait();
+            TempData["Success"] = "הוספה בוצעה בהצלחה!";
             return RedirectToAction("IntentionalFormWorkshop", new { id = form.formId });
 
         }
-
-
 
 
 
@@ -62,14 +61,18 @@ namespace BasisForAppraisal_finalProject.Controllers
            return View(t);
        }
 
-
+        /// <summary>
+        /// saving the form with all his changes
+        /// </summary>
+        /// <param name="formViewModel"></param>
+        /// <returns></returns>
        [HttpPost]
        public ActionResult IntentionalFormWorkshop(FormViewModel formViewModel)
        {
            var manager = new FormManager();
            manager.UpdateForm(formViewModel);
          
-               TempData["Success"] = "Success message text.";
+               TempData["Success"] = "שמירה בוצעה בהצלחה!";
            return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
        }
 
@@ -80,6 +83,12 @@ namespace BasisForAppraisal_finalProject.Controllers
            var q = b.GetFormWithQuestion(formid);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
+       }
+
+       [HttpGet]
+       public ActionResult backToMainForm()
+       {
+           return RedirectToAction("MainFormManagment", "ManageForm");
        }
 	}
 }

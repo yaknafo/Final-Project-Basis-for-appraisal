@@ -1,35 +1,102 @@
-﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tblForm>
+﻿
+
+@model IEnumerable<BasisForAppraisal_finalProject.DBML.tblForm>
 
 @{
     ViewBag.Title = "MainFormManagment";
 }
+<script src="~/Scripts/DataTable/dataTables.keyTable.js"></script>
+<script src="~/Scripts/DataTable/jquery.js"></script>
+<script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
+<link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
+<link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
 
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+@Styles.Render("~/Content/bootstrapcss")
+@Styles.Render("~/Content/themes/base/css")
 <div dir="rtl" style="text-align:center;">
     <h2>ניהול טפסים</h2>
 
-    <div style="margin-right:90%; margin-top:5%">
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="width:150px;"><img src="~/photos/NewForm.png" /></button>
+
+
+    <!-- yair-->
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid" dir="ltr">
+            <!-- Brand and toggle get grouped for better mobile display -->
+           
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <div style="margin-right:90%;">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="width:150px;"><img src="~/photos/newForm.png" /></button>
     </div>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">סוגי טפסים <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">מכוון</a></li>
+                            <li><a href="#">מספר אפשרויות</a></li>
+                            <li><a href="#">דירוג</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+   
 
 
-    <div class="panel panel-default" dir="rtl" style="width:75%; margin-right:30%; margin-top:5%; margin-bottom:30%; text-align:center">
+
+
+
+        <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
         <!-- Default panel contents -->
 
-        <div class="panel-heading" style="padding-bottom: 10px; font-size: 22px; ">רשימת טפסים</div>
+            <div class="panel-heading" style="font-size: 22px; ">רשימת טפסים</div>
 
-        <!-- Table -->
-        <table class="table-bordered" align="right" style="width:100%;">
+            <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
+            <!---knafo-->
+
+            <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
+                <thead>
             <tr style=" font-size:20px;">
-                <td align="center">מספר</td>
                 <td align="center">שם</td>
+                            <td align="center">מספר שאלות</td>
+                            <td align="center">מחיקה</td>
             </tr>
-                @foreach (BasisForAppraisal_finalProject.DBML.tblForm f in Model)
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
 {
     <tr>
-        <td align="center">@f.formId</td>
-        <td align="center">@Html.ActionLink(f.FormName, "Edit", new { @id = f.formId })</td>
+                        <td align="center">@Html.ActionLink(item.FormName, "Edit", new { @id = item.formId })</td>
+                       <td align="center">@item.Questions.Count().ToString()</td>
+                        <td align="center">@Html.ActionLink("Delete", "DeleteForm", new { @id = item.formId })</td>
     </tr>
 }
+                </tbody>
+            </table>
+
+
+
+            <script>
+
+                var table = $('#myTable').DataTable();
+                new $.fn.dataTable.KeyTable(table);
+
+            </script>
+            <!----------------------------------------------------------------------------------------------------------------->
+            
+            
+            
+                     
 
 
 
@@ -56,6 +123,7 @@
                 </div>
             </div>
            
-        </table>
+         
     </div>
+
 

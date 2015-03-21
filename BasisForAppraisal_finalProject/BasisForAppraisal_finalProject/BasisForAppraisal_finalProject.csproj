@@ -40,6 +40,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -186,11 +192,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
+    <Content Include="photos\backTo.png" />
     <Content Include="photos\NewForm.png" />
     <Content Include="photos\previewForm.png" />
     <Content Include="photos\saveForm.png" />
@@ -203,9 +211,19 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\DataTable\dataTables.keyTable.css" />
+    <Content Include="Scripts\DataTable\dataTables.keyTable.js" />
+    <Content Include="Scripts\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTable\dataTables.keyTable.min.css" />
+    <Content Include="Scripts\DataTable\jquery.dataTables.css" />
+    <Content Include="Scripts\DataTable\jquery.dataTables.min.css" />
+    <Content Include="Scripts\DataTable\jquery.dataTables_themeroller.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\DataTable\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTable\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTable\jquery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -248,7 +266,7 @@
     <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
     <Content Include="Views\ManageForm\MainFormManagment.cshtml" />
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartial.cshtml" />
-    <Content Include="Views\MainFormCreator\_tbl_IntionalAnswerDisable.cshtml" />
+    <Content Include="Views\ManageForm\a.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\check\" />

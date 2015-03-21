@@ -126,6 +126,29 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
+        /// <summary>
+        /// delte question from specfic form and specfic question
+        /// 
+        /// <param name="formID"></param> 
+        /// <param name="quesNumber"></param>
+        public void deleteForm(int formID)
+        {
+            // find the form
+            var formForDelete = manager.tblForms.Where(x => x.formId == formID).FirstOrDefault();
+
+            // check if exist
+            if(formForDelete == null)
+                throw new Exception(string.Format("the form with number id {0} camt be delete becouse he cant be found in DB",formID));
+
+            // delete all his question
+            formForDelete.Questions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
+
+            // delete the form him self
+            manager.tblForms.DeleteOnSubmit(formForDelete);
+
+            manager.SubmitChanges();
+        }
+
 
         //------------------------------------------------   Update Method -----------------------------------------------------------//
 
