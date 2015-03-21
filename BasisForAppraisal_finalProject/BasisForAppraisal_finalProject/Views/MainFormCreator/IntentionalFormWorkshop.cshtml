@@ -1,5 +1,6 @@
 ﻿@model BasisForAppraisal_finalProject.ViewModel.FormViewModel
  @using BasisForAppraisal_finalProject.ViewModel
+ @using BasisForAppraisal_finalProject.DBML
 
 @{
     ViewBag.Title = "IntentionalFormWorkshop";
@@ -48,7 +49,7 @@
         <!-- exit -->
         @using (Html.BeginForm("backToMainForm", "MainFormCreator", FormMethod.Get))
 {
-    <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
+    <button type="submit" class="btn btn-primary btn-lg" title="חזרה לניהול טפסים" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
         <img src="~/photos/backTo.png" />
     </button>
 }
@@ -72,26 +73,30 @@
     }
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl">שאלה חדשה</h4>
-                </div>
-                @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
-                {  <div class="modal-body">
-                    @Html.HiddenFor(s => s.formId)
-                    @Html.EditorFor(b => b.NewQuestion)
-                </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">שמור שאלה</button>
-                    </div>
-                }
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;" st><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
             </div>
+            @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
+            {  <div class="modal-body">
+                @Html.HiddenFor(s => s.formId)
+                @Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)
+            
+                 </div>
+            
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >סגור</button>
+                    <button type="submit" class="btn btn-primary" style="margin-right:40%">שמור שאלה</button>
+                </div>
+            }
+            
         </div>
     </div>
+</div>
+
     <!-- popup preview -->
     <div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
         <div class="modal-dialog" style="width:95%">
@@ -110,13 +115,15 @@
                                 <u style="font-size:xx-large;  text-shadow:inherit; margin-left:40%; color:darkblue;font-weight:bold;">@Model.form.FormName</u>
                                 <br />
                                 
-                                @for (int i = 0; i < Model.IntentionalQuestions.Count;i++ )
+                                @for (int i =0;i< Model.IntentionalQuestions.Count; i++)
                                 {
                                     Html.RenderPartial("~/Views/MainFormCreator/_intetionalQusestionPartial.cshtml", new QuestionPreview(Model.IntentionalQuestions[i],i+1));
                                 }
+                              
                             </div>
                         </div>
                     </div>
+                   
                 }
             </div>
         </div>

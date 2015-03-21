@@ -49,7 +49,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var b = new FormManager();
             b.deleteQustion(formID, quesNumber);
-            return RedirectToAction("IntentionalFormWorkshop");
+            return RedirectToAction("IntentionalFormWorkshop", new { id = formID });
 
         }
 
@@ -90,5 +90,6 @@ namespace BasisForAppraisal_finalProject.Controllers
        {
            return RedirectToAction("MainFormManagment", "ManageForm");
        }
+       
 	}
 }
