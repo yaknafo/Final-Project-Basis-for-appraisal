@@ -192,6 +192,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
     <Content Include="photos\NewForm.png" />
+    <Content Include="photos\previewForm.png" />
     <Content Include="photos\saveForm.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

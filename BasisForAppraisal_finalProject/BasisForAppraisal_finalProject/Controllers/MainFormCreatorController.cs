@@ -38,7 +38,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             var formManager = new FormManager();
             Task taskA = Task.Factory.StartNew(() => formManager.SaveQuestionToForm(form.NewQuestion));
             taskA.Wait();
-            return RedirectToAction("IntentionalFormWorkshop");
+            return RedirectToAction("IntentionalFormWorkshop", new { id = form.formId });
 
         }
 
