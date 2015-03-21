@@ -248,6 +248,7 @@
     <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
     <Content Include="Views\ManageForm\MainFormManagment.cshtml" />
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartial.cshtml" />
+    <Content Include="Views\MainFormCreator\_tbl_IntionalAnswerDisable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\check\" />
