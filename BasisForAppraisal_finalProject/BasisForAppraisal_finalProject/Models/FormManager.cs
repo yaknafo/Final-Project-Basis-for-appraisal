@@ -74,6 +74,17 @@ namespace BasisForAppraisal_finalProject.Models
             db.deleteQustion(formID, quesNumber);
         }
 
+        /// <summary>
+        /// delete question
+        /// </summary>
+        /// <param name="formID"></param>
+        /// <param name="quesNumber"></param>
+        public void deleteForm(int formId)
+        {
+            DataManager db = new DataManager();
+            db.deleteForm(formId);
+        }
+
        
 
         /// <summary>

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Models;
+using PagedList;
+using PagedList;
 
 
 namespace BasisForAppraisal_finalProject.Controllers
@@ -25,6 +27,14 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = id });
         }
 
+
+        public ActionResult DeleteForm(int id)
+        {
+            var fm = new FormManager();
+            fm.deleteForm(id);
+            return RedirectToAction("MainFormManagment");
+        }
+
         [HttpGet]
         public ActionResult addNewForm()
         {
@@ -32,6 +42,13 @@ namespace BasisForAppraisal_finalProject.Controllers
             var numberOfForm=fm.AddNewForm();
             return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = numberOfForm });
 
+        }
+
+        [HttpGet]
+        public ActionResult a()
+        {
+            var forms = new ManageFormViewModel();
+            return View(forms.Forms);
         }
 	}
 }
