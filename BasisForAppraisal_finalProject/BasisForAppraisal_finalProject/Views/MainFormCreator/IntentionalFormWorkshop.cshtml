@@ -83,6 +83,7 @@
             @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
             {  <div class="modal-body">
                 @Html.HiddenFor(s => s.formId)
+                @*@Html.EditorFor(x=>x.NewQuestion)*@
                 @Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)
             
                  </div>
