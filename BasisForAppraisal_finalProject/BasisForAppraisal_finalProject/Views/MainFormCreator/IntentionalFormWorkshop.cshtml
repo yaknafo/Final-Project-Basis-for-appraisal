@@ -32,7 +32,11 @@
 
 <div style="text-align: right; margin-left:79%; margin-top:17%; position:fixed">
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
+
     <img src="~/photos/addQues.png" /></button>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#Preview" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
+        <img src="~/photos/addQues.png" />
+    </button>
 </div>
  
     @using (Html.BeginForm())
@@ -71,9 +75,6 @@
                     <button type="submit" class="btn btn-primary">שמור שאלה</button>
                 </div>
             }
-
-
-
         </div>
     </div>
 </div>
@@ -81,22 +82,29 @@
                                                      <!-- popup preview -->
 <div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
     <div class="modal-dialog" style="width:95%">
+        
         <div class=" modal-content" style="width:95%">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:2%; margin-top:1%;" st><span aria-hidden="true">&times;</span></button>
             <div class="modal-header" style="width:95%"></div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:0%; margin-top:0%;" st><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-right:50%; color:blue;">מצב תצוגה</h4>
+            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:blue;">מצב תצוגה</h4>
             
             @using (Html.BeginForm())
             {
-                @Html.EditorFor(x => x.form)
-                @Html.EditorFor(a => a.IntentionalQuestions)
+        <div id="Panel" style="width: 90%; margin-left:2%">
+            <div class="panel panel-default" style="margin-left:0%;width: 100%;">
+                <div class=" panel-heading" style="margin-left:0%;width: 100%;">
+                
+                    <h4 style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:darkblue;font-weight:bold;">@Model.form.FormName</h4>
+                    @foreach(BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion question in Model.IntentionalQuestions)
+                    {
+                        Html.RenderPartial("~/Views/MainFormCreator/_intetionalQusestionPartial.cshtml", question);
+                    }
 
-            }
-
-
-
+                </div>
+            </div>
         </div>
-
+            }
+        </div>
     </div>
 </div>
 

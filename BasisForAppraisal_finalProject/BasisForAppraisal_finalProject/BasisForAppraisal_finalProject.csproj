@@ -245,6 +245,7 @@
     <Content Include="Views\MainFormCreator\a.cshtml" />
     <Content Include="Views\MainFormCreator\IntentionalFormWorkshop.cshtml" />
     <Content Include="Views\ManageForm\MainFormManagment.cshtml" />
+    <Content Include="Views\MainFormCreator\_intetionalQusestionPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\check\" />
