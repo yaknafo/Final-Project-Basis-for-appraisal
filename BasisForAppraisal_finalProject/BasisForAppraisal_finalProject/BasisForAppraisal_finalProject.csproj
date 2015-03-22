@@ -198,6 +198,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
+    <Content Include="photos\backTo.png" />
     <Content Include="photos\NewForm.png" />
     <Content Include="photos\previewForm.png" />
     <Content Include="photos\saveForm.png" />
