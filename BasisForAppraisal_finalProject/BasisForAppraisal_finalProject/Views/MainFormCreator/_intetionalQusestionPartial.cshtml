@@ -1,38 +1,48 @@
-﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+﻿@model BasisForAppraisal_finalProject.ViewModel.QuestionPreview
+@using BasisForAppraisal_finalProject.DBML
 @{
     ViewBag.Title = "tbl_IntentionalQuestion";
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<button type="button" class="btn btn-primary btn-lg" title="איך עונים על השאלה הזאת" data-toggle="modal" data-target="#info" style=" margin-top:3%; width:55px;  background-color: transparent; border:none">
+    <img src="~/photos/info.png" />
+</button>
 
-<table class="table" dir="rtl">
-    <div dir="rtl">
-        @Html.HiddenFor(x => x.FormId)
-        @Html.HiddenFor(x => x.QuestionId)
-        
-       <h4 style="font-weight:bold">@Model.Title</h4>
-    </div>
-
-
+    <h4 style="font-weight:bold" dir="rtl">@Model.numberOfQuestion.@Model.question.Title</h4>
+    <table class="table" dir="rtl">
+        <th>
+            @for (int i = 0; i < Model.question.Answers.Count(); i++)
+            {
+           
+                @Html.TextAreaFor(x => x.question.Answers[i].Text, new { style = "height: 200px;  width:200px;margin-left:10%; ", disabled = "disabled" })
+            }
+            <br />
+            @for (int i = 0; i < Model.question.Answers.Count(); i++)
+            {
+                @Html.RadioButtonFor(a => a.question.selectedAnswer, Model.question.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-right: 10%;margin-left: 18%; margin-top: 10px;color:black ", disabled = "disabled" })
+            }
+           
+       </th>
+    
+</table>
    
 
 
-    <tr dir="rtl">
-
-        <br />
-        <br />
-        @for (int i = 0; i < Model.Answers.Count(); i++)
-        {
-            <th dir="rtl">
-                @Html.EditorFor(x => x.Answers[i])
-                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 20%; margin-top: 10px;" })
-            </th>
-
-
-
-        }
-
-    </tr>
-</table>
-
-
+ <!-- popUp -->
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%">שאלה מסוג מכוון</h4>
+            </div>
+         
+              <div class="modal-body" dir="rtl">
+                    פה יהיה מידע על איך עונים על השאלה
+                </div>
+             
+           
+        </div>
+    </div>
+</div>

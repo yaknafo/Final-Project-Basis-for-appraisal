@@ -13,6 +13,7 @@ namespace BasisForAppraisal_finalProject.DBML
     /// </summary>
     public partial class tbl_IntentionalQuestion
     {
+      
         public int selectedAnswer { set; get; }
        
         /// <summary>
@@ -23,7 +24,7 @@ namespace BasisForAppraisal_finalProject.DBML
         /// <param name="numberOfQuestoin"></param>
         public tbl_IntentionalQuestion(int numberOfAnswers, int formId):base()
         {
-          
+             
             this.FormId = formId;
             this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
             this._tblForm = default(EntityRef<tblForm>);

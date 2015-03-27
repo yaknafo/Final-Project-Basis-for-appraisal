@@ -7,6 +7,7 @@ using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Models;
 using PagedList;
 using PagedList;
+using BasisForAppraisal_finalProject.DBML;
 
 
 namespace BasisForAppraisal_finalProject.Controllers
@@ -27,6 +28,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = id });
         }
 
+       
 
         public ActionResult DeleteForm(int id)
         {

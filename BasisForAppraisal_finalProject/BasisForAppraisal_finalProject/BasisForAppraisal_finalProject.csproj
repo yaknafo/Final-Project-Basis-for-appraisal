@@ -188,6 +188,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
+    <Compile Include="ViewModel\QuestionPreview.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -199,6 +200,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
     <Content Include="photos\backTo.png" />
+    <Content Include="photos\info.png" />
+    <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\NewForm.png" />
     <Content Include="photos\previewForm.png" />
     <Content Include="photos\saveForm.png" />
@@ -267,6 +270,7 @@
     <Content Include="Views\ManageForm\MainFormManagment.cshtml" />
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartial.cshtml" />
     <Content Include="Views\ManageForm\a.cshtml" />
+    <Content Include="Views\MainFormCreator\_intetionalQusestionPartialForAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\check\" />
