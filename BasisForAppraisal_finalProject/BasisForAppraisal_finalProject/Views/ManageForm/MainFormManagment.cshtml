@@ -20,7 +20,7 @@
 
 
 
-    <!-- yair-->
+    <!-- navbar-->
 
     <nav class="navbar navbar-default">
         <div class="container-fluid" dir="ltr">
@@ -31,7 +31,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <div style="margin-right:90%;">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="width:150px;"><img src="~/photos/newForm.png" /></button>
+                        @using(Html.BeginForm("addNewForm", "ManageForm",FormMethod.Post))
+                        {
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:150px;"><img src="~/photos/newForm.png" /></button>
+                        }
     </div>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -75,13 +78,13 @@
                 <tbody>
                     @foreach (var item in Model)
 {
-    <tr>
+                <tr>
                         <td align="center">@Html.ActionLink(item.FormName, "Edit", new { @id = item.formId })</td>
                        <td align="center">@item.Questions.Count().ToString()</td>
                   
         <td><p><span class="glyphicon glyphicon-trash" title="תצוגה מקדימה" data-toggle="modal" data-target="#@item.formId" style="cursor:pointer;"></span></p></td>
 
-    </tr>
+             </tr>
 }
                 </tbody>
             </table>

@@ -37,7 +37,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("MainFormManagment");
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult addNewForm()
         {
             var fm = new FormManager();
