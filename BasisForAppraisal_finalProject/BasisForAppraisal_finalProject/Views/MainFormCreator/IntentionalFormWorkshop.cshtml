@@ -40,23 +40,17 @@
             <img src="~/photos/addQues.png" />
         </button>
             <!-- Preview button -->
-            <button type="button" class="btn btn-primary btn-lg"  title="תצוגה מקדימה" data-toggle="modal" data-target="#Preview" style=" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
-                <img src="~/photos/previewForm.png" />
-            </button>
-
-        <!-- exit -->
-        @using (Html.BeginForm("backToMainForm", "MainFormCreator", FormMethod.Get))
-{
-    <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
-        <img src="~/photos/backTo.png" />
-    </button>
-}
-</div>
+        <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" style=" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
+            <img src="~/photos/previewForm.png" />
+        </button>
 
     @using (Html.BeginForm())
     {
-        <div style=" margin-left: 93%; margin-top: 13.5%; ">
-            <button type="submit" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
+         <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
+            <img src="~/photos/backTo.png" />
+        </button>
+        <div style=" margin-left: 93%; margin-top: 3%; ">
+            <button type="submit" name="save" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
         </div>
         <div id="Panel" style="width: 90%;">
             <div class="panel panel-default">
@@ -66,7 +60,25 @@
                 </div>
             </div>
         </div>
-
+        
+         <!-- Modal -->
+<div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl">do you want the save the changes?</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור וצא</button>
+                    <button type="submit" name="exit" value="Save and Close" class="btn btn-primary">שמור וצא</button>
+                </div>
+        
+        </div>
+    </div>
+</div>
 
     }
 
@@ -120,25 +132,4 @@
     </div>
 
 
- <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" dir="rtl">do you want the save the changes?</h4>
-            </div>
-            @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
-            {  <div class="modal-body">
-                @Html.HiddenFor(s => s.formId)
-                @Html.re
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">שמור שאלה</button>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
+ 

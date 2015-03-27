@@ -67,12 +67,19 @@ namespace BasisForAppraisal_finalProject.Controllers
         /// <param name="formViewModel"></param>
         /// <returns></returns>
        [HttpPost]
-       public ActionResult IntentionalFormWorkshop(FormViewModel formViewModel)
+       public ActionResult IntentionalFormWorkshop(string save, string exit,FormViewModel formViewModel )
        {
+           
            var manager = new FormManager();
            manager.UpdateForm(formViewModel);
          
                TempData["Success"] = "שמירה בוצעה בהצלחה!";
+
+           if(exit != null)
+           {
+               return backToMainForm();
+           }
+
            return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
        }
 
