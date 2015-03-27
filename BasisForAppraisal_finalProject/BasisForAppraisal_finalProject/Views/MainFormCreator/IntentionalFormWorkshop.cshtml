@@ -42,10 +42,10 @@
             <img src="~/photos/addQues.png" />
         </button>
             <!-- Preview button -->
-        <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" style=" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
-                <img src="~/photos/previewForm.png" />
-            </button>
-
+        <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" data-toggle="modal" data-target="#Preview" style=" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
+            <img src="~/photos/previewForm.png" />
+        </button>
+        </div>
     @using (Html.BeginForm())
 {
          <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
@@ -69,13 +69,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" dir="rtl">do you want the save the changes?</h4>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl">האם אתה בטוח שאתה רוצה לצאת?</h4>
             </div>
             <div class="modal-body">
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור וצא</button>
-                    <button type="submit" name="exit" value="Save and Close" class="btn btn-primary">שמור וצא</button>
+                <button type="submit" name="exit" value="exit" class="btn btn-default">סגור וצא</button>
+                <button type="submit" name="SaveAndClose" value="Save and Close" class="btn btn-primary">שמור וצא</button>
                 </div>
 
         </div>
@@ -95,8 +93,8 @@
                 @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
                 {  <div class="modal-body">
                     @Html.HiddenFor(s => s.formId)
-                @*@Html.EditorFor(x=>x.NewQuestion)*@
-                @Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)
+                @Html.EditorFor(x=>x.NewQuestion)
+                @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
             
                 </div>
             
