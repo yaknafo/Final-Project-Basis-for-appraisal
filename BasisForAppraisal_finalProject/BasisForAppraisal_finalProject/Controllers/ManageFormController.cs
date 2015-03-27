@@ -29,7 +29,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
        
-
+        [HttpPost]
         public ActionResult DeleteForm(int id)
         {
             var fm = new FormManager();
