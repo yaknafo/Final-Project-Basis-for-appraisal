@@ -112,7 +112,7 @@
                             <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה למחוק פריט זה?</h4>
                             <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.FormName</h4>
                         </div>
-                        @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Get))
+                        @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Post))
                         {  <div class="modal-body">
                                <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
                              <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
