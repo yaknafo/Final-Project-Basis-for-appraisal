@@ -6,12 +6,13 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
    
 
-    <table class="table" dir="rtl">
+    
         <div dir="rtl">
+            
             @Html.HiddenFor(x => x.FormId)
             @Html.HiddenFor(x => x.QuestionId)
             <h4>שאלה</h4>
-            @Html.TextAreaFor(x => x.Title, new { style = "height: 60px;  width:300px;" })
+            @Html.TextAreaFor(x => x.Title, new { @cols = 80, @rows = 8 })
             </div>
        
         @if (Model.QuestionId > 0)
@@ -21,22 +22,45 @@
             @Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
         }
           
-        
-        <tr dir="rtl">
+        <table class="table" dir="rtl">
+    <tr dir="rtl">
 
-            <br />
-            <br />
-            @for (int i = 0; i < Model.Answers.Count(); i++)
-            {
-                <th dir="rtl">
+        @for (int i = 0; i < Model.Answers.Count(); i++)
+        {
+            <th dir="rtl">
+                @if (i != 1 && i != 3 || Model.Answers.Count() <= 3)
+                {
                     @Html.EditorFor(x => x.Answers[i])
-                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 40%; margin-top: 10px;" })
-                </th>
+                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 50%; margin-top: 10px;" })
+                }
+                else
+                {
 
-         }
+                    @Html.HiddenFor(x => x.Answers[i].FormId)
+                    @Html.HiddenFor(x => x.Answers[i].QuestionId)
+                    @Html.HiddenFor(x => x.Answers[i].AnswerId)
+                    @Html.HiddenFor(x => x.Answers[i].Score)
+                    @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                    @Html.HiddenFor(x => x.Answers[i].Text, new { style = "height: 200px;  width:200px; margin-left:13%" })
+                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 40%; margin-top: 210px;" })
+                }
 
-        </tr>
-    </table>
+            </th>
+
+        }
+
+    </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
 
 
 

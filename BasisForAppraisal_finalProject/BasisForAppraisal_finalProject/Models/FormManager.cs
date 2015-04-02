@@ -49,7 +49,6 @@ namespace BasisForAppraisal_finalProject.Models
         {
             var manager = new DataManager();
             manager.saveQuestionToDB(question);
-            question.tblForm.AddedNewQuestion();
         }
 
         /// <summary>
@@ -95,6 +94,9 @@ namespace BasisForAppraisal_finalProject.Models
         {
             var manager = new DataManager();
             manager.UpdateFormToDB(form.form);
+
+            // can be that we still dont have question in ur form
+            if(form.IntentionalQuestions != null)
             manager.UpdateQuestionsToDB(form.IntentionalQuestions);
 
         }

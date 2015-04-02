@@ -112,20 +112,6 @@ namespace BasisForAppraisal_finalProject.DBML
 
          private tbl_IntentionalQuestion newQuestion;
 
-         public tbl_IntentionalQuestion NewQuestion
-         {
-             get
-             {
-
-                 return newQuestion ?? new tbl_IntentionalQuestion(3, 1);
-                
-             }
-             set
-             {
-                 newQuestion = value;
-             }
-
-         }
         
          public List<tbl_IntentionalQuestion> Questions
          {
@@ -163,9 +149,6 @@ namespace BasisForAppraisal_finalProject.DBML
              return new tbl_IntentionalQuestion( formId, num +1);
          }
 
-         public void AddedNewQuestion()
-         {
-             NewQuestion = null;
-         }
+      
     }
 }

@@ -5,12 +5,11 @@
 }
 @Html.HiddenFor(x => x.formId)
 @Html.HiddenFor(x=> x.Questions.Count)
-@Html.HiddenFor(x => x.NewQuestion.QuestionId)
 
 <div id="Panel" style="width:90%; ">
 
     <h1 class="text-center" dir="rtl">@Html.EditorFor(x => x.FormName)</h1>
 
 </div>
-@Html.HiddenFor(x => x.NewQuestion)
+
 

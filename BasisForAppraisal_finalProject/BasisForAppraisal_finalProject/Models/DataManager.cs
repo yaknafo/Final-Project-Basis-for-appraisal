@@ -210,9 +210,18 @@ namespace BasisForAppraisal_finalProject.Models
                 throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
 
             // setting the data for the new answer
-            updateAnswer.Text = newAnswer.Text;
-            updateAnswer.Score = newAnswer.Score;
-            updateAnswer.AnswerOption = newAnswer.AnswerOption;
+            if (newAnswer != null)
+            {
+                updateAnswer.Text = newAnswer.Text;
+                updateAnswer.Score = newAnswer.Score;
+                updateAnswer.AnswerOption = newAnswer.AnswerOption;
+            }
+            else
+            {
+                updateAnswer.Text = string.Empty;
+                updateAnswer.Score = 0;
+                updateAnswer.AnswerOption = false;
+            }
 
             // save change to db
             manager.SubmitChanges();
