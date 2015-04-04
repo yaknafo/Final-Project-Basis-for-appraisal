@@ -177,21 +177,32 @@ namespace BasisForAppraisal_finalProject.Models
 
                 // check if exist
                 if (updateQuestoin == null)
-                    throw new Exception(string.Format("Question id = {0} cant be update, the question does not exist in the dataBase", q.QuestionId));
-             
-                // setting the title of the question
-                updateQuestoin.Title = q.Title;
-                
-                var answerAndNewAnswer = q.Answers.Zip(updateQuestoin.Answers, (o, n) => new { newAnswer = o, oldAnswer = n });
-
-                foreach (var nw in answerAndNewAnswer)
+                    saveQuestionToDB(q);
+                else
                 {
-                    UpdateAnswerToDB(nw.oldAnswer, nw.newAnswer);
+                    // setting the title of the question
+                    updateQuestoin.Title = q.Title;
+
+                    var answerAndNewAnswer = q.Answers.Zip(updateQuestoin.Answers, (o, n) => new { newAnswer = o, oldAnswer = n });
+
+                    foreach (var nw in answerAndNewAnswer)
+                    {
+                        UpdateAnswerToDB(nw.oldAnswer, nw.newAnswer);
+                        manager.SubmitChanges();
+                    }
+
                     manager.SubmitChanges();
                 }
-
-                manager.SubmitChanges();
             }
+
+            // delete part
+            var deleteQuestions = manager.tbl_IntentionalQuestions.Where(x => x.FormId == questions.First().FormId && !questions.Contains(x)).ToList();
+
+
+            // delete all his question
+            deleteQuestions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
+
+            manager.SubmitChanges();
         }
 
 

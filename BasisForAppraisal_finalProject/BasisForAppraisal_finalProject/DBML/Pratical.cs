@@ -13,8 +13,15 @@ namespace BasisForAppraisal_finalProject.DBML
     /// </summary>
     public partial class tbl_IntentionalQuestion
     {
-      
+      /// <summary>
+      /// which answer has been selected
+      /// </summary>
         public int selectedAnswer { set; get; }
+
+        /// <summary>
+        /// if to delete the question 
+        /// </summary>
+        public bool deleteQuestion { set; get; }
        
         /// <summary>
         /// counstrator costume 

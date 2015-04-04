@@ -48,13 +48,23 @@
         </div>
     @using (Html.BeginForm())
 {
+        <!-- the exit button-->
          <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
         <img src="~/photos/backTo.png" />
     </button>
+        
+        <!-- the save button-->
         <div style=" margin-left: 93%; margin-top: 3%; ">
-            <button type="submit" name="save" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
+            <button type="submit" name="submit" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
         </div>
-        <div id="Panel" style="width: 90%;">
+        
+        <!-- the delete button-->
+        <div style=" margin-left: 94%; margin-top: 25%; ">
+            <button type="submit" name="submit" value="delete" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/deleteQ.png" /></button>
+        </div>
+        
+        
+        <div id="Panel" style="width: 90%; margin-top: -20%; ">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @Html.EditorFor(x => x.form)
@@ -72,15 +82,15 @@
                 <h4 class="modal-title" id="myModalLabel" dir="rtl">האם אתה בטוח שאתה רוצה לצאת?</h4>
             </div>
             <div class="modal-body">
-                <button type="submit" name="exit" value="exit" class="btn btn-default">סגור וצא</button>
-                <button type="submit" name="SaveAndClose" value="Save and Close" class="btn btn-primary">שמור וצא</button>
+                <button type="submit" name="submit" value="exit" class="btn btn-default">סגור וצא</button>
+                <button type="submit" name="submit" value="SaveAndClose" class="btn btn-primary">שמור וצא</button>
                 </div>
 
         </div>
     </div>
 </div>
 
-    }
+    
 
     <!-- Add new question -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -90,9 +100,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;" st><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
                 </div>
-                @using (Html.BeginForm("addNewQuestion", "MainFormCreator", FormMethod.Post))
-                {  <div class="modal-body">
-                    @Html.HiddenFor(s => s.formId)
+               
+                  <div class="modal-body">
+                      @if(Model.NewQuestion !=null)
+                      {
+                          Model.NewQuestion = null;
+                      }
                 @Html.EditorFor(x=>x.NewQuestion)
                 @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
             
@@ -100,13 +113,14 @@
             
                     <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" >סגור</button>
-                    <button type="submit" class="btn btn-primary" style="margin-right:40%">שמור שאלה</button>
+                        <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%">שמור שאלה</button>
                     </div>
-                }
+                
             
             </div>
         </div>
     </div>
+    }
 
     <!-- popup preview -->
     <div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">

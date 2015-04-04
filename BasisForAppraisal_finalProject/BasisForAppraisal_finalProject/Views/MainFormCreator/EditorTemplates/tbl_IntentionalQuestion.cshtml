@@ -19,7 +19,13 @@
         { 
             @*@Html.ActionLink("ערוך", "", new { @formID = Model.FormId, @quesNumber = Model.QuestionId }) *@
          
-            @Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })
+            @*@Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })*@
+            <table>
+                <tr>
+            <th>delete</th>
+            <th>  @Html.CheckBoxFor(x => x.deleteQuestion,new { style = "height: 25px;  width:25px;"})</th>
+                    </tr>
+                </table>
         }
           
         <table class="table" dir="rtl">

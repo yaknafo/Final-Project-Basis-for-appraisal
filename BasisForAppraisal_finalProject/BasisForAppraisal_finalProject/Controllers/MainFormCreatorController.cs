@@ -7,6 +7,7 @@ using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Models;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -15,11 +16,15 @@ namespace BasisForAppraisal_finalProject.Controllers
         //
         // GET: /MainFormCreator/
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int id =1014)
         {
             var b = new DataManager();
-            var q = b.GetFormWithQuestion(1);
-            return View(q);
+            var q = b.GetFormWithQuestion(id);
+            var t = new ViewModel.FormViewModel(q);
+            if (Request.IsAjaxRequest())
+                return PartialView("_ipq", t.IntentionalQuestions);
+
+            return View(t.IntentionalQuestions);
         }
 
         [HttpPost]
@@ -67,25 +72,37 @@ namespace BasisForAppraisal_finalProject.Controllers
         /// <param name="formViewModel"></param>
         /// <returns></returns>
        [HttpPost]
-       public ActionResult IntentionalFormWorkshop(string save, string exit,string SaveAndClose, FormViewModel formViewModel )
+       public ActionResult IntentionalFormWorkshop(string submit, FormViewModel formViewModel)
        {
-           if (exit != null)
-           {
-               return backToMainForm();
-           }
 
            var manager = new FormManager();
-           manager.UpdateForm(formViewModel);
-         
-               TempData["Success"] = "שמירה בוצעה בהצלחה!";
+           ModelState.Clear();
 
-           if (SaveAndClose != null)
+           switch(submit)
            {
-               return backToMainForm();
-           }
+               case "exit":       return backToMainForm();
 
-           return RedirectToAction("IntentionalFormWorkshop",formViewModel.formId);
+               case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
+                                  TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                  break;
+
+               case "Save":   manager.UpdateForm(formViewModel);
+                              TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                               break;
+                
+               case "delete": formViewModel.DeleteQuestions();
+                              TempData["Success"] = "מחיקה בוצעה בהצלחה!";
+                              break;
+
+               case "SaveAndClose": manager.UpdateForm(formViewModel);
+                                   TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                                   return backToMainForm();
+
+           }
+           return View(formViewModel);
        }
+
+
 
        [HttpGet]
        public ActionResult preview(int formid=1 )

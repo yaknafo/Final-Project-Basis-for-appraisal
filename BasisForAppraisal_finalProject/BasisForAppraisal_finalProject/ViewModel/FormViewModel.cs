@@ -47,6 +47,25 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         }
 
+       public void AddQuestion(tbl_IntentionalQuestion question)
+        {
+            if (question.FormId == 0)
+            {
+                question.FormId = form.formId;
+                question.Answers.ForEach(a => a.FormId = form.formId);
+            }
+
+            IntentionalQuestions.Add(question);
+        }
+
+       public void DeleteQuestions()
+       {
+           var deleteQuestion=IntentionalQuestions.Where(q => q.deleteQuestion);
+
+           IntentionalQuestions.RemoveAll(x => x.deleteQuestion);
+           
+       }
+
 
      
 

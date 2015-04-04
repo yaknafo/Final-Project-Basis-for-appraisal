@@ -200,6 +200,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="photos\addQues.png" />
     <Content Include="photos\backTo.png" />
+    <Content Include="photos\deleteQ.png" />
     <Content Include="photos\info.png" />
     <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\NewForm.png" />
@@ -271,6 +272,7 @@
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartial.cshtml" />
     <Content Include="Views\ManageForm\a.cshtml" />
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartialForAdd.cshtml" />
+    <Content Include="Views\MainFormCreator\_iqp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\check\" />
