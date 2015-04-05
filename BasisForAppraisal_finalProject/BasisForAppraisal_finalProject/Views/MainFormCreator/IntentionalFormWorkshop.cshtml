@@ -35,12 +35,12 @@
 @if (TempData["changes"] != null)
 {
 
-   <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 5%; position: fixed;"><strong>Your Changes are not Saved</strong></div>
+   <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 4%; position: fixed;"><strong>Your Changes are not Saved</strong></div>
 
 }
 
 <!-- if there ant changes the alret  will show up after an type of the user-->
-<div id="changes" class="alert-warning" role="grid" style=" display: none; width: 15%; height: 5%; position: fixed;"><strong>Your Changes are not Saved</strong></div>
+<div id="changes" class="alert-warning" role="grid" style=" display: none; width: 18%; height: 5%; position: fixed;"><span class="glyphicon glyphicon-comment" style="margin-right:4px;"></span><strong>Your Changes are not Saved</strong></div>
 
 
 
@@ -50,11 +50,11 @@
   
 
         <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
-            <img src="~/photos/addQues.png" />
+            <img src="~/photos/addQues.png" draggable="false" />
         </button>
             <!-- Preview button -->
         <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" data-toggle="modal" data-target="#Preview" style=" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
-            <img src="~/photos/previewForm.png" />
+            <img src="~/photos/previewForm.png"  draggable="false"/>
         </button>
         </div>
 
@@ -66,17 +66,17 @@
 
         <!-- the exit button-->
          <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
-        <img src="~/photos/backTo.png" />
+             <img src="~/photos/backTo.png" draggable="false" />
     </button>
         
         <!-- the save button-->
         <div style=" margin-left: 93%; margin-top: 3%; ">
-            <button type="submit" name="submit" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" /></button>
+            <button type="submit" name="submit" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" draggable="false" /></button>
         </div>
         
         <!-- the delete button-->
         <div style=" margin-left: 94%; margin-top: 25%; ">
-            <button type="submit" name="submit" value="delete" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/deleteQ.png" /></button>
+            <button type="submit" name="submit" value="delete" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/deleteQ.png" draggable="false" /></button>
         </div>
         
 
