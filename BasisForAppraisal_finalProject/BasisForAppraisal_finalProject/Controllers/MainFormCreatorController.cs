@@ -36,17 +36,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(form);
         }
 
-        [HttpPost]
-        public ActionResult addNewQuestion(FormViewModel form)
-        {
-            
-            var formManager = new FormManager();
-            Task taskA = Task.Factory.StartNew(() => formManager.SaveQuestionToForm(form.NewQuestion));
-            taskA.Wait();
-            TempData["Success"] = "הוספה בוצעה בהצלחה!";
-            return RedirectToAction("IntentionalFormWorkshop", new { id = form.formId });
-
-        }
+       
 
 
 
@@ -84,6 +74,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
                case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                                   TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                  TempData["changes"] = "add";
                                   break;
 
                case "Save":   manager.UpdateForm(formViewModel);
@@ -92,6 +83,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                 
                case "delete": formViewModel.DeleteQuestions();
                               TempData["Success"] = "מחיקה בוצעה בהצלחה!";
+                              TempData["changes"] = "remove";
                               break;
 
                case "SaveAndClose": manager.UpdateForm(formViewModel);
