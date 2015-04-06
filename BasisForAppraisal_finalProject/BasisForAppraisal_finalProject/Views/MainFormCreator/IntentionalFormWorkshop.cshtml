@@ -45,15 +45,13 @@
 
 
     <!-- Add button -->
-    <div style="text-align: right; margin-left:79%; margin-top:17%; position:fixed">
-  
-  
-
-        <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 200px;  background-color: AppWorkspace">
+    <div style="text-align: right; margin-left:82%; margin-top:16%; position:fixed">
+        <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
             <img src="~/photos/addQues.png" draggable="false" />
         </button>
+
             <!-- Preview button -->
-        <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" data-toggle="modal" data-target="#Preview" style=" margin-top:3%; 18px; width: 200px;  background-color: AppWorkspace">
+        <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" data-toggle="modal" data-target="#Preview" style=" margin-top: 3%; width: 157px; background-color: AppWorkspace">
             <img src="~/photos/previewForm.png"  draggable="false"/>
         </button>
         </div>
@@ -65,22 +63,22 @@
    
 
         <!-- the exit button-->
-         <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin-top: 3%;font-size: 18px; width: 200px; background-color: AppWorkspace">
+         <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin-top: 3%;font-size: 18px; width: 180px; background-color: AppWorkspace">
              <img src="~/photos/backTo.png" draggable="false" />
     </button>
         
         <!-- the save button-->
-        <div style=" margin-left: 93%; margin-top: 3%; ">
-            <button type="submit" name="submit" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" draggable="false" /></button>
+        <div style=" margin-left: 97%; margin-top: 3%; ">
+            <button type="submit" name="submit" value="Save" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 150px; background-color: AppWorkspace"><img src="~/photos/saveForm.png" draggable="false" /></button>
         </div>
         
         <!-- the delete button-->
-        <div style=" margin-left: 94%; margin-top: 25%; ">
-            <button type="submit" name="submit" value="delete" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 195px; background-color: AppWorkspace"><img src="~/photos/deleteQ.png" draggable="false" /></button>
+        <div style=" margin-left: 97.5%; margin-top: 23%; ">
+            <button type="submit" name="submit" value="delete" class="btn btn-primary btn-lg" title="שמירת טופס" style=" position: fixed; font-size: 18px; width: 140px; background-color: AppWorkspace"><img src="~/photos/deleteQ.png" draggable="false" /></button>
         </div>
         
 
-        <div id="Panel" onchange="showWorningSaveMsg()" style="width: 90%; margin-top: -20%; ">
+        <div id="Panel" onchange="showWorningSaveMsg()" style="width: 95%; margin-top: -20%; ">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @Html.EditorFor(x => x.form)
