@@ -275,6 +275,7 @@
     <Content Include="Views\MainFormCreator\_iqp.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\AddCompany\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>
