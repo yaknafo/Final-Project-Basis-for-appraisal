@@ -2,16 +2,59 @@
 @{
     ViewBag.Title = "tbl_Company";
 }
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
-@Html.DisplayNameFor(x => x.comapnyName)
-<h3>@Model.comapnyName</h3>
+<br />
+<br />
+<table class="table-condensed"  style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
+    <tr>
+        <th>
+            שם:
+        </th>
+        <th>
+            <h3>@Model.comapnyName</h3>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            כותבת:
+        </th>
+        <th>
+            <h4>@Model.comapnyAddress</h4>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            טלפון:
+        </th>
+        <th>
+            <h4>@Model.comapnyPhone</h4>
+        </th>
+    </tr>
+</table>
 
-@Html.DisplayNameFor(x => x.comapnyAddress)
-<h4>@Model.comapnyAddress</h4>
-
-@Html.DisplayNameFor(x => x.comapnyPhone)
-<h4>@Model.comapnyPhone</h4>
-
+<table class="table-bordered">
+    @for(int i=0; i< @Model.Employees.Count; i++)
+    {
+        <tr>
+            <th>
+                מס זהות
+            </th>
+            <th>
+                מס פרטי
+            </th>
+        </tr> 
+           <tr>
+            <th>
+                @Model.Employees[i].employeeId
+            </th>
+               <th>
+                   @Model.Employees[i].firstName
+               </th>
+        </tr> 
+    }
+    </table>
 
 
 

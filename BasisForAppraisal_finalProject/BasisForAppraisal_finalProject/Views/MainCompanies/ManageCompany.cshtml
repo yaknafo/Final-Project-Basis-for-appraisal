@@ -1,5 +1,5 @@
 ﻿@model  BasisForAppraisal_finalProject.ViewModel.CompanyViewModel
-{
+@{
     ViewBag.Title = "ManageCompany";
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
@@ -8,4 +8,6 @@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
-<h2>fff </h2>
+<div dir="rtl">
+    @Html.EditorFor(x => x.Company)
+</div>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
+using BasisForAppraisal_finalProject.ViewModel;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -29,7 +30,8 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.First();
-            return View(companyies);
+            var companyView = new CompanyViewModel(companyies);
+            return View(companyView);
 
         }
         public ActionResult addCompanie()
