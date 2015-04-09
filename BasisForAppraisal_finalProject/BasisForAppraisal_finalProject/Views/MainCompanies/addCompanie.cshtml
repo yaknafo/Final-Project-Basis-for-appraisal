@@ -1,0 +1,54 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Company
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2 style="margin-left:40%;">הוספת לקוח חדש</h2>
+
+@using (Html.BeginForm("addCompanie", "MainCompanies", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" dir="rtl">
+         <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.companyId)
+
+        <div class="form-group">
+             <div class="col-md-10">
+                <div>שם חברה</div>
+                @Html.EditorFor(model => model.comapnyName)
+                @Html.ValidationMessageFor(model => model.comapnyName)
+                 <br />
+            </div>
+        </div>
+
+        <div class="form-group">
+              <div class="col-md-10">
+                <div>כתובת חברה</div>
+                @Html.EditorFor(model => model.comapnyAddress)
+                @Html.ValidationMessageFor(model => model.comapnyAddress)
+            </div>
+        </div>
+
+        <div class="form-group">
+             <div class="col-md-10">
+                <div>טלפון חברה</div>
+                @Html.EditorFor(model => model.comapnyPhone)
+                @Html.ValidationMessageFor(model => model.comapnyPhone)
+            </div>
+        </div>
+
+      
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-left:40%;">
+            <input type="submit" value="שמור" class="btn btn-default" style="font-weight:bold" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("חזרה לרשימת חברות", "MainCompanies")
+</div>

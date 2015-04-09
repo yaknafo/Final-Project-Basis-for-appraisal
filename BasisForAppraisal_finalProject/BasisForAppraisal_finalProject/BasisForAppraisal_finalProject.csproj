@@ -182,6 +182,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CompanyManger.cs" />
     <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\FormManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -279,9 +280,9 @@
     <Content Include="Views\MainCompanies\MainCompanies.cshtml" />
     <Content Include="Views\MainCompanies\EditorTemplates\tbl_Company.cshtml" />
     <Content Include="Views\MainCompanies\ManageCompany.cshtml" />
+    <Content Include="Views\MainCompanies\addCompanie.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\AddCompany\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>

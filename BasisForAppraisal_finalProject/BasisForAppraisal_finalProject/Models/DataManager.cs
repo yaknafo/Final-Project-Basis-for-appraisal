@@ -50,7 +50,7 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
         //----------------------------------------------------------------------------------------------------------------------------------//
-     
+
 
         public tbl_IntentionalQuestion GetQuestionWithAnswers(int fid, int qid)
         {
@@ -270,7 +270,7 @@ namespace BasisForAppraisal_finalProject.Models
                 return;
             }
             string[] str = path.Split('.');
-            if (!str[1].Equals("xlsx")||!str[1].Equals("csv")||!str[1].Equals("xls"))
+            if (!str[1].Equals("xlsx") || !str[1].Equals("csv") || !str[1].Equals("xls"))
             {
                 Console.WriteLine("The file in not Csv file!");
                 return;
@@ -287,6 +287,15 @@ namespace BasisForAppraisal_finalProject.Models
             }
             catch (Exception ex) { Console.WriteLine("eror in excel"); }
         }
+
+
+
+        //-------------------------------------------------------------------------------company method--------------------------------------------------------
+
+        public void addCompany(tbl_Company cmp)
+        {
+            this.manager.tbl_Companies.InsertOnSubmit(cmp);
+            this.manager.SubmitChanges();
+        }
     }
-}           
-  
+}
