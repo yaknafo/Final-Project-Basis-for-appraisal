@@ -14,17 +14,21 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase file)
+        public ActionResult addExcel(HttpPostedFileBase file)
         {
-            string[] str = Path.GetFileName(file.FileName).Split('.');
-            if (file.ContentLength > 0)
-                if (str[str.Count() - 1].Equals("xlsx") || str[str.Count() - 1].Equals("csv") || str[str.Count() - 1].Equals("xls"))
-                {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-                    file.SaveAs(path);
-                    upload_excelfile(path,fileName);
-                }
+            try
+            {
+                string[] str = Path.GetFileName(file.FileName).Split('.');
+                if (file.ContentLength > 0)
+                    if (str[str.Count() - 1].Equals("xlsx") || str[str.Count() - 1].Equals("csv") || str[str.Count() - 1].Equals("xls"))
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                        file.SaveAs(path);
+                        upload_excelfile(path, fileName);
+                    }
+            }
+            catch (Exception ex) { }
             return RedirectToAction("ManageCompany");
         }
         // method add excel data to db
@@ -49,7 +53,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-        public ActionResult ManageCompany(int id)
+        public ActionResult ManageCompany(int id=1)
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First(); ;
