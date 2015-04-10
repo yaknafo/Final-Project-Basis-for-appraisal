@@ -279,6 +279,7 @@
     <Content Include="Views\MainCompanies\MainCompanies.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\AddCompany\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>

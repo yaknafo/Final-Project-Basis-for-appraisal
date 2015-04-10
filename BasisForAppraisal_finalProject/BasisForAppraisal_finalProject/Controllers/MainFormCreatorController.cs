@@ -47,7 +47,12 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("IntentionalFormWorkshop", new { id = formID });
 
         }
+        public void upload_excelfile(string path)
+        {
+            var db = new FormManager();
+            db.upload_excelfile(path);
 
+        }
        public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();

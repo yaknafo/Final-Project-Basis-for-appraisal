@@ -84,6 +84,12 @@ namespace BasisForAppraisal_finalProject.Models
             db.deleteForm(formId);
         }
 
+        public void upload_excelfile(string path)
+        {
+            DataManager db = new DataManager();
+            db.upload_excelfile(path);
+
+        }
        
 
         /// <summary>

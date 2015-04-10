@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BasisForAppraisal_finalProject.DBML;
 using System.Data.Linq;
+using System.IO;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -60,7 +61,7 @@ namespace BasisForAppraisal_finalProject.Models
 
         public tblForm GetFormWithQuestion(int fid)
         {
-            var form = manager.tblForms.Where(x => x.formId== fid).FirstOrDefault();
+            var form = manager.tblForms.Where(x => x.formId == fid).FirstOrDefault();
 
             if (form == null)
                 throw new Exception("form with number number: " + fid + " mot exist in DB");
@@ -88,7 +89,7 @@ namespace BasisForAppraisal_finalProject.Models
         {
             var changeForm = manager.tblForms.Where(x => x.formId == form.formId).First();
             changeForm.FormName = form.FormName;
-           
+
             manager.SubmitChanges();
         }
 
@@ -117,7 +118,7 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
-       
+
         /// <summary>
         /// save new form in data base
         /// </summary>
@@ -157,8 +158,8 @@ namespace BasisForAppraisal_finalProject.Models
             var formForDelete = manager.tblForms.Where(x => x.formId == formID).FirstOrDefault();
 
             // check if exist
-            if(formForDelete == null)
-                throw new Exception(string.Format("the form with number id {0} camt be delete becouse he cant be found in DB",formID));
+            if (formForDelete == null)
+                throw new Exception(string.Format("the form with number id {0} camt be delete becouse he cant be found in DB", formID));
 
             // delete all his question
             formForDelete.Questions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
@@ -178,7 +179,7 @@ namespace BasisForAppraisal_finalProject.Models
         /// <param name="form"></param>
         public void UpdateFormToDB(tblForm form)
         {
-            var formUpdate=manager.tblForms.Where(f => f.formId== form.formId).FirstOrDefault();
+            var formUpdate = manager.tblForms.Where(f => f.formId == form.formId).FirstOrDefault();
             formUpdate.FormName = form.FormName;
             manager.SubmitChanges();
         }
@@ -235,7 +236,7 @@ namespace BasisForAppraisal_finalProject.Models
         {
             // getting pointer to the dataBase
             var updateAnswer = manager.tbl_IntentionalAnswers.Where(x => x.AnswerId == answer.AnswerId).FirstOrDefault();
-           
+
             // check if exist
             if (updateAnswer == null)
                 throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
@@ -258,5 +259,34 @@ namespace BasisForAppraisal_finalProject.Models
             manager.SubmitChanges();
         }
 
+
+
+        //-----------------------------------------------------------------------------------output- input method-----------------------------------------------------------------
+        public void upload_excelfile(string path)
+        {
+            path = "C://Users/USER/Desktop/excel for manufacturer.xlsx";
+            if (path == "")
+            {
+                return;
+            }
+            string[] str = path.Split('.');
+            if (!str[1].Equals("xlsx")||!str[1].Equals("csv")||!str[1].Equals("xls"))
+            {
+                Console.WriteLine("The file in not Csv file!");
+                return;
+            }
+            try
+            {
+
+                string[] all_txt = File.ReadAllText(path).Split('\n');
+                foreach (string line in all_txt)
+                {
+                    string[] data = line.Split(',');
+                    Console.WriteLine(data[5]);
+                }
+            }
+            catch (Exception ex) { Console.WriteLine("eror in excel"); }
+        }
     }
-}
+}           
+  
