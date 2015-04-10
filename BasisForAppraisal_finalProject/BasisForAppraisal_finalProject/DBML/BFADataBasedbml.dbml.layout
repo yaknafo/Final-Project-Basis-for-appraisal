@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BFADataBasedbml">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 8.5" name="BFADataBasedbml">
   <DataContextMoniker Name="/BFADataBasedbmlDataContext" />
   <nestedChildShapes>
     <classShape Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" absoluteBounds="0.5, 1, 2, 1.1939925130208338">
@@ -20,7 +20,7 @@
         <elementListCompartment Id="e73032cd-16ac-4617-b6db-274d30bde6c4" absoluteBounds="6.015, 1.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 1.59699625651042); (3.125 : 1.59699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 1.59699625651042); (3.125 : 1.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tblForm/tblForm_tbl_IntentionalQuestion" />
       <nodes>
         <classShapeMoniker Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" />
@@ -32,6 +32,25 @@
       <nodes>
         <classShapeMoniker Id="a6695223-a236-401d-a265-7fbf30d93214" />
         <classShapeMoniker Id="63956066-7ed5-4485-a860-cc380538d78a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" absoluteBounds="5.25, 3.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Company" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d9a5d44f-47e3-4a84-ae00-37552803558e" absoluteBounds="5.265, 4.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97f2bfed-9bfb-4a18-ba11-9cf56485c982" absoluteBounds="8.875, 3.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Employee" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6eebe92e-af5c-4bfb-8414-b73837597331" absoluteBounds="8.89, 4.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.25 : 4.41429768880208); (8.875 : 4.41429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Company/tbl_Company_tbl_Employee" />
+      <nodes>
+        <classShapeMoniker Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" />
+        <classShapeMoniker Id="97f2bfed-9bfb-4a18-ba11-9cf56485c982" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

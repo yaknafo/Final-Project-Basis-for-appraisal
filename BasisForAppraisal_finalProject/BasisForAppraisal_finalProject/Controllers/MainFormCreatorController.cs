@@ -57,7 +57,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        }
 
         /// <summary>
-        /// saving the form with all his changes
+       /// saving/addQustion/exit/ SaveAndClose the form with all his changes
         /// </summary>
         /// <param name="formViewModel"></param>
         /// <returns></returns>

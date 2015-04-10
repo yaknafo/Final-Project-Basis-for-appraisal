@@ -39,6 +39,12 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
     partial void Updatetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
     partial void Deletetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
+    partial void Inserttbl_Company(tbl_Company instance);
+    partial void Updatetbl_Company(tbl_Company instance);
+    partial void Deletetbl_Company(tbl_Company instance);
+    partial void Inserttbl_Employee(tbl_Employee instance);
+    partial void Updatetbl_Employee(tbl_Employee instance);
+    partial void Deletetbl_Employee(tbl_Employee instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -94,6 +100,22 @@ namespace BasisForAppraisal_finalProject.DBML
 				return this.GetTable<tbl_IntentionalAnswer>();
 			}
 		}
+		
+		public System.Data.Linq.Table<tbl_Company> tbl_Companies
+		{
+			get
+			{
+				return this.GetTable<tbl_Company>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_Employee> tbl_Employees
+		{
+			get
+			{
+				return this.GetTable<tbl_Employee>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblForm")]
@@ -123,8 +145,8 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
 			OnCreated();
 		}
-
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Name = "formId", Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int formId
 		{
 			get
@@ -269,7 +291,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_QuestionId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int QuestionId
 		{
 			get
@@ -481,7 +503,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_AnswerId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int AnswerId
 		{
 			get
@@ -593,6 +615,343 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._QuestionId = default(int);
 					}
 					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Company")]
+	public partial class tbl_Company : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _companyId;
+		
+		private string _comapnyName;
+		
+		private string _comapnyAddress;
+		
+		private string _comapnyPhone;
+		
+		private EntitySet<tbl_Employee> _tbl_Employees;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OncomapnyNameChanging(string value);
+    partial void OncomapnyNameChanged();
+    partial void OncomapnyAddressChanging(string value);
+    partial void OncomapnyAddressChanged();
+    partial void OncomapnyPhoneChanging(string value);
+    partial void OncomapnyPhoneChanged();
+    #endregion
+		
+		public tbl_Company()
+		{
+			this._tbl_Employees = new EntitySet<tbl_Employee>(new Action<tbl_Employee>(this.attach_tbl_Employees), new Action<tbl_Employee>(this.detach_tbl_Employees));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyName", DbType="VarChar(100)")]
+		public string comapnyName
+		{
+			get
+			{
+				return this._comapnyName;
+			}
+			set
+			{
+				if ((this._comapnyName != value))
+				{
+					this.OncomapnyNameChanging(value);
+					this.SendPropertyChanging();
+					this._comapnyName = value;
+					this.SendPropertyChanged("comapnyName");
+					this.OncomapnyNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyAddress", DbType="VarChar(300)")]
+		public string comapnyAddress
+		{
+			get
+			{
+				return this._comapnyAddress;
+			}
+			set
+			{
+				if ((this._comapnyAddress != value))
+				{
+					this.OncomapnyAddressChanging(value);
+					this.SendPropertyChanging();
+					this._comapnyAddress = value;
+					this.SendPropertyChanged("comapnyAddress");
+					this.OncomapnyAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyPhone", DbType="VarChar(50)")]
+		public string comapnyPhone
+		{
+			get
+			{
+				return this._comapnyPhone;
+			}
+			set
+			{
+				if ((this._comapnyPhone != value))
+				{
+					this.OncomapnyPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._comapnyPhone = value;
+					this.SendPropertyChanged("comapnyPhone");
+					this.OncomapnyPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_tbl_Employee", Storage="_tbl_Employees", ThisKey="companyId", OtherKey="companyId")]
+		public EntitySet<tbl_Employee> tbl_Employees
+		{
+			get
+			{
+				return this._tbl_Employees;
+			}
+			set
+			{
+				this._tbl_Employees.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_Employees(tbl_Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = this;
+		}
+		
+		private void detach_tbl_Employees(tbl_Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Employee")]
+	public partial class tbl_Employee : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _companyId;
+		
+		private string _employeeId;
+		
+		private string _firstName;
+		
+		private string _lastName;
+		
+		private EntityRef<tbl_Company> _tbl_Company;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnemployeeIdChanging(string value);
+    partial void OnemployeeIdChanged();
+    partial void OnfirstNameChanging(string value);
+    partial void OnfirstNameChanged();
+    partial void OnlastNameChanging(string value);
+    partial void OnlastNameChanged();
+    #endregion
+		
+		public tbl_Employee()
+		{
+			this._tbl_Company = default(EntityRef<tbl_Company>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._tbl_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employeeId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string employeeId
+		{
+			get
+			{
+				return this._employeeId;
+			}
+			set
+			{
+				if ((this._employeeId != value))
+				{
+					this.OnemployeeIdChanging(value);
+					this.SendPropertyChanging();
+					this._employeeId = value;
+					this.SendPropertyChanged("employeeId");
+					this.OnemployeeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firstName", DbType="VarChar(30)")]
+		public string firstName
+		{
+			get
+			{
+				return this._firstName;
+			}
+			set
+			{
+				if ((this._firstName != value))
+				{
+					this.OnfirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._firstName = value;
+					this.SendPropertyChanged("firstName");
+					this.OnfirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastName", DbType="VarChar(30)")]
+		public string lastName
+		{
+			get
+			{
+				return this._lastName;
+			}
+			set
+			{
+				if ((this._lastName != value))
+				{
+					this.OnlastNameChanging(value);
+					this.SendPropertyChanging();
+					this._lastName = value;
+					this.SendPropertyChanged("lastName");
+					this.OnlastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_tbl_Employee", Storage="_tbl_Company", ThisKey="companyId", OtherKey="companyId", IsForeignKey=true)]
+		public tbl_Company tbl_Company
+		{
+			get
+			{
+				return this._tbl_Company.Entity;
+			}
+			set
+			{
+				tbl_Company previousValue = this._tbl_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Company.Entity = null;
+						previousValue.tbl_Employees.Remove(this);
+					}
+					this._tbl_Company.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Employees.Add(this);
+						this._companyId = value.companyId;
+					}
+					else
+					{
+						this._companyId = default(int);
+					}
+					this.SendPropertyChanged("tbl_Company");
 				}
 			}
 		}

@@ -38,6 +38,19 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.tbl_IntentionalQuestions; }
         }
 
+        public Table<tbl_Company> Companyies
+        {
+            get { return manager.tbl_Companies; }
+        }
+
+        public Table<tbl_Employee> Employees
+        {
+            get { return manager.tbl_Employees; }
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------//
+     
+
         public tbl_IntentionalQuestion GetQuestionWithAnswers(int fid, int qid)
         {
             var question = manager.tbl_IntentionalQuestions.Where(x => x.FormId == fid && x.QuestionId == qid).First();
@@ -54,6 +67,13 @@ namespace BasisForAppraisal_finalProject.Models
 
             form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
             return form;
+        }
+
+        //--------------------------------   Get Method by id -----------------------------
+
+        public List<tbl_Employee> getEmployeesByCompanyId(int companyId)
+        {
+            return manager.tbl_Employees.Where(e => e.companyId == companyId).ToList();
         }
 
         //--------------------------------   SAVE Method -----------------------------

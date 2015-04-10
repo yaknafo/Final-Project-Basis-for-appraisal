@@ -167,6 +167,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainCompaniesController.cs" />
     <Compile Include="Controllers\MainFormCreatorController.cs" />
     <Compile Include="Controllers\ManageFormController.cs" />
     <Compile Include="DBML\BFADataBasedbml.designer.cs">
@@ -176,6 +177,7 @@
     </Compile>
     <Compile Include="DBML\DbmlBFADataContext.cs" />
     <Compile Include="DBML\Pratical.cs" />
+    <Compile Include="DBML\tbl_CompanyPartial.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +188,7 @@
     <Compile Include="Models\PartialIntentionalAnswer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\CompanyViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />
@@ -273,6 +276,7 @@
     <Content Include="Views\ManageForm\a.cshtml" />
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartialForAdd.cshtml" />
     <Content Include="Views\MainFormCreator\_iqp.cshtml" />
+    <Content Include="Views\MainCompanies\MainCompanies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\check\" />
