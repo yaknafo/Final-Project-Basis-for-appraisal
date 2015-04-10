@@ -5,6 +5,9 @@ using System.Web;
 using BasisForAppraisal_finalProject.DBML;
 using System.Data.Linq;
 using System.IO;
+using Microsoft.Office.Interop;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -264,28 +267,29 @@ namespace BasisForAppraisal_finalProject.Models
         //-----------------------------------------------------------------------------------output- input method-----------------------------------------------------------------
         public void upload_excelfile(string path)
         {
-            path = "C://Users/USER/Desktop/excel for manufacturer.xlsx";
-            if (path == "")
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
+            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            Excel.Range xlRange = xlWorksheet.UsedRange;
+            int rowCount = xlRange.Rows.Count;
+            int colCount = xlRange.Columns.Count;
+            
+            for (int i = 1; i <= rowCount; i++)
             {
-                return;
-            }
-            string[] str = path.Split('.');
-            if (!str[1].Equals("xlsx") || !str[1].Equals("csv") || !str[1].Equals("xls"))
-            {
-                Console.WriteLine("The file in not Csv file!");
-                return;
-            }
-            try
-            {
-
-                string[] all_txt = File.ReadAllText(path).Split('\n');
-                foreach (string line in all_txt)
+                  String[] data = new string[colCount];
+                for (int j = 1; j <= colCount; j++)
                 {
-                    string[] data = line.Split(',');
-                    Console.WriteLine(data[5]);
+                  data[j-1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
                 }
+                var emp = new tbl_Employee();
+                emp.companyId = 1;
+                emp.employeeId = data[0];
+                emp.firstName = data[1];// change it to cto'r!!!
+                emp.lastName = data[2];
+                this.addWorkerToDb(emp);
             }
-            catch (Exception ex) { Console.WriteLine("eror in excel"); }
+           xlApp.Workbooks.Close();         
+           File.Delete(path);
         }
 
 
@@ -294,8 +298,20 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void addCompany(tbl_Company cmp)
         {
+           
             this.manager.tbl_Companies.InsertOnSubmit(cmp);
             this.manager.SubmitChanges();
+        }
+        // add employee to db withought company
+        // check if there is double! ( not checked!!!!)
+
+        public void addWorkerToDb(tbl_Employee emp)
+        {
+            if (!manager.tbl_Employees.Contains(emp))
+            {
+                this.manager.tbl_Employees.InsertOnSubmit(emp);
+                this.manager.SubmitChanges();
+            }
         }
     }
 }

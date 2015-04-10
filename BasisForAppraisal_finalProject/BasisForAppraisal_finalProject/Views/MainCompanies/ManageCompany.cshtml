@@ -11,3 +11,12 @@
 <div dir="rtl">
     @Html.EditorFor(x => x.Company)
 </div>
+<div dir="rtl"style="border:double; width:220px; margin-left:40%;">
+    <form action="Index" method="post" enctype="multipart/form-data" tir>
+         <label for="file" style="margin-right:36%">הוסף עובדים</label>
+        <br />
+        <input type="file" name="file" id="file" />
+        <br />
+        <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
+    </form>
+</div>
