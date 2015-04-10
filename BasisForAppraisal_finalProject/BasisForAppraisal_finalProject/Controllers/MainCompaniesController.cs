@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int id=1,HttpPostedFileBase file= null)
+        public ActionResult Index(int id,HttpPostedFileBase file)
         {
             try
             {
@@ -25,17 +25,17 @@ namespace BasisForAppraisal_finalProject.Controllers
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
                     file.SaveAs(path);
-                        upload_excelfile(path, fileName);
+                        upload_excelfile(path, id);
                     }
                 }
             catch (Exception ex) { }
             return RedirectToAction("ManageCompany");
         }
         // method add excel data to db
-        private void upload_excelfile(string path, string filename)
+        private void upload_excelfile(string path, int idCompany)
         {
             var db = new CompanyManger();
-            db.upload_excelfile(path,filename);
+            db.upload_excelfile(path,idCompany);
 
         }
         //

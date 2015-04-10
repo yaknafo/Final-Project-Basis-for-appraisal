@@ -20,7 +20,7 @@
 </div>
 
 <div dir="rtl"style="border:double; width:220px; margin-left:40%;">
-       @using (Html.BeginForm("Index", "MainCompanies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+       @using (Html.BeginForm("Index", "MainCompanies", FormMethod.Post, new { enctype = "multipart/form-data",id=Model.Company.companyId }))
        { 
            
          <label for="file" style="margin-right:36%">הוסף עובדים</label>

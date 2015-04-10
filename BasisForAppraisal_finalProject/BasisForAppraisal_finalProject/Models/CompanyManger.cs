@@ -15,10 +15,10 @@ namespace BasisForAppraisal_finalProject.Models
             manger.addCompany(cmp);
         }
         // method add data from excel file to sql server db- workers to company
-        public void upload_excelfile(string path, string filename)
+        public void upload_excelfile(string path, int idCompany)
         {
             DataManager db = new DataManager();
-            db.upload_excelfile(path);
+            db.upload_excelfile(path,idCompany);
 
         }
     }
