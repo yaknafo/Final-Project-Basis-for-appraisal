@@ -12,12 +12,27 @@ namespace BasisForAppraisal_finalProject.ViewModel
     {
         public tblForm form{set; get;}
 
-        public List<tbl_IntentionalQuestion> IntentionalQuestions {set; get;}
+        private List<tbl_IntentionalQuestion> intentionalQuestions; 
 
         private tbl_IntentionalQuestion newQuestion;
 
         public int formId { set; get; }
 
+       public List<tbl_IntentionalQuestion> IntentionalQuestions
+        {
+           get
+            {
+                if (intentionalQuestions == null)
+                    intentionalQuestions = new List<tbl_IntentionalQuestion>();
+                return intentionalQuestions;
+
+            }
+           set
+            {
+                intentionalQuestions = value;
+            }
+
+        }
         public FormViewModel (tblForm form)
 	{
             this.form= form;

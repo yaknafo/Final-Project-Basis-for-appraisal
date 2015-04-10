@@ -13,30 +13,6 @@ namespace BasisForAppraisal_finalProject.Controllers
 {
     public class MainFormCreatorController : Controller
     {
-        //
-        // GET: /MainFormCreator/
-        [HttpGet]
-        public ActionResult Index(int id =1014)
-        {
-            var b = new DataManager();
-            var q = b.GetFormWithQuestion(id);
-            var t = new ViewModel.FormViewModel(q);
-            if (Request.IsAjaxRequest())
-                return PartialView("_ipq", t.IntentionalQuestions);
-
-            return View(t.IntentionalQuestions);
-        }
-
-        [HttpPost]
-        public ActionResult Index(tblForm form)
-        {
-            var formManager = new FormManager();
-            Task taskA = Task.Factory.StartNew(() => formManager.SaveForm(form));
-            taskA.Wait();
-            return View(form);
-        }
-
-       
 
 
 
@@ -47,7 +23,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("IntentionalFormWorkshop", new { id = formID });
 
         }
-     
+
        public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();

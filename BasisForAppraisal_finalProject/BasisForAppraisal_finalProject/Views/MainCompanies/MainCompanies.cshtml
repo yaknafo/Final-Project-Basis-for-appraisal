@@ -17,12 +17,12 @@
 
 
     <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
-
+      
         <!-- Default panel contents -->
         <div class="panel-heading" style="font-size: 22px;  ">רשימת לקוחות</div>
-        <div style="margin-right:85%">  @Html.ActionLink("הוסף חברה חדשה", "addCompanie")</div>
+         <div style="margin-right:85%">  @Html.ActionLink("הוסף חברה חדשה", "addCompanie")</div>
         <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
-
+      
         <!---knafo-->
         <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
             <thead>
@@ -38,7 +38,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td align="center">@Html.ActionLink(item.comapnyName, "Edit", new { @id = item.companyId })</td>
+                        <td align="center">@Html.ActionLink(item.comapnyName, "ManageCompany", new { @id = item.companyId })</td>
                         <td align="center">@item.comapnyAddress</td>
                         <td align="center">@item.comapnyPhone</td>
                         <td align="center">@item.Employees.Count</td>

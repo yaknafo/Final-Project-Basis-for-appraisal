@@ -220,11 +220,13 @@ namespace BasisForAppraisal_finalProject.Models
             }
 
             // delete part
-            var deleteQuestions = manager.tbl_IntentionalQuestions.Where(x => x.FormId == questions.First().FormId && !questions.Contains(x)).ToList();
+            if (questions.Any())
+            {
+                var deleteQuestions = manager.tbl_IntentionalQuestions.Where(x => x.FormId == questions.First().FormId && !questions.Contains(x)).ToList();
 
-
-            // delete all his question
-            deleteQuestions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
+                // delete all his question
+                deleteQuestions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
+            }
 
             manager.SubmitChanges();
         }
