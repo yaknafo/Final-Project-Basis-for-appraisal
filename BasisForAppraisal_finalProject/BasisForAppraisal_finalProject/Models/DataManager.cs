@@ -315,5 +315,19 @@ namespace BasisForAppraisal_finalProject.Models
                 this.manager.SubmitChanges();
             }
         }
+
+       
+         public void  deleteWorker(String workerid,int companyNumber)
+        {
+            // find the record to delete f
+            var workerToDelete = manager.tbl_Employees.Where(a => a.employeeId == workerid && a.companyId == companyNumber).FirstOrDefault();
+            manager.tbl_Employees.DeleteOnSubmit(workerToDelete);
+            manager.SubmitChanges();
+
+        }
+
+
+
+
     }
 }

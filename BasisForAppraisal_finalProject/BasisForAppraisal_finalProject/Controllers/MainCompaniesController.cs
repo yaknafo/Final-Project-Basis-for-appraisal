@@ -74,6 +74,13 @@ namespace BasisForAppraisal_finalProject.Controllers
             cm.addCompany(company);
             return RedirectToAction("MainCompanies");
         }
+        [HttpPost]
+        public ActionResult deleteWorker(String idworker,int companyNumber)
+        {
+            var cm = new CompanyManger();
+            cm.deleteWorker(idworker, companyNumber);
+            return RedirectToAction("ManageCompany");
+        }
        
 	}
 }

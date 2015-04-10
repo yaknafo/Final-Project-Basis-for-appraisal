@@ -8,12 +8,10 @@
 <script src="~/Scripts/DataTable/jquery.js"></script>
 <script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
 <link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
-
 <br />
 <br />
 
-
-<table class="table-condensed"  style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
+<table class="table-condensed" style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
     <tr>
         <th>
             שם:
@@ -39,13 +37,10 @@
         </th>
     </tr>
 </table>
-
- <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center ">
-
+<div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center ">
     <!-- Default panel contents -->
     <div class="panel-heading" style="font-size: 22px;  ">רשימת עובדים</div>
     <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
-
     <!---knafo-->
     <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
         <thead>
@@ -53,15 +48,17 @@
                 <td align="center"> מס זהות</td>
                 <td align="center">שם פרטי</td>
                 <td align="center">שם משפחה</td>
+                <td align="center">מחיקה</td>
             </tr>
         </thead>
         <tbody>
-           @for(int i=0; i< @Model.Employees.Count; i++)
+            @for(int i=0; i< @Model.Employees.Count; i++)
             {
                 <tr>
                     <td align="center">@Html.ActionLink(@Model.Employees[i].employeeId, "ManageCompany", new { @id = @Model.Employees[i].companyId })</td>
                     <td align="center">@Model.Employees[i].firstName</td>
                     <td align="center">@Model.Employees[i].lastName</td>
+                    <td><p><span class="glyphicon glyphicon-trash" title="מחק עובד מהחברה" data-toggle="modal" data-target="#@Model.Employees[i].employeeId" style="cursor:pointer;"></span></p></td>
                 </tr>
             }
         </tbody>
@@ -74,7 +71,27 @@
     </script>
 </div>
 
+@foreach (var item in Model.Employees)
+{
 
+            <!-- Modal -->
+    <div class="modal fade" id=@item.employeeId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:red;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק איש קשר : </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.firstName @item.lastName?</h4>
+                </div>
+                @using (Html.BeginForm("deleteWorker", "MainCompanies", new { idworker = item.employeeId, companyNumber = item.companyId }, FormMethod.Post))
+                        {  <div class="modal-body">
+                    <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
+                </div>
 
-
-
+                }
+      
+            </div>
+        </div>
+    </div>
+}

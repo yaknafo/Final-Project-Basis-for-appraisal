@@ -21,5 +21,12 @@ namespace BasisForAppraisal_finalProject.Models
             db.upload_excelfile(path,idCompany);
 
         }
+
+         public void  deleteWorker(String workerid,int companyNumber)
+        {
+            DataManager db = new DataManager();
+            db.deleteWorker(workerid, companyNumber);
+
+        }
     }
 }
