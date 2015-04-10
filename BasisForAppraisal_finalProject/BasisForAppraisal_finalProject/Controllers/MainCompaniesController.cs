@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int id,HttpPostedFileBase file)
+        public ActionResult Index(int id=1,HttpPostedFileBase file=null)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-        public ActionResult ManageCompany(int id)
+        public ActionResult ManageCompany(int id=1)
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First();

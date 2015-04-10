@@ -12,21 +12,25 @@
 
 <div style="width:100%; background-color: cornflowerblue; text-align:center">
     <h2>@Model.Company.comapnyName</h2>
+
+   
 </div>
+<div dir="rtl" style="border:double; width:220px; margin-left:40%;">
+    @using (Html.BeginForm("Index", "MainCompanies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
 
-
-<div dir="rtl">
-    @Html.EditorFor(x => x.Company)
-</div>
-
-<div dir="rtl"style="border:double; width:220px; margin-left:40%;">
-       @using (Html.BeginForm("Index", "MainCompanies", FormMethod.Post, new { enctype = "multipart/form-data",id=Model.Company.companyId }))
-       { 
-           
-         <label for="file" style="margin-right:36%">הוסף עובדים</label>
+        <label for="file" style="margin-right:36%">הוסף עובדים</label>
         <br />
         <input type="file" name="file" id="file" />
         <br />
         <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
-   }
+    }
 </div>
+
+
+
+<div dir="rtl">
+    @Html.EditorFor(x => x.Company)
+ 
+</div>
+
