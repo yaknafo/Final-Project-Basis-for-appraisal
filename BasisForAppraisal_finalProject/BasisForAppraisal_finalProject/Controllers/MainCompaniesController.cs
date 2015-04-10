@@ -56,7 +56,8 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult ManageCompany(int id)
         {
             var dManager = new DataManager();
-            var companyies = dManager.Companyies.Where(c => c.companyId == id).First(); ;
+            var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
+            companyies.LoadEmployees();
             var companyView = new CompanyViewModel(companyies);
             return View(companyView);
 
