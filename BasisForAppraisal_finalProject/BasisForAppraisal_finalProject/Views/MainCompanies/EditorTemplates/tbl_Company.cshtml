@@ -75,27 +75,6 @@
 </div>
 
 
-<table class="table-bordered">
-    @for(int i=0; i< @Model.Employees.Count; i++)
-    {
-        <tr>
-            <th>
-                מס זהות
-            </th>
-            <th>
-                מס פרטי
-            </th>
-        </tr> 
-           <tr>
-            <th>
-                @Model.Employees[i].employeeId
-            </th>
-               <th>
-                   @Model.Employees[i].firstName
-               </th>
-        </tr> 
-    }
-    </table>
 
 
 
