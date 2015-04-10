@@ -27,7 +27,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult ManageCompany()
         {
             var dManager = new DataManager();
-            var companyies = dManager.Companyies;
+            var companyies = dManager.Companyies.First();
             return View(companyies);
 
         }

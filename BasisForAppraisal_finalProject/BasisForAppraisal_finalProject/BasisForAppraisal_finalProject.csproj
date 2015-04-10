@@ -277,6 +277,8 @@
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartialForAdd.cshtml" />
     <Content Include="Views\MainFormCreator\_iqp.cshtml" />
     <Content Include="Views\MainCompanies\MainCompanies.cshtml" />
+    <Content Include="Views\MainCompanies\EditorTemplates\tbl_Company.cshtml" />
+    <Content Include="Views\MainCompanies\ManageCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AddCompany\" />

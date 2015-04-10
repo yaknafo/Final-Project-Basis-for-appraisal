@@ -8,7 +8,7 @@ using BasisForAppraisal_finalProject.Models;
 
 namespace BasisForAppraisal_finalProject.ViewModel
 {
-    class CompanyViewModel
+    public class CompanyViewModel
     {
         public tbl_Company Company { set; get; }
 
