@@ -4,9 +4,15 @@
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/DataTable/dataTables.keyTable.js"></script>
+<script src="~/Scripts/DataTable/jquery.js"></script>
+<script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
+<link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
 
 <br />
 <br />
+
+
 <table class="table-condensed"  style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
     <tr>
         <th>
@@ -33,6 +39,41 @@
         </th>
     </tr>
 </table>
+
+ <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
+
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="font-size: 22px;  ">רשימת לקוחות</div>
+    <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
+
+    <!---knafo-->
+    <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
+        <thead>
+            <tr style=" font-size:20px;">
+                <td align="center"> מס זהות</td>
+                <td align="center">שם פרטי</td>
+                <td align="center">שם משפחה</td>
+            </tr>
+        </thead>
+        <tbody>
+           @for(int i=0; i< @Model.Employees.Count; i++)
+            {
+                <tr>
+                    <td align="center">@Html.ActionLink(@Model.Employees[i].employeeId, "ManageCompany", new { @id = @Model.Employees[i].companyId })</td>
+                    <td align="center">@Model.Employees[i].firstName</td>
+                    <td align="center">@Model.Employees[i].lastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script>
+
+        var table = $('#myTable').DataTable();
+        new $.fn.dataTable.KeyTable(table);
+
+    </script>
+</div>
+
 
 <table class="table-bordered">
     @for(int i=0; i< @Model.Employees.Count; i++)

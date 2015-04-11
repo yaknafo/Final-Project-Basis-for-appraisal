@@ -38,6 +38,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult addCompanie(tbl_Company company)
         {
