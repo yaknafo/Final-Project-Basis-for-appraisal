@@ -146,7 +146,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int formId
 		{
 			get
@@ -290,8 +290,8 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_QuestionId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
 		public int QuestionId
 		{
 			get
@@ -454,8 +454,8 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true)]
 		public int FormId
 		{
 			get
@@ -502,8 +502,8 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_AnswerId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
 		public int AnswerId
 		{
 			get
