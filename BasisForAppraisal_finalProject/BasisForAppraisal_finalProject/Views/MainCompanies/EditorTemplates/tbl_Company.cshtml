@@ -17,23 +17,23 @@
             שם:
         </th>
         <th>
-            <h3>@Model.comapnyName</h3>
+            <h3>@Html.DisplayFor(x => x.comapnyName)</h3>
         </th>
     </tr>
     <tr>
         <th>
-            כותבת:
+            @Html.DisplayNameFor(x => x.comapnyAddress)
         </th>
         <th>
-            <h4>@Model.comapnyAddress</h4>
+            <h4>@Html.DisplayFor(x => x.comapnyAddress)</h4>
         </th>
     </tr>
     <tr>
         <th>
-            טלפון:
+            @Html.DisplayNameFor(x => x.comapnyPhone)
         </th>
         <th>
-            <h4>@Model.comapnyPhone</h4>
+            <h4>@Html.DisplayFor(x => x.comapnyPhone)</h4>
         </th>
     </tr>
 </table>

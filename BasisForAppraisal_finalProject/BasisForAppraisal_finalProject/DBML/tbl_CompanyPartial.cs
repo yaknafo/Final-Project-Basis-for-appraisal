@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BasisForAppraisal_finalProject.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace BasisForAppraisal_finalProject.DBML
 {
+    [MetadataType(typeof(CompanyMetadata))]
     public partial class tbl_Company
     {
 
@@ -32,5 +34,21 @@ namespace BasisForAppraisal_finalProject.DBML
             var dManager = new DataManager();
             Employees= dManager.getEmployeesByCompanyId(companyId);
         }
+    }
+
+    public class CompanyMetadata
+    {
+        [Display(Name="שם")]
+        [DataType(DataType.Text)]
+        public string comapnyName { get; set; }
+
+        [Display(Name = "טלפון:")]
+        [DataType(DataType.PhoneNumber)]
+        public string comapnyPhone { get; set; }
+
+        [Display(Name = "כתובת:")]
+        [DataType(DataType.Text)]
+        public string comapnyAddress { get; set;}
+
     }
 }
