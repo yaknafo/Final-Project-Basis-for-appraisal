@@ -267,7 +267,7 @@ namespace BasisForAppraisal_finalProject.Models
 
 
         //-----------------------------------------------------------------------------------output- input method-----------------------------------------------------------------
-        public void upload_excelfile(string path)
+        public void upload_excelfile(string path,int idCompany)
         {
             Excel.Application xlApp = new Excel.Application();
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
@@ -284,7 +284,7 @@ namespace BasisForAppraisal_finalProject.Models
                   data[j-1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
                 }
                 var emp = new tbl_Employee();
-                emp.companyId = 1;
+                emp.companyId = idCompany;
                 emp.employeeId = data[0];
                 emp.firstName = data[1];// change it to cto'r!!!
                 emp.lastName = data[2];
@@ -315,5 +315,19 @@ namespace BasisForAppraisal_finalProject.Models
                 this.manager.SubmitChanges();
             }
         }
+
+       
+         public void  deleteWorker(String workerid,int companyNumber)
+        {
+            // find the record to delete f
+            var workerToDelete = manager.tbl_Employees.Where(a => a.employeeId == workerid && a.companyId == companyNumber).FirstOrDefault();
+            manager.tbl_Employees.DeleteOnSubmit(workerToDelete);
+            manager.SubmitChanges();
+
+        }
+
+
+
+
     }
 }
