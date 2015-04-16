@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int id=1,HttpPostedFileBase file=null)
+        public ActionResult Index(int idCompany, HttpPostedFileBase file = null)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
                     file.SaveAs(path);
-                        upload_excelfile(path, id);
+                        upload_excelfile(path, idCompany);
                     }
                 }
             catch (Exception ex) { }

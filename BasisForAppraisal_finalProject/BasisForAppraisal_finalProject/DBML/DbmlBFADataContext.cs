@@ -12,7 +12,7 @@ namespace BasisForAppraisal_finalProject.DBML
         public static string connectionStringfrenkel = "Data Source=ASUS\\FINALPROJECT;Initial Catalog=BasisForAppraisalDB;Integrated Security=True";
 
 
-        public static BFADataBasedbmlDataContext dbDataContext = new BFADataBasedbmlDataContext(connectionStringYair);
+        public static BFADataBasedbmlDataContext dbDataContext = new BFADataBasedbmlDataContext(connectionStringfrenkel);
 
         public static BFADataBasedbmlDataContext GetDataContextInstance()
         {
