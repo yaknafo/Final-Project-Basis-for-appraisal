@@ -20,6 +20,7 @@ namespace BasisForAppraisal_finalProject.DBML
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
+    using System.ComponentModel.DataAnnotations;
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="BasisForAppraisalDB")]
@@ -695,7 +696,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-		
+        [Required(ErrorMessage="שדה חובה")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyName", DbType="VarChar(100)")]
 		public string comapnyName
 		{
@@ -715,7 +716,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-		
+       
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyAddress", DbType="VarChar(300)")]
 		public string comapnyAddress
 		{
@@ -735,7 +736,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-		
+         [RegularExpression(@"^0[234679]{1}[\s]{0,1}[\-]{0,1}[\s]{0,1}[1-9]{1}[0-9]{6}$", ErrorMessage = "מס' טלפון לא חוקי")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyPhone", DbType="VarChar(50)")]
 		public string comapnyPhone
 		{
