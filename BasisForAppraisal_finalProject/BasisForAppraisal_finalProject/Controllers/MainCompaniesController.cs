@@ -16,6 +16,11 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public ActionResult Index(int id=1,HttpPostedFileBase file=null)
         {
+            if (!Directory.Exists(Server.MapPath("~/App_Data/uploads")))
+            {
+                Directory.CreateDirectory(Server.MapPath("~/App_Data/uploads"));
+            }
+
             try
             {
             string[] str = Path.GetFileName(file.FileName).Split('.');

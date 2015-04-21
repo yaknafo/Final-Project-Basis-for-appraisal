@@ -14,16 +14,6 @@ namespace BasisForAppraisal_finalProject.Controllers
     public class MainFormCreatorController : Controller
     {
 
-
-
-        public ActionResult deleteQustion(int formID, int quesNumber)
-        {
-            var b = new FormManager();
-            b.deleteQustion(formID, quesNumber);
-            return RedirectToAction("IntentionalFormWorkshop", new { id = formID });
-
-        }
-
        public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();
@@ -46,7 +36,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
            switch(submit)
            {
-               case "exit":       return backToMainForm();
+               case "Exit":       return backToMainForm();
 
                case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                                   TempData["Success"] = "הוספה בוצעה בהצלחה!";
@@ -57,7 +47,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                               TempData["Success"] = "שמירה בוצעה בהצלחה!";
                                break;
                 
-               case "delete": formViewModel.DeleteQuestions();
+               case "Delete": formViewModel.DeleteQuestions();
                               TempData["Success"] = "מחיקה בוצעה בהצלחה!";
                               TempData["changes"] = "remove";
                               break;
