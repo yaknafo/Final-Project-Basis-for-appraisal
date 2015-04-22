@@ -8,6 +8,9 @@ using BasisForAppraisal_finalProject.Models;
 using PagedList;
 using PagedList;
 using BasisForAppraisal_finalProject.DBML;
+using System.Net;
+using System.Text;
+using System.IO;
 
 
 namespace BasisForAppraisal_finalProject.Controllers
@@ -52,5 +55,12 @@ namespace BasisForAppraisal_finalProject.Controllers
             var forms = new ManageFormViewModel();
             return View(forms.Forms);
         }
+        [WordDocument]
+        public ActionResult AboutDocument()
+        {
+            ViewBag.WordDocumentFilename = "AboutMeDocument";
+            return View("About");
+        }
+  
 	}
 }

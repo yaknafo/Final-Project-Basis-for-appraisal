@@ -716,7 +716,8 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-       
+
+        [Required(ErrorMessage = "שדה חובה")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyAddress", DbType="VarChar(300)")]
 		public string comapnyAddress
 		{

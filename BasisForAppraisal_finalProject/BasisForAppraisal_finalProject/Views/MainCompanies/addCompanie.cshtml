@@ -10,6 +10,7 @@
     @using (Html.BeginForm("addCompanie", "MainCompanies", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
     <div class="form-horizontal" dir="rtl">
              <hr />
