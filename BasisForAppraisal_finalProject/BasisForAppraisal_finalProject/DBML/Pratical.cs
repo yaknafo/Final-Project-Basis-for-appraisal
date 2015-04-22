@@ -14,16 +14,16 @@ namespace BasisForAppraisal_finalProject.DBML
     /// </summary>
     public partial class tbl_IntentionalQuestion
     {
-        /// <summary>
-        /// which answer has been selected
-        /// </summary>
+      /// <summary>
+      /// which answer has been selected
+      /// </summary>
         public int selectedAnswer { set; get; }
 
         /// <summary>
         /// if to delete the question 
         /// </summary>
         public bool deleteQuestion { set; get; }
-
+       
         /// <summary>
         /// counstrator costume 
         /// </summary>
@@ -33,7 +33,7 @@ namespace BasisForAppraisal_finalProject.DBML
         public tbl_IntentionalQuestion(int numberOfAnswers, int formId, int sectionId, tbl_TypeQuestion type)
             : base()
         {
-
+             
             this.FormId = formId;
             this.SectionId = sectionId;
             this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
@@ -52,52 +52,52 @@ namespace BasisForAppraisal_finalProject.DBML
         /// create how many answer options that the user like (at the moment our defult is 3)
         /// </summary>
         /// <param name="numberOfQuestoin"></param>
-        public void createAnswersToQuestion(int? numberOfQuestoin)
+        public void createAnswersToQuestion(int numberOfQuestoin)
         {
             List<tbl_IntentionalAnswer> tempList = new List<tbl_IntentionalAnswer>(); ;
 
             for (int i = 0; i < numberOfQuestoin; i++)
             {
-                var temp = new tbl_IntentionalAnswer
+               var temp = new tbl_IntentionalAnswer
                 {
-
+       
                     FormId = this.FormId,
                     Text = string.Empty,
                     Score = 0,
                     AnswerOption = false,
                 };
-
-
-                tempList.Add(temp);
+               
+               
+               tempList.Add(temp);
             }
 
             this.Answers = tempList;
         }
-
+   
         private List<tbl_IntentionalAnswer> answers = new List<tbl_IntentionalAnswer>();
 
-        public List<tbl_IntentionalAnswer> Answers
+         public List<tbl_IntentionalAnswer> Answers
         {
-            get
-            {
-                return answers;
-            }
+        get
+        {
+            return answers;
+        }
             set
             {
                 answers = value;
             }
-        }
+    }
         /// <summary>
         /// gat al the answer of th question from tbl_intenational answers
         /// </summary>
         public void GetAllAnswers()
-        {
-            var manager = new DataManager();
+         {
+             var manager = new DataManager();
             this.Answers = manager.IntentionalAnswer.Where(a => a.QuestionId == this.QuestionId && a.FormId == this.FormId).ToList();
-        }
+         }
 
 
-
+     
     }
 
 
@@ -110,7 +110,7 @@ namespace BasisForAppraisal_finalProject.DBML
             get
             {
                 if (AnswerOption != null)
-                    return AnswerOption.Value;
+                return AnswerOption.Value;
                 return false;
             }
             set

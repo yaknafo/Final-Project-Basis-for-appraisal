@@ -76,7 +76,7 @@
     <div dir="rtl" style="border-bottom: solid;">
         <br />
         <br />
-        @if(@Model.NumberOfAnswers == null)
+        @if(@Model.NumberOfAnswers == 2)
         {
 
         @Html.EditorFor(x => x.NumberOfAnswers)
@@ -99,6 +99,7 @@
                     { 
                     <th>
                         @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                        @Html.HiddenFor(x => x.NumberOfAnswers)
                         @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 15px;  width:15px; margin-top: 10px;" })
                     </th>
                     }

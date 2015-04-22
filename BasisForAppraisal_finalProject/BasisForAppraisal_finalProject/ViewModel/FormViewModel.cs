@@ -195,6 +195,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_IntentionalQuestion InitNewQuestionScale()
         {
             NewQuestionScale = new tbl_IntentionalQuestion(2, formId, CurrentSection.SectionId, ScaleType);
+            NewQuestionScale.NumberOfAnswers = 2;
             return NewQuestionScale;
         }
        
@@ -249,21 +250,22 @@ namespace BasisForAppraisal_finalProject.ViewModel
            var minTag = question.Answers[1].Text;
 
            if (question.NumberOfAnswers >= 2)
-           question.createAnswersToQuestion(question.NumberOfAnswers);
+           {
+               question.createAnswersToQuestion(question.NumberOfAnswers.Value);
+           }
 
            question.Answers[0].Text = minTag;
            question.Answers[question.Answers.Count-1].Text = maxTag;
 
 
 
-           if (question.FormId == 0 || question.SectionId == 0)
-           {
+        
                // we wnat to make sure that every question and answer has the form id and section id
                question.FormId = form.formId;
                question.SectionId = CurrentSection.SectionId;
                question.Answers.ForEach(a => a.FormId = form.formId);
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
-           }
+         
 
 
            Questions.Add(question);

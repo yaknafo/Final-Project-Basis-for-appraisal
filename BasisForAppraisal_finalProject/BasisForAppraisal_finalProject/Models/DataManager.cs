@@ -111,8 +111,11 @@ namespace BasisForAppraisal_finalProject.Models
         {
             manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
             manager.SubmitChanges();
+
             question.Answers.ForEach(x => x.QuestionId = question.QuestionId);
             question.Answers.ForEach(x => x.SectionId = question.SectionId);
+            question.Answers.ForEach(x => x.FormId = question.FormId);
+
             manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
             manager.SubmitChanges();
         }
