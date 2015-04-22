@@ -5,6 +5,7 @@
       <Column Name="FormId" Member="formId" Storage="_FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FormName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="tblForm_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="formId" OtherKey="FormId" Type="tbl_IntentionalQuestion" />
+      <Association Name="tblForm_tbl_Section" Member="tbl_Sections" ThisKey="formId" OtherKey="formId" Type="tbl_Section" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
@@ -43,6 +44,14 @@
       <Column Name="firstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="lastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Association Name="tbl_Company_tbl_Employee" Member="tbl_Company" ThisKey="companyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Section" Member="tbl_Sections">
+    <Type Name="tbl_Section">
+      <Column Name="FormId" Member="formId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HelpExplanation" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Association Name="tblForm_tbl_Section" Member="tblForm" ThisKey="formId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -46,6 +46,9 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_Employee(tbl_Employee instance);
     partial void Updatetbl_Employee(tbl_Employee instance);
     partial void Deletetbl_Employee(tbl_Employee instance);
+    partial void Inserttbl_Section(tbl_Section instance);
+    partial void Updatetbl_Section(tbl_Section instance);
+    partial void Deletetbl_Section(tbl_Section instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -117,6 +120,14 @@ namespace BasisForAppraisal_finalProject.DBML
 				return this.GetTable<tbl_Employee>();
 			}
 		}
+		
+		public System.Data.Linq.Table<tbl_Section> tbl_Sections
+		{
+			get
+			{
+				return this.GetTable<tbl_Section>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblForm")]
@@ -131,6 +142,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
 		
+		private EntitySet<tbl_Section> _tbl_Sections;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -144,10 +157,11 @@ namespace BasisForAppraisal_finalProject.DBML
 		public tblForm()
 		{
 			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
+			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int formId
 		{
 			get
@@ -200,6 +214,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="formId")]
+		public EntitySet<tbl_Section> tbl_Sections
+		{
+			get
+			{
+				return this._tbl_Sections;
+			}
+			set
+			{
+				this._tbl_Sections.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -227,6 +254,18 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
+		private void attach_tbl_Sections(tbl_Section entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_tbl_Sections(tbl_Section entity)
 		{
 			this.SendPropertyChanging();
 			entity.tblForm = null;
@@ -455,8 +494,8 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
 			OnCreated();
 		}
-
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true)]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true)]
 		public int FormId
 		{
 			get
@@ -504,7 +543,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_AnswerId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
+         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_AnswerId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
 		public int AnswerId
 		{
 			get
@@ -716,7 +755,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-       
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyAddress", DbType="VarChar(300)")]
 		public string comapnyAddress
 		{
@@ -736,6 +775,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
+
          [RegularExpression(@"^0[234679]{1}[\s]{0,1}[\-]{0,1}[\s]{0,1}[1-9]{1}[0-9]{6}$", ErrorMessage = "מס' טלפון לא חוקי")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyPhone", DbType="VarChar(50)")]
 		public string comapnyPhone
@@ -953,6 +993,153 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._companyId = default(int);
 					}
 					this.SendPropertyChanged("tbl_Company");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Section")]
+	public partial class tbl_Section : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _formId;
+		
+		private int _SectionId;
+		
+		private string _HelpExplanation;
+		
+		private EntityRef<tblForm> _tblForm;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnformIdChanging(int value);
+    partial void OnformIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnHelpExplanationChanging(string value);
+    partial void OnHelpExplanationChanged();
+    #endregion
+		
+		public tbl_Section()
+		{
+			this._tblForm = default(EntityRef<tblForm>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="FormId", Storage="_formId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int formId
+		{
+			get
+			{
+				return this._formId;
+			}
+			set
+			{
+				if ((this._formId != value))
+				{
+					this.OnformIdChanging(value);
+					this.SendPropertyChanging();
+					this._formId = value;
+					this.SendPropertyChanged("formId");
+					this.OnformIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HelpExplanation", DbType="VarChar(1000)")]
+		public string HelpExplanation
+		{
+			get
+			{
+				return this._HelpExplanation;
+			}
+			set
+			{
+				if ((this._HelpExplanation != value))
+				{
+					this.OnHelpExplanationChanging(value);
+					this.SendPropertyChanging();
+					this._HelpExplanation = value;
+					this.SendPropertyChanged("HelpExplanation");
+					this.OnHelpExplanationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tblForm", ThisKey="formId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.tbl_Sections.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Sections.Add(this);
+						this._formId = value.formId;
+					}
+					else
+					{
+						this._formId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
 				}
 			}
 		}

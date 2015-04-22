@@ -213,6 +213,7 @@
     <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\NewForm.png" />
     <Content Include="photos\previewForm.png" />
+    <Content Include="photos\Savef.png" />
     <Content Include="photos\saveForm.png" />
     <Content Include="photos\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
