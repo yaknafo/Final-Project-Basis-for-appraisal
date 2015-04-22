@@ -327,29 +327,42 @@ namespace BasisForAppraisal_finalProject.Models
         //-----------------------------------------------------------------------------------output- input method-----------------------------------------------------------------
         public void upload_excelfile(string path,int idCompany)
         {
-            Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            Excel.Range xlRange = xlWorksheet.UsedRange;
-            int rowCount = xlRange.Rows.Count;
-            int colCount = xlRange.Columns.Count;
-            
-            for (int i = 1; i <= rowCount; i++)
+            try
             {
-                  String[] data = new string[colCount];
-                for (int j = 1; j <= colCount; j++)
+                Excel.Application xlApp = new Excel.Application();
+                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
+                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Excel.Range xlRange = xlWorksheet.UsedRange;
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+
+                for (int i = 1; i <= rowCount; i++)
                 {
-                  data[j-1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
+                    String[] data = new string[colCount];
+                    for (int j = 1; j <= colCount; j++)
+                    {
+                        data[j - 1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
+                    }
+                    var emp = new tbl_Employee();
+                    emp.companyId = idCompany;
+                    emp.employeeId = data[0];
+                    emp.firstName = data[1];// change it to cto'r!!!
+                    emp.lastName = data[2];
+                    emp.Email = data[3];
+                    emp.Unit = data[4];
+                    emp.Class = data[5];
+                    if (data[6].Equals("כן"))
+                        emp.IsManger = true;
+                    else
+                        emp.IsManger = false;
+                    this.addWorkerToDb(emp);
                 }
-                var emp = new tbl_Employee();
-                emp.companyId = idCompany;
-                emp.employeeId = data[0];
-                emp.firstName = data[1];// change it to cto'r!!!
-                emp.lastName = data[2];
-                this.addWorkerToDb(emp);
+                xlApp.Workbooks.Close();
             }
-           xlApp.Workbooks.Close();         
-           File.Delete(path);
+            finally
+            {
+                File.Delete(path);
+            }
         }
 
 

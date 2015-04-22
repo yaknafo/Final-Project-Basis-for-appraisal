@@ -10,7 +10,7 @@
 <link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
 
 <div dir="rtl" style="border:double; width:220px; margin-left:40%;">
-    @using (Html.BeginForm("Index", "MainCompanies", new { idCompany=Model.Company.companyId, enctype = "multipart/form-data" }, FormMethod.Post))
+    @using (Html.BeginForm("Index", "MainCompanies",FormMethod.Post, new { idCompany=Model.Company.companyId, enctype = "multipart/form-data" }))
     {
 
         <label for="file" style="margin-right:36%">הוסף עובדים</label>

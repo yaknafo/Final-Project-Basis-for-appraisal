@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int idCompany, HttpPostedFileBase file = null)
+        public ActionResult Index(int idCompany=1, HttpPostedFileBase file = null)
         {
             if (!Directory.Exists(Server.MapPath("~/App_Data/uploads")))
             {
