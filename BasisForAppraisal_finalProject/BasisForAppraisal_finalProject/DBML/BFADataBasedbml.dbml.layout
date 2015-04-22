@@ -1,17 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.625, 8.5" name="BFADataBasedbml">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.125, 8.5" name="BFADataBasedbml">
   <DataContextMoniker Name="/BFADataBasedbmlDataContext" />
   <nestedChildShapes>
     <classShape Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" absoluteBounds="0.5, 0.5, 2, 1.1939925130208338">
       <DataClassMoniker Name="/BFADataBasedbmlDataContext/tblForm" />
       <nestedChildShapes>
         <elementListCompartment Id="de8d42b3-60a4-4231-814e-762c5b50c0e7" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" absoluteBounds="3.625, 0.5, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Company" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d9a5d44f-47e3-4a84-ae00-37552803558e" absoluteBounds="3.6399999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="9450fc37-0bf0-4800-88c4-bce75d72af3b" absoluteBounds="0.5, 4.5, 2, 2.3478011067708335">
@@ -26,7 +20,7 @@
         <elementListCompartment Id="0b3e19a9-9df5-4f1f-bf1e-6df743c2f5a6" absoluteBounds="7.015, 5.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.5 : 5.5751389860026); (7 : 5.5751389860026)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 5.5751389860026); (4.88541666666667 : 5.5751389860026 : JumpStart); (5.05208333333333 : 5.5751389860026 : JumpEnd); (7 : 5.5751389860026)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalQuestion/tbl_IntentionalQuestion_tbl_IntentionalAnswer" />
       <nodes>
         <classShapeMoniker Id="9450fc37-0bf0-4800-88c4-bce75d72af3b" />
@@ -66,51 +60,83 @@
         <classShapeMoniker Id="b79de99e-a26f-4f5d-9ec2-697a3e74fdbb" />
       </nodes>
     </associationConnector>
-    <classShape Id="81dd73b7-3a8b-41d1-a54f-fb125d6fc144" absoluteBounds="6.75, 1.875, 2, 2.3478011067708335">
+    <classShape Id="b7816a33-a0b4-477d-9cbc-f687d988866f" absoluteBounds="6.375, 2.25, 2, 2.3478011067708335">
       <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Employee" />
       <nestedChildShapes>
-        <elementListCompartment Id="ac8c6e9e-29e9-456a-a184-1fe9150d454e" absoluteBounds="6.7650000000000006, 2.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ef0d2dd5-e060-4ac0-ad8f-745f8392c29f" absoluteBounds="6.39, 2.71, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.625 : 1.1874995); (7.75 : 1.1874995); (7.75 : 1.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Company/tbl_Company_tbl_Employee" />
+    <classShape Id="239d8d49-4a7f-4655-a8c1-b03d509f3681" absoluteBounds="3.375, 0.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Company" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d0208897-ecd5-45e0-b4f0-30d5e27b0d58" absoluteBounds="3.3899999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c84de795-e9c3-4d5e-a6d8-02a4dd0270ed" absoluteBounds="9.625, 1, 2, 1.3862939453125">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Class" />
+      <nestedChildShapes>
+        <elementListCompartment Id="58e88032-d9f5-4dd3-ae4c-8df527b037dc" absoluteBounds="9.64, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.71875 : 2.3862939453125); (9.71875 : 2.72439747265625); (9.20833333333333 : 2.72439747265625 : JumpStart); (9.04166666666667 : 2.72439747265625 : JumpEnd); (8.375 : 2.72439747265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Class/tbl_Class_tbl_Employee" />
       <nodes>
-        <classShapeMoniker Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" />
-        <classShapeMoniker Id="81dd73b7-3a8b-41d1-a54f-fb125d6fc144" />
+        <classShapeMoniker Id="c84de795-e9c3-4d5e-a6d8-02a4dd0270ed" />
+        <classShapeMoniker Id="b7816a33-a0b4-477d-9cbc-f687d988866f" />
       </nodes>
     </associationConnector>
-    <classShape Id="f2d3c98b-e4b5-42e2-adc4-feb88bbe2042" absoluteBounds="11.375, 2.75, 2, 1.5785953776041666">
+    <classShape Id="88e04ff6-db0a-4d7e-ad85-4e1ea9480f79" absoluteBounds="6, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Unit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3fe797ea-ec9c-4bdf-b377-4c4f103b2f87" absoluteBounds="6.0150000000000006, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8 : 1.34699625651042); (9.625 : 1.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Unit/tbl_Unit_tbl_Class" />
+      <nodes>
+        <classShapeMoniker Id="88e04ff6-db0a-4d7e-ad85-4e1ea9480f79" />
+        <classShapeMoniker Id="c84de795-e9c3-4d5e-a6d8-02a4dd0270ed" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.375 : 1.09699625651042); (6 : 1.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Company/tbl_Company_tbl_Unit" />
+      <nodes>
+        <classShapeMoniker Id="239d8d49-4a7f-4655-a8c1-b03d509f3681" />
+        <classShapeMoniker Id="88e04ff6-db0a-4d7e-ad85-4e1ea9480f79" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="724c1a42-1426-4ce6-8047-167dafba8ddc" absoluteBounds="9.875, 3.125, 2, 1.5785953776041666">
       <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_ConnectorFormFill" />
       <nestedChildShapes>
-        <elementListCompartment Id="590d1f0d-ef58-485c-ba5c-e44e61b759a1" absoluteBounds="11.39, 3.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="779302fd-fcb2-400c-9ad2-39ae069c5879" absoluteBounds="9.89, 3.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.625 : 0.81249725); (12.375 : 0.81249725); (12.375 : 2.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.375 : 1.61904781705729); (5.75 : 1.61904781705729); (5.75 : 1.94399251302083); (9.375 : 1.94399251302083); (9.375 : 2.5112939453125); (9.63541666666667 : 2.5112939453125 : JumpStart); (9.80208333333333 : 2.5112939453125 : JumpEnd); (10.875 : 2.5112939453125); (10.875 : 3.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Company/tbl_Company_tbl_ConnectorFormFill" />
       <nodes>
-        <classShapeMoniker Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" />
-        <classShapeMoniker Id="f2d3c98b-e4b5-42e2-adc4-feb88bbe2042" />
+        <classShapeMoniker Id="239d8d49-4a7f-4655-a8c1-b03d509f3681" />
+        <classShapeMoniker Id="724c1a42-1426-4ce6-8047-167dafba8ddc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.75 : 3.48640055338542); (11.375 : 3.48640055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.375 : 3.86140055338542); (9.875 : 3.86140055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Employee/tbl_Employee_tbl_ConnectorFormFill" />
       <nodes>
-        <classShapeMoniker Id="81dd73b7-3a8b-41d1-a54f-fb125d6fc144" />
-        <classShapeMoniker Id="f2d3c98b-e4b5-42e2-adc4-feb88bbe2042" />
+        <classShapeMoniker Id="b7816a33-a0b4-477d-9cbc-f687d988866f" />
+        <classShapeMoniker Id="724c1a42-1426-4ce6-8047-167dafba8ddc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.75 : 3.05570027669271); (11.375 : 3.05570027669271)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.375 : 3.43070027669271); (9.875 : 3.43070027669271)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Employee/tbl_Employee_tbl_ConnectorFormFill1" />
       <nodes>
-        <classShapeMoniker Id="81dd73b7-3a8b-41d1-a54f-fb125d6fc144" />
-        <classShapeMoniker Id="f2d3c98b-e4b5-42e2-adc4-feb88bbe2042" />
+        <classShapeMoniker Id="b7816a33-a0b4-477d-9cbc-f687d988866f" />
+        <classShapeMoniker Id="724c1a42-1426-4ce6-8047-167dafba8ddc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 1.09699625651042); (3.375 : 1.09699625651042); (3.375 : 2.125); (5.625 : 2.125); (5.625 : 2.32859537760417); (6.5 : 2.32859537760417); (6.5 : 1.625); (7.66666666666667 : 1.625 : JumpStart); (7.83333333333333 : 1.625 : JumpEnd); (11.843748 : 1.625); (11.843748 : 2.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 1.09699625651042); (3.125 : 1.09699625651042); (3.125 : 2.125); (9.125 : 2.125); (9.125 : 2.8862939453125); (10.343748 : 2.8862939453125); (10.343748 : 3.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tblForm/tblForm_tbl_ConnectorFormFill" />
       <nodes>
         <classShapeMoniker Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" />
-        <classShapeMoniker Id="f2d3c98b-e4b5-42e2-adc4-feb88bbe2042" />
+        <classShapeMoniker Id="724c1a42-1426-4ce6-8047-167dafba8ddc" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
