@@ -14,20 +14,10 @@ namespace BasisForAppraisal_finalProject.Controllers
     public class MainFormCreatorController : Controller
     {
 
-
-
-        public ActionResult deleteQustion(int formID, int quesNumber)
-        {
-            var b = new FormManager();
-            b.deleteQustion(formID, quesNumber);
-            return RedirectToAction("IntentionalFormWorkshop", new { id = formID });
-
-        }
-
        public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();
-           var q = b.GetFormWithQuestion(id);
+           var q = b.GetFormWithSections(id);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
        }
@@ -46,18 +36,28 @@ namespace BasisForAppraisal_finalProject.Controllers
 
            switch(submit)
            {
-               case "exit":       return backToMainForm();
+               case "Exit":       return backToMainForm();
 
                case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                                   TempData["Success"] = "הוספה בוצעה בהצלחה!";
                                   TempData["changes"] = "add";
                                   break;
 
+               case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
+                                          TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                          TempData["changes"] = "add";
+                                          break;
+
+               case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
+                                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                        TempData["changes"] = "add";
+                                        break;
+
                case "Save":   manager.UpdateForm(formViewModel);
                               TempData["Success"] = "שמירה בוצעה בהצלחה!";
                                break;
                 
-               case "delete": formViewModel.DeleteQuestions();
+               case "Delete": formViewModel.DeleteQuestions();
                               TempData["Success"] = "מחיקה בוצעה בהצלחה!";
                               TempData["changes"] = "remove";
                               break;
@@ -76,7 +76,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        public ActionResult preview(int formid=1 )
        {
            var b = new DataManager();
-           var q = b.GetFormWithQuestion(formid);
+           var q = b.GetFormWithSections(formid);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
        }

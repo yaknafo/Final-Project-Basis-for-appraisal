@@ -166,6 +166,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Enum\WorkShopActions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainCompaniesController.cs" />
     <Compile Include="Controllers\MainFormCreatorController.cs" />
@@ -178,7 +179,10 @@
       <DependentUpon>BFADataBasedbml.dbml</DependentUpon>
     </Compile>
     <Compile Include="DBML\DbmlBFADataContext.cs" />
+    <Compile Include="DBML\FormPartial.cs" />
+    <Compile Include="DBML\Interface\QuestionType.cs" />
     <Compile Include="DBML\Pratical.cs" />
+    <Compile Include="DBML\SectionPartical.cs" />
     <Compile Include="DBML\tbl_CompanyPartial.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +217,7 @@
     <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\NewForm.png" />
     <Content Include="photos\previewForm.png" />
+    <Content Include="photos\Savef.png" />
     <Content Include="photos\saveForm.png" />
     <Content Include="photos\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -289,6 +294,7 @@
     <Content Include="Views\test\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DBML\Pratical\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,11 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.tblForms; }
         }
 
+        public Table<tbl_Section> Sections
+        {
+            get { return manager.tbl_Sections; }
+        }
+
         public Table<tbl_IntentionalQuestion> IntentionalQuestion
         {
             get { return manager.tbl_IntentionalQuestions; }
@@ -52,6 +57,11 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.tbl_Employees; }
         }
 
+        public Table<tbl_TypeQuestion> TypeQuestions
+        {
+            get { return manager.tbl_TypeQuestions; }
+        }
+
         //----------------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -62,14 +72,14 @@ namespace BasisForAppraisal_finalProject.Models
             return question;
         }
 
-        public tblForm GetFormWithQuestion(int fid)
+        public tblForm GetFormWithSections(int fid)
         {
             var form = manager.tblForms.Where(x => x.formId == fid).FirstOrDefault();
 
             if (form == null)
                 throw new Exception("form with number number: " + fid + " mot exist in DB");
 
-            form.GetAllQuestions().ForEach(q => q.GetAllAnswers());
+            form.GetAllSections().ForEach(q => q.GetAllQuestions().ForEach(a => a.GetAllAnswers()));
             return form;
         }
 
@@ -102,6 +112,7 @@ namespace BasisForAppraisal_finalProject.Models
             manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
             manager.SubmitChanges();
             question.Answers.ForEach(x => x.QuestionId = question.QuestionId);
+            question.Answers.ForEach(x => x.SectionId = question.SectionId);
             manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
             manager.SubmitChanges();
         }
@@ -121,6 +132,12 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
+        public int SaveSection(tbl_Section section)
+        {
+            manager.tbl_Sections.InsertOnSubmit(section);
+            manager.SubmitChanges();
+            return section.FormId;
+        }
 
         /// <summary>
         /// save new form in data base
@@ -151,6 +168,28 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
         /// <summary>
+        /// delete Section from specfic form and specfic question
+        /// 
+        /// <param name="formID"></param> 
+        /// <param name="quesNumber"></param>
+        public void deleteSection(int sectionId)
+        {
+            // find the record to delete from the right form and right ques number
+            var SectionToDelete = manager.tbl_Sections.Where(a => a.SectionId == sectionId).FirstOrDefault();
+
+            var QuestionToDelete = manager.tbl_IntentionalAnswers.Where(a => a.SectionId == sectionId);
+
+            SectionToDelete.Questions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
+
+            manager.tbl_Sections.DeleteOnSubmit(SectionToDelete);
+            
+            manager.SubmitChanges();
+
+        }
+
+
+
+        /// <summary>
         /// delte question from specfic form and specfic question
         /// 
         /// <param name="formID"></param> 
@@ -164,8 +203,8 @@ namespace BasisForAppraisal_finalProject.Models
             if (formForDelete == null)
                 throw new Exception(string.Format("the form with number id {0} camt be delete becouse he cant be found in DB", formID));
 
-            // delete all his question
-            formForDelete.Questions.ForEach(q => deleteQustion(q.FormId, q.QuestionId));
+            // delete all the section of the form
+            formForDelete.Sections.ForEach(q => deleteSection(q.SectionId));
 
             // delete the form him self
             manager.tblForms.DeleteOnSubmit(formForDelete);
@@ -185,6 +224,25 @@ namespace BasisForAppraisal_finalProject.Models
             var formUpdate = manager.tblForms.Where(f => f.formId == form.formId).FirstOrDefault();
             formUpdate.FormName = form.FormName;
             manager.SubmitChanges();
+        }
+
+
+        /// <summary>
+        /// save form include qustions and answers to db
+        /// </summary>
+        /// <param name="form"></param>
+        public void UpdateSectionsToDB(List<tbl_Section> sections)
+        {
+            foreach (tbl_Section s in sections)
+            {
+                var sectionUpdate = manager.tbl_Sections.Where(f => s.SectionId == f.SectionId).FirstOrDefault();
+
+                sectionUpdate.Name = s.Name;
+                sectionUpdate.HelpExplanation = s.HelpExplanation;
+                manager.SubmitChanges();
+                
+            }
+           
         }
 
 

@@ -6,79 +6,120 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
    
 
-    
-        <div dir="rtl">
-            
-            @Html.HiddenFor(x => x.FormId)
-            @Html.HiddenFor(x => x.QuestionId)
-            <h4>שאלה</h4>
-            @Html.TextAreaFor(x => x.Title, new { @cols = 80, @rows = 8 })
-            </div>
-       
-        @if (Model.QuestionId > 0)
-        { 
-            @Html.ActionLink("ערוך", "upload_excelfile", new { @path="rrr" })
-            
+    <div draggable="true">
+    <div dir="rtl">
 
-            @*@Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })*@
-            <table >
-                <tr>
-            <th>delete</th>
-            <th>  @Html.CheckBoxFor(x => x.deleteQuestion,new { style = "height: 25px;  width:25px;"})</th>
-                    </tr>
-                </table>
-        }
-          
-        <table class="table" dir="rtl" style="border-top: hidden; border-bottom: solid;">
-            <tr dir="rtl">
+        @Html.HiddenFor(x => x.FormId)
+        @Html.HiddenFor(x => x.SectionId)
+        @Html.HiddenFor(x => x.QuestionId)
+        @Html.HiddenFor(x => x.QuestionType)
+        <h4>שאלה</h4>
+        @Html.TextAreaFor(x => x.Title, new { @cols = 80, @rows = 8 })
+    </div>
 
-                @for (int i = 0; i < Model.Answers.Count(); i++)
-                {
-                    <th dir="rtl">
-                        @if (i != 1 && i != 3 || Model.Answers.Count() <= 3)
-                        {
-                            @Html.EditorFor(x => x.Answers[i])
-                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 50%; margin-top: 10px;" })
-                        }
-                        else
-                        {
+    @if (Model.QuestionId > 0)
+    {
+        @Html.ActionLink("ערוך", "upload_excelfile", new { @path = "rrr" })
 
-                            @Html.HiddenFor(x => x.Answers[i].FormId)
-                            @Html.HiddenFor(x => x.Answers[i].QuestionId)
-                            @Html.HiddenFor(x => x.Answers[i].AnswerId)
-                            @Html.HiddenFor(x => x.Answers[i].Score)
-                            @Html.HiddenFor(x => x.Answers[i].AnswerOption)
-                            @Html.HiddenFor(x => x.Answers[i].Text, new { style = "height: 200px;  width:200px; margin-left:13%" })
-                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 40%; margin-top: 210px;" })
-                        }
 
-                    </th>
-                }
-                
+        @*@Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })*@
+        <table>
+            <tr>
+                <th>delete</th>
+                <th>  @Html.CheckBoxFor(x => x.deleteQuestion, new { style = "height: 25px;  width:25px;" })</th>
             </tr>
-</table>
-@*<div style=" margin-left: 73%; border-bottom:groove">
-    <p dir="ltr" style="font-size:20px;">
-        מתקשה להעריך
-        @Html.DisplayText("מתקשה להעריך")
-        @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 25px;  width:25px;" })
-    </p>
-</div>*@  
+        </table>
+    }
 
+@if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
+{ 
+    <table class="table" dir="rtl" style="border-top: hidden; border-bottom: solid;">
+        <tr dir="rtl">
+            @for (int i = 0; i < Model.Answers.Count(); i++)
+            {
+                <th dir="rtl">
+                    @if (i != 1 && i != 3 || Model.Answers.Count() <= 3)
+                    {
+                        @Html.EditorFor(x => x.Answers[i])
+                        @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 50%; margin-top: 10px;" })
+                    }
+                    else
+                    {
 
+                        @Html.HiddenFor(x => x.Answers[i].FormId)
+                        @Html.HiddenFor(x => x.Answers[i].QuestionId)
+                        @Html.HiddenFor(x => x.Answers[i].AnswerId)
+                        @Html.HiddenFor(x => x.Answers[i].Score)
+                        @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                        @Html.HiddenFor(x => x.Answers[i].Text, new { style = "height: 200px;  width:200px; margin-left:13%" })
+                        @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 40%; margin-top: 210px;" })
+                    }
+                </th>
+            }
 
+        </tr>
+    </table>
+}
 
+@if (@Model.QuestionType != null && @Model.QuestionType.Contains("FreeText"))
+{
+    <div dir="rtl" style="border-bottom: solid;">
+        <br />
+        <br />
+                    @Html.EditorFor(x => x.Answers[0])
+        <div style="margin-bottom:2%;"></div>
+</div>
+}
 
+ @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Scale"))
+{
+    <div dir="rtl" style="border-bottom: solid;">
+        <br />
+        <br />
+        @if(@Model.NumberOfAnswers == null)
+        {
 
+        @Html.EditorFor(x => x.NumberOfAnswers)
+        <br />
+        <br />
+        @Html.TextBoxFor(x => x.Answers[0].Text, new { placeholder = "תג לערך מקסימלי" })
+        <br />
+        <br />
+        @Html.TextBoxFor(x => x.Answers[1].Text, new { placeholder = "תג לערך מינימלי" })
 
+        }
+        else
+        {
+            <table>
+                <tr>
+                    <th>
+                        @Html.TextBoxFor(x => x.Answers[0].Text)
+                    </th>
+                    @for(int i=0; i< @Model.Answers.Count;i++)
+                    { 
+                    <th>
+                        @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                        @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 15px;  width:15px; margin-top: 10px;" })
+                    </th>
+                    }
+                    <th>
+                        @Html.TextBoxFor(x => x.Answers[Model.Answers.Count-1].Text)
+                    </th>
+                </tr>
+            </table>
+        }
 
-
-
-
-
-
-
-
+        <div style="margin-bottom:2%;"></div>
+    </div>
+}
+        </div>
+    @*<div style=" margin-left: 73%; border-bottom:groove">
+            <p dir="ltr" style="font-size:20px;">
+                מתקשה להעריך
+                @Html.DisplayText("מתקשה להעריך")
+                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 25px;  width:25px;" })
+            </p>
+        </div>*@
 
 
 
