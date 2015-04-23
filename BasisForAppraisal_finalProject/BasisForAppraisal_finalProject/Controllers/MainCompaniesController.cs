@@ -88,6 +88,10 @@ namespace BasisForAppraisal_finalProject.Controllers
             cm.deleteWorker(idworker, companyNumber);
             return RedirectToAction("ManageCompany");
         }
+        public ActionResult test()
+        {
+            return View();
+        }
        
 	}
 }

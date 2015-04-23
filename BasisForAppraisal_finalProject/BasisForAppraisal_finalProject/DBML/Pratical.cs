@@ -12,7 +12,7 @@ namespace BasisForAppraisal_finalProject.DBML
     /// <summary>
     /// partial class tbl_IntentionalQuestion 
     /// </summary>
-    public partial class tbl_IntentionalQuestion 
+    public partial class tbl_IntentionalQuestion
     {
       /// <summary>
       /// which answer has been selected
@@ -30,13 +30,14 @@ namespace BasisForAppraisal_finalProject.DBML
         /// <param name="numberOfAnswers"></param>
         /// <param name="formId"></param>
         /// <param name="numberOfQuestoin"></param>
-        public tbl_IntentionalQuestion(int numberOfAnswers, int formId, int sectionId, tbl_TypeQuestion type):base()
+        public tbl_IntentionalQuestion(int numberOfAnswers, int formId, int sectionId, tbl_TypeQuestion type)
+            : base()
         {
              
             this.FormId = formId;
             this.SectionId = sectionId;
             this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
-           // this.tbl_Section = default(EntityRef<tbl_Section);
+            // this.tbl_Section = default(EntityRef<tbl_Section);
             createAnswersToQuestion(numberOfAnswers);
             this.QuestionType = type.Name;
         }
@@ -51,7 +52,7 @@ namespace BasisForAppraisal_finalProject.DBML
         /// create how many answer options that the user like (at the moment our defult is 3)
         /// </summary>
         /// <param name="numberOfQuestoin"></param>
-        public void createAnswersToQuestion(int? numberOfQuestoin)
+        public void createAnswersToQuestion(int numberOfQuestoin)
         {
             List<tbl_IntentionalAnswer> tempList = new List<tbl_IntentionalAnswer>(); ;
 
@@ -73,7 +74,7 @@ namespace BasisForAppraisal_finalProject.DBML
             this.Answers = tempList;
         }
    
-         private List<tbl_IntentionalAnswer> answers= new List<tbl_IntentionalAnswer>();
+        private List<tbl_IntentionalAnswer> answers = new List<tbl_IntentionalAnswer>();
 
          public List<tbl_IntentionalAnswer> Answers
         {
@@ -92,7 +93,7 @@ namespace BasisForAppraisal_finalProject.DBML
         public void GetAllAnswers()
          {
              var manager = new DataManager();
-           this.Answers= manager.IntentionalAnswer.Where(a => a.QuestionId == this.QuestionId && a.FormId == this.FormId).ToList();
+            this.Answers = manager.IntentionalAnswer.Where(a => a.QuestionId == this.QuestionId && a.FormId == this.FormId).ToList();
          }
 
 
@@ -120,5 +121,5 @@ namespace BasisForAppraisal_finalProject.DBML
         }
     }
 
-   
+
 }
