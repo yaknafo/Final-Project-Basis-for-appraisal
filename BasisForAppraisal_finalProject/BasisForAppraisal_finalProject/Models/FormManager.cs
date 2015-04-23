@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.ViewModel;
+using System.Data.Linq;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -18,28 +19,14 @@ namespace BasisForAppraisal_finalProject.Models
         /// <param name="question"></param>
         public void addQuestionToForm(int formId)
         {
-            var manager = new DataManager();
-            var form = manager.GetFormWithQuestion(formId);
-            var numberOfTheQuestion = form.Questions.Count()+1;
-            var newQuestion = new tbl_IntentionalQuestion(3, formId);
-            manager.saveQuestionToDB(newQuestion);
+            //var manager = new DataManager();
+            //var form = manager.GetFormWithSections(formId);
+            //var numberOfTheQuestion = form.Questions.Count()+1;
+            //var newQuestion = new tbl_IntentionalQuestion(3, formId);
+            //manager.saveQuestionToDB(newQuestion);
         }
 
-        /// <summary>
-        /// this method attach question to from without save the question in the DB
-        /// </summary>
-        /// <param name="formId"></param>
-        /// <param name="numberOfTheQuestion"></param>
-        /// <returns></returns>
-        public tblForm GetQuestionToForm(int formId, tbl_IntentionalQuestion question)
-        {
-
-            var manager = new DataManager();
-            var form = manager.GetFormWithQuestion(formId);
-            form.Questions.Add(question);
-            return form;
-          
-        }
+       
 
         /// <summary>
         /// save new question in form  
@@ -95,9 +82,13 @@ namespace BasisForAppraisal_finalProject.Models
             var manager = new DataManager();
             manager.UpdateFormToDB(form.form);
 
-            // can be that we still dont have question in ur form
-            if(form.IntentionalQuestions != null)
-            manager.UpdateQuestionsToDB(form.IntentionalQuestions);
+            //// can be that we still dont have question in ur form
+            if (form.CurrentSection != null)
+                manager.UpdateSectionsToDB(new List<tbl_Section>{form.CurrentSection});
+
+            //// can be that we still dont have question in ur form
+           if(form.Questions != null)
+               manager.UpdateQuestionsToDB(form.Questions);
 
         }
 
@@ -108,8 +99,10 @@ namespace BasisForAppraisal_finalProject.Models
         public int AddNewForm()
         {
             var manager = new DataManager();
-            var newform= new tblForm{ FormName="טופס חדש"};
-           return manager.AddForm(newform);
+            var newform= new tblForm{ FormName="שאלון חדש"};
+            var section = new tbl_Section { Name= "חלק חדש"};
+           section.FormId = manager.AddForm(newform);
+           return manager.SaveSection(section);
         }
 
     }

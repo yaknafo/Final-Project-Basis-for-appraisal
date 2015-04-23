@@ -4,28 +4,7 @@
     <Type Name="tblForm">
       <Column Name="FormId" Member="formId" Storage="_FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FormName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="tblForm_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="formId" OtherKey="FormId" Type="tbl_IntentionalQuestion" />
-      <Association Name="tblForm_tbl_Section" Member="tbl_Sections" ThisKey="formId" OtherKey="formId" Type="tbl_Section" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
-    <Type Name="tbl_IntentionalQuestion">
-      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers" ThisKey="FormId,QuestionId" OtherKey="FormId,QuestionId" Type="tbl_IntentionalAnswer" />
-      <Association Name="tblForm_tbl_IntentionalQuestion" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers">
-    <Type Name="tbl_IntentionalAnswer">
-      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="AnswerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Text" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="AnswerOption" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalQuestion" ThisKey="FormId,QuestionId" OtherKey="FormId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
+      <Association Name="tblForm_tbl_Section" Member="tbl_Sections" ThisKey="formId" OtherKey="FormId" Type="tbl_Section" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Company" Member="tbl_Companies">
@@ -46,12 +25,47 @@
       <Association Name="tbl_Company_tbl_Employee" Member="tbl_Company" ThisKey="companyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
+    <Type Name="tbl_IntentionalQuestion">
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="HelpText" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="QuestionType" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="MandatoryQuestion" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfAnswers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers" ThisKey="FormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalAnswer" />
+      <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_TypeQuestion" ThisKey="QuestionType" OtherKey="Name" Type="tbl_TypeQuestion" IsForeignKey="true" />
+      <Association Name="tbl_Section_tbl_IntentionalQuestion" Member="tbl_Section" ThisKey="FormId,SectionId" OtherKey="FormId,SectionId" Type="tbl_Section" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers">
+    <Type Name="tbl_IntentionalAnswer">
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnswerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="VarChar(800)" CanBeNull="true" />
+      <Column Name="AnswerOption" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalQuestion" ThisKey="FormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_TypeQuestion" Member="tbl_TypeQuestions">
+    <Type Name="tbl_TypeQuestion">
+      <Column Name="Name" Type="System.String" DbType="VarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="Name" OtherKey="QuestionType" Type="tbl_IntentionalQuestion" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_Section" Member="tbl_Sections">
     <Type Name="tbl_Section">
-      <Column Name="FormId" Member="formId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="HelpExplanation" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
-      <Association Name="tblForm_tbl_Section" Member="tblForm" ThisKey="formId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="tbl_Section_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="FormId,SectionId" OtherKey="FormId,SectionId" Type="tbl_IntentionalQuestion" />
+      <Association Name="tblForm_tbl_Section" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

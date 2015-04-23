@@ -17,5 +17,7 @@ namespace BasisForAppraisal_finalProject.Controllers.Enum
 
         SaveAndClose,
 
+        AddScaleQuestion,
+
     }
 }

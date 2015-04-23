@@ -17,7 +17,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();
-           var q = b.GetFormWithQuestion(id);
+           var q = b.GetFormWithSections(id);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
        }
@@ -43,6 +43,16 @@ namespace BasisForAppraisal_finalProject.Controllers
                                   TempData["changes"] = "add";
                                   break;
 
+               case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
+                                          TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                          TempData["changes"] = "add";
+                                          break;
+
+               case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
+                                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                        TempData["changes"] = "add";
+                                        break;
+
                case "Save":   manager.UpdateForm(formViewModel);
                               TempData["Success"] = "שמירה בוצעה בהצלחה!";
                                break;
@@ -66,7 +76,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        public ActionResult preview(int formid=1 )
        {
            var b = new DataManager();
-           var q = b.GetFormWithQuestion(formid);
+           var q = b.GetFormWithSections(formid);
            var t = new ViewModel.FormViewModel(q);
            return View(t);
        }

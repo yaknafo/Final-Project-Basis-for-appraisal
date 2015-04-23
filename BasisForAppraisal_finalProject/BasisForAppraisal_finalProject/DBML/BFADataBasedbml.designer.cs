@@ -20,7 +20,6 @@ namespace BasisForAppraisal_finalProject.DBML
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-    using System.ComponentModel.DataAnnotations;
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="BasisForAppraisalDB")]
@@ -34,18 +33,21 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void InserttblForm(tblForm instance);
     partial void UpdatetblForm(tblForm instance);
     partial void DeletetblForm(tblForm instance);
-    partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
-    partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
-    partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
-    partial void Inserttbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
-    partial void Updatetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
-    partial void Deletetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
     partial void Inserttbl_Company(tbl_Company instance);
     partial void Updatetbl_Company(tbl_Company instance);
     partial void Deletetbl_Company(tbl_Company instance);
     partial void Inserttbl_Employee(tbl_Employee instance);
     partial void Updatetbl_Employee(tbl_Employee instance);
     partial void Deletetbl_Employee(tbl_Employee instance);
+    partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
+    partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
+    partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
+    partial void Inserttbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
+    partial void Updatetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
+    partial void Deletetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
+    partial void Inserttbl_TypeQuestion(tbl_TypeQuestion instance);
+    partial void Updatetbl_TypeQuestion(tbl_TypeQuestion instance);
+    partial void Deletetbl_TypeQuestion(tbl_TypeQuestion instance);
     partial void Inserttbl_Section(tbl_Section instance);
     partial void Updatetbl_Section(tbl_Section instance);
     partial void Deletetbl_Section(tbl_Section instance);
@@ -89,6 +91,22 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		public System.Data.Linq.Table<tbl_Company> tbl_Companies
+		{
+			get
+			{
+				return this.GetTable<tbl_Company>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_Employee> tbl_Employees
+		{
+			get
+			{
+				return this.GetTable<tbl_Employee>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tbl_IntentionalQuestion> tbl_IntentionalQuestions
 		{
 			get
@@ -105,19 +123,11 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_Company> tbl_Companies
+		public System.Data.Linq.Table<tbl_TypeQuestion> tbl_TypeQuestions
 		{
 			get
 			{
-				return this.GetTable<tbl_Company>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_Employee> tbl_Employees
-		{
-			get
-			{
-				return this.GetTable<tbl_Employee>();
+				return this.GetTable<tbl_TypeQuestion>();
 			}
 		}
 		
@@ -140,8 +150,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private string _FormName;
 		
-		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
-		
 		private EntitySet<tbl_Section> _tbl_Sections;
 		
     #region Extensibility Method Definitions
@@ -156,12 +164,11 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		public tblForm()
 		{
-			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
 			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
 			OnCreated();
 		}
-
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="FormId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int formId
 		{
 			get
@@ -201,20 +208,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="formId", OtherKey="FormId")]
-		public EntitySet<tbl_IntentionalQuestion> tbl_IntentionalQuestions
-		{
-			get
-			{
-				return this._tbl_IntentionalQuestions;
-			}
-			set
-			{
-				this._tbl_IntentionalQuestions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="formId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="FormId")]
 		public EntitySet<tbl_Section> tbl_Sections
 		{
 			get
@@ -247,18 +241,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		private void attach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-		
 		private void attach_tbl_Sections(tbl_Section entity)
 		{
 			this.SendPropertyChanging();
@@ -269,414 +251,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this.SendPropertyChanging();
 			entity.tblForm = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalQuestion")]
-	public partial class tbl_IntentionalQuestion : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _FormId;
-		
-		private int _QuestionId;
-		
-		private string _Title;
-		
-		private EntitySet<tbl_IntentionalAnswer> _tbl_IntentionalAnswers;
-		
-		private EntityRef<tblForm> _tblForm;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnFormIdChanging(int value);
-    partial void OnFormIdChanged();
-    partial void OnQuestionIdChanging(int value);
-    partial void OnQuestionIdChanged();
-    partial void OnTitleChanging(string value);
-    partial void OnTitleChanged();
-    #endregion
-		
-		public tbl_IntentionalQuestion()
-		{
-			this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
-			this._tblForm = default(EntityRef<tblForm>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int FormId
-		{
-			get
-			{
-				return this._FormId;
-			}
-			set
-			{
-				if ((this._FormId != value))
-				{
-					if (this._tblForm.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFormIdChanging(value);
-					this.SendPropertyChanging();
-					this._FormId = value;
-					this.SendPropertyChanged("FormId");
-					this.OnFormIdChanged();
-				}
-			}
-		}
-
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_QuestionId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
-		public int QuestionId
-		{
-			get
-			{
-				return this._QuestionId;
-			}
-			set
-			{
-				if ((this._QuestionId != value))
-				{
-					this.OnQuestionIdChanging(value);
-					this.SendPropertyChanging();
-					this._QuestionId = value;
-					this.SendPropertyChanged("QuestionId");
-					this.OnQuestionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(300)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this.OnTitleChanging(value);
-					this.SendPropertyChanging();
-					this._Title = value;
-					this.SendPropertyChanged("Title");
-					this.OnTitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer", Storage="_tbl_IntentionalAnswers", ThisKey="FormId,QuestionId", OtherKey="FormId,QuestionId")]
-		public EntitySet<tbl_IntentionalAnswer> tbl_IntentionalAnswers
-		{
-			get
-			{
-				return this._tbl_IntentionalAnswers;
-			}
-			set
-			{
-				this._tbl_IntentionalAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_IntentionalQuestion", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
-		public tblForm tblForm
-		{
-			get
-			{
-				return this._tblForm.Entity;
-			}
-			set
-			{
-				tblForm previousValue = this._tblForm.Entity;
-				if (((previousValue != value) 
-							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tblForm.Entity = null;
-						previousValue.tbl_IntentionalQuestions.Remove(this);
-					}
-					this._tblForm.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_IntentionalQuestions.Add(this);
-						this._FormId = value.formId;
-					}
-					else
-					{
-						this._FormId = default(int);
-					}
-					this.SendPropertyChanged("tblForm");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_IntentionalAnswers(tbl_IntentionalAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_IntentionalQuestion = this;
-		}
-		
-		private void detach_tbl_IntentionalAnswers(tbl_IntentionalAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_IntentionalQuestion = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalAnswer")]
-	public partial class tbl_IntentionalAnswer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _FormId;
-		
-		private int _QuestionId;
-		
-		private int _AnswerId;
-		
-		private string _Text;
-		
-		private System.Nullable<bool> _AnswerOption;
-		
-		private System.Nullable<int> _Score;
-		
-		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnFormIdChanging(int value);
-    partial void OnFormIdChanged();
-    partial void OnQuestionIdChanging(int value);
-    partial void OnQuestionIdChanged();
-    partial void OnAnswerIdChanging(int value);
-    partial void OnAnswerIdChanged();
-    partial void OnTextChanging(string value);
-    partial void OnTextChanged();
-    partial void OnAnswerOptionChanging(System.Nullable<bool> value);
-    partial void OnAnswerOptionChanged();
-    partial void OnScoreChanging(System.Nullable<int> value);
-    partial void OnScoreChanged();
-    #endregion
-		
-		public tbl_IntentionalAnswer()
-		{
-			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true)]
-		public int FormId
-		{
-			get
-			{
-				return this._FormId;
-			}
-			set
-			{
-				if ((this._FormId != value))
-				{
-					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFormIdChanging(value);
-					this.SendPropertyChanging();
-					this._FormId = value;
-					this.SendPropertyChanged("FormId");
-					this.OnFormIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int QuestionId
-		{
-			get
-			{
-				return this._QuestionId;
-			}
-			set
-			{
-				if ((this._QuestionId != value))
-				{
-					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestionIdChanging(value);
-					this.SendPropertyChanging();
-					this._QuestionId = value;
-					this.SendPropertyChanged("QuestionId");
-					this.OnQuestionIdChanged();
-				}
-			}
-		}
-
-         [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_AnswerId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
-		public int AnswerId
-		{
-			get
-			{
-				return this._AnswerId;
-			}
-			set
-			{
-				if ((this._AnswerId != value))
-				{
-					this.OnAnswerIdChanging(value);
-					this.SendPropertyChanging();
-					this._AnswerId = value;
-					this.SendPropertyChanged("AnswerId");
-					this.OnAnswerIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="VarChar(500)")]
-		public string Text
-		{
-			get
-			{
-				return this._Text;
-			}
-			set
-			{
-				if ((this._Text != value))
-				{
-					this.OnTextChanging(value);
-					this.SendPropertyChanging();
-					this._Text = value;
-					this.SendPropertyChanged("Text");
-					this.OnTextChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerOption", DbType="Bit")]
-		public System.Nullable<bool> AnswerOption
-		{
-			get
-			{
-				return this._AnswerOption;
-			}
-			set
-			{
-				if ((this._AnswerOption != value))
-				{
-					this.OnAnswerOptionChanging(value);
-					this.SendPropertyChanging();
-					this._AnswerOption = value;
-					this.SendPropertyChanged("AnswerOption");
-					this.OnAnswerOptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Score", DbType="Int")]
-		public System.Nullable<int> Score
-		{
-			get
-			{
-				return this._Score;
-			}
-			set
-			{
-				if ((this._Score != value))
-				{
-					this.OnScoreChanging(value);
-					this.SendPropertyChanging();
-					this._Score = value;
-					this.SendPropertyChanged("Score");
-					this.OnScoreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer", Storage="_tbl_IntentionalQuestion", ThisKey="FormId,QuestionId", OtherKey="FormId,QuestionId", IsForeignKey=true)]
-		public tbl_IntentionalQuestion tbl_IntentionalQuestion
-		{
-			get
-			{
-				return this._tbl_IntentionalQuestion.Entity;
-			}
-			set
-			{
-				tbl_IntentionalQuestion previousValue = this._tbl_IntentionalQuestion.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_IntentionalQuestion.Entity = null;
-						previousValue.tbl_IntentionalAnswers.Remove(this);
-					}
-					this._tbl_IntentionalQuestion.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_IntentionalAnswers.Add(this);
-						this._FormId = value.FormId;
-						this._QuestionId = value.QuestionId;
-					}
-					else
-					{
-						this._FormId = default(int);
-						this._QuestionId = default(int);
-					}
-					this.SendPropertyChanged("tbl_IntentionalQuestion");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -735,7 +309,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-        [Required(ErrorMessage="שדה חובה")]
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyName", DbType="VarChar(100)")]
 		public string comapnyName
 		{
@@ -775,8 +349,7 @@ namespace BasisForAppraisal_finalProject.DBML
 				}
 			}
 		}
-
-         [RegularExpression(@"^0[234679]{1}[\s]{0,1}[\-]{0,1}[\s]{0,1}[1-9]{1}[0-9]{6}$", ErrorMessage = "מס' טלפון לא חוקי")]
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comapnyPhone", DbType="VarChar(50)")]
 		public string comapnyPhone
 		{
@@ -1018,17 +591,716 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalQuestion")]
+	public partial class tbl_IntentionalQuestion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private string _Title;
+		
+		private string _HelpText;
+		
+		private string _QuestionType;
+		
+		private bool _MandatoryQuestion;
+		
+		private System.Nullable<int> _NumberOfAnswers;
+		
+		private EntitySet<tbl_IntentionalAnswer> _tbl_IntentionalAnswers;
+		
+		private EntityRef<tbl_TypeQuestion> _tbl_TypeQuestion;
+		
+		private EntityRef<tbl_Section> _tbl_Section;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnHelpTextChanging(string value);
+    partial void OnHelpTextChanged();
+    partial void OnQuestionTypeChanging(string value);
+    partial void OnQuestionTypeChanged();
+    partial void OnMandatoryQuestionChanging(bool value);
+    partial void OnMandatoryQuestionChanged();
+    partial void OnNumberOfAnswersChanging(System.Nullable<int> value);
+    partial void OnNumberOfAnswersChanged();
+    #endregion
+		
+		public tbl_IntentionalQuestion()
+		{
+			this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
+			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
+			this._tbl_Section = default(EntityRef<tbl_Section>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tbl_Section.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_Section.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(300)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HelpText", DbType="VarChar(300)")]
+		public string HelpText
+		{
+			get
+			{
+				return this._HelpText;
+			}
+			set
+			{
+				if ((this._HelpText != value))
+				{
+					this.OnHelpTextChanging(value);
+					this.SendPropertyChanging();
+					this._HelpText = value;
+					this.SendPropertyChanged("HelpText");
+					this.OnHelpTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionType", DbType="VarChar(300)")]
+		public string QuestionType
+		{
+			get
+			{
+				return this._QuestionType;
+			}
+			set
+			{
+				if ((this._QuestionType != value))
+				{
+					if (this._tbl_TypeQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionTypeChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionType = value;
+					this.SendPropertyChanged("QuestionType");
+					this.OnQuestionTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MandatoryQuestion", DbType="Bit NOT NULL")]
+		public bool MandatoryQuestion
+		{
+			get
+			{
+				return this._MandatoryQuestion;
+			}
+			set
+			{
+				if ((this._MandatoryQuestion != value))
+				{
+					this.OnMandatoryQuestionChanging(value);
+					this.SendPropertyChanging();
+					this._MandatoryQuestion = value;
+					this.SendPropertyChanged("MandatoryQuestion");
+					this.OnMandatoryQuestionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfAnswers", DbType="Int")]
+		public System.Nullable<int> NumberOfAnswers
+		{
+			get
+			{
+				return this._NumberOfAnswers;
+			}
+			set
+			{
+				if ((this._NumberOfAnswers != value))
+				{
+					this.OnNumberOfAnswersChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfAnswers = value;
+					this.SendPropertyChanged("NumberOfAnswers");
+					this.OnNumberOfAnswersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer", Storage="_tbl_IntentionalAnswers", ThisKey="FormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId")]
+		public EntitySet<tbl_IntentionalAnswer> tbl_IntentionalAnswers
+		{
+			get
+			{
+				return this._tbl_IntentionalAnswers;
+			}
+			set
+			{
+				this._tbl_IntentionalAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_tbl_IntentionalQuestion", Storage="_tbl_TypeQuestion", ThisKey="QuestionType", OtherKey="Name", IsForeignKey=true)]
+		public tbl_TypeQuestion tbl_TypeQuestion
+		{
+			get
+			{
+				return this._tbl_TypeQuestion.Entity;
+			}
+			set
+			{
+				tbl_TypeQuestion previousValue = this._tbl_TypeQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_TypeQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_TypeQuestion.Entity = null;
+						previousValue.tbl_IntentionalQuestions.Remove(this);
+					}
+					this._tbl_TypeQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_IntentionalQuestions.Add(this);
+						this._QuestionType = value.Name;
+					}
+					else
+					{
+						this._QuestionType = default(string);
+					}
+					this.SendPropertyChanged("tbl_TypeQuestion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Section_tbl_IntentionalQuestion", Storage="_tbl_Section", ThisKey="FormId,SectionId", OtherKey="FormId,SectionId", IsForeignKey=true)]
+		public tbl_Section tbl_Section
+		{
+			get
+			{
+				return this._tbl_Section.Entity;
+			}
+			set
+			{
+				tbl_Section previousValue = this._tbl_Section.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Section.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Section.Entity = null;
+						previousValue.tbl_IntentionalQuestions.Remove(this);
+					}
+					this._tbl_Section.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_IntentionalQuestions.Add(this);
+						this._FormId = value.FormId;
+						this._SectionId = value.SectionId;
+					}
+					else
+					{
+						this._FormId = default(int);
+						this._SectionId = default(int);
+					}
+					this.SendPropertyChanged("tbl_Section");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_IntentionalAnswers(tbl_IntentionalAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalQuestion = this;
+		}
+		
+		private void detach_tbl_IntentionalAnswers(tbl_IntentionalAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalQuestion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalAnswer")]
+	public partial class tbl_IntentionalAnswer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private int _AnswerId;
+		
+		private string _Text;
+		
+		private System.Nullable<bool> _AnswerOption;
+		
+		private System.Nullable<int> _Score;
+		
+		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnAnswerIdChanging(int value);
+    partial void OnAnswerIdChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnAnswerOptionChanging(System.Nullable<bool> value);
+    partial void OnAnswerOptionChanged();
+    partial void OnScoreChanging(System.Nullable<int> value);
+    partial void OnScoreChanged();
+    #endregion
+		
+		public tbl_IntentionalAnswer()
+		{
+			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AnswerId
+		{
+			get
+			{
+				return this._AnswerId;
+			}
+			set
+			{
+				if ((this._AnswerId != value))
+				{
+					this.OnAnswerIdChanging(value);
+					this.SendPropertyChanging();
+					this._AnswerId = value;
+					this.SendPropertyChanged("AnswerId");
+					this.OnAnswerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="VarChar(800)")]
+		public string Text
+		{
+			get
+			{
+				return this._Text;
+			}
+			set
+			{
+				if ((this._Text != value))
+				{
+					this.OnTextChanging(value);
+					this.SendPropertyChanging();
+					this._Text = value;
+					this.SendPropertyChanged("Text");
+					this.OnTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerOption", DbType="Bit")]
+		public System.Nullable<bool> AnswerOption
+		{
+			get
+			{
+				return this._AnswerOption;
+			}
+			set
+			{
+				if ((this._AnswerOption != value))
+				{
+					this.OnAnswerOptionChanging(value);
+					this.SendPropertyChanging();
+					this._AnswerOption = value;
+					this.SendPropertyChanged("AnswerOption");
+					this.OnAnswerOptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Score", DbType="Int")]
+		public System.Nullable<int> Score
+		{
+			get
+			{
+				return this._Score;
+			}
+			set
+			{
+				if ((this._Score != value))
+				{
+					this.OnScoreChanging(value);
+					this.SendPropertyChanging();
+					this._Score = value;
+					this.SendPropertyChanged("Score");
+					this.OnScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer", Storage="_tbl_IntentionalQuestion", ThisKey="FormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
+		public tbl_IntentionalQuestion tbl_IntentionalQuestion
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestion.Entity;
+			}
+			set
+			{
+				tbl_IntentionalQuestion previousValue = this._tbl_IntentionalQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalQuestion.Entity = null;
+						previousValue.tbl_IntentionalAnswers.Remove(this);
+					}
+					this._tbl_IntentionalQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_IntentionalAnswers.Add(this);
+						this._FormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+					}
+					else
+					{
+						this._FormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_TypeQuestion")]
+	public partial class tbl_TypeQuestion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Name;
+		
+		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public tbl_TypeQuestion()
+		{
+			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(300) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="Name", OtherKey="QuestionType")]
+		public EntitySet<tbl_IntentionalQuestion> tbl_IntentionalQuestions
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestions;
+			}
+			set
+			{
+				this._tbl_IntentionalQuestions.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = this;
+		}
+		
+		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Section")]
 	public partial class tbl_Section : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _formId;
+		private int _FormId;
 		
 		private int _SectionId;
 		
 		private string _HelpExplanation;
+		
+		private string _Name;
+		
+		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
 		
 		private EntityRef<tblForm> _tblForm;
 		
@@ -1036,36 +1308,43 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnformIdChanging(int value);
-    partial void OnformIdChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
     partial void OnSectionIdChanging(int value);
     partial void OnSectionIdChanged();
     partial void OnHelpExplanationChanging(string value);
     partial void OnHelpExplanationChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     #endregion
 		
 		public tbl_Section()
 		{
+			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
 			this._tblForm = default(EntityRef<tblForm>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="FormId", Storage="_formId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int formId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
 		{
 			get
 			{
-				return this._formId;
+				return this._FormId;
 			}
 			set
 			{
-				if ((this._formId != value))
+				if ((this._FormId != value))
 				{
-					this.OnformIdChanging(value);
+					if (this._tblForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
 					this.SendPropertyChanging();
-					this._formId = value;
-					this.SendPropertyChanged("formId");
-					this.OnformIdChanged();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
 				}
 			}
 		}
@@ -1110,7 +1389,40 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tblForm", ThisKey="formId", OtherKey="formId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(100)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Section_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="FormId,SectionId", OtherKey="FormId,SectionId")]
+		public EntitySet<tbl_IntentionalQuestion> tbl_IntentionalQuestions
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestions;
+			}
+			set
+			{
+				this._tbl_IntentionalQuestions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
 		public tblForm tblForm
 		{
 			get
@@ -1133,11 +1445,11 @@ namespace BasisForAppraisal_finalProject.DBML
 					if ((value != null))
 					{
 						value.tbl_Sections.Add(this);
-						this._formId = value.formId;
+						this._FormId = value.formId;
 					}
 					else
 					{
-						this._formId = default(int);
+						this._FormId = default(int);
 					}
 					this.SendPropertyChanged("tblForm");
 				}
@@ -1162,6 +1474,18 @@ namespace BasisForAppraisal_finalProject.DBML
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Section = this;
+		}
+		
+		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Section = null;
 		}
 	}
 }

@@ -1,69 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.125, 8.5" name="BFADataBasedbml">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BFADataBasedbml">
   <DataContextMoniker Name="/BFADataBasedbmlDataContext" />
   <nestedChildShapes>
-    <classShape Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" absoluteBounds="0.5, 1, 2, 1.1939925130208338">
+    <classShape Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" absoluteBounds="0.5, 0.5, 2, 1.1939925130208338">
       <DataClassMoniker Name="/BFADataBasedbmlDataContext/tblForm" />
       <nestedChildShapes>
-        <elementListCompartment Id="de8d42b3-60a4-4231-814e-762c5b50c0e7" absoluteBounds="0.51500000000000012, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="de8d42b3-60a4-4231-814e-762c5b50c0e7" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a6695223-a236-401d-a265-7fbf30d93214" absoluteBounds="3.875, 1, 2, 1.3862939453125">
-      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalQuestion" />
-      <nestedChildShapes>
-        <elementListCompartment Id="564a6eb0-4a9e-4fc3-91fa-d0537910ad19" absoluteBounds="3.8900000000000006, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="63956066-7ed5-4485-a860-cc380538d78a" absoluteBounds="7.625, 0.75, 2, 1.9631982421874998">
-      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalAnswer" />
-      <nestedChildShapes>
-        <elementListCompartment Id="e73032cd-16ac-4617-b6db-274d30bde6c4" absoluteBounds="7.64, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(2.5 : 1.59699625651042); (3.875 : 1.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tblForm/tblForm_tbl_IntentionalQuestion" />
-      <nodes>
-        <classShapeMoniker Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" />
-        <classShapeMoniker Id="a6695223-a236-401d-a265-7fbf30d93214" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(5.875 : 1.69314697265625); (7.625 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalQuestion/tbl_IntentionalQuestion_tbl_IntentionalAnswer" />
-      <nodes>
-        <classShapeMoniker Id="a6695223-a236-401d-a265-7fbf30d93214" />
-        <classShapeMoniker Id="63956066-7ed5-4485-a860-cc380538d78a" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" absoluteBounds="5.25, 3.625, 2, 1.5785953776041666">
+    <classShape Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" absoluteBounds="3.625, 0.5, 2, 1.5785953776041666">
       <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Company" />
       <nestedChildShapes>
-        <elementListCompartment Id="d9a5d44f-47e3-4a84-ae00-37552803558e" absoluteBounds="5.265, 4.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d9a5d44f-47e3-4a84-ae00-37552803558e" absoluteBounds="3.6399999999999997, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="97f2bfed-9bfb-4a18-ba11-9cf56485c982" absoluteBounds="8.875, 3.625, 2, 1.5785953776041666">
+    <classShape Id="97f2bfed-9bfb-4a18-ba11-9cf56485c982" absoluteBounds="6.75, 0.5, 2, 1.5785953776041666">
       <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Employee" />
       <nestedChildShapes>
-        <elementListCompartment Id="6eebe92e-af5c-4bfb-8414-b73837597331" absoluteBounds="8.89, 4.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6eebe92e-af5c-4bfb-8414-b73837597331" absoluteBounds="6.7650000000000006, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.25 : 4.41429768880208); (8.875 : 4.41429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.625 : 1.28929768880208); (6.75 : 1.28929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Company/tbl_Company_tbl_Employee" />
       <nodes>
         <classShapeMoniker Id="ac9c10c8-9a5e-4de4-b9e0-b2476567f5d9" />
         <classShapeMoniker Id="97f2bfed-9bfb-4a18-ba11-9cf56485c982" />
       </nodes>
     </associationConnector>
-    <classShape Id="fa4b3abe-779e-4e41-93c6-51d45992ba8a" absoluteBounds="0.875, 3.625, 2, 1.3862939453125">
-      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Section" />
+    <classShape Id="9450fc37-0bf0-4800-88c4-bce75d72af3b" absoluteBounds="0.5, 4.5, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalQuestion" />
       <nestedChildShapes>
-        <elementListCompartment Id="d583f0c9-bb39-43b8-b2ce-0370d8362961" absoluteBounds="0.89000000000000012, 4.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b9dcef64-5066-4db3-8f1d-f9f0cd43000c" absoluteBounds="0.51499999999999968, 4.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(1.6875 : 2.19399251302083); (1.6875 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="a233cd02-bd3a-4bb3-9598-bfd444cc4333" absoluteBounds="7, 5.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalAnswer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b3e19a9-9df5-4f1f-bf1e-6df743c2f5a6" absoluteBounds="7.015, 5.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 5.5751389860026); (4.88541666666667 : 5.5751389860026 : JumpStart); (5.05208333333333 : 5.5751389860026 : JumpEnd); (7 : 5.5751389860026)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_IntentionalQuestion/tbl_IntentionalQuestion_tbl_IntentionalAnswer" />
+      <nodes>
+        <classShapeMoniker Id="9450fc37-0bf0-4800-88c4-bce75d72af3b" />
+        <classShapeMoniker Id="a233cd02-bd3a-4bb3-9598-bfd444cc4333" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f52983f1-5763-4e50-acd0-d014eaf149af" absoluteBounds="3.375, 2.375, 2, 1.0016910807291668">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_TypeQuestion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ea3debf5-9473-4257-ac69-71ead2875972" absoluteBounds="3.3900000000000006, 2.835, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.96875 : 3.37669108072917); (4.96875 : 6.15027797200521); (2.5 : 6.15027797200521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_TypeQuestion/tbl_TypeQuestion_tbl_IntentionalQuestion" />
+      <nodes>
+        <classShapeMoniker Id="f52983f1-5763-4e50-acd0-d014eaf149af" />
+        <classShapeMoniker Id="9450fc37-0bf0-4800-88c4-bce75d72af3b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b79de99e-a26f-4f5d-9ec2-697a3e74fdbb" absoluteBounds="0.5, 2.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BFADataBasedbmlDataContext/tbl_Section" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd2c1427-a003-4056-b135-3787b3ab9119" absoluteBounds="0.51500000000000012, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.5 : 3.82859537760417); (1.5 : 4.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BFADataBasedbmlDataContext/tbl_Section/tbl_Section_tbl_IntentionalQuestion" />
+      <nodes>
+        <classShapeMoniker Id="b79de99e-a26f-4f5d-9ec2-697a3e74fdbb" />
+        <classShapeMoniker Id="9450fc37-0bf0-4800-88c4-bce75d72af3b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.5 : 1.69399251302083); (1.5 : 2.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/BFADataBasedbmlDataContext/tblForm/tblForm_tbl_Section" />
       <nodes>
         <classShapeMoniker Id="0e1931ea-f36b-4d46-8662-58a8201ab7d4" />
-        <classShapeMoniker Id="fa4b3abe-779e-4e41-93c6-51d45992ba8a" />
+        <classShapeMoniker Id="b79de99e-a26f-4f5d-9ec2-697a3e74fdbb" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

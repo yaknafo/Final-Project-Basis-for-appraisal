@@ -178,8 +178,10 @@
       <DependentUpon>BFADataBasedbml.dbml</DependentUpon>
     </Compile>
     <Compile Include="DBML\DbmlBFADataContext.cs" />
+    <Compile Include="DBML\FormPartial.cs" />
     <Compile Include="DBML\Interface\QuestionType.cs" />
     <Compile Include="DBML\Pratical.cs" />
+    <Compile Include="DBML\SectionPartical.cs" />
     <Compile Include="DBML\tbl_CompanyPartial.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -288,6 +290,7 @@
     <Content Include="Views\SendMailer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DBML\Pratical\" />
     <Folder Include="Views\check\" />
   </ItemGroup>
   <ItemGroup>
