@@ -214,6 +214,7 @@
     <Content Include="photos\addQues.png" />
     <Content Include="photos\backTo.png" />
     <Content Include="photos\deleteQ.png" />
+    <Content Include="photos\folderIcon.png" />
     <Content Include="photos\info.png" />
     <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\NewForm.png" />
@@ -293,6 +294,7 @@
     <Content Include="Views\SendMailer\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutWord.cshtml" />
     <Content Include="Views\test\About.cshtml" />
+    <Content Include="Views\MainCompanies\CompanyUnit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

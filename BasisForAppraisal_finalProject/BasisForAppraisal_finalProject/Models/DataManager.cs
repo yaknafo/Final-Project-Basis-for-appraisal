@@ -41,7 +41,7 @@ namespace BasisForAppraisal_finalProject.Models
         {
             get { return manager.tbl_Sections; }
         }
-
+     
         public Table<tbl_IntentionalQuestion> IntentionalQuestion
         {
             get { return manager.tbl_IntentionalQuestions; }

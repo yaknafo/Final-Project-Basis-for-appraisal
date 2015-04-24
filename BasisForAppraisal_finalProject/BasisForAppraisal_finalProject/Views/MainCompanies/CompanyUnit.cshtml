@@ -1,0 +1,21 @@
+﻿@model IEnumerable< BasisForAppraisal_finalProject.DBML.tbl_Unit>
+@{
+    ViewBag.Title = "CompanyUnit";
+}
+<h2 style="margin-left:50%">חברת @ViewBag.name </h2>
+<div dir="rtl">
+  <br /><br />
+
+            @foreach (var item in Model)
+            {
+
+                <a id=@item.unitName ><img style="margin-right:10%; cursor:pointer" src="~/photos/folderIcon.png" /> </a>
+            }
+            <br />
+            @foreach (var item in Model)
+            {
+
+                <label style="margin-right:10%">@item.unitName </label>
+            }
+
+</div>

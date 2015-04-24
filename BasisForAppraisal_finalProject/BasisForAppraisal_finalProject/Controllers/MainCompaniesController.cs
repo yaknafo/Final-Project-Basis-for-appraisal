@@ -69,6 +69,18 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(companyView);
 
         }
+        public ActionResult CompanyUnit(int id = 1)
+        {
+            var dManager = new DataManager();
+            var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
+            var unitIncompanie=companyies.tbl_Units;
+
+            // refresh Employees
+            //companyies.LoadEmployees();
+            ViewBag.name = companyies.comapnyName;
+            return View(unitIncompanie);
+
+        }
         public ActionResult addCompanie()
         {
             return View();

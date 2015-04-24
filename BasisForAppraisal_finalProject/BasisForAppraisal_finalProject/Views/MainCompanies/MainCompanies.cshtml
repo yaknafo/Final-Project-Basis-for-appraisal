@@ -37,7 +37,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td align="center">@Html.ActionLink(item.comapnyName, "ManageCompany", new { @id = item.companyId })</td>
+                        <td align="center">@Html.ActionLink(item.comapnyName, "CompanyUnit", new { @id = item.companyId })</td>
                         <td align="center">@item.comapnyAddress</td>
                         <td align="center">@item.comapnyPhone</td>
                         <td align="center">@item.Employees.Count</td>
