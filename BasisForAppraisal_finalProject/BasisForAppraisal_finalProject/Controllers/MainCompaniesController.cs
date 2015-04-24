@@ -16,6 +16,9 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public ActionResult Index(int idCompany, HttpPostedFileBase file = null)
         {
+            DateTime now = DateTime.Now;
+
+            string name = now.ToString("yyyy-MM-ddTHH:mm:ss");
             if (!Directory.Exists(Server.MapPath("~/App_Data/uploads")))
             {
                 Directory.CreateDirectory(Server.MapPath("~/App_Data/uploads"));
@@ -28,13 +31,15 @@ namespace BasisForAppraisal_finalProject.Controllers
                 if (str[str.Count() - 1].Equals("xlsx") || str[str.Count() - 1].Equals("csv") || str[str.Count() - 1].Equals("xls"))
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"),"4" + fileName);
                     file.SaveAs(path);
                         upload_excelfile(path, idCompany);
                     }
                 }
             catch (Exception ex) { }
+           
             return RedirectToAction("ManageCompany");
+          
         }
         // method add excel data to db
         private void upload_excelfile(string path, int idCompany)

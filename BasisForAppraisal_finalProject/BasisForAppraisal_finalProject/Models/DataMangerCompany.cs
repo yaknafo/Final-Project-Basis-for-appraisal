@@ -20,12 +20,18 @@ namespace BasisForAppraisal_finalProject.Models
             var cultureinfo = new System.Globalization.CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = cultureinfo;
         }
+
+        //----------------------------------------------- Excel Hellper ---------------------------------------------------//
         public void upload_excelfile(string path, int idCompany)
         {
-            Excel.Application xlApp=new Excel.Application();
+
+            string unitName = string.Empty;
+
+            string className = string.Empty;
+
+            Excel.Application xlApp = new Excel.Application();
             try
             {
-               
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
@@ -37,7 +43,16 @@ namespace BasisForAppraisal_finalProject.Models
                     String[] data = new string[colCount];
                     for (int j = 1; j <= colCount; j++)
                     {
+                        try
+                        {
                         data[j - 1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
+                    }
+                        catch
+                        {
+                            // the col of the unit and class
+                            if(j==5 || j ==6)
+                             data[j - 1] = string.Empty;
+                        }
                     }
                     var emp = new tbl_Employee();
                     emp.companyId = idCompany;
@@ -45,15 +60,50 @@ namespace BasisForAppraisal_finalProject.Models
                     emp.firstName = data[1];// change it to cto'r!!!
                     emp.lastName = data[2];
                     emp.Email = data[3];
-                    //emp.Unit = data[4];
-                   // emp.Class = data[5];
+                    unitName = data[4];
+                    className = data[5];
                     if (data[6].Equals("כן"))
                         emp.IsManger = true;
                     else
                         emp.IsManger = false;
-                    this.addWorkerToDb(emp);
+
+                    // sreach for unit in Db
+                    var unitFormDB = getUnitByName(unitName, idCompany);
+
+                    if(unitFormDB == null)
+                    {
+                        unitFormDB = new tbl_Unit { companyId = idCompany, unitName = unitName };
+                        AddUnit(unitFormDB);
+                        emp.unitName = unitName;
+                    }
+                    else
+                    {
+                        emp.unitName = unitFormDB.unitName;
+                    }
+
+                    // sreach for unit in Db
+                    // if unit not have a class ---> defult value will be Genral
+                    if (className == string.Empty)
+                        className = "Genral";
+
+                    var ClassFormDB = getClassByName(className, unitName, idCompany);
+
+                    if (ClassFormDB == null)
+                    {
+                        ClassFormDB = new tbl_Class { companyId = idCompany, unitName = unitName, className = className, tbl_Unit = unitFormDB };
+                        AddClass(ClassFormDB);
+                        emp.className = className;
+                        emp.tbl_Class = ClassFormDB;
+                    }
+                    else
+                    {
+                        emp.className = ClassFormDB.className;
+                    }
+
+
+
+                   addWorkerToDb(emp);
                 }
-               
             }
             finally
             {
@@ -91,12 +141,40 @@ namespace BasisForAppraisal_finalProject.Models
             manager.SubmitChanges();
 
         }
+
+
+        //----------------------------------------------- add Methods ---------------------------------------------------//
+
+        public void AddUnit(tbl_Unit unit)
+        {
+
+            manager.tbl_Units.InsertOnSubmit(unit);
+            manager.SubmitChanges();
+        }
+
+        public void AddClass(tbl_Class cla)
+        {
+
+            manager.tbl_Classes.InsertOnSubmit(cla);
+            manager.SubmitChanges();
+        }
          public List<tbl_Employee> getEmployee(int idCompany,string unit,string cl)
          {
               return manager.tbl_Employees.Where(x => x.companyId == idCompany&&x.className.Equals(cl)&&x.unitName.Equals(unit)).ToList();
          }
 
 
+        //----------------------------------------------- get Methods ---------------------------------------------------//
+
+        public tbl_Unit getUnitByName(string unitName, int companyId)
+        {
+            return manager.tbl_Units.Where(x => x.unitName == unitName && x.companyId ==companyId).FirstOrDefault();
+        }
+
+        public tbl_Class getClassByName(string className ,string unitName, int companyId)
+        {
+            return manager.tbl_Classes.Where(x => x.className == className && x.unitName == unitName  && x.companyId == companyId).FirstOrDefault();
+        }
     }
 
 

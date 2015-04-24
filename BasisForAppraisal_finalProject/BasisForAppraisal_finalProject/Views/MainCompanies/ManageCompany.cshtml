@@ -9,6 +9,9 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
 
+<div dir="rtl" style="border:double; width:220px; margin-left:40%; margin-top:20%">
+    @using (Html.BeginForm("Index", "MainCompanies",FormMethod.Post, new { idCompany=Model.Company.companyId, enctype = "multipart/form-data" }))
+    {
 
 
 <div style="width:100%; background-color: cornflowerblue; text-align:center">
