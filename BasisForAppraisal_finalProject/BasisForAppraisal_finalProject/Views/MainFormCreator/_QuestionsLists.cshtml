@@ -1,0 +1,31 @@
+﻿@model BasisForAppraisal_finalProject.ViewModel.FormViewModel
+@using BasisForAppraisal_finalProject.ViewModel
+@using BasisForAppraisal_finalProject.DBML
+@using BasisForAppraisal_finalProject.Controllers.Enum
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () { $("#success-alert").fadeOut(1500); }, 2500)
+        $('#btnclick').click(function () {
+            $('#testdiv').show();
+            setTimeout(function () { $("#testdiv").fadeOut(1500); }, 2500)
+        })
+    })
+</script>
+
+
+@if (TempData["Success"] != null)
+{
+
+    <div class="alert alert-success" id="success-alert" style="text-align: right; ; margin-top:13%; position:fixed; align-self:center">
+        <strong dir="rtl">@TempData["Success"] </strong>
+    </div>
+}
+@if (TempData["changes"] != null)
+{
+    <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 3%; position: fixed; margin-top:13%"><strong>Your Changes are not Saved</strong></div>
+}
+    @Html.EditorFor(a => a.Questions)

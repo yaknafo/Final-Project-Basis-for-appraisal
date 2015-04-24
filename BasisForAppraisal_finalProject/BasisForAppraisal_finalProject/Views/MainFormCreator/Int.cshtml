@@ -1,0 +1,47 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+   
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script> 
+<h2>Int</h2>
+
+
+
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair" }))
+    {
+      
+      <input type="submit" value="s" />
+        <input type="search" value="ssearch"  />
+
+    }
+@Ajax.ActionLink("change", "changeQuestion", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "#yair", InsertionMode = InsertionMode.Replace })
+
+<input id="btnAjax" name="btnAjax" type="button" value="Get Products" />
+<div id="yair">
+    @Html.Partial("_example", Model)
+</div>
+
+@Html.TextAreaFor(x => x.Title)
+
+@section Scripts {
+    <script>
+        $('#btnAjax').click(function () {
+            $.ajax({
+                url: '/MainFormCreator/changeQuestion',
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html'
+
+            })
+            .success(function (result) {
+                $('#yair').html(result);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
+        });
+    </script>
+}

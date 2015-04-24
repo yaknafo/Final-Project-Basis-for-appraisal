@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int idCompany=1, HttpPostedFileBase file = null)
+        public ActionResult Index(int idCompany, HttpPostedFileBase file = null)
         {
             if (!Directory.Exists(Server.MapPath("~/App_Data/uploads")))
             {
@@ -58,7 +58,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-        public ActionResult ManageCompany(int id=1)
+        public ActionResult ManageCompany(int id)
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First();

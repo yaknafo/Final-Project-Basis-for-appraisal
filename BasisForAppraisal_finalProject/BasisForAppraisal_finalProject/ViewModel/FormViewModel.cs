@@ -21,11 +21,13 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_IntentionalQuestion newQuestion;
         private tbl_IntentionalQuestion newQuestionFreeText;
         private tbl_IntentionalQuestion newQuestionScale;
+        private tbl_IntentionalQuestion newQuestionMultipleChoice;
 
        // type of new Question
         private tbl_TypeQuestion intentionalType;
         private tbl_TypeQuestion freeTextType;
         private tbl_TypeQuestion scaleType;
+        private tbl_TypeQuestion multipleChoiceType;
 
        // data manager for get data from DB
         private DataManager dm;
@@ -142,6 +144,19 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         }
 
+        public tbl_TypeQuestion MultipleChoiceType
+        {
+            get
+            {
+                return multipleChoiceType ?? DM.TypeQuestions.Where(x => x.Name.Contains("MultipleChoice")).FirstOrDefault();
+            }
+            set
+            {
+                multipleChoiceType = value;
+            }
+
+        }
+
         //-------------End The Type Question Area 
 
        //------------- The new Question Area 
@@ -189,6 +204,21 @@ namespace BasisForAppraisal_finalProject.ViewModel
             }
 
         }
+
+        public tbl_IntentionalQuestion NewQuestionMultipleChoice
+        {
+            get
+            {
+
+                return newQuestionMultipleChoice ?? InitnewQuestionMultipleChoice();
+
+            }
+            set
+            {
+                newQuestionMultipleChoice = value;
+            }
+
+        }
         //-------------End The new Question Area 
 
        //--------------- Init New question
@@ -198,7 +228,18 @@ namespace BasisForAppraisal_finalProject.ViewModel
             NewQuestionScale.NumberOfAnswers = 2;
             return NewQuestionScale;
         }
+
+        private tbl_IntentionalQuestion InitnewQuestionMultipleChoice()
+        {
+            NewQuestionMultipleChoice = new tbl_IntentionalQuestion(1, formId, CurrentSection.SectionId, MultipleChoiceType);
+            NewQuestionMultipleChoice.NumberOfAnswers = 1;
+            return NewQuestionMultipleChoice;
+        }
+
+
        
+       
+
        private tbl_IntentionalQuestion InitNewQuestionFreeText()
         {
             NewQuestionFreeText = new tbl_IntentionalQuestion(1, formId, CurrentSection.SectionId, FreeTextType);
@@ -231,10 +272,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
            if (question.FormId == 0 || question.SectionId == 0)
            {
                question.FormId = form.formId;
-               //question.SectionId = form.Sections.First().SectionId;
                question.SectionId = CurrentSection.SectionId;
                question.Answers.ForEach(a => a.FormId = form.formId);
-               //question.Answers.ForEach(a => a.SectionId = form.Sections.First().SectionId);
 
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
            }

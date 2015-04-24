@@ -60,10 +60,12 @@ namespace BasisForAppraisal_finalProject.DBML
             {
                var temp = new tbl_IntentionalAnswer
                 {
-       
+
                     FormId = this.FormId,
+                    QuestionId = this.QuestionId,
+                    SectionId = this.SectionId,
                     Text = string.Empty,
-                    Score = 0,
+                    tbl_IntentionalQuestion = this,
                     AnswerOption = false,
                 };
                
@@ -72,6 +74,16 @@ namespace BasisForAppraisal_finalProject.DBML
             }
 
             this.Answers = tempList;
+        }
+
+        /// <summary>
+        /// Add answer option to question will be use in muliti choice Question and choose from a list question
+        /// </summary>
+        public void AddAnswerOption()
+        {
+            var answerToAdd = new tbl_IntentionalAnswer() {FormId= this.FormId,QuestionId= this.QuestionId,SectionId = this.SectionId,Text= string.Empty,
+                                                           tbl_IntentionalQuestion= this, AnswerOption= false };
+            Answers.Add(answerToAdd);
         }
    
         private List<tbl_IntentionalAnswer> answers = new List<tbl_IntentionalAnswer>();
