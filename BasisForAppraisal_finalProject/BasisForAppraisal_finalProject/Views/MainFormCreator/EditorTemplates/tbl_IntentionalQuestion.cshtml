@@ -36,7 +36,7 @@
                         @if (i != 1 && i != 3 || Model.Answers.Count() <= 3)
                         {
                             @Html.EditorFor(x => x.Answers[i])
-                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 50%; margin-top: 10px;" })
+                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 35%; margin-top: 10px;" })
                         }
                         else
                         {

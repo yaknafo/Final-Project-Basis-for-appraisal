@@ -41,6 +41,7 @@ namespace BasisForAppraisal_finalProject.Controllers
            return View(t.NewQuestionFreeText);
        }
 
+        [HttpGet]
         public PartialViewResult changeQuestion()
         {
             var h = new tbl_IntentionalQuestion() { HelpText = "yari knafo" };
@@ -101,6 +102,10 @@ namespace BasisForAppraisal_finalProject.Controllers
                                    TempData["Success"] = "שמירה בוצעה בהצלחה!";
                                    return backToMainForm();
 
+           }
+           if(Request.IsAjaxRequest())
+           {
+               return PartialView("_QuestionsLists", formViewModel);
            }
            return View(formViewModel);
        }
