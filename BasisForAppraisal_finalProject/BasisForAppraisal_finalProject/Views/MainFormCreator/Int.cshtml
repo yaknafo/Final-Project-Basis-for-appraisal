@@ -1,0 +1,26 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+
+<h2>Int</h2>
+
+
+
+@*@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "yair" }))
+    {
+        @Html.HiddenFor(x=>x.form)
+        <input type="submit" value="s" />
+        <input type="search" value="ssearch"  />
+
+    }*@
+@Ajax.ActionLink("change", "changeQuestion", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "yair", InsertionMode = InsertionMode.Replace })
+
+<div id="yair">
+    @Html.Partial("_example", Model)
+</div>
+
+@Html.TextAreaFor(x => x.Title)
+

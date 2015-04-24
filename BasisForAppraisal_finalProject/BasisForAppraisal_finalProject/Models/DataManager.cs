@@ -352,8 +352,8 @@ namespace BasisForAppraisal_finalProject.Models
                     emp.firstName = data[1];// change it to cto'r!!!
                     emp.lastName = data[2];
                     emp.Email = data[3];
-                    emp.Unit = data[4];
-                    emp.Class = data[5];
+                    //emp.Unit = data[4];
+                    //emp.Class = data[5];
                     if (data[6].Equals("כן"))
                         emp.IsManger = true;
                     else
