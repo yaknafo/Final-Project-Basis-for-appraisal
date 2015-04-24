@@ -28,7 +28,7 @@ namespace BasisForAppraisal_finalProject.Models
             db.deleteWorker(workerid, companyNumber);
 
         }
-
+        
        
     }
 }

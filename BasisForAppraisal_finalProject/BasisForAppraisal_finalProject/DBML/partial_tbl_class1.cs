@@ -14,8 +14,7 @@ namespace BasisForAppraisal_finalProject.DBML
         {
             get
             {
-                if (employees == null)
-                    LoadEmployees();
+                LoadEmployees();
                 return employees;
             }
 

@@ -172,7 +172,6 @@
     <Compile Include="Controllers\MainFormCreatorController.cs" />
     <Compile Include="Controllers\ManageFormController.cs" />
     <Compile Include="Controllers\SendMailerController.cs" />
-    <Compile Include="Controllers\testController.cs" />
     <Compile Include="DBML\BFADataBasedbml.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

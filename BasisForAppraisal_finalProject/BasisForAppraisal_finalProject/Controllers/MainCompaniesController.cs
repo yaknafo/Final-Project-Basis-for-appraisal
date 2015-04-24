@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int idCompany, HttpPostedFileBase file = null)
+        public ActionResult Index(int idCompany=1, HttpPostedFileBase file = null)
         {
             DateTime now = DateTime.Now;
 
@@ -31,14 +31,14 @@ namespace BasisForAppraisal_finalProject.Controllers
                 if (str[str.Count() - 1].Equals("xlsx") || str[str.Count() - 1].Equals("csv") || str[str.Count() - 1].Equals("xls"))
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"),"4" + fileName);
+                    var path = Path.Combine(Server.MapPath("~/App_Data/uploads"),"5" + fileName);
                     file.SaveAs(path);
                         upload_excelfile(path, idCompany);
                     }
                 }
             catch (Exception ex) { }
-           
-            return RedirectToAction("ManageCompany");
+
+            return RedirectToAction("MainCompanies");
           
         }
         // method add excel data to db
@@ -105,11 +105,11 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("MainCompanies");
         }
         [HttpPost]
-        public ActionResult deleteWorker(String idworker,int companyNumber)
+        public ActionResult deleteWorker(String idworker, int companyNumber, string unit, string cl)
         {
             var cm = new CompanyManger();
             cm.deleteWorker(idworker, companyNumber);
-            return RedirectToAction("ManageCompany");
+            return RedirectToAction("ManageCompany", new { id = companyNumber, unit = unit, cl = cl });
         }
         public ActionResult test()
         {

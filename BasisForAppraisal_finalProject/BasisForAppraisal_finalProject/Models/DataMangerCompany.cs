@@ -175,6 +175,11 @@ namespace BasisForAppraisal_finalProject.Models
         {
             return manager.tbl_Classes.Where(x => x.className == className && x.unitName == unitName  && x.companyId == companyId).FirstOrDefault();
         }
+        public List<tbl_Employee> getEmpForEmail(int id, string unit, string cl)
+        {
+            return manager.tbl_Employees.Where(x => x.companyId == id && x.unitName.Equals(unit) && x.className.Equals(cl)).ToList();
+            
+        }
     }
 
 
