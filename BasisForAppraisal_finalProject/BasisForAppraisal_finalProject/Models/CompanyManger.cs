@@ -11,20 +11,20 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void addCompany(tbl_Company cmp)
         {
-            var manger = new DataManager();
+            var manger =new DataMangerCompany();
             manger.addCompany(cmp);
         }
         // method add data from excel file to sql server db- workers to company
         public void upload_excelfile(string path, int idCompany)
         {
-            DataManager db = new DataManager();
+            var db = new DataMangerCompany();
             db.upload_excelfile(path,idCompany);
 
         }
 
          public void  deleteWorker(String workerid,int companyNumber)
         {
-            DataManager db = new DataManager();
+            var db = new DataMangerCompany();
             db.deleteWorker(workerid, companyNumber);
 
         }
