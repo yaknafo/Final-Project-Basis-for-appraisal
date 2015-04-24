@@ -1,4 +1,4 @@
-﻿@model BasisForAppraisal_finalProject.DBML.tbl_Company
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Class
 @{
     ViewBag.Title = "tbl_Company";
 }
@@ -10,33 +10,34 @@
 <link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
 <br />
 <br />
-
+<div dir="rtl">
 <table class="table-condensed" style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
     <tr>
         <th>
-            שם:
+            שם חברה:
         </th>
         <th>
-            <h3>@Html.DisplayFor(x => x.comapnyName)</h3>
+            <h3>@Html.DisplayFor(x => x.tbl_Unit.tbl_Company.comapnyName)</h3>
+        </th>
+    </tr>
+     <tr>
+        <th>
+           יחידה:
+        </th>
+        <th>
+            <h4>@Html.DisplayFor(x => x.tbl_Unit.unitName)</h4>
         </th>
     </tr>
     <tr>
         <th>
-            @Html.DisplayNameFor(x => x.comapnyAddress)
+           מחזור:
         </th>
         <th>
-            <h4>@Html.DisplayFor(x => x.comapnyAddress)</h4>
-        </th>
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(x => x.comapnyPhone)
-        </th>
-        <th>
-            <h4>@Html.DisplayFor(x => x.comapnyPhone)</h4>
+            <h4>@Html.DisplayFor(x => x.className)</h4>
         </th>
     </tr>
 </table>
+</div>
 <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center ">
     <!-- Default panel contents -->
     <div class="panel-heading" style="font-size: 22px;  ">רשימת עובדים</div>
@@ -52,8 +53,9 @@
             </tr>
         </thead>
         <tbody>
-            @for(int i=0; i< @Model.Employees.Count; i++)
+           @for (int i = 0; i <Model.Employees.Count()  ; i++)
             {
+               
                 <tr>
                     <td align="center">@Html.ActionLink(@Model.Employees[i].employeeId, "ManageCompany", new { @id = @Model.Employees[i].companyId })</td>
                     <td align="center">@Model.Employees[i].firstName</td>
@@ -61,7 +63,7 @@
                     <td><p><span class="glyphicon glyphicon-trash" title="מחק עובד מהחברה" data-toggle="modal" data-target="#@Model.Employees[i].employeeId" style="cursor:pointer;"></span></p></td>
                 </tr>
             }
-        </tbody>
+        </tbody>.
     </table>
     <script>
 

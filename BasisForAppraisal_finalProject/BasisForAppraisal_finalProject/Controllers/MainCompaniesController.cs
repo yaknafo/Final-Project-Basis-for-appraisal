@@ -58,27 +58,33 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-        public ActionResult ManageCompany(int id)
+        public ActionResult ManageCompany(int id,string unit,string cl)
         {
             var dManager = new DataManager();
-            var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
+            var comapny = dManager.Companyies.Where(x => x.companyId == id).First();
+            var myunit = comapny.tbl_Units.Where(x => x.unitName.Equals( unit)).FirstOrDefault();
+            var myclass = myunit.tbl_Classes.Where(x => x.className.Equals(cl)).FirstOrDefault();
 
             // refresh Employees
-            companyies.LoadEmployees();
-            var companyView = new CompanyViewModel(companyies);
-            return View(companyView);
+            comapny.LoadEmployees();
+           // var companyView = new CompanyViewModel(myclass);
+            return View(myclass);
 
         }
-        public ActionResult CompanyUnit(int id = 1)
+        public ActionResult CompanyUnit(int id )
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
-            var unitIncompanie=companyies.tbl_Units;
+            List<tbl_Class> list= new List<tbl_Class>();
+            foreach (var unit in companyies.tbl_Units)
+                foreach (var cl in unit.tbl_Classes)
+                    list.Add(cl);
+           
 
             // refresh Employees
             //companyies.LoadEmployees();
             ViewBag.name = companyies.comapnyName;
-            return View(unitIncompanie);
+            return View(list);
 
         }
         public ActionResult addCompanie()

@@ -22,9 +22,10 @@ namespace BasisForAppraisal_finalProject.Models
         }
         public void upload_excelfile(string path, int idCompany)
         {
+            Excel.Application xlApp=new Excel.Application();
             try
             {
-                Excel.Application xlApp = new Excel.Application();
+               
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
                 Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
                 Excel.Range xlRange = xlWorksheet.UsedRange;
@@ -52,10 +53,11 @@ namespace BasisForAppraisal_finalProject.Models
                         emp.IsManger = false;
                     this.addWorkerToDb(emp);
                 }
-                xlApp.Workbooks.Close();
+               
             }
             finally
             {
+                xlApp.Workbooks.Close();
                 File.Delete(path);
             }
         }
@@ -89,7 +91,10 @@ namespace BasisForAppraisal_finalProject.Models
             manager.SubmitChanges();
 
         }
-
+         public List<tbl_Employee> getEmployee(int idCompany,string unit,string cl)
+         {
+              return manager.tbl_Employees.Where(x => x.companyId == idCompany&&x.className.Equals(cl)&&x.unitName.Equals(unit)).ToList();
+         }
 
 
     }
