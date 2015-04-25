@@ -39,6 +39,8 @@ namespace BasisForAppraisal_finalProject.DBML
             this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
             // this.tbl_Section = default(EntityRef<tbl_Section);
             createAnswersToQuestion(numberOfAnswers);
+            // check if type is not null
+            if (type != null)
             this.QuestionType = type.Name;
         }
 
