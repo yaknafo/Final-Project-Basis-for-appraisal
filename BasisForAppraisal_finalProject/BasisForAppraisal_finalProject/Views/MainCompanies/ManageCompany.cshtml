@@ -1,4 +1,4 @@
-﻿@model  BasisForAppraisal_finalProject.DBML.tbl_Class
+﻿@model  BasisForAppraisal_finalProject.ViewModel.Company.ClassUnitViewModel
 @{
     ViewBag.Title = "ManageCompany";
 }
@@ -13,12 +13,12 @@
         
 
 <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
-    <h2>@Model.tbl_Unit.tbl_Company.comapnyName</h2>
+    <h2>@Model.MyClass.tbl_Unit.tbl_Company.comapnyName</h2>
 </div>
-
+@Html.Partial("_partialAddFormToUnit",Model)
 
 <div dir="rtl">
-    @Html.EditorForModel()
+    @Html.EditorFor(x=>x.MyClass)
 </div>
 
 
@@ -26,7 +26,7 @@
     <legend>
         Send Email
     </legend>
-    @using (Html.BeginForm("Index", "SendMailer",new{id=Model.companyId,unit=Model.unitName,cl= Model.className}, FormMethod.Post))
+    @using (Html.BeginForm("Index", "SendMailer", new { id = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className }, FormMethod.Post))
     {
         
         <input type="submit" value="Send mail" />

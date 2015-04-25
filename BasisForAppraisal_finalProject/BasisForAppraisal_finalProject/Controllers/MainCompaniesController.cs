@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.ViewModel;
 using System.IO;
+using BasisForAppraisal_finalProject.ViewModel.Company;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -22,10 +23,10 @@ namespace BasisForAppraisal_finalProject.Controllers
             SendUploadExcel(file, id);
 
             return RedirectToAction("CompanyUnit", new { id = id });
-          
-                    }
+          }
            
-            return RedirectToAction("ManageCompany", new { id = id});
+           
+
           
         // method add excel data to db
         //private void upload_excelfile(string path, int idCompany)
@@ -55,12 +56,12 @@ namespace BasisForAppraisal_finalProject.Controllers
             var comapny = dManager.Companyies.Where(x => x.companyId == id).First();
             var myunit = comapny.tbl_Units.Where(x => x.unitName.Equals( unit)).FirstOrDefault();
             var myclass = myunit.tbl_Classes.Where(x => x.className.Equals(cl)).FirstOrDefault();
-
+            var unitAndForm = new ClassUnitViewModel(myclass);
 
             // refresh Employees
             comapny.LoadEmployees();
            // var companyView = new CompanyViewModel(myclass);
-            return View(myclass);
+            return View(unitAndForm);
 
         }
         public ActionResult CompanyUnit(int id )
@@ -129,6 +130,11 @@ namespace BasisForAppraisal_finalProject.Controllers
                     }
             }
             catch (Exception ex) { }
+        }
+        public void AddConnector(string employeeFillID, string employeeOnId, int companyId, int formID)
+        {
+            var dmc = new DataMangerCompany();
+            dmc.AddConnector(employeeFillID, employeeOnId, companyId, formID);
         }
        
 	}
