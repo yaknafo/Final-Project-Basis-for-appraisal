@@ -45,8 +45,8 @@ namespace BasisForAppraisal_finalProject.Models
                     {
                         try
                         {
-                            data[j - 1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
-                        }
+                        data[j - 1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
+                    }
                         catch
                         {
                             // the col of the unit and class

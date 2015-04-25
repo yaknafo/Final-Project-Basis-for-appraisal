@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index(int idCompany=1, HttpPostedFileBase file = null)
+        public ActionResult Index(int idCompany, HttpPostedFileBase file = null)
         {
             DateTime now = DateTime.Now;
 
@@ -63,7 +63,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-        public ActionResult ManageCompany(int id=1)
+        public ActionResult ManageCompany(int id)
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
@@ -72,6 +72,18 @@ namespace BasisForAppraisal_finalProject.Controllers
             companyies.LoadEmployees();
             var companyView = new CompanyViewModel(companyies);
             return View(companyView);
+
+        }
+        public ActionResult CompanyUnit(int id = 1)
+        {
+            var dManager = new DataManager();
+            var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
+            var unitIncompanie=companyies.tbl_Units;
+
+            // refresh Employees
+            //companyies.LoadEmployees();
+            ViewBag.name = companyies.comapnyName;
+            return View(unitIncompanie);
 
         }
         public ActionResult addCompanie()

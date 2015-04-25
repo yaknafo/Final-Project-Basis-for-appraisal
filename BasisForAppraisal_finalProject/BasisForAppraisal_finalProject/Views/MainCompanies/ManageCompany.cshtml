@@ -13,13 +13,6 @@
     @using (Html.BeginForm("Index", "MainCompanies",FormMethod.Post, new { idCompany=Model.Company.companyId, enctype = "multipart/form-data" }))
     {
 
-        <label for="file" style="margin-right:36%">הוסף עובדים</label>
-        <br />
-        <input type="file" name="file" id="file" />
-        <br />
-        <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
-    }
-</div>
 
 <div style="width:100%; background-color: cornflowerblue; text-align:center">
     <h2>@Model.Company.comapnyName</h2>
@@ -41,3 +34,15 @@
         <input type="submit" value="Send mail" />
     }
 </fieldset>
+
+<div dir="rtl" style="border:double; width:220px; margin-left:40%;">
+    @using (Html.BeginForm("Index", "MainCompanies", new { idCompany = Model.Company.companyId, enctype = "multipart/form-data" }, FormMethod.Post))
+    {
+
+        <label for="file" style="margin-right:36%">הוסף עובדים</label>
+        <br />
+        <input type="file" name="file" id="file" />
+        <br />
+        <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
+    }
+</div>
