@@ -11,13 +11,13 @@
 <br />
 <br />
 <div dir="rtl">
-<table class="table-condensed" style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
+<table class="table-condensed" style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px; ">
     <tr>
         <th>
             שם חברה:
         </th>
         <th>
-            <h3>@Html.DisplayFor(x => x.tbl_Unit.tbl_Company.comapnyName)</h3>
+            <h3 style="margin-right:0%">@Html.DisplayFor(x => x.tbl_Unit.tbl_Company.comapnyName)</h3>
         </th>
     </tr>
      <tr>
@@ -65,13 +65,14 @@
             }
         </tbody>.
     </table>
-    <script>
-
-        var table = $('#myTable').DataTable();
-        new $.fn.dataTable.KeyTable(table);
-
-    </script>
+  
 </div>
+<script>
+
+    var table = $('#myTable').DataTable();
+    new $.fn.dataTable.KeyTable(table);
+
+</script>
 
 @foreach (var item in Model.Employees)
 {
