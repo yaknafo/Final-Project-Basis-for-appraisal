@@ -4,18 +4,6 @@
 
 
 <button><span title="הוספת טופס לארגון" data-toggle="modal" data-target="#addForm" style="cursor:pointer;">הוספת טופס ליחידה</span></button>
-
-
-
-
-
-
-
-
-
-
-
-
             <!-- Modal -->
     <div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:70%; margin-left:10%">
     <div class=" modal-dialog">
@@ -39,9 +27,9 @@
                         @foreach (var item in Model.Forms)
                         {
                             <tr>
-                                <td align="center">@Html.ActionLink(item.FormName, "Edit", new { @id = item.formId })</td>
+                                <td align="center">@item.FormName</td>
                                 <td align="center">@item.Sections.Count().ToString()</td>
-                                <td align="center">@Html.ActionLink("הוסף טופס", "AddConnector", new { employeeFillID = 301378239, employeeOnId = Model.MyClass.Employees.First().employeeId, companyId = Model.MyClass.companyId, formID = item.formId })</td>
+                                <td><p><span  title="הוספת טופס ליחידה" data-toggle="modal" data-target="#@item.formId" style="cursor:pointer;">הוספת טופס ליחידה</span></p></td>
                             </tr>
                         }
                     </tbody>
@@ -65,4 +53,29 @@
     new $.fn.dataTable.KeyTable(table);
 
 </script>
-
+ <!-- Modal -->
+@foreach (var item in Model.Forms)
+{
+       <div class="modal fade" id=@item.formId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה להוסיף טופס:  </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.FormName?</h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">ליחידה:  </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@Model.MyClass.unitName @Model.MyClass.className?</h4>
+                </div>
+                @using (Html.BeginForm("AddConnector", "MainCompanies", new { companyId = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className, formId = item.formId }, FormMethod.Post))
+                 { 
+                     <div class="modal-body">
+                    <button type="submit" class="btn btn-primary" style="background-color:blue;">הוסף</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+           

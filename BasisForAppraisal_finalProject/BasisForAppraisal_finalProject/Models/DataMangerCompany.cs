@@ -106,7 +106,9 @@ namespace BasisForAppraisal_finalProject.Models
                 throw new Exception("form not exit in the DB");
 
 
-            var tempconnector = new tbl_ConnectorFormFill { employeeFillId = employeeFillID, employeeOnId = employeeOnId, companyId = companyId, formId = formID };
+            var tempconnector = new tbl_ConnectorFormFill { employeeFillId = employeeFillID, employeeOnId = employeeOnId, companyId = 1, formId = formID };
+            if (manager.tbl_ConnectorFormFills.Contains(tempconnector))
+                return;
             manager.tbl_ConnectorFormFills.InsertOnSubmit(tempconnector);
             manager.SubmitChanges();
 
