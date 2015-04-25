@@ -42,9 +42,9 @@
     <div dir="rtl">
         <br /><br />
         <div dir="rtl" style="border:double; width:220px; margin-right:40%;">
-            @using (Html.BeginForm("Index", "MainCompanies",FormMethod.Post, new { idCompany = Model.First().companyId, enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Index", "MainCompanies", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-
+                Session["companyId"]=Model.First().companyId;
                 <label for="file" style="margin-right:36%">הוסף עובדים</label>
                 <br />
                 <input type="file" name="file" id="file" />
@@ -73,11 +73,11 @@
     </div>
 </div>
 }
-@if(Model.Count() <1)
+@*@if(Model.Count() <1)
 {
     <script>alert("bla")</script>
     Response.Redirect(Url.Action("MainCompanies", "MainCompanies"));
-}
+}*@
     
 
 }

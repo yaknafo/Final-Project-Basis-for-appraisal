@@ -9,20 +9,10 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
 
-<div dir="rtl" style="border:double; width:220px; margin-left:40%; margin-top:10%">
-    @using (Html.BeginForm("Index", "MainCompanies", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-
-        Session["companyId"] = @Model.Company.companyId;
-        
-        <label for="file" style="margin-right:36%">הוסף עובדים</label>
-        <br />
-        <input type="file" name="file" id="file" />
-        <br />
-        <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
+          
         
 
-<div style="width:100%; background-color: cornflowerblue; text-align:center">
+<div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
     <h2>@Model.tbl_Unit.tbl_Company.comapnyName</h2>
 </div>
 
@@ -44,13 +34,5 @@
 </fieldset>
 
 <div dir="rtl" style="border:double; width:220px; margin-left:40%;">
-    @using (Html.BeginForm("Index", "MainCompanies", new { idCompany = Model.Company.companyId, enctype = "multipart/form-data" }, FormMethod.Post))
-    {
 
-        <label for="file" style="margin-right:36%">הוסף עובדים</label>
-        <br />
-        <input type="file" name="file" id="file" />
-        <br />
-        <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
-    }
 </div>
