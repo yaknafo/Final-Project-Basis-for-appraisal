@@ -19,5 +19,7 @@ namespace BasisForAppraisal_finalProject.Controllers.Enum
 
         AddScaleQuestion,
 
+        AddMultipleChoiceQuestion,
+
     }
 }

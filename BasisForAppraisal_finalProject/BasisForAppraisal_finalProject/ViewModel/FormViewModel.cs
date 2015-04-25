@@ -261,8 +261,6 @@ namespace BasisForAppraisal_finalProject.ViewModel
                 question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
             }
 
-            
-
             Questions.Add(question);
         }
 
@@ -277,7 +275,6 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
            }
-
 
            Questions.Add(question);
        }
@@ -295,20 +292,25 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
            question.Answers[0].Text = minTag;
            question.Answers[question.Answers.Count-1].Text = maxTag;
-
-
-
         
                // we wnat to make sure that every question and answer has the form id and section id
                question.FormId = form.formId;
                question.SectionId = CurrentSection.SectionId;
                question.Answers.ForEach(a => a.FormId = form.formId);
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
-         
-
-
            Questions.Add(question);
        }
+
+       public void AddQuestionMultipleChoice(tbl_IntentionalQuestion question)
+       {
+           // we wnat to make sure that every question and answer has the form id and section id
+           question.FormId = CurrentSection.FormId;
+           question.SectionId = CurrentSection.SectionId;
+           question.Answers.ForEach(a => a.FormId = CurrentSection.FormId);
+           question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
+           Questions.Add(question);
+       }
+
 
        public void DeleteQuestions()
        {

@@ -16,6 +16,38 @@
     })
 </script>
 
+<script>
+
+    function CloseModelsMultipleChoiceQuestion() {
+        alert("hi")
+    
+    }
+
+
+
+</script>
+@if (TempData["Success"] != null)
+{
+    <script>
+        $('#FreeTextQuestion').modal('hide');
+        $('#myModal').modal('hide');
+        $('#MultipleChoiceQuestion').modal('hide');
+        $('#ScaleQuestion').modal('hide');
+
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    </script>
+}
+else
+{
+    <script>
+        $('.modal-backdrop').remove();
+        $('#MultipleChoiceQuestion').modal('toggle');
+    </script>
+}
+
+
+
 
 @if (TempData["Success"] != null)
 {
@@ -38,16 +70,52 @@
             </div>
             <div class="modal-body">
                 <div id="MultipleChoice">
-                    @Html.EditorFor(x => x.NewQuestionMultipleChoice)
+                  @Html.EditorFor(x => x.NewQuestionMultipleChoice)
                 </div>
+                <button type="submit" class="btn btn-primary" name="submit" value="AddAnswerToMulitiChoice" style="margin-right:40%">+</button>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddScaleQuestion style="margin-right:40%">שמור שאלה</button>
+                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddMultipleChoiceQuestion style="margin-right:40%">שמור שאלה</button>
             </div>
 
         </div>
     </div>
 </div>
 
+<!-- Edit Section -->
+<div class="modal fade" id="MySection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
+            </div>
+
+            <div class="modal-body">
+                @if (Model.NewQuestion != null)
+                {
+                    Model.NewQuestion = null;
+                }
+                @Html.EditorFor(x => x.Sections)
+                @Html.EditorFor(x => x.CurrentSection)
+                @Html.EditorForModel();
+                @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CloseModelsMultipleChoiceQuestion()">סגור</button>
+                <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%">שמור שאלה</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
 @Html.EditorFor(a => a.Questions)
+

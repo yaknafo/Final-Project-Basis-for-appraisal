@@ -111,46 +111,18 @@
         @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoice"))
         {
             <div dir="rtl" style="border-bottom: solid;">
-                <br />
-                <br />
-                @if (@Model.NumberOfAnswers >0)
+                @if (@Model.Answers.Count()>0)
                 {
-
-                    <br />
                     <br />
                     @*@Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })*@
                     for (int i = 0; i < @Model.Answers.Count; i++ )
                     { 
+                     @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
                     @Html.TextBoxFor(x => x.Answers[i].Text)
                     <br />
                      <br />
                     }
-                    Session["MultipleChoice"]= Model;
-                    @*@Ajax.ActionLink("change", "AddAnswerToQuestion", new { id =1, q=Model }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "MultipleChoice", InsertionMode = InsertionMode.InsertAfter })*@
-                     <button type="submit" class="btn btn-primary" name="submit" value="knafo" style="margin-right:40%">+</button>
-                    
 
-                }
-                else
-                {
-                    <table>
-                        <tr>
-                            <th>
-                                @Html.TextBoxFor(x => x.Answers[0].Text)
-                            </th>
-                            @for (int i = 0; i < @Model.Answers.Count; i++)
-                            {
-                                <th>
-                                    @Html.HiddenFor(x => x.Answers[i].AnswerOption)
-                                    @Html.HiddenFor(x => x.NumberOfAnswers)
-                                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
-                                </th>
-                            }
-                            <th>
-                                @Html.TextBoxFor(x => x.Answers[Model.Answers.Count - 1].Text)
-                            </th>
-                        </tr>
-                    </table>
                 }
                 <div style="margin-bottom:2%;"></div>
             </div>

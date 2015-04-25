@@ -68,7 +68,7 @@ namespace BasisForAppraisal_finalProject.Controllers
          public ActionResult AddAnswerToQuestion(int id, tbl_IntentionalQuestion q)
         {
 
-            // question.AddAnswerOption();
+            
             var h = new tbl_IntentionalAnswer();
              return PartialView("_MultipleChoiceQuestion", h);
         }
@@ -83,8 +83,8 @@ namespace BasisForAppraisal_finalProject.Controllers
            {
                case "Exit":       return backToMainForm();
 
-               case "knafo":      formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
-                                  break;
+               case "AddAnswerToMulitiChoice": formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
+                                               break;
 
                case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                                   TempData["Success"] = "הוספה בוצעה בהצלחה!";
@@ -98,6 +98,11 @@ namespace BasisForAppraisal_finalProject.Controllers
                                           break;
 
                case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
+                                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                        TempData["changes"] = "add";
+                                        break;
+
+               case "AddMultipleChoiceQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoice);
                                         TempData["Success"] = "הוספה בוצעה בהצלחה!";
                                         TempData["changes"] = "add";
                                         break;
