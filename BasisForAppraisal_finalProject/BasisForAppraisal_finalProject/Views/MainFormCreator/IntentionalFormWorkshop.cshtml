@@ -72,7 +72,7 @@
         </div>
 
 
-    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair" }))
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair" , OnSuccess="CloseModels()"}))
 {
 
     <div id="ActionBtn" style="position: fixed; margin-top: -14%; background-color: lightgrey; width: 100%; ">
@@ -114,7 +114,18 @@
  <script>
      function showWorningSaveMsg() {
     document.getElementById("changes").style.display = "block";
-}
+     }
+
+     function CloseModels() {
+         $('#FreeTextQuestion').modal('hide');
+         $('#myModal').modal('hide');
+         $('#MultipleChoiceQuestion').modal('hide');
+         $('#ScaleQuestion').modal('hide');
+
+         $('body').removeClass('modal-open');
+         $('.modal-backdrop').remove();
+     }
+
 </script>
  
 
