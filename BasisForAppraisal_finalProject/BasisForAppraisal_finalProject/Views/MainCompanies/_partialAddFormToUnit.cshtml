@@ -1,0 +1,35 @@
+﻿ @model IEnumerable<BasisForAppraisal_finalProject.DBML.tblForm>
+
+<div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="font-size: 22px; ">רשימת טפסים</div>
+    <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
+    <!---knafo-->
+    <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
+        <thead>
+            <tr style=" font-size:20px;">
+                <td align="center">שם</td>
+                <td align="center">מספר שאלות</td>
+                <td align="center">מחיקה</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td align="center">@Html.ActionLink(item.FormName, "Edit", new { @id = item.formId })</td>
+                    <td align="center">@item.Sections.Count().ToString()</td>
+
+                    <td><p><span class="glyphicon glyphicon-trash" title="תצוגה מקדימה" data-toggle="modal" data-target="#@item.formId" style="cursor:pointer;"></span></p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+
+    <script>
+
+                var table = $('#myTable').DataTable();
+                new $.fn.dataTable.KeyTable(table);
+
+    </script>

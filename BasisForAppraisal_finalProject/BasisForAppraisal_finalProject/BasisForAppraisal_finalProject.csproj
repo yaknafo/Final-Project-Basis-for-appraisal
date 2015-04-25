@@ -315,6 +315,7 @@
     <Content Include="Views\MainCompanies\CompanyUnit.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\MainCompanies\_partialAddFormToUnit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

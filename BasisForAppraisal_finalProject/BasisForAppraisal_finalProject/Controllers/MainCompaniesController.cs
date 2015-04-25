@@ -37,8 +37,8 @@ namespace BasisForAppraisal_finalProject.Controllers
                     }
                 }
             catch (Exception ex) { }
-           
-            return RedirectToAction("ManageCompany", new { id = id});
+
+            return RedirectToAction("CompanyUnit", new { id = id });
           
         }
         // method add excel data to db
@@ -81,6 +81,10 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var dManager = new DataManager();
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
+            ViewBag.id = id;
+            ViewBag.name = companyies.comapnyName;
+            ViewBag.phone = companyies.comapnyPhone;
+            ViewBag.adress = companyies.comapnyAddress;
             List<tbl_Class> list= new List<tbl_Class>();
             foreach (var unit in companyies.tbl_Units)
                 foreach (var cl in unit.tbl_Classes)
