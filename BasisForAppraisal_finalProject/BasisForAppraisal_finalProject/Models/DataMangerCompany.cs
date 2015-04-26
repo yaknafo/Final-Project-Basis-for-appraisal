@@ -30,6 +30,8 @@ namespace BasisForAppraisal_finalProject.Models
             string className = string.Empty;
 
             Excel.Application xlApp = new Excel.Application();
+
+            var companyForUnit = manager.tbl_Companies.Where(x => x.companyId == idCompany).FirstOrDefault();
             try
             {
                 Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
@@ -74,7 +76,7 @@ namespace BasisForAppraisal_finalProject.Models
                     {
                         unitFormDB = new tbl_Unit { companyId = idCompany, unitName = unitName };
                         AddUnit(unitFormDB);
-                        emp.unitName = unitName;
+                        emp.unitName = unitFormDB.unitName;
                     }
                     else
                     {
@@ -88,22 +90,32 @@ namespace BasisForAppraisal_finalProject.Models
 
                     var ClassFormDB = getClassByName(className, unitName, idCompany);
 
-                    if (ClassFormDB == null)
+                    try
                     {
-                        ClassFormDB = new tbl_Class { companyId = idCompany, unitName = unitName, className = className, tbl_Unit = unitFormDB };
-                        AddClass(ClassFormDB);
-                        emp.className = className;
-                        emp.tbl_Class = ClassFormDB;
-                    }
-                    else
+                        if (ClassFormDB == null)
+                        {
+                            var newClassFormDB = new tbl_Class { companyId = idCompany, unitName = unitName, className = className };
+                             AddClass(newClassFormDB);
+                           // emp.className = newClassFormDB.className;
+                            //emp.tbl_Class = newClassFormDB;
+                        }
+                        else
+                        {
+                            emp.className = ClassFormDB.className;
+                        }
+                    }catch(Exception ex)
                     {
-                        emp.className = ClassFormDB.className;
+
                     }
 
 
 
                    addWorkerToDb(emp);
                 }
+            }
+               catch(Exception ex)
+            {
+
             }
             finally
             {
@@ -147,16 +159,44 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void AddUnit(tbl_Unit unit)
         {
+            if (!manager.tbl_Units.Contains(unit))
+            {
+                var compantForUnit = manager.tbl_Companies.Where(x => x.companyId == unit.companyId).FirstOrDefault();
+                if (compantForUnit != null)
+                {
+                    unit.tbl_Classes = null;
+                    manager.tbl_Units.InsertOnSubmit(unit);
+                    unit.tbl_Classes = null;
+                    manager.SubmitChanges();
+                }
+            }
+        }
 
-            manager.tbl_Units.InsertOnSubmit(unit);
+
+        public void AddClass(List<tbl_Class> cla)
+        {
+            manager.tbl_Classes.InsertAllOnSubmit(cla);
             manager.SubmitChanges();
         }
 
         public void AddClass(tbl_Class cla)
         {
 
-            manager.tbl_Classes.InsertOnSubmit(cla);
-            manager.SubmitChanges();
+            if (!manager.tbl_Classes.Contains(cla))
+            {
+               var c = manager.tbl_Units.Where(s => s.unitName == cla.unitName && s.companyId == cla.companyId).First();
+               cla.tbl_Unit = c;
+                //manager.tbl_Units.Attach(c);
+                // manager.Refresh(RefreshMode.KeepChanges, c);
+                //   manager.tbl_Units.Attach(unit, false);
+                ////manager.SubmitChanges();
+                //manager.Refresh(RefreshMode.KeepChanges, unit);
+              // cla.tbl_Employees = null;
+
+          
+                manager.tbl_Classes.InsertOnSubmit(cla);
+                manager.SubmitChanges();
+            }
         }
 
 

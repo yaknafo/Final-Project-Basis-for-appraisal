@@ -21,6 +21,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
             this.Employees = Company.Employees;
 
         }
+        public CompanyViewModel()
+        {
+
+        }
 
        
     }
