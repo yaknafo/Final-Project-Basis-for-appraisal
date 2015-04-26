@@ -94,7 +94,7 @@ namespace BasisForAppraisal_finalProject.Models
             }
         }
 
-        public void Addconnector(string employeeFillID, string employeeOnId, int companyId, int formID)
+        public void AddConnector(string employeeFillID, string employeeOnId, int companyId, int formID)
         {
             if (string.IsNullOrEmpty(employeeFillID) || string.IsNullOrEmpty(employeeOnId))
                 throw new Exception("employee id is missing");
