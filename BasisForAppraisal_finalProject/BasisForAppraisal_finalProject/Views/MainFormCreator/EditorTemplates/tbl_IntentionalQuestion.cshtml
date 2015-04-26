@@ -118,8 +118,15 @@
 
                     <br />
                     <br />
-                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
+                    @*@Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })*@
+                    for (int i = 0; i < @Model.Answers.Count; i++ )
+                    { 
                     @Html.TextBoxFor(x => x.Answers[0].Text)
+                    <br />
+                    }
+                    Session["MultipleChoice"]= Model;
+                    @Ajax.ActionLink("change", "AddAnswerToQuestion", new { id = 1 }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "MultipleChoice", InsertionMode = InsertionMode.Replace })
+                     <button type="submit" class="btn btn-primary" name="submit" value="knafo" style="margin-right:40%">+</button>
                     
 
                 }

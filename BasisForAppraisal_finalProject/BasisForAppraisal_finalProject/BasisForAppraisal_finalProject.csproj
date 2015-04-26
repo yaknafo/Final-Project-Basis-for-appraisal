@@ -316,6 +316,7 @@
     <Content Include="Views\MainCompanies\CompanyUnit.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\MainFormCreator\_MultipleChoiceQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

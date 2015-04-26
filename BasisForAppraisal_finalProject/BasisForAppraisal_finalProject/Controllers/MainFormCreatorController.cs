@@ -45,7 +45,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         public PartialViewResult changeQuestion()
         {
             var h = new tbl_IntentionalQuestion() { HelpText = "yari knafo" };
-            return PartialView("_example", h);
+            return PartialView(h);
         }
        // [HttpPost]
        //public ActionResult Int(FormViewModel formViewModel)
@@ -63,6 +63,15 @@ namespace BasisForAppraisal_finalProject.Controllers
         /// </summary>
         /// <param name="formViewModel"></param>
         /// <returns></returns>
+        /// 
+         [HttpPost]
+         public ActionResult AddAnswerToQuestion(int id)
+        {
+
+            var question = Session["MultipleChoice"] as tbl_IntentionalQuestion;
+             question.AddAnswerOption();
+             return PartialView("_MultipleChoiceQuestion", question);
+        }
        [HttpPost]
        public ActionResult IntentionalFormWorkshop(string submit, FormViewModel formViewModel)
        {
@@ -74,10 +83,14 @@ namespace BasisForAppraisal_finalProject.Controllers
            {
                case "Exit":       return backToMainForm();
 
+               case "knafo":      formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
+                                  break;
+
                case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                                   TempData["Success"] = "הוספה בוצעה בהצלחה!";
                                   TempData["changes"] = "add";
                                   break;
+
 
                case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
                                           TempData["Success"] = "הוספה בוצעה בהצלחה!";

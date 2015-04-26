@@ -64,7 +64,7 @@
             <strong style="color:black;">קנה מידה</strong>
         </button>
 
-        <!-- Add button Muliti choise question -->
+        <!-- Add button Muliti choise question         OnSuccess="CloseModels()"  -->
         <button type="button" class="btn btn-primary btn-lg"  title="הוספת שאלה בחירה מרובה" data-toggle="modal" data-target="#MultipleChoiceQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
         <strong style="color:black;">בחירה מרובה</strong></button>
 
@@ -72,7 +72,7 @@
         </div>
 
 
-    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair" , OnSuccess="CloseModels()"}))
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair",}))
 {
 
     <div id="ActionBtn" style="position: fixed; margin-top: -14%; background-color: lightgrey; width: 100%; ">
@@ -241,6 +241,7 @@
         
          
           <!-- Add new question scale -->
+        
     <div class="modal fade" id="MultipleChoiceQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:75%">
             <div class="modal-content" style="width:75%">
@@ -253,7 +254,9 @@
                     {
                         Model.NewQuestionMultipleChoice = null;
                     }
-                    @Html.EditorFor(x => x.NewQuestionMultipleChoice)
+                    <div id="MultipleChoice">
+                        @Html.Partial("_MultipleChoiceQuestion", Model.NewQuestionMultipleChoice)
+                    </div>
                     @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
                 </div>
                 <div class="modal-footer">
