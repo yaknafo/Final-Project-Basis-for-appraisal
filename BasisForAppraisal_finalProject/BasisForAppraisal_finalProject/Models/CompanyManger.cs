@@ -63,7 +63,7 @@ namespace BasisForAppraisal_finalProject.Models
                     var emp = new tbl_Employee();
                     emp.companyId = idCompany;
                     emp.employeeId = data[0];
-                    emp.firstName = data[1];// change it to cto'r!!!
+                    emp.firstName = data[1];// change it to cto'r!!!!
                     emp.lastName = data[2];
                     emp.Email = data[3];
                     unitName = data[4];
