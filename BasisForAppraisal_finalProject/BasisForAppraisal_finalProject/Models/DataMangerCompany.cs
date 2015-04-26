@@ -21,8 +21,14 @@ namespace BasisForAppraisal_finalProject.Models
             System.Threading.Thread.CurrentThread.CurrentCulture = cultureinfo;
         }
 
-       
+       //-------------------------------------------------- Get Method --------------------------------------------------
+        public List<tbl_ConnectorFormFill> getConecctors()
+        {
+            return manager.tbl_ConnectorFormFills.ToList();
+        }
 
+
+        //-------------------------------------------------- Add Method --------------------------------------------------
         public void addCompany(tbl_Company cmp)
         {
 
@@ -87,13 +93,34 @@ namespace BasisForAppraisal_finalProject.Models
                 manager.SubmitChanges();
             }
         }
+
+        public void Addconnector(string employeeFillID, string employeeOnId, int companyId, int formID)
+        {
+            if (string.IsNullOrEmpty(employeeFillID) || string.IsNullOrEmpty(employeeOnId))
+                throw new Exception("employee id is missing");
+
+            if(manager.tbl_Companies.Where(x=> x.companyId ==companyId).FirstOrDefault() == null)
+                throw new Exception("Company not exit in the DB");
+
+            if (manager.tblForms.Where(x => x.formId == formID).FirstOrDefault() == null)
+                throw new Exception("form not exit in the DB");
+
+
+            var tempconnector = new tbl_ConnectorFormFill { employeeFillId = employeeFillID, employeeOnId = employeeOnId, companyId = companyId, formId = formID };
+            manager.tbl_ConnectorFormFills.InsertOnSubmit(tempconnector);
+            manager.SubmitChanges();
+
+        }
+
+        //----------------------------------------------- get Methods ---------------------------------------------------//
+
          public List<tbl_Employee> getEmployee(int idCompany,string unit,string cl)
          {
               return manager.tbl_Employees.Where(x => x.companyId == idCompany&&x.className.Equals(cl)&&x.unitName.Equals(unit)).ToList();
          }
 
 
-        //----------------------------------------------- get Methods ---------------------------------------------------//
+       
 
         public tbl_Unit getUnitByName(string unitName, int companyId)
         {
@@ -109,6 +136,8 @@ namespace BasisForAppraisal_finalProject.Models
             return manager.tbl_Employees.Where(x => x.companyId == id && x.unitName.Equals(unit) && x.className.Equals(cl)).ToList();
             
         }
+
+       
     }
 
 
