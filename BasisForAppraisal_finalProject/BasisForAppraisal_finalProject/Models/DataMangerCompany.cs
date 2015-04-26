@@ -97,7 +97,7 @@ namespace BasisForAppraisal_finalProject.Models
                             var newClassFormDB = new tbl_Class { companyId = idCompany, unitName = unitName, className = className };
                              AddClass(newClassFormDB);
                            // emp.className = newClassFormDB.className;
-                            //emp.tbl_Class = newClassFormDB;
+                            emp.className = newClassFormDB.className;
                         }
                         else
                         {
