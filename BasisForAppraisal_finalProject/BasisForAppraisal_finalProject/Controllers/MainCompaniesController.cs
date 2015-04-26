@@ -131,10 +131,16 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             catch (Exception ex) { }
         }
-        public void AddConnector(string employeeFillID, string employeeOnId, int companyId, int formID)
+        [HttpPost]
+        public ActionResult AddConnector(int companyid,string unit,string cl,int formId)
         {
             var dmc = new DataMangerCompany();
-            dmc.AddConnector(employeeFillID, employeeOnId, companyId, formID);
+           var employes= dmc.getEmployee(companyid,unit,cl);
+            foreach(var e1 in employes)
+                foreach(var e2 in employes)
+                   dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
+            return RedirectToAction("ManageCompany", new { id = companyid, unit = unit, cl = cl });
+            
         }
        
 	}
