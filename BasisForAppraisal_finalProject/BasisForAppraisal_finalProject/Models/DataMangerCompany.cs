@@ -198,6 +198,10 @@ namespace BasisForAppraisal_finalProject.Models
                 manager.SubmitChanges();
             }
         }
+         public List<tbl_Employee> getEmployee(int idCompany,string unit,string cl)
+         {
+              return manager.tbl_Employees.Where(x => x.companyId == idCompany&&x.className.Equals(cl)&&x.unitName.Equals(unit)).ToList();
+         }
 
 
         //----------------------------------------------- get Methods ---------------------------------------------------//
@@ -210,6 +214,11 @@ namespace BasisForAppraisal_finalProject.Models
         public tbl_Class getClassByName(string className ,string unitName, int companyId)
         {
             return manager.tbl_Classes.Where(x => x.className == className && x.unitName == unitName  && x.companyId == companyId).FirstOrDefault();
+        }
+        public List<tbl_Employee> getEmpForEmail(int id, string unit, string cl)
+        {
+            return manager.tbl_Employees.Where(x => x.companyId == id && x.unitName.Equals(unit) && x.className.Equals(cl)).ToList();
+            
         }
     }
 

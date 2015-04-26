@@ -172,7 +172,6 @@
     <Compile Include="Controllers\MainFormCreatorController.cs" />
     <Compile Include="Controllers\ManageFormController.cs" />
     <Compile Include="Controllers\SendMailerController.cs" />
-    <Compile Include="Controllers\testController.cs" />
     <Compile Include="DBML\BFADataBasedbml.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +181,7 @@
     <Compile Include="DBML\FormPartial.cs" />
     <Compile Include="DBML\Interface\QuestionType.cs" />
     <Compile Include="DBML\Pratical.cs" />
+    <Compile Include="DBML\partial_tbl_class1.cs" />
     <Compile Include="DBML\SectionPartical.cs" />
     <Compile Include="DBML\tbl_CompanyPartial.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,7 +302,7 @@
     <Content Include="Views\MainFormCreator\_intetionalQusestionPartialForAdd.cshtml" />
     <Content Include="Views\MainFormCreator\_iqp.cshtml" />
     <Content Include="Views\MainCompanies\MainCompanies.cshtml" />
-    <Content Include="Views\MainCompanies\EditorTemplates\tbl_Company.cshtml" />
+    <Content Include="Views\MainCompanies\EditorTemplates\tbl_Class.cshtml" />
     <Content Include="Views\MainCompanies\ManageCompany.cshtml" />
     <Content Include="Views\MainCompanies\addCompanie.cshtml" />
     <Content Include="Views\SendMailer\Index.cshtml" />
@@ -312,6 +312,9 @@
     <Content Include="Views\MainFormCreator\_example.cshtml" />
     <Content Include="Views\MainFormCreator\Int.cshtml" />
     <Content Include="Views\MainFormCreator\_QuestionsLists.cshtml" />
+    <Content Include="Views\MainCompanies\CompanyUnit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

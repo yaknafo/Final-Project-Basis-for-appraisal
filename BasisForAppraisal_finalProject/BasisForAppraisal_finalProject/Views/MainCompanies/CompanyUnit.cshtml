@@ -1,21 +1,83 @@
-﻿@model IEnumerable< BasisForAppraisal_finalProject.DBML.tbl_Unit>
+﻿@model IEnumerable< BasisForAppraisal_finalProject.DBML.tbl_Class>
 @{
     ViewBag.Title = "CompanyUnit";
 }
-<h2 style="margin-left:50%">חברת @ViewBag.name </h2>
-<div dir="rtl">
-  <br /><br />
+@if (Model.Count() >0)
+{
+  
+   
 
+<div dir="rtl" style="margin-top:7%">
+    <div style="width:100%; background-color: cornflowerblue; text-align:center">
+         <h2>@Model.First().tbl_Unit.tbl_Company.comapnyName </h2>
+    </div>
+
+
+    <table class="table-condensed" style="background-color:ButtonFace; font-size:22px; margin-right:10%; padding: 10px;  ">
+        <tr>
+            <th>
+                שם:
+            </th>
+            <th>
+                <h3>@Html.DisplayFor(x => x.First().tbl_Unit.tbl_Company.comapnyName)</h3>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.First().tbl_Unit.tbl_Company.comapnyAddress)
+            </th>
+            <th>
+                <h4>@Html.DisplayFor(x => x.First().tbl_Unit.tbl_Company.comapnyAddress)</h4>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.First().tbl_Unit.tbl_Company.comapnyPhone)
+            </th>
+            <th>
+                <h4>@Html.DisplayFor(x => x.First().tbl_Unit.tbl_Company.comapnyPhone)</h4>
+            </th>
+        </tr>
+    </table>
+    <div dir="rtl">
+        <br /><br />
+        <div dir="rtl" style="border:double; width:220px; margin-right:40%;">
+            @using (Html.BeginForm("Index", "MainCompanies", new { idCompany = Model.First().companyId, enctype = "multipart/form-data" }, FormMethod.Post))
+            {
+
+                <label for="file" style="margin-right:36%">הוסף עובדים</label>
+                <br />
+                <input type="file" name="file" id="file" />
+                <br />
+                <input type="submit" value="העלה נתונים" style="margin-right:36%;" />
+            }
+        </div>
+        <td>
             @foreach (var item in Model)
             {
 
-                <a id=@item.unitName ><img style="margin-right:10%; cursor:pointer" src="~/photos/folderIcon.png" /> </a>
-            }
-            <br />
-            @foreach (var item in Model)
-            {
+                using (Html.BeginForm("ManageCompany", "MainCompanies", new { id = item.companyId, unit = item.unitName, cl = item.className }))
+                {
+                    <button type="submit" style="padding: 0; border: none; background-color:transparent"><img src="~/photos/folderIcon.png" style="cursor:pointer" /> </button>
+                }
 
-                <label style="margin-right:10%">@item.unitName </label>
             }
+        </td>
+        <br />
+        @foreach (var item in Model)
+        {
+            <label style="margin-right:2%">@item.unitName @item.className</label>
 
+        }
+
+    </div>
 </div>
+}
+@if(Model.Count() <1)
+{
+    <script>alert("bla")</script>
+    Response.Redirect(Url.Action("MainCompanies", "MainCompanies"));
+}
+    
+
+}

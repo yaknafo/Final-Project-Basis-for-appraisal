@@ -114,8 +114,8 @@ namespace BasisForAppraisal_finalProject.Models
             {
                 xlApp.Workbooks.Close();
                 File.Delete(path);
-            }
-        }
+    }
+}
          }
     }
 
