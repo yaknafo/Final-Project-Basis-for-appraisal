@@ -113,7 +113,7 @@
             <div dir="rtl" style="border-bottom: solid;">
                 <br />
                 <br />
-                @if (@Model.NumberOfAnswers >0)
+                @if (@Model.Answers.Count()>0)
                 {
 
                     <br />
@@ -127,8 +127,7 @@
                     }
                     Session["MultipleChoice"]= Model;
                     @*@Ajax.ActionLink("change", "AddAnswerToQuestion", new { id =1, q=Model }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "MultipleChoice", InsertionMode = InsertionMode.InsertAfter })*@
-                     <button type="submit" class="btn btn-primary" name="submit" value="knafo" style="margin-right:40%">+</button>
-                    
+   
 
                 }
                 else
