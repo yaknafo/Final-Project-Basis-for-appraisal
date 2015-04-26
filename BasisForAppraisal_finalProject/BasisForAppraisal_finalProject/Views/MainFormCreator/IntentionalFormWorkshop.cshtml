@@ -72,7 +72,7 @@
         </div>
 
 
-    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair",}))
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair", OnSuccess = "CloseModels()" }))
 {
 
     <div id="ActionBtn" style="position: fixed; margin-top: -14%; background-color: lightgrey; width: 100%; ">
@@ -240,9 +240,9 @@
         
         
          
-          <!-- Add new question scale -->
+          <!-- Add new question MultipleChoice -->
         
-    <div class="modal fade" id="MultipleChoiceQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    @*<div class="modal fade" id="MultipleChoiceQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:75%">
             <div class="modal-content" style="width:75%">
                 <div class="modal-header" style="width:100%">
@@ -250,14 +250,9 @@
                     <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
                 </div>
                 <div class="modal-body">
-                    @if (Model.NewQuestionMultipleChoice != null)
-                    {
-                        Model.NewQuestionMultipleChoice = null;
-                    }
                     <div id="MultipleChoice">
-                        @Html.Partial("_MultipleChoiceQuestion", Model.NewQuestionMultipleChoice)
+                        @Html.EditorFor(x=> x.NewQuestionMultipleChoice)
                     </div>
-                    @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
@@ -266,7 +261,7 @@
 
             </div>
         </div>
-    </div>
+    </div>*@
 
 
 

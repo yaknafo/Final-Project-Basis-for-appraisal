@@ -65,12 +65,12 @@ namespace BasisForAppraisal_finalProject.Controllers
         /// <returns></returns>
         /// 
          [HttpPost]
-         public ActionResult AddAnswerToQuestion(int id)
+         public ActionResult AddAnswerToQuestion(int id, tbl_IntentionalQuestion q)
         {
 
-            var question = Session["MultipleChoice"] as tbl_IntentionalQuestion;
-             question.AddAnswerOption();
-             return PartialView("_MultipleChoiceQuestion", question);
+            // question.AddAnswerOption();
+            var h = new tbl_IntentionalAnswer();
+             return PartialView("_MultipleChoiceQuestion", h);
         }
        [HttpPost]
        public ActionResult IntentionalFormWorkshop(string submit, FormViewModel formViewModel)

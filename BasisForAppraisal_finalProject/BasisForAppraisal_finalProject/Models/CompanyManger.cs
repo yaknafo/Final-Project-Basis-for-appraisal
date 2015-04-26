@@ -84,7 +84,7 @@ namespace BasisForAppraisal_finalProject.Models
                     }
                     else
                     {
-                        emp.unitName = unitFormDB.unitName;
+                      //  emp.unitName = unitFormDB.unitName;
                     }
 
                     // sreach for unit in Db
@@ -102,10 +102,12 @@ namespace BasisForAppraisal_finalProject.Models
                             DM.AddClass(newClassFormDB);
                             // emp.className = newClassFormDB.className;
                             emp.className = newClassFormDB.className;
+                            emp.unitName = ClassFormDB.unitName;
                         }
                         else
                         {
                             emp.className = ClassFormDB.className;
+                            emp.unitName = ClassFormDB.unitName;
                         }
                     }
                     catch (Exception ex)
