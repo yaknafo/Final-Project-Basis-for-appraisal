@@ -26,6 +26,27 @@
 
 
 </script>
+@if (TempData["Success"] != null)
+{
+    <script>
+        $('#FreeTextQuestion').modal('hide');
+        $('#myModal').modal('hide');
+        $('#MultipleChoiceQuestion').modal('hide');
+        $('#ScaleQuestion').modal('hide');
+
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    </script>
+}
+else
+{
+    <script>
+        $('.modal-backdrop').remove();
+        $('#MultipleChoiceQuestion').modal('toggle');
+    </script>
+}
+
+
 
 
 @if (TempData["Success"] != null)
@@ -97,23 +118,4 @@
 
 
 @Html.EditorFor(a => a.Questions)
-
-@if (TempData["Success"] != null)
-{
-<script>
-    $('#FreeTextQuestion').modal('hide');
-    $('#myModal').modal('hide');
-    $('#MultipleChoiceQuestion').modal('hide');
-    $('#ScaleQuestion').modal('hide');
-
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
- </script>
-}
-else
-{
-    <script>
-        $('#MultipleChoiceQuestion').modal('show');
-    </script>
-}
 
