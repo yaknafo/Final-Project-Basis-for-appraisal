@@ -178,6 +178,7 @@
       <DependentUpon>BFADataBasedbml.dbml</DependentUpon>
     </Compile>
     <Compile Include="DBML\DbmlBFADataContext.cs" />
+    <Compile Include="DBML\EmployeePratical.cs" />
     <Compile Include="DBML\FormPartial.cs" />
     <Compile Include="DBML\Interface\QuestionType.cs" />
     <Compile Include="DBML\Pratical.cs" />
@@ -320,6 +321,8 @@
     </Content>
     <Content Include="Views\MainFormCreator\_MultipleChoiceQuestion.cshtml" />
     <Content Include="Views\MainCompanies\_partialAddFormToUnit.cshtml" />
+    <Content Include="Views\MainCompanies\EditorTemplates\tbl_Employee.cshtml" />
+    <Content Include="Views\MainCompanies\MainEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
