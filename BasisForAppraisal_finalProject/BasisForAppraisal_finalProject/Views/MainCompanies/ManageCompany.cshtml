@@ -14,7 +14,17 @@
 
 <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
     <h2>@Model.MyClass.tbl_Unit.tbl_Company.comapnyName</h2>
+    
 </div>
+<fieldset>
+
+    @using (Html.BeginForm("Index", "SendMailer", new { id = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className }, FormMethod.Post))
+    {
+
+        <input type="submit" value="Send mail" />
+    }
+</fieldset>
+
 @Html.Partial("_partialAddFormToUnit",Model)
 
 <div dir="rtl">
@@ -22,18 +32,7 @@
 </div>
 
 
-<fieldset>
-    <legend>
-        Send Email
-    </legend>
-    @using (Html.BeginForm("Index", "SendMailer", new { id = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className }, FormMethod.Post))
-    {
-        
-        <input type="submit" value="Send mail" />
-    }
-</fieldset>
 
-<div dir="rtl" style="border:double; width:220px; margin-left:40%;">
 
-</div>
+
 
