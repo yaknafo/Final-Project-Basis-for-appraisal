@@ -262,6 +262,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
             }
 
             Questions.Add(question);
+
+            // stratup new question מחוון
+            NewQuestion = null;
+
         }
 
 
@@ -277,6 +281,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
            }
 
            Questions.Add(question);
+
+           // stratup new question free text
+           NewQuestionFreeText = null;
+
        }
 
 
@@ -298,7 +306,11 @@ namespace BasisForAppraisal_finalProject.ViewModel
                question.SectionId = CurrentSection.SectionId;
                question.Answers.ForEach(a => a.FormId = form.formId);
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
-           Questions.Add(question);
+               Questions.Add(question);
+               
+           // stratup new question scale
+               NewQuestionScale = null;
+
        }
 
        public void AddQuestionMultipleChoice(tbl_IntentionalQuestion question)
@@ -309,6 +321,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
            question.Answers.ForEach(a => a.FormId = CurrentSection.FormId);
            question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
            Questions.Add(question);
+
+           // stratup new question Muliti choice
+           NewQuestionMultipleChoice = null;
+
        }
 
 
