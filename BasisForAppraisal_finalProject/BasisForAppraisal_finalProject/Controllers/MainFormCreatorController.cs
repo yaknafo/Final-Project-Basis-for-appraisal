@@ -79,6 +79,10 @@ namespace BasisForAppraisal_finalProject.Controllers
            var manager = new FormManager();
            ModelState.Clear();
 
+           if (submit.All(char.IsDigit))
+               formViewModel.DeleteAnswer(Convert.ToInt32(submit));
+
+
            switch(submit)
            {
                case "Exit":       return backToMainForm();

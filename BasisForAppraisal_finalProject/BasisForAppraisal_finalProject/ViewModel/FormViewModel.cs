@@ -320,6 +320,29 @@ namespace BasisForAppraisal_finalProject.ViewModel
            
        }
 
+       public void DeleteAnswer(int idAnswer)
+       {
+           //var questionId = questionIdWithAnswerId.Split(new Char [] {'-'});
+
+           //var q = Convert.ToInt32(questionId.First());
+
+           //var AnswerId = Convert.ToInt32(questionId[1]);
+
+           //var QuestionDeleteAnswer = Questions.Where(x => x.QuestionId == q).First().Answers.Where(a => a.AnswerId == AnswerId).First();
+
+           //var b = Questions.Where(x => x.QuestionId == q).First().Answers.Remove(QuestionDeleteAnswer);
+
+           for (int i = 0; i < Questions.Count; i++ )
+           {
+               var questionAnswers = Questions[i].Answers; ;
+                var deleteAnswer = questionAnswers.Where(a => a.AnswerId == idAnswer).FirstOrDefault();
+                if (deleteAnswer != null)
+                Questions[i].Answers.Remove(deleteAnswer);
+           }
+
+
+       }
+
 
      
 
