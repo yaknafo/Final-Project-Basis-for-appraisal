@@ -108,8 +108,8 @@ namespace BasisForAppraisal_finalProject.Models
                     DM.AddClass(newClassFormDB);
                     // emp.className = newClassFormDB.className;
                     emp.className = newClassFormDB.className;
-                    if (ClassFormDB.unitName != null)
 
+                    if (ClassFormDB != null && ClassFormDB.unitName != null)
                         emp.unitName = ClassFormDB.unitName;
                     else
                         emp.unitName = unitName;
