@@ -138,7 +138,8 @@ namespace BasisForAppraisal_finalProject.Controllers
            var employes= dmc.getEmployee(companyid,unit,cl);
             foreach(var e1 in employes)
                 foreach(var e2 in employes)
-                   dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
+                    if(e2.IsManger==false)
+                         dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
             return RedirectToAction("ManageCompany", new { id = companyid, unit = unit, cl = cl });
             
         }
