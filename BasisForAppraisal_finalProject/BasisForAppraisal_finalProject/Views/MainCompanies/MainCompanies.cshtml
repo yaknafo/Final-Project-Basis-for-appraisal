@@ -13,13 +13,8 @@
 @Styles.Render("~/Content/bootstrapcss")
 @Styles.Render("~/Content/themes/base/css")
 <div dir="rtl" style="text-align:center;">
-
-
-
-
-    <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
-      
-        <!-- Default panel contents -->
+<div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
+       <!-- Default panel contents -->
         <div class="panel-heading" style="font-size: 22px;  ">רשימת לקוחות</div>
          <div style="margin-right:85%">  @Html.ActionLink("הוסף חברה חדשה", "addCompanie")</div>
         <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
@@ -49,12 +44,16 @@
             </tbody>
         </table>
 
-        <script>
-
-            var table = $('#myTable').DataTable();
-            new $.fn.dataTable.KeyTable(table);
-
-        </script>
+       
     </div>
     </div>
+
+<script>
+
+    var table = $('#myTable').DataTable();
+    new $.fn.dataTable.KeyTable(table);
+
+</script>
+
+
 

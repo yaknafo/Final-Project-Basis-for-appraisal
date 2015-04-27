@@ -74,7 +74,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             ViewBag.phone = companyies.comapnyPhone;
             ViewBag.adress = companyies.comapnyAddress;
             List<tbl_Class> list= new List<tbl_Class>();
-            foreach (var unit in companyies.tbl_Units)
+            foreach (var unit in companyies.Units)
                 foreach (var cl in unit.tbl_Classes)
                     list.Add(cl);
            

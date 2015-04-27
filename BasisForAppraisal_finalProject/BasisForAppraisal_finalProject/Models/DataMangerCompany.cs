@@ -13,9 +13,10 @@ namespace BasisForAppraisal_finalProject.Models
 
     public class DataMangerCompany
     {
-        private BFADataBasedbmlDataContext manager = new BFADataBasedbmlDataContext();
+        private BFADataBasedbmlDataContext manager; 
         public DataMangerCompany()
         {
+            manager= new BFADataBasedbmlDataContext();
             this.manager = DbmlBFADataContext.GetDataContextInstance();
             var cultureinfo = new System.Globalization.CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = cultureinfo;
@@ -27,7 +28,12 @@ namespace BasisForAppraisal_finalProject.Models
             return manager.tbl_ConnectorFormFills.ToList();
         }
 
+      
 
+        public List<tbl_Unit> getUnitsForCompany(int id)
+        {
+            return this.manager.tbl_Units.Where(x => x.companyId == id).ToList();
+        }
         //-------------------------------------------------- Add Method --------------------------------------------------
         public void addCompany(tbl_Company cmp)
         {

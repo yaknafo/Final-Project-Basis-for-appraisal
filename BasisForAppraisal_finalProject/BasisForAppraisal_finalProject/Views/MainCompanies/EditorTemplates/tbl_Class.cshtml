@@ -37,7 +37,7 @@
         </th>
     </tr>
 </table>
-</div>
+
 <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center ">
     <!-- Default panel contents -->
     <div class="panel-heading" style="font-size: 22px;  ">רשימת עובדים</div>
@@ -67,12 +67,7 @@
     </table>
   
 </div>
-<script>
-
-    var table = $('#myTable').DataTable();
-    new $.fn.dataTable.KeyTable(table);
-
-</script>
+</div>
 
 @foreach (var item in Model.Employees)
 {
@@ -98,3 +93,10 @@
         </div>
     </div>
 }
+
+<script>
+
+    var table = $('#myTable').DataTable();
+    new $.fn.dataTable.KeyTable(table);
+
+</script>
