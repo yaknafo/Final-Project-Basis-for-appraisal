@@ -13,20 +13,25 @@
         <h4>שאלה</h4>
             @Html.TextAreaFor(x => x.Title,new { @cols = 90, @rows = 2 })
     </div>
+        <strong>חובה   </strong>
+        @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0.5%;" })
+        <br />
     @if (Model.QuestionId > 0)
     {
-        @Html.ActionLink("ערוך", "upload_excelfile", new { @path = "rrr" })
+        @*@Html.ActionLink("ערוך", "upload_excelfile", new { @path = "rrr" })*@
 
-
-        @*@Html.ActionLink("מחק", "deleteQustion", new { @formID = Model.FormId, @quesNumber = Model.QuestionId })*@
         <table>
             <tr>
-                <th>delete</th>
-                <th>  @Html.CheckBoxFor(x => x.deleteQuestion, new { style = "height: 25px;  width:25px;" })</th>
+                <th>מחיקה</th>
+                <th>  @Html.CheckBoxFor(x => x.deleteQuestion, new { style = "height: 20px;  width:20px; margin-left:2%;" })</th>
             </tr>
         </table>
     }
-    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
+    
+    <!--////////---------------------------------------Type of question --------------------------------------------///                      -->
+   
+        
+         @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
     {
         <table class="table" dir="rtl" style="border-top: hidden; border-bottom: solid;">
             <tr dir="rtl">
@@ -64,7 +69,7 @@
         </div>
     }
     
-    <!-- Part of Scale Question-->
+    <!----------------------------------- Part of Scale Question------------------------------------------------------------>
     @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Scale"))
     {
         <div dir="rtl" style="border-bottom: solid;">
@@ -107,7 +112,8 @@
         </div>
     }
     
-        <!-- Part of Scale Muliti choise question-->
+        <!--------------------------- Part of  Muliti choise question--------------------------------------------------------->
+
         @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoice"))
         {
             <div dir="rtl" style="border-bottom: solid;">
@@ -119,6 +125,8 @@
                     { 
                      @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
                     @Html.TextBoxFor(x => x.Answers[i].Text)
+                    @Html.HiddenFor( x => x.Answers[i].AnswerId)
+                     <button type="submit" class="btn btn-danger" name="submit" value="@Model.Answers[i].AnswerId">X</button>
                     <br />
                      <br />
                     }

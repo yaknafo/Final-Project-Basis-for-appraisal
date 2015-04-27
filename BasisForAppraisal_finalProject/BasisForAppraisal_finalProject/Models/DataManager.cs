@@ -154,6 +154,24 @@ namespace BasisForAppraisal_finalProject.Models
             return form.formId;
         }
         //////////////////////////////////////////////////////////////////////////Delete method////////////////////////////////////////
+
+        /// <summary>
+        /// delete Answer from specfic form and specfic question
+        /// 
+        /// <param name="formID"></param> 
+        /// <param name="quesNumber"></param>
+        public void deleteAnswer(int formID, int quesNumber, int answerId)
+        {
+            // find the record to delete from the right form and right ques number
+            var answerToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.QuestionId == quesNumber && a.AnswerId == answerId).FirstOrDefault();
+
+            if (answerToDelete != null)
+                manager.tbl_IntentionalAnswers.DeleteOnSubmit(answerToDelete);
+
+            manager.SubmitChanges();
+
+        }
+        
         /// <summary>
         /// delte question from specfic form and specfic question
         /// 
@@ -260,11 +278,22 @@ namespace BasisForAppraisal_finalProject.Models
                 // get pointer in DB
                 var updateQuestoin = manager.tbl_IntentionalQuestions.Where(x => x.QuestionId == q.QuestionId).FirstOrDefault();
 
+                
+
+
                 // check if exist
                 if (updateQuestoin == null)
                     saveQuestionToDB(q);
+
                 else
                 {
+                    // Delete Answers in the question that was deleted by the user
+                    foreach (tbl_IntentionalAnswer answer in updateQuestoin.Answers)
+                    {
+                        if (!q.Answers.Select(x => x.AnswerId).Contains(answer.AnswerId))
+                            deleteAnswer(q.FormId, q.QuestionId, answer.AnswerId);
+                    }
+
                     // setting the title of the question
                     updateQuestoin.Title = q.Title;
 
@@ -276,11 +305,13 @@ namespace BasisForAppraisal_finalProject.Models
                         manager.SubmitChanges();
                     }
 
+                    var answersToDelete= manager.tbl_IntentionalAnswers.Where(x => x.QuestionId == q.QuestionId);
+
                     manager.SubmitChanges();
                 }
             }
 
-            // delete part
+            // --------------------------- Delete Question ---------------------------------------------
             if (questions.Any())
             {
                 var deleteQuestions = manager.tbl_IntentionalQuestions.Where(x => x.FormId == questions.First().FormId && !questions.Contains(x)).ToList();

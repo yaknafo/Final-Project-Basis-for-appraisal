@@ -262,6 +262,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
             }
 
             Questions.Add(question);
+
+            // stratup new question מחוון
+            NewQuestion = null;
+
         }
 
 
@@ -277,6 +281,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
            }
 
            Questions.Add(question);
+
+           // stratup new question free text
+           NewQuestionFreeText = null;
+
        }
 
 
@@ -298,7 +306,11 @@ namespace BasisForAppraisal_finalProject.ViewModel
                question.SectionId = CurrentSection.SectionId;
                question.Answers.ForEach(a => a.FormId = form.formId);
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
-           Questions.Add(question);
+               Questions.Add(question);
+               
+           // stratup new question scale
+               NewQuestionScale = null;
+
        }
 
        public void AddQuestionMultipleChoice(tbl_IntentionalQuestion question)
@@ -309,6 +321,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
            question.Answers.ForEach(a => a.FormId = CurrentSection.FormId);
            question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
            Questions.Add(question);
+
+           // stratup new question Muliti choice
+           NewQuestionMultipleChoice = null;
+
        }
 
 
@@ -318,6 +334,29 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
           Questions.RemoveAll(x => x.deleteQuestion);
            
+       }
+
+       public void DeleteAnswer(int idAnswer)
+       {
+           //var questionId = questionIdWithAnswerId.Split(new Char [] {'-'});
+
+           //var q = Convert.ToInt32(questionId.First());
+
+           //var AnswerId = Convert.ToInt32(questionId[1]);
+
+           //var QuestionDeleteAnswer = Questions.Where(x => x.QuestionId == q).First().Answers.Where(a => a.AnswerId == AnswerId).First();
+
+           //var b = Questions.Where(x => x.QuestionId == q).First().Answers.Remove(QuestionDeleteAnswer);
+
+           for (int i = 0; i < Questions.Count; i++ )
+           {
+               var questionAnswers = Questions[i].Answers; ;
+                var deleteAnswer = questionAnswers.Where(a => a.AnswerId == idAnswer).FirstOrDefault();
+                if (deleteAnswer != null)
+                Questions[i].Answers.Remove(deleteAnswer);
+           }
+
+
        }
 
 

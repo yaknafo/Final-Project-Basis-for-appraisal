@@ -78,7 +78,7 @@
     <div id="ActionBtn" style="position: fixed; margin-top: -14%; background-color: lightgrey; width: 100%; ">
 
         <!-- the exit button-->
-        <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 100px; background-color: black; ">
+        <button type="button" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 100px; background-color: black; ">
             <img src="~/photos/backTo.png" draggable="false" />
         </button>
 
@@ -127,15 +127,16 @@
          $('.modal-backdrop').remove();
      }
 
-
-     function Cl(){
-         alert("this is what???")
-     }
+     
 
 </script>
  
 
-         <!-- Modal -->
+
+  }
+
+ @using (Html.BeginForm())
+{     
 <div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -146,130 +147,12 @@
             <div class="modal-body">
                 <button type="submit" name="submit" value=@WorkShopActions.Exit class="btn btn-default">סגור וצא</button>
                 <button type="submit" name="submit" value=@WorkShopActions.SaveAndClose class="btn btn-primary">שמור וצא</button>
-                </div>
+            </div>
 
         </div>
     </div>
 </div>
-
-    
-
-    <!-- Add new question -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-    <div class="modal-dialog" style="width:75%">
-        <div class="modal-content" style="width:75%">
-            <div class="modal-header" style="width:100%">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
-                </div>
-               
-                  <div class="modal-body">
-                      @if(Model.NewQuestion !=null)
-                      {
-                          Model.NewQuestion = null;
-                      }
-                @Html.EditorFor(x=>x.NewQuestion)
-                @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
-            
-                </div>
-            
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" >סגור</button>
-                        <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%">שמור שאלה</button>
-                    </div>
-                
-            
-            </div>
-        </div>
-    </div>
-        
-        
-        
-         <!-- Add new question free text -->
-    <div class="modal fade" id="FreeTextQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:75%">
-            <div class="modal-content" style="width:75%">
-                <div class="modal-header" style="width:100%">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
-                </div>
-
-                <div class="modal-body">
-                    @if (Model.NewQuestionFreeText != null)
-                    {
-                        Model.NewQuestionFreeText = null;
-                    }
-                    @Html.EditorFor(x => x.NewQuestionFreeText)
-                    @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                    <button type="submit" class="btn btn-primary" name="submit" value="AddQustionFreeText" style="margin-right:40%">שמור שאלה</button>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-        
-        
-          <!-- Add new question scale -->
-    <div class="modal fade" id="ScaleQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:75%">
-            <div class="modal-content" style="width:75%">
-                <div class="modal-header" style="width:100%">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
-                </div>
-
-                <div class="modal-body">
-                    @if (Model.NewQuestionScale != null)
-                    {
-                        Model.NewQuestionScale = null;
-                    }
-                    @Html.EditorFor(x => x.NewQuestionScale)
-                    @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                    <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddScaleQuestion style="margin-right:40%">שמור שאלה</button>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-        
-        
-         
-          <!-- Add new question MultipleChoice -->
-    @*<div class="modal fade" id="MultipleChoiceQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:75%">
-            <div class="modal-content" style="width:75%">
-                <div class="modal-header" style="width:100%">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="MultipleChoice">
-                        @Html.EditorFor(x=> x.NewQuestionMultipleChoice)
-                    </div>
-                    @Ajax.ActionLink("change", "AddAnswerToQuestion", new { id = 1, q = Model }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "MultipleChoice", InsertionMode = InsertionMode.Replace })
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                    <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddScaleQuestion style="margin-right:40%">שמור שאלה</button>
-                </div>
-
-            </div>
-        </div>
-    </div>*@
-
-
+}
 
           <!-- Edit Section -->
     <div class="modal fade" id="MySection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -300,7 +183,7 @@
             </div>
         </div>
     </div>
-}
+
 
     <!-- popup preview -->
     @*<div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
@@ -312,7 +195,7 @@
                 <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:blue;">מצב תצוגה</h4>
 
                 @using (Html.BeginForm())
-                {
+               
                     <div id="Panel" style="width: 90%; margin-left:2%">
                         <div class="panel panel-default" style="margin-left:0%;width: 100%;">
                             <div class=" panel-heading" style="margin-left:0%;width: 100%;">
@@ -326,81 +209,9 @@
                         </div>
                     </div>
                    
-                }
+               
             </div>
         </div>
     </div>*@
 
-        <!-- Add new question MultipleChoice -->
-@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "MultipleChoice" }))
-{
-   
- 
-
-@*<div class="modal fade" id="MultipleChoiceQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:75%">
-        <div class="modal-content" style="width:75%">
-            <div class="modal-header" style="width:100%">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
-            </div>
-            <div class="modal-body">
-                <div id="MultipleChoice">
-                    @if (TempData["Success"] != null)
-                    {
-
-                        <script>
-                            $('#FreeTextQuestion').modal('hide');
-                            $('#myModal').modal('hide');
-                            $('#MultipleChoiceQuestion').modal('hide');
-                            $('#ScaleQuestion').modal('hide');
-
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                        </script>
-                    }
-
-                    @Html.Partial("_MultipleChoiceQuestion", Model)
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddMultipleChoiceQuestion style="margin-right:40%">שמור שאלה</button>
-            </div>
-
-        </div>
-    </div>
-</div>*@
-    
-            <!-- Edit Section -->
-    <div class="modal fade" id="MySection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width:75%">
-            <div class="modal-content" style="width:75%">
-                <div class="modal-header" style="width:100%">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
-                </div>
-
-                <div class="modal-body">
-                    @if (Model.NewQuestion != null)
-                    {
-                        Model.NewQuestion = null;
-                    }
-                    @Html.EditorFor(x => x.Sections)
-                    @Html.EditorFor(x => x.CurrentSection)
-                    @Html.EditorForModel();
-                    @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
-
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                    <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%">שמור שאלה</button>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-}
- 
+       

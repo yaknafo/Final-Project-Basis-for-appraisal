@@ -79,11 +79,17 @@ namespace BasisForAppraisal_finalProject.Controllers
            var manager = new FormManager();
            ModelState.Clear();
 
+           // delete answer
+           if (submit.All(char.IsDigit))
+               formViewModel.DeleteAnswer(Convert.ToInt32(submit));
+
+
            switch(submit)
            {
                case "Exit":       return backToMainForm();
 
                case "AddAnswerToMulitiChoice": formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
+                                               TempData["AddAnswerToMulitiChoice"] = "Add";
                                                break;
 
                case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);

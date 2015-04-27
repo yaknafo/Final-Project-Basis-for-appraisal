@@ -191,6 +191,7 @@
     <Compile Include="Models\CompanyManger.cs" />
     <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\DataMangerCompany.cs" />
+    <Compile Include="Models\Dictionary.cs" />
     <Compile Include="Models\FormManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MailModel.cs" />
@@ -232,6 +233,7 @@
       <LastGenOutput>BFADataBasedbml.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="photos\Uploading\ajax-loading.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DataTable\dataTables.keyTable.css" />

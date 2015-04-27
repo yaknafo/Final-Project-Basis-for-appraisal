@@ -38,7 +38,7 @@
         $('.modal-backdrop').remove();
     </script>
 }
-else
+@if (TempData["AddAnswerToMulitiChoice"] != null)
 {
     <script>
         $('.modal-backdrop').remove();
@@ -60,7 +60,8 @@ else
 {
     <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 3%; position: fixed; margin-top:13%"><strong>Your Changes are not Saved</strong></div>
 }
-   
+
+<!--  ------------------    question Multiple Choice             ----------------------------------------------------------->   
 <div class="modal fade" id="MultipleChoiceQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="width:75%">
         <div class="modal-content" style="width:75%">
@@ -116,6 +117,92 @@ else
 </div>
 
 
+<!--  ------------------    question מחוון             ----------------------------------------------------------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
+            </div>
 
+            <div class="modal-body">
+                @if (Model.NewQuestion != null)
+                {
+                    Model.NewQuestion = null;
+                }
+                @Html.EditorFor(x => x.NewQuestion)
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%">שמור שאלה</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+   <!-- Add new question free text -->
+<div class="modal fade" id="FreeTextQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
+            </div>
+
+            <div class="modal-body">
+                @if (Model.NewQuestionFreeText != null)
+                {
+                    Model.NewQuestionFreeText = null;
+                }
+                @Html.EditorFor(x => x.NewQuestionFreeText)
+                @*@Html.Partial("~/Views/MainFormCreator/_intetionalqusestionpartialforadd.cshtml",Model.NewQuestion)*@
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="submit" class="btn btn-primary" name="submit" value="AddQustionFreeText" style="margin-right:40%">שמור שאלה</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+     <!-- Add new question scale -->
+<div class="modal fade" id="ScaleQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">שאלה חדשה</h4>
+            </div>
+
+            <div class="modal-body">
+                @if (Model.NewQuestionScale != null)
+                {
+                    Model.NewQuestionScale = null;
+                }
+                @Html.EditorFor(x => x.NewQuestionScale)
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddScaleQuestion style="margin-right:40%">שמור שאלה</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!--       List of question -------------------------------------------------------------->
 @Html.EditorFor(a => a.Questions)
 
