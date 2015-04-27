@@ -8,6 +8,7 @@ using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.ViewModel;
 using System.IO;
 using BasisForAppraisal_finalProject.ViewModel.Company;
+using System.Threading.Tasks;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -17,10 +18,10 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public ActionResult Index( HttpPostedFileBase file = null, CompanyViewModel c= null)
         {
-            DateTime now = DateTime.Now;
+           
             var id = Convert.ToInt32( Session["companyId"]);
-            string name = now.ToString("yyyy-MM-ddTHH:mm:ss");
-            SendUploadExcel(file, id);
+            var taskUpLoadExcel= Task.Factory.StartNew(() => SendUploadExcel(file, id));
+            taskUpLoadExcel.Wait();
 
             return RedirectToAction("CompanyUnit", new { id = id });
           }

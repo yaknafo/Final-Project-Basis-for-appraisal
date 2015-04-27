@@ -60,13 +60,18 @@ namespace BasisForAppraisal_finalProject.Models
                     // setting all the valuues from the row in the excel into the new emoloyee
                     var emp = SetValuesInEmployee(idCompany, ref unitName, ref className, data);
 
+                    // check stauts of the input of the current row
+                    var inputStatus = validationRowInput(emp);
 
-                    unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
+                    if (inputStatus)
+                    {
+                        unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
 
 
-                    className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
+                        className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
-                    DM.addWorkerToDb(emp);
+                        DM.addWorkerToDb(emp);
+                    }
                 }
             }
             catch (Exception ex)
@@ -80,6 +85,8 @@ namespace BasisForAppraisal_finalProject.Models
             }
         }
 
+
+        //------------------------------ Private method of Excel upload method --------------------------------------------------------------- //
         private static string SetClassToEmployee(int idCompany, DataMangerCompany DM, string unitName, string className, tbl_Employee emp)
         {
             // sreach for unit in Db
@@ -134,6 +141,17 @@ namespace BasisForAppraisal_finalProject.Models
                 emp.unitName = unitFormDB.unitName;
             }
             return unitName;
+        }
+
+        private bool validationRowInput(tbl_Employee employee)
+        {
+            if (!employee.employeeId.All(char.IsDigit) || !(employee.employeeId.Length == 9))
+                return false;
+
+            if (string.IsNullOrEmpty(employee.firstName) || string.IsNullOrEmpty(employee.lastName))
+                return false;
+
+            return true;
         }
 
         private static tbl_Employee SetValuesInEmployee(int idCompany, ref string unitName, ref string className, String[] data)
