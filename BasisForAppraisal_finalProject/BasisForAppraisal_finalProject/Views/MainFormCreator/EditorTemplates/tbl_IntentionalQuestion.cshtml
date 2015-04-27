@@ -112,7 +112,7 @@
         </div>
     }
     
-        <!--------------------------- Part of Scale Muliti choise question--------------------------------------------------------->
+        <!--------------------------- Part of  Muliti choise question--------------------------------------------------------->
 
         @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoice"))
         {
@@ -125,7 +125,8 @@
                     { 
                      @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
                     @Html.TextBoxFor(x => x.Answers[i].Text)
-    <button type="submit" class="btn btn-danger" name="submit" value="@Model.Answers[i].AnswerId">X</button>
+                    @Html.HiddenFor( x => x.Answers[i].AnswerId)
+                     <button type="submit" class="btn btn-danger" name="submit" value="@Model.Answers[i].AnswerId">X</button>
                     <br />
                      <br />
                     }

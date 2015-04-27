@@ -203,8 +203,8 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="formId", Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Name = "formId", Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
 		public int formId
 		{
 			get

@@ -78,7 +78,7 @@
     <div id="ActionBtn" style="position: fixed; margin-top: -14%; background-color: lightgrey; width: 100%; ">
 
         <!-- the exit button-->
-        <button type="submit" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 100px; background-color: black; ">
+        <button type="button" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 100px; background-color: black; ">
             <img src="~/photos/backTo.png" draggable="false" />
         </button>
 
@@ -127,15 +127,16 @@
          $('.modal-backdrop').remove();
      }
 
-
-     function Cl(){
-         alert("this is what???")
-     }
+     
 
 </script>
  
 
-         <!-- Modal -->
+
+  }
+
+ @using (Html.BeginForm())
+{     
 <div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -146,11 +147,12 @@
             <div class="modal-body">
                 <button type="submit" name="submit" value=@WorkShopActions.Exit class="btn btn-default">סגור וצא</button>
                 <button type="submit" name="submit" value=@WorkShopActions.SaveAndClose class="btn btn-primary">שמור וצא</button>
-                </div>
+            </div>
 
         </div>
     </div>
 </div>
+}
 
           <!-- Edit Section -->
     <div class="modal fade" id="MySection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -181,7 +183,7 @@
             </div>
         </div>
     </div>
-}
+
 
     <!-- popup preview -->
     @*<div class="modal fade" id="Preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
@@ -193,7 +195,7 @@
                 <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:blue;">מצב תצוגה</h4>
 
                 @using (Html.BeginForm())
-                {
+               
                     <div id="Panel" style="width: 90%; margin-left:2%">
                         <div class="panel panel-default" style="margin-left:0%;width: 100%;">
                             <div class=" panel-heading" style="margin-left:0%;width: 100%;">
@@ -207,7 +209,7 @@
                         </div>
                     </div>
                    
-                }
+               
             </div>
         </div>
     </div>*@
