@@ -58,10 +58,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             var myunit = comapny.tbl_Units.Where(x => x.unitName.Equals( unit)).FirstOrDefault();
             var myclass = myunit.tbl_Classes.Where(x => x.className.Equals(cl)).FirstOrDefault();
             var unitAndForm = new ClassUnitViewModel(myclass);
-
-            // refresh Employees
             comapny.LoadEmployees();
-           // var companyView = new CompanyViewModel(myclass);
             return View(unitAndForm);
 
         }

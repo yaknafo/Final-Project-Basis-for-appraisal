@@ -57,17 +57,19 @@
         <td>
 
    
-    <div dir="rtl">
+   
         <br /><br />
    
         <br />
         <table>
-            </div>
+           
             <tr>
-            @foreach (var item in Model)
+            
+            @for (int i=0;i<Model.Count();i++)
             {
+                
                     <td style="margin-right:12%; width:32%">
-                        @using (Html.BeginForm("ManageCompany", "MainCompanies", new { id = item.companyId, unit = item.unitName, cl = item.className }))
+                        @using (Html.BeginForm("ManageCompany", "MainCompanies", new { id = Model.ToArray()[i].companyId, unit = Model.ToArray()[i].unitName, cl = Model.ToArray()[i].className }))
                 {
                    
                             <button  type="submit" style="padding: 0; border: none; background-color:transparent; margin-right:10%" sty><img src="~/photos/folderIcon.png" style="cursor:pointer" /> </button>
