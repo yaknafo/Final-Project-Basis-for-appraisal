@@ -86,9 +86,9 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
-        public ActionResult MainEmployee(string id = "100100101")
+        public ActionResult MainEmployee(string id = "301378242")
         {
-            if(string.IsNullOrEmpty(id))
+            if(!string.IsNullOrEmpty(id))
             {
                 var DM = new DataManager();
 

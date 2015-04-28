@@ -3,28 +3,66 @@
     Layout = null;
 }
 
+<table class="table-condensed" style="background-color:whitesmoke">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.unitName)
+        </th>
+        <th>
+            @Html.DisplayFor(x => x.unitName)
+        </th>
+    </tr>
 
-@Html.NameFor(x => x.unitName)
-@Html.EditorFor(x => x.unitName)
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.className)
+        </th>
+        <th>
+            @Html.DisplayFor(x => x.className)
+        </th>
+    </tr>
 
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.employeeId)
+        </th>
+        <th>
+            @Html.DisplayFor(x => x.employeeId)
+        </th>
+    </tr>
 
-@Html.NameFor(x => x.className)
-@Html.EditorFor(x => x.className)
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.firstName)
+            </th>
+        <th>
+            @Html.DisplayFor(x => x.firstName)
+            </th>
+</tr>
 
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.lastName)
+            </th>
 
-@Html.NameFor(x => x.employeeId)
-@Html.EditorFor(x => x.companyId)
-
-
-@Html.NameFor(x => x.firstName)
-@Html.EditorFor(x => x.firstName)
-
-
-@Html.NameFor(x => x.lastName)
-@Html.EditorFor(x => x.lastName)
-
-@Html.NameFor(x => x.Email)
-@Html.EditorFor(x => x.Email)
-
-@Html.NameFor(x => x.IsManger)
-@Html.EditorFor(x => x.IsManger)
+        <th>
+            @Html.DisplayFor(x => x.lastName)
+            </th>
+</tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.Email)
+            </th>
+<th>
+    @Html.DisplayFor(x => x.Email)
+    </th>
+</tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.IsManger)
+        </th>
+        <th>
+            @Html.CheckBoxFor(x => x.IsManger)
+            </th>
+</tr>
+</table>

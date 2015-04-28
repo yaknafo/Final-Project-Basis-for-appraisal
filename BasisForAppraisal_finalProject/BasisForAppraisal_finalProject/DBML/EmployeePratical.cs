@@ -14,15 +14,12 @@ namespace BasisForAppraisal_finalProject.DBML
 
         private Dictionary<tblForm, tbl_Employee> fillOnThem;
 
-
+      
     }
 
     public class EmployeeMetadata
     {
-        [Display(Name = "שם")]
-        [DataType(DataType.Text)]
-        public string comapnyName { get; set; }
-
+       
         [Display(Name = "מחלקה:")]
         [DataType(DataType.Text)]
         public string unitName { get; set; }
