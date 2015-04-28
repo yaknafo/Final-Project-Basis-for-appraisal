@@ -11,15 +11,31 @@ namespace BasisForAppraisal_finalProject.DBML
     [MetadataType(typeof(CompanyMetadata))]
     public partial class tbl_Company
     {
-
+        private List<tbl_Unit> units= new List<tbl_Unit>();
+        public List<tbl_Unit> Units
+        {
+            get
+            {
+                
+                loadUnits();
+                return units;
+            }
+           
+        }
+        public void loadUnits()
+        {
+            var dManager = new DataMangerCompany();
+            units = dManager.getUnitsForCompany(companyId);
+        }
         private List<tbl_Employee> employees;
+      
 
         public List<tbl_Employee> Employees
         {
             get
             {
-                if (employees == null)
-                    LoadEmployees();
+               
+                   LoadEmployees();
                 return employees;
             }
             set

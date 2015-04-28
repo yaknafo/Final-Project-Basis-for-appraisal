@@ -16,7 +16,10 @@
     <h2>@Model.MyClass.tbl_Unit.tbl_Company.comapnyName</h2>
     
 </div>
+@Html.Partial("_partialAddFormToUnit", Model)
 <fieldset>
+
+
 
     @using (Html.BeginForm("Index", "SendMailer", new { id = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className }, FormMethod.Post))
     {
@@ -24,12 +27,8 @@
         <input type="submit" value="Send mail" />
     }
 </fieldset>
+@Html.EditorFor(x=>x.MyClass)
 
-@Html.Partial("_partialAddFormToUnit",Model)
-
-<div dir="rtl">
-    @Html.EditorFor(x=>x.MyClass)
-</div>
 
 
 
