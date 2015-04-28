@@ -3,7 +3,7 @@
     Layout = null;
 }
 
-<table class="table-condensed" style="background-color:whitesmoke">
+<table class="table-condensed" style="background-color:whitesmoke" align="center">
     <tr>
         <th>
             @Html.DisplayNameFor(x => x.unitName)
@@ -62,7 +62,7 @@
             @Html.DisplayNameFor(x => x.IsManger)
         </th>
         <th>
-            @Html.CheckBoxFor(x => x.IsManger.Value)
+            @Html.CheckBoxFor(x => x.IsManger.Value, new { @disabled = "disabled" })
             </th>
 </tr>
 </table>

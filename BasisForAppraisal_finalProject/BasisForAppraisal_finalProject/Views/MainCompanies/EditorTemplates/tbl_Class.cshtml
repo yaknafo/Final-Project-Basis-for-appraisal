@@ -57,7 +57,7 @@
             {
                
                 <tr>
-                    <td align="center">@Html.ActionLink(@Model.Employees[i].employeeId, "ManageCompany", new { @id = @Model.Employees[i].companyId })</td>
+                    <td align="center">@Html.ActionLink(@Model.Employees[i].employeeId, "MainEmployee", new { @id = @Model.Employees[i].employeeId })</td>
                     <td align="center">@Model.Employees[i].firstName</td>
                     <td align="center">@Model.Employees[i].lastName</td>
                     <td><p><span class="glyphicon glyphicon-trash" title="מחק עובד מהחברה" data-toggle="modal" data-target="#@Model.Employees[i].employeeId" style="cursor:pointer;"></span></p></td>

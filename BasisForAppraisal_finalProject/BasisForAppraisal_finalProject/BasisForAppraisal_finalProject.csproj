@@ -221,6 +221,8 @@
     <Content Include="photos\addQues.png" />
     <Content Include="photos\backTo.png" />
     <Content Include="photos\deleteQ.png" />
+    <Content Include="photos\Employee\arrow_down_2.png" />
+    <Content Include="photos\Employee\arrow_up_2.png" />
     <Content Include="photos\folderIcon.png" />
     <Content Include="photos\info.png" />
     <Content Include="photos\logosmall.jpg" />

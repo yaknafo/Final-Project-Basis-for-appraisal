@@ -1,12 +1,87 @@
 ﻿@model BasisForAppraisal_finalProject.DBML.tbl_Employee
+           @using BasisForAppraisal_finalProject.DBML;
+@using System.Collections.Generic;
 @{
     ViewBag.Title = "MainEmployee";
 }
-<div style="margin-top:5%; font-size:medium;" dir="rtl" >
-    <h2>MainEmployee</h2>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+
+<div style="margin-top:5%; font-size:medium; margin-bottom:40%" dir="rtl">
+
+    <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
+        <h2>@Model.tbl_Class.tbl_Unit.tbl_Company.comapnyName</h2>
+    </div>
 
     @Html.EditorForModel()
 
-   
+
+
+    <div class="col-xs-3" style="align-content: center;margin-left:15%; margin-top:4%">
+        <h2 class="sub-header" title=" מי ממלא על העובד"><img src="~/photos/Employee/arrow_up_2.png" /> </h2>
+        <div class="table-responsive">
+            <table class="table table-striped" >
+                <thead>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td style="width:40%">
+                            ת"ז
+                        </td>
+                        <td>
+                            שם טופס
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FillOnMe)
+                    {
+                        <tr>
+                            <td>@item.employeeFillId</td>
+                            <td>@item.tblForm.FormName</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <div class="col-xs-3" style="margin-left: 15%; margin-top:4%">
+        <h2 class="sub-header" title="על מי העובד ממלא"><img src="~/photos/Employee/arrow_down_2.png" /> </h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td style="width:40%">
+                            ת"ז
+                        </td>
+                        <td>
+                            שם טופס
+                        </td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tbody>
+                    @foreach (var item in Model.FillOnThem)
+                    {
+                        <tr>
+                            <td>@item.employeeOnId</td>
+                            <td>@item.tblForm.FormName</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+   
+
+
 

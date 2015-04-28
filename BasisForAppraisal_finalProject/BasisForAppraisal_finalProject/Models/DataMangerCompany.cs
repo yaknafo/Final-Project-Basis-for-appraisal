@@ -23,7 +23,7 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
        //-------------------------------------------------- Get Method --------------------------------------------------
-        public List<tbl_ConnectorFormFill> getConecctors()
+        public List<tbl_ConnectorFormFill> Conecctors()
         {
             return manager.tbl_ConnectorFormFills.ToList();
         }
