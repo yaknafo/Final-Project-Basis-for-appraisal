@@ -85,6 +85,21 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(list);
 
         }
+
+        public ActionResult MainEmployee(string id = "100100101")
+        {
+            if(string.IsNullOrEmpty(id))
+            {
+                var DM = new DataManager();
+
+                var emp = DM.Employees.Where(e => e.employeeId == id).FirstOrDefault();
+
+                return View(emp);
+ 
+            }
+
+            return View();
+        }
         public ActionResult addCompanie()
         {
             return View();

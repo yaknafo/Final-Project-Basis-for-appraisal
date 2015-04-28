@@ -11,6 +11,10 @@ namespace BasisForAppraisal_finalProject.Models
     public class CompanyManger
     {
 
+        private static string defultUnit = "Genral";
+
+        private static string defultClass = "Genral";
+
         public void addCompany(tbl_Company cmp)
         {
             var manger = new DataMangerCompany();
@@ -61,7 +65,7 @@ namespace BasisForAppraisal_finalProject.Models
                     var emp = SetValuesInEmployee(idCompany, ref unitName, ref className, data);
 
                     // check stauts of the input of the current row
-                    var inputStatus = validationRowInput(emp);
+                    var inputStatus = validationRowInput(emp, ref unitName, ref className);
 
                     if (inputStatus)
                     {
@@ -92,7 +96,7 @@ namespace BasisForAppraisal_finalProject.Models
             // sreach for unit in Db
             // if unit not have a class ---> defult value will be Genral
             if (className == string.Empty)
-                className = "Genral";
+                className = defultClass;
 
             var ClassFormDB = DM.getClassByName(className, unitName, idCompany);
 
@@ -129,7 +133,7 @@ namespace BasisForAppraisal_finalProject.Models
             // sreach for unit in Db
             // if unit not have a class ---> defult value will be Genral
             if (unitName == string.Empty)
-                unitName = "Genral";
+                unitName = defultUnit;
 
             // sreach for unit in Db
             var unitFormDB = DM.getUnitByName(unitName, idCompany);
@@ -143,13 +147,19 @@ namespace BasisForAppraisal_finalProject.Models
             return unitName;
         }
 
-        private bool validationRowInput(tbl_Employee employee)
+        private bool validationRowInput(tbl_Employee employee, ref string unitName, ref string  className)
         {
             if (!employee.employeeId.All(char.IsDigit) || !(employee.employeeId.Length == 9))
                 return false;
 
             if (string.IsNullOrEmpty(employee.firstName) || string.IsNullOrEmpty(employee.lastName))
                 return false;
+
+            if (string.IsNullOrEmpty(className))
+               className = defultClass;
+
+            if (string.IsNullOrEmpty(unitName))
+                unitName = defultUnit;
 
             return true;
         }
