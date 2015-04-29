@@ -25,19 +25,13 @@ namespace BasisForAppraisal_finalProject.Controllers
 
             return RedirectToAction("CompanyUnit", new { id = id });
           }
-           
-           
 
-          
-        // method add excel data to db
-        //private void upload_excelfile(string path, int idCompany)
-        //{
-        //    var db = new CompanyManger();
-        //    db.upload_excelfile(path,idCompany);
 
-        //}
-        //
-        // GET: /MainCompanies/
+
+      
+     
+
+
         public ActionResult Index()
         {
             return View();
@@ -83,6 +77,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult MainEmployee(string id = "301378242")
         {
             if(!string.IsNullOrEmpty(id))
@@ -97,6 +92,19 @@ namespace BasisForAppraisal_finalProject.Controllers
 
             return View();
         }
+
+
+        public JsonResult GetEmployee(string term)
+        {
+            var DM = new DataManager();
+
+            var emp = DM.Employees.Where(x => x.employeeId.StartsWith(term)).Select(a=> a.employeeId).ToList();
+
+            return Json(emp, JsonRequestBehavior.AllowGet);
+        }
+
+
+       
         public ActionResult addCompanie()
         {
             return View();

@@ -336,7 +336,10 @@ namespace BasisForAppraisal_finalProject.Models
 
             // check if exist
             if (updateAnswer == null)
-                throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
+            {
+                //throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
+                return;
+            }
 
             // setting the data for the new answer
             if (newAnswer != null)
