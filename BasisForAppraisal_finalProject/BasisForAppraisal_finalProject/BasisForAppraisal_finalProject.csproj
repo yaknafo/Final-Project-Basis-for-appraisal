@@ -181,6 +181,7 @@
     <Compile Include="DBML\EmployeePratical.cs" />
     <Compile Include="DBML\FormPartial.cs" />
     <Compile Include="DBML\Interface\QuestionType.cs" />
+    <Compile Include="DBML\PartialConnectorFormFill.cs" />
     <Compile Include="DBML\Pratical.cs" />
     <Compile Include="DBML\partial_tbl_class1.cs" />
     <Compile Include="DBML\SectionPartical.cs" />

@@ -4,41 +4,27 @@
 @{
     ViewBag.Title = "MainEmployee";
 }
-<link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#txtSearch').autocomplete({
-            source: '@Url.Action("GetEmployee")'
-        });
-    });
-</script>
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 
 <div style="margin-top:5%; font-size:medium; margin-bottom:40%" dir="rtl">
-    @using (Html.BeginForm())
-    {
-        <b>ID</b>
-        @Html.TextBox("searchTrem", null, new { id = "txtSearch" })
-        <input type="submit" value="search" />
-    }
-
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "conTable", }))
+{
     <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
-        <h2>@Model.tbl_Class.tbl_Unit.tbl_Company.comapnyName</h2>
+        <h2>@Model.employeeId</h2>
     </div>
 
 
-    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "conTable", }))
-    {
+   
      <button type="submit"  name="submit"  class="btn btn-primary btn-lg" title="ערוך עובד" style="margin: 1%; width: 100px; background-color: black">
              <span class="glyphicon glyphicon-pencil" title="עריכה" data-toggle="modal" data-target="#@Model.employeeId" style="cursor:pointer;"></span>
          </button>
      @Html.EditorForModel()
        
     <div id="conTable">
-        @Html.Partial("_ConecctorTable", Model)
+         @Html.Partial("_ConecctorTable", Model)
     </div>
     }
     </div>

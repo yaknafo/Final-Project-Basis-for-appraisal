@@ -9,7 +9,7 @@
             @Html.DisplayNameFor(x => x.unitName)
         </th>
         <th>
-            @Html.DisplayFor(x => x.unitName)
+            @Html.EditorFor(x => x.unitName)
         </th>
     </tr>
 
@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(x => x.className)
         </th>
         <th>
-            @Html.DisplayFor(x => x.className)
+            @Html.EditorFor(x => x.className)
         </th>
     </tr>
 
@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(x => x.employeeId)
         </th>
         <th>
-            @Html.DisplayFor(x => x.employeeId)
+            @Html.EditorFor(x => x.employeeId)
         </th>
     </tr>
 
@@ -36,7 +36,7 @@
             @Html.DisplayNameFor(x => x.firstName)
             </th>
         <th>
-            @Html.DisplayFor(x => x.firstName)
+            @Html.EditorFor(x => x.firstName)
             </th>
 </tr>
 
@@ -46,7 +46,7 @@
             </th>
 
         <th>
-            @Html.DisplayFor(x => x.lastName)
+            @Html.EditorFor(x => x.lastName)
             </th>
 </tr>
     <tr>
@@ -54,7 +54,7 @@
             @Html.DisplayNameFor(x => x.Email)
             </th>
 <th>
-    @Html.DisplayFor(x => x.Email)
+    @Html.EditorFor(x => x.Email)
     </th>
 </tr>
     <tr>
@@ -65,4 +65,4 @@
             @Html.CheckBoxFor(x => x.IsManger.Value, new { @disabled = "disabled" })
             </th>
 </tr>
-</table>
+</table>    

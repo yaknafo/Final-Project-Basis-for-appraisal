@@ -30,6 +30,15 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
+        public void DeleteConnectors(List<tbl_ConnectorFormFill> Connectors)
+        {
+             var db = new DataMangerCompany();
+             for (int i = 0; i < Connectors.Count; i++)
+                 db.DeleteConnector(Connectors[i].employeeFillId, Connectors[i].employeeOnId, Connectors[i].companyId, Connectors[i].formId);
+            
+        }
+
+
         // method add data from excel file to sql server db- workers to company
         public void UploadExcelFile(string path, int idCompany)
         {

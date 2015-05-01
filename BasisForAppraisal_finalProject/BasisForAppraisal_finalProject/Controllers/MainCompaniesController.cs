@@ -85,6 +85,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                 var DM = new DataManager();
 
                 var emp = DM.Employees.Where(e => e.employeeId == id).FirstOrDefault();
+                emp.RefreshConecctors();
 
                 return View(emp);
  
@@ -94,11 +95,83 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult MainEmployee(string submit, string iFillOnThem, string fromName, string ThemFillOnMe, string fromNameOnMe, tbl_Employee emp)
+        {
+            ModelState.Clear();
+            var DM = new DataMangerCompany();
+            var DMO = new DataManager();
+            var cm = new CompanyManger();
+           
+            if (submit.Equals("addThemfillOnMe"))
+            {
+                var formID = DMO.Forms.Where(f => f.FormName == fromNameOnMe).Select(f => f.formId).FirstOrDefault();
+                var taskAddCon = Task.Factory.StartNew(() => DM.AddConnector(ThemFillOnMe, emp.employeeId, emp.companyId, formID));
+                taskAddCon.Wait();
+            }
+
+            else if (submit.Equals("addMEfillOnThem"))
+            {
+                var formID = DMO.Forms.Where(f => f.FormName == fromName).Select(f => f.formId).FirstOrDefault();
+                var taskAddCon = Task.Factory.StartNew(() => DM.AddConnector(emp.employeeId, iFillOnThem, emp.companyId, formID));
+                taskAddCon.Wait();
+            }
+            else if (submit.Equals("DeleteMEfillOnThem"))
+            {
+                var conecntorsForDelete = emp.FillOnThem.Where(x => x.IfDelete).ToList();
+                var taskAddCon = Task.Factory.StartNew(() => cm.DeleteConnectors(conecntorsForDelete));
+                taskAddCon.Wait();
+            }
+            else if (submit.Equals("DeleteThemFillOnMe"))
+            {
+                var conecntorsForDelete = emp.FillOnMe.Where(x => x.IfDelete).ToList();
+                var taskAddCon = Task.Factory.StartNew(() => cm.DeleteConnectors(conecntorsForDelete));
+                taskAddCon.Wait();
+            }
+
+            emp.RefreshConecctors();
+
+            if(Request.IsAjaxRequest())
+            {
+                return PartialView("_ConecctorTable", emp);
+            }
+           
+            return View(emp);
+        }
+
+
         public JsonResult GetEmployee(string term)
         {
             var DM = new DataManager();
 
             var emp = DM.Employees.Where(x => x.employeeId.StartsWith(term)).Select(a=> a.employeeId).ToList();
+
+            return Json(emp, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetEmployees(string term)
+        {
+            var DM = new DataManager();
+
+            var emp = DM.Employees.Where(x => x.employeeId.StartsWith(term)).Select(a => a.employeeId).ToList();
+
+            return Json(emp, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetForms(string term)
+       {
+            var DM = new DataManager();
+
+            var emp = DM.Forms.Where(x => x.FormName.StartsWith(term)).Select(a => a.FormName).Take(5).ToList();
+
+            return Json(emp, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetFormss(string term)
+        {
+            var DM = new DataManager();
+
+            var emp = DM.Forms.Where(x => x.FormName.StartsWith(term)).Select(a => a.FormName).Take(5).ToList();
 
             return Json(emp, JsonRequestBehavior.AllowGet);
         }

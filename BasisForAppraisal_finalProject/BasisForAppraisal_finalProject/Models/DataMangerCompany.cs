@@ -145,8 +145,44 @@ namespace BasisForAppraisal_finalProject.Models
             
         }
 
-       
+        //----------------------------------------------- Delete Method ---------------------------------------------------//
+
+        public void DeleteConnector(string employeeFillID, string employeeOnId, int companyId, int formID)
+        {
+            if (string.IsNullOrEmpty(employeeFillID) || string.IsNullOrEmpty(employeeOnId))
+                throw new Exception("employee id is missing");
+
+            if (manager.tbl_Companies.Where(x => x.companyId == companyId).FirstOrDefault() == null)
+                throw new Exception("Company not exit in the DB");
+
+            if (manager.tblForms.Where(x => x.formId == formID).FirstOrDefault() == null)
+                throw new Exception("form not exit in the DB");
+
+
+          //var tempconnector = new tbl_ConnectorFormFill { employeeFillId = employeeFillID, employeeOnId = employeeOnId, companyId = 1, formId = formID };
+
+            var tempconnector = manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyId && x.employeeFillId == employeeFillID
+                                                                     && x.employeeOnId == employeeOnId && x.formId == formID).FirstOrDefault();
+
+            if (tempconnector == null)
+                return;
+            manager.tbl_ConnectorFormFills.DeleteOnSubmit(tempconnector);
+            manager.SubmitChanges();
+
+        }
+
+
+        public void DeleteConnectors(List<tbl_ConnectorFormFill> Connectors)
+        {
+           
+            manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(Connectors);
+            manager.SubmitChanges();
+
+        }
     }
+
+
+    
 
 
 }

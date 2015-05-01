@@ -81,7 +81,11 @@ namespace BasisForAppraisal_finalProject.DBML
             return dic;
         }
 
-     
+      public void RefreshConecctors()
+      {
+          InitfillOnMe();
+          InitfillOnThem();
+      }
       
     }
 
