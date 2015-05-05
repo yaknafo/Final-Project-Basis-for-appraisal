@@ -21,5 +21,7 @@ namespace BasisForAppraisal_finalProject.Controllers.Enum
 
         AddMultipleChoiceQuestion,
 
+        AddYesNoQuestion,
+
     }
 }

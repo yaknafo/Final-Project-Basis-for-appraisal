@@ -163,7 +163,7 @@ namespace BasisForAppraisal_finalProject.Models
         public void deleteAnswer(int formID, int quesNumber, int answerId)
         {
             // find the record to delete from the right form and right ques number
-            var answerToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.QuestionId == quesNumber && a.AnswerId == answerId).FirstOrDefault();
+            var answerToDelete = manager.tbl_IntentionalAnswers.Where(a => a.AnswerId == answerId).FirstOrDefault();
 
             if (answerToDelete != null)
                 manager.tbl_IntentionalAnswers.DeleteOnSubmit(answerToDelete);

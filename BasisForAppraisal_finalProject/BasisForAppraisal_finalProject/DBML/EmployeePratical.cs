@@ -91,34 +91,33 @@ namespace BasisForAppraisal_finalProject.DBML
 
     public class EmployeeMetadata
     {
-       
+        [StringLength(30, MinimumLength = 2)]
+        [Required ]
         [Display(Name = "מחלקה:")]
-        [DataType(DataType.Text)]
         public string unitName { get; set; }
 
+         [Required]
         [Display(Name = "מחזור:")]
-        [DataType(DataType.Text)]
         public string className { get; set; }
 
+         [Required]
         [Display(Name = "מייל:")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required]
         [Display(Name = "שם פרטי:")]
-        [DataType(DataType.Text)]
         public string firstName { get; set; }
-
+        [StringLength(30, MinimumLength = 1)]
+        [Required]
         [Display(Name = "שם פרטי:")]
-        [DataType(DataType.Text)]
         public string lastName { get; set; }
 
-
+        [StringLength(9, MinimumLength=9)]
+        [Required]
         [Display(Name = "תז:")]
-        [DataType(DataType.Text)]
         public string employeeId { get; set; }
 
         [Display(Name = "מנהל:")]
-        [DataType(DataType.Text)]
         public string IsManger { get; set; }
 
 

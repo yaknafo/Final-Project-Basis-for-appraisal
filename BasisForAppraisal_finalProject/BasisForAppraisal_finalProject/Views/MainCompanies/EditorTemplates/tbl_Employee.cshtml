@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-
+@Html.HiddenFor(x => x.employeeId)
 <table class="table-condensed" style="background-color:whitesmoke" align="center">
     <tr>
         <th>
@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(x => x.employeeId)
         </th>
         <th>
-            @Html.EditorFor(x => x.employeeId)
+            @Html.TextBoxFor(x => x.employeeId, new { @disabled = "disabled"})
         </th>
     </tr>
 

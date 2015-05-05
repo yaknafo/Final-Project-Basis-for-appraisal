@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -345,6 +347,7 @@
     <Content Include="Views\MainCompanies\EditorTemplates\tbl_Employee.cshtml" />
     <Content Include="Views\MainCompanies\MainEmployee.cshtml" />
     <Content Include="Views\MainCompanies\_ConecctorTable.cshtml" />
+    <Content Include="Views\MainCompanies\AddEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
@@ -429,6 +432,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
