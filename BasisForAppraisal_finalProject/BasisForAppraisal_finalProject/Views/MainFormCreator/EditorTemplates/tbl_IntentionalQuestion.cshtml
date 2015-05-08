@@ -132,7 +132,10 @@
                      @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
                     @Html.TextBoxFor(x => x.Answers[i].Text)
                     @Html.HiddenFor( x => x.Answers[i].AnswerId)
+                        if (Model.Answers[i].AnswerId!=0)
+                        { 
                      <button type="submit" class="btn btn-danger" name="submit" value="@Model.Answers[i].AnswerId">X</button>
+                }
                     <br />
                      <br />
                     }
