@@ -91,12 +91,17 @@
             {
                 <table>
                     <tr>
-                        <th>
-                            @Html.TextBoxFor(x => x.Answers[0].Text)
+                        
+                            @if(Model.Answers.Count>0)
+                            {
+                                <th>
+                               @Html.TextBoxFor(x => x.Answers[0].Text)
+                           
                         </th>
-                        @for (int i = 0; i < @Model.Answers.Count; i++)
+                        for (int i = 0; i < @Model.Answers.Count; i++)
                         {
                             <th>
+                                @Html.HiddenFor(x => x.Answers[i].AnswerId)
                                 @Html.HiddenFor(x => x.Answers[i].AnswerOption)
                                 @Html.HiddenFor(x => x.NumberOfAnswers)
                                 @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
@@ -105,6 +110,7 @@
                         <th>
                             @Html.TextBoxFor(x => x.Answers[Model.Answers.Count - 1].Text)
                         </th>
+                            }
                     </tr>
                 </table>
             }
@@ -126,10 +132,51 @@
                      @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
                     @Html.TextBoxFor(x => x.Answers[i].Text)
                     @Html.HiddenFor( x => x.Answers[i].AnswerId)
+                        if (Model.Answers[i].AnswerId!=0)
+                        { 
                      <button type="submit" class="btn btn-danger" name="submit" value="@Model.Answers[i].AnswerId">X</button>
+                }
                     <br />
                      <br />
                     }
+
+                }
+                <div style="margin-bottom:2%;"></div>
+            </div>
+        }
+        
+        <!--------------------------- Part of  YesNo question--------------------------------------------------------->
+        @if (@Model.QuestionType != null && @Model.QuestionType.Contains("YesNo"))
+        {
+            <div dir="rtl" style="border-bottom: solid;">
+                @if (@Model.Answers.Count() == 2)
+                {
+                    <br />
+                    @Html.HiddenFor(x => x.Answers[0].AnswerOption)
+                    @Html.HiddenFor(x => x.Answers[1].AnswerOption)
+                      @Html.HiddenFor(x => x.Answers[0].AnswerId)
+                    @Html.HiddenFor(x => x.Answers[1].AnswerId)
+    <table>
+        <tr>
+            <td style="width:70px;">
+                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; " })
+            </td>
+            <th>
+                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[1].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; " })
+            </th>
+        </tr>
+        <tr>
+            <td style="width:70px;">
+                כן
+            </td>
+            <td>
+              לא
+            </td>
+        </tr>
+    </table>
+                         <br />
+                        <br />
+                    
 
                 }
                 <div style="margin-bottom:2%;"></div>

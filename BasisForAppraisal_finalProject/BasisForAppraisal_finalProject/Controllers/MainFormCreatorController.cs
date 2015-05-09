@@ -102,6 +102,10 @@ namespace BasisForAppraisal_finalProject.Controllers
                                           TempData["Success"] = "הוספה בוצעה בהצלחה!";
                                           TempData["changes"] = "add";
                                           break;
+               case "AddYesNoQuestion": formViewModel.AddQuestion(formViewModel.NewQuestionYesNo);
+                                          TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                                          TempData["changes"] = "add";
+                                          break;
 
                case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
                                         TempData["Success"] = "הוספה בוצעה בהצלחה!";

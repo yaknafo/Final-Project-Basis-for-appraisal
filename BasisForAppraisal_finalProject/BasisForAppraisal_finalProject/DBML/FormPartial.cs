@@ -33,7 +33,7 @@ namespace BasisForAppraisal_finalProject.DBML
         public List<tbl_Section> GetAllSections()
         {
             var manager = new DataManager();
-            return manager.Sections.Where(x => x.FormId == this._FormId).ToList();
+            return manager.Sections.Where(x => x.FormId == this.formId).ToList();
         }
 
       

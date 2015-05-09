@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BasisForAppraisalDB" Class="BFADataBasedbmlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=ASUS\FINALPROJECT;Initial Catalog=BasisForAppraisalDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BasisForAppraisalDBConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LENOVO-PC-YAIR;Initial Catalog=BasisForAppraisalDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BasisForAppraisalDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
     <Type Name="tbl_IntentionalQuestion">
       <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />

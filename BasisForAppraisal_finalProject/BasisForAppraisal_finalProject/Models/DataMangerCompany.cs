@@ -7,6 +7,8 @@ using System.Data.Linq;
 using System.IO;
 using Microsoft.Office.Interop;
 using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -23,7 +25,7 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
        //-------------------------------------------------- Get Method --------------------------------------------------
-        public List<tbl_ConnectorFormFill> getConecctors()
+        public List<tbl_ConnectorFormFill> Conecctors()
         {
             return manager.tbl_ConnectorFormFills.ToList();
         }
@@ -117,7 +119,10 @@ namespace BasisForAppraisal_finalProject.Models
             if (!manager.tbl_Employees.Contains(emp))
             {
                 this.manager.tbl_Employees.InsertOnSubmit(emp);
+                
                 this.manager.SubmitChanges();
+
+                CreateUserWithRole(emp.employeeId, emp.employeeId, "Guest");
             }
         }
 
@@ -174,6 +179,7 @@ namespace BasisForAppraisal_finalProject.Models
             manager.tbl_ConnectorFormFills.InsertOnSubmit(tempconnector);
             manager.SubmitChanges();
 
+
         }
 
         //----------------------------------------------- get Methods ---------------------------------------------------//
@@ -201,8 +207,86 @@ namespace BasisForAppraisal_finalProject.Models
             
         }
 
-       
+        //----------------------------------------------- Delete Method ---------------------------------------------------//
+
+        public void DeleteConnector(string employeeFillID, string employeeOnId, int companyId, int formID)
+        {
+            if (string.IsNullOrEmpty(employeeFillID) || string.IsNullOrEmpty(employeeOnId))
+                throw new Exception("employee id is missing");
+
+            if (manager.tbl_Companies.Where(x => x.companyId == companyId).FirstOrDefault() == null)
+                throw new Exception("Company not exit in the DB");
+
+            if (manager.tblForms.Where(x => x.formId == formID).FirstOrDefault() == null)
+                throw new Exception("form not exit in the DB");
+
+
+          //var tempconnector = new tbl_ConnectorFormFill { employeeFillId = employeeFillID, employeeOnId = employeeOnId, companyId = 1, formId = formID };
+
+            var tempconnector = manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyId && x.employeeFillId == employeeFillID
+                                                                     && x.employeeOnId == employeeOnId && x.formId == formID).FirstOrDefault();
+
+            if (tempconnector == null)
+                return;
+            manager.tbl_ConnectorFormFills.DeleteOnSubmit(tempconnector);
+            manager.SubmitChanges();
+
+        }
+
+
+        public void DeleteConnectors(List<tbl_ConnectorFormFill> Connectors)
+        {
+           
+            manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(Connectors);
+            manager.SubmitChanges();
+
+        }
+
+
+        //  ------------------------------- secutiry --------------------------------------------------------------//
+
+
+        public async void CreateRole(string roleName)
+        {
+            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+            if (!roleManager.RoleExists(roleName))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = roleName;
+                roleManager.Create(role);
+
+            }
+
+        }
+
+        public async void CreateUserWithRole(string userName, string password, string roleName)
+        {
+            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var role = roleManager.FindByNameAsync(roleName);
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var user = new ApplicationUser() { UserName = userName };
+
+            var result = await UserManager.CreateAsync(user, password);
+
+            var userExiset = UserManager.FindByName(userName);
+
+            var roleExiset = roleManager.FindByName(roleName);
+
+            if (result.Succeeded && userExiset != null && roleExiset != null)
+            {
+                await UserManager.AddToRoleAsync(userExiset.Id, roleName);
+            }
+
+
+        }
+
+
     }
+
+
+    
 
 
 }

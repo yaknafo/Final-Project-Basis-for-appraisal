@@ -1,0 +1,111 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Employee
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width" />
+    <title>GuestMain</title>
+</head>
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:white">
+    <div class="container">
+        <p class="navbar-text navbar-right"><img src="~/photos/Logo/logo_for_ToolBar.PNG" /></p>
+        <p class="navbar-text navbar-right"><h1>
+    שלום, @Model.firstName  @Model.lastName
+</h1></p>
+    </div>
+</nav>
+
+         
+    <div class="table-responsive" dir="rtl" style="margin-top:5%;">
+        <h2 style="background-color:beige; opacity:0.8;">רשימת טפסים שעלייך למלא:</h2>
+    </div>
+
+    <div dir="rtl">
+        @for (int i = 0; i < Model.FillOnThem.Count; i++)
+        {
+            @Html.HiddenFor(x => x.FillOnThem[i].companyId);
+            @Html.HiddenFor(x => x.FillOnThem[i].employeeFillId);
+            @Html.HiddenFor(x => x.FillOnThem[i].employeeOnId);
+            @Html.HiddenFor(x => x.FillOnThem[i].formId);
+            <br />
+
+            using (Html.BeginForm("GetFromForFill", "Guest", new
+            {
+                companyId = Model.FillOnThem[i].companyId,
+                employeeFillId = Model.FillOnThem[i].employeeFillId,
+                employeeOnId = Model.FillOnThem[i].employeeOnId,
+                formId = Model.FillOnThem[i].formId
+            },
+            FormMethod.Post))
+            {
+                if (Model.FillOnThem[i].done.HasValue && Model.FillOnThem[i].done.Value)
+                {
+                    <button class="alert alert-success" role="alert" style="width:30%; text-align:right">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-left:4%;"></span>
+                        <strong style="align-content:flex-end; margin-left:10%"> שם: @Model.FillOnThem[i].tbl_Employee1.firstName @Model.FillOnThem[i].tbl_Employee1.lastName</strong>
+                        <strong style="align-content:flex-end">       טופס: @Model.FillOnThem[i].tblForm.FormName</strong>
+                    </button>
+                }
+                else
+                {
+                    <button class="alert alert-warning" role="alert" style="width: 30%; text-align: right">
+                        <span class="glyphicon glyphicon-time" aria-hidden="true" style="margin-left:4%;"></span>
+
+                        <strong style="align-content:flex-end; margin-left:10%"> שם: @Model.FillOnThem[i].tbl_Employee1.firstName @Model.FillOnThem[i].tbl_Employee1.lastName</strong>
+                        <strong style="align-content:flex-end">       טופס: @Model.FillOnThem[i].tblForm.FormName</strong>
+                    </button>
+                }
+
+            }
+
+
+
+            <span>@*@Html.CheckBoxFor(x => x.FillOnThem[i].done.HasValue, new { @disabled = "disabled" })*@</span>
+
+
+        }
+    </div>
+
+    @*<div class="table-responsive" dir="rtl" style="margin-top:10%;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr></tr>
+                        <tr>
+                            <td style="width:40%">
+                                שם מלא
+                            </td>
+                            <td>
+                                שם טופס
+                            </td>
+                            <td>
+                                בוצע
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.FillOnThem.Count; i++)
+                        {
+                            @Html.HiddenFor(x => x.FillOnThem[i].companyId);
+                            @Html.HiddenFor(x => x.FillOnThem[i].employeeFillId);
+                            @Html.HiddenFor(x => x.FillOnThem[i].employeeOnId);
+                            @Html.HiddenFor(x => x.FillOnThem[i].formId);
+                            <tr>
+                                <td>@Model.FillOnThem[i].tbl_Employee1.firstName @Model.FillOnThem[i].tbl_Employee1.lastName </td>
+                                <td>@Model.FillOnThem[i].tblForm.FormName</td>
+                                <td>@Html.CheckBoxFor(x => x.FillOnThem[i].done.HasValue, new { @disabled = "disabled" })</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
+
+

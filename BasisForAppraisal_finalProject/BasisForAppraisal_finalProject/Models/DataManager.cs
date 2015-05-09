@@ -7,6 +7,8 @@ using System.Data.Linq;
 using System.IO;
 using Microsoft.Office.Interop;
 using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 
 namespace BasisForAppraisal_finalProject.Models
@@ -163,7 +165,7 @@ namespace BasisForAppraisal_finalProject.Models
         public void deleteAnswer(int formID, int quesNumber, int answerId)
         {
             // find the record to delete from the right form and right ques number
-            var answerToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.QuestionId == quesNumber && a.AnswerId == answerId).FirstOrDefault();
+            var answerToDelete = manager.tbl_IntentionalAnswers.Where(a => a.AnswerId == answerId).FirstOrDefault();
 
             if (answerToDelete != null)
                 manager.tbl_IntentionalAnswers.DeleteOnSubmit(answerToDelete);
@@ -336,7 +338,10 @@ namespace BasisForAppraisal_finalProject.Models
 
             // check if exist
             if (updateAnswer == null)
-                throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
+            {
+                //throw new Exception(string.Format("Answer id = {0} cant be update, the question does not exist in the dataBase", answer.QuestionId));
+                return;
+            }
 
             // setting the data for the new answer
             if (newAnswer != null)
@@ -358,10 +363,29 @@ namespace BasisForAppraisal_finalProject.Models
 
 
 
-       
+       ////  ------------------------------- secutiry --------------------------------------------------------------//
 
 
+       // public async void CreateRole(string roleName)
+       // {
+       //     var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
+       //     if (!roleManager.RoleExists(roleName))
+       //     {
+       //         var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+       //         role.Name = roleName;
+       //         roleManager.Create(role);
+
+       //     }
+
+       // }
+
+       // public async void CreateUser(string userName, string password)
+       // {
+       //     var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())); 
+       //     var user = new ApplicationUser() { UserName = userName ,};
+       //     var result = await UserManager.CreateAsync(user, password);
+       // }
 
 
 
