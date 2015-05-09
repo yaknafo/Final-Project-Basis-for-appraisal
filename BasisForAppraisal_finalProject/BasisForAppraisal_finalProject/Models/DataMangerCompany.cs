@@ -273,6 +273,11 @@ namespace BasisForAppraisal_finalProject.Models
             var userExiset = UserManager.FindByName(userName);
 
             var roleExiset = roleManager.FindByName(roleName);
+            if (roleExiset == null)
+            {
+                CreateRole(roleName);
+                roleExiset = roleManager.FindByName(roleName);
+            }
 
             if (result.Succeeded && userExiset != null && roleExiset != null)
             {

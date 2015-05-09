@@ -11,9 +11,9 @@
 
     <div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:70%; margin-left:10%" dir="rtl">
     <div class=" modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
                     <h3>הוספת טופס לארגון</h3>
                 </div>
@@ -46,22 +46,22 @@
                     <tbody>
                         @foreach (var item in Model.Forms)
                         {
-
+                           
                             <tr>
                                 <td align="center">@item.FormName</td>
                                 <td align="center">@item.Sections.Count().ToString()</td>
                                 @using (Html.BeginForm("AddConnector", "MainCompanies", new { companyid = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className, formId = item.formId }, FormMethod.Post))
-                                {
-                                    <td> <input type="submit" value="הוספת טופס זה" onclick="validate()"></td>
-                                }
+                            {
+                                <td> <input type="submit" value="הוספת טופס זה" onclick="validate()"></td> 
+                            }
                             </tr>
                         }
-
+                      
                     </tbody>
                 </table>
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 <script>
