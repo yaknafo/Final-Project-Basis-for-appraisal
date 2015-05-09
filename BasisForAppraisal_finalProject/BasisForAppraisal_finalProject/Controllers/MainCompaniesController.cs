@@ -235,6 +235,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
         public void intalizeCheckBox(bool workers, bool manager,bool onManger,bool onHimself)
         {
+            //delete
             Session["workers"] = workers;
             Session["manager"] = manager;
             Session["onManger"] = onManger;
