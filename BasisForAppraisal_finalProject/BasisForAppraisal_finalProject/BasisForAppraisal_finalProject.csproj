@@ -349,11 +349,12 @@
     <Content Include="Views\MainCompanies\_partialAddFormToUnit.cshtml" />
     <Content Include="Views\MainCompanies\EditorTemplates\tbl_Employee.cshtml" />
     <Content Include="Views\MainCompanies\MainEmployee.cshtml" />
-    <Content Include="Views\MainCompanies\_ConecctorTable.cshtml" />
     <Content Include="Views\MainCompanies\AddEmployee.cshtml" />
     <Content Include="Views\Guest\Guestlogin.cshtml" />
     <Content Include="Views\Guest\GuestMain.cshtml" />
+    <Content Include="Views\MainCompanies\_ConecctorTable.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\MainCompanies\_UnitFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
