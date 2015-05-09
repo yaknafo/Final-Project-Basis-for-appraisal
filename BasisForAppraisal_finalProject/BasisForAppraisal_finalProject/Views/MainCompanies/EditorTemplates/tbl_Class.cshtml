@@ -36,6 +36,16 @@
             <h4>@Html.DisplayFor(x => x.className)</h4>
         </th>
     </tr>
+     <tr>
+        <th>
+            @using (Html.BeginForm("Index", "SendMailer", new { id = Model.companyId, unit = Model.unitName, cl = Model.className }, FormMethod.Post))
+            {
+
+                <input type="submit" value="שלח טופס לאנשי קשר" />
+            }
+        </th>
+        
+    </tr>
 </table>
 
 <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center ">

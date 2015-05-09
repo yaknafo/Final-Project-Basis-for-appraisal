@@ -202,6 +202,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CompanyViewModel.cs" />
     <Compile Include="ViewModel\Company\ClassUnitViewModel.cs" />
+    <Compile Include="ViewModel\Company\FolderUnitPartialView.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />
@@ -323,6 +324,7 @@
     <Content Include="Views\MainCompanies\_partialAddFormToUnit.cshtml" />
     <Content Include="Views\MainCompanies\EditorTemplates\tbl_Employee.cshtml" />
     <Content Include="Views\MainCompanies\MainEmployee.cshtml" />
+    <Content Include="Views\MainCompanies\_UnitFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

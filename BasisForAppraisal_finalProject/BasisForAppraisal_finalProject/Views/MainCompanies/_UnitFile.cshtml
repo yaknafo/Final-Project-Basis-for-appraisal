@@ -1,0 +1,90 @@
+﻿@model BasisForAppraisal_finalProject.ViewModel.Company.FolderUnitPartialView
+
+   
+<div dir="rtl">
+    @if (Model.count < 5)
+    {
+        <button id="delete" onclick=" Delete()">מחק תיקיה</button>
+    }
+    <table>
+
+        <tr>
+
+            @for (int i = Model.count; i < Model.count + 5 && i < Model.myClass.Count(); i++)
+            {
+
+                <td style=" width:25%; margin-left:17%" ma >
+                    @using (Html.BeginForm("ManageCompany", "MainCompanies", new { id = Model.myClass.ToArray()[i].companyId, unit = Model.myClass.ToArray()[i].unitName, cl = Model.myClass.ToArray()[i].className }))
+                    {
+                        <button name="show" type="button" class="close" aria-label="Close" style="color:red; visibility:hidden;" data-toggle="modal" data-target="#@i"><span aria-hidden="true">&times;</span></button>
+                        <button class="folder"  type="submit" style="padding: 0; border: none; background-color:transparent;  width:50px;margin-left:25%; " ><img class="pic" src="~/photos/folderIcon.png" style="cursor:pointer" /> </button>
+                        <figcaption style="width:75px;margin-left:25%;">@Model.myClass.ToArray()[i].unitName @Model.myClass.ToArray()[i].className</figcaption>
+                    }
+                </td>
+
+            }
+        </tr>
+    </table>
+    <br />
+</div>
+
+<script>
+    function Delete() {
+        var but = document.getElementById('delete');
+        var list = document.getElementsByClassName('close');
+        var folder = document.getElementsByClassName('folder');
+        var pic = document.getElementsByClassName('pic');
+        var str = "מחק תיקיה";
+        if (but.innerText==str)
+        {
+           
+            for (i = 0; i < list.length; i++) {
+                list[i].style.visibility = 'visible';
+                pic[i].style.cursor = 'initial';
+                folder[i].disabled = true;
+            }
+         but.innerText = "חזור לשימוש";
+        }
+        else {
+            but.innerText = str.toString();
+            for (i = 0; i < list.length; i++)
+            {
+              
+                list[i].style.visibility = 'hidden';
+                pic[i].style.cursor = 'pointer';
+                folder[i].disabled = false;
+                
+                
+            }
+        
+
+        }
+    }
+  
+</script>
+
+@for (int i = Model.count; i < Model.count + 5 && i < Model.myClass.Count(); i++)
+{
+
+            <!-- Modal -->
+    <div class="modal fade" id=@i tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:red;">
+                   
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק תיקיה  : </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@Model.myClass.ToArray()[i].unitName @Model.myClass.ToArray()[i].className?</h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">מחיקה זו תמחוק את כל העובדים ואת כל המחלקות של חברה זו!</h4>
+                </div>
+                @using (Html.BeginForm("deleteFolder", "MainCompanies", new { className = Model.myClass.ToArray()[i].className, unitid = Model.myClass.ToArray()[i].unitName, companyid = Model.myClass.ToArray()[i].companyId, FormMethod.Post }))
+                {  <div class="modal-body">
+                    <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
+                </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+}

@@ -12,6 +12,9 @@ namespace BasisForAppraisal_finalProject.ViewModel.Company
         private tbl_Class myClass;
 
         private List<tblForm> forms;
+        public bool onlymanger{set;get;}
+        public bool onlyworkers { set; get; }
+        public bool workersAndManger { set; get; }
 
 
         public ClassUnitViewModel()

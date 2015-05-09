@@ -30,9 +30,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InserttblForm(tblForm instance);
-    partial void UpdatetblForm(tblForm instance);
-    partial void DeletetblForm(tblForm instance);
     partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
@@ -54,16 +51,19 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_Unit(tbl_Unit instance);
     partial void Updatetbl_Unit(tbl_Unit instance);
     partial void Deletetbl_Unit(tbl_Unit instance);
-    partial void Inserttbl_ConnectorFormFill(tbl_ConnectorFormFill instance);
-    partial void Updatetbl_ConnectorFormFill(tbl_ConnectorFormFill instance);
-    partial void Deletetbl_ConnectorFormFill(tbl_ConnectorFormFill instance);
     partial void Inserttbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
     partial void Updatetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
     partial void Deletetbl_IntentionalAnswer(tbl_IntentionalAnswer instance);
+    partial void InserttblForm(tblForm instance);
+    partial void UpdatetblForm(tblForm instance);
+    partial void DeletetblForm(tblForm instance);
+    partial void Inserttbl_ConnectorFormFill(tbl_ConnectorFormFill instance);
+    partial void Updatetbl_ConnectorFormFill(tbl_ConnectorFormFill instance);
+    partial void Deletetbl_ConnectorFormFill(tbl_ConnectorFormFill instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BasisForAppraisalDBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BasisForAppraisalDBConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -90,14 +90,6 @@ namespace BasisForAppraisal_finalProject.DBML
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<tblForm> tblForms
-		{
-			get
-			{
-				return this.GetTable<tblForm>();
-			}
 		}
 		
 		public System.Data.Linq.Table<tbl_IntentionalQuestion> tbl_IntentionalQuestions
@@ -156,14 +148,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_ConnectorFormFill> tbl_ConnectorFormFills
-		{
-			get
-			{
-				return this.GetTable<tbl_ConnectorFormFill>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_IntentionalAnswer> tbl_IntentionalAnswers
 		{
 			get
@@ -171,147 +155,21 @@ namespace BasisForAppraisal_finalProject.DBML
 				return this.GetTable<tbl_IntentionalAnswer>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblForm")]
-	public partial class tblForm : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _FormId;
-		
-		private string _FormName;
-		
-		private EntitySet<tbl_Section> _tbl_Sections;
-		
-		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnformIdChanging(int value);
-    partial void OnformIdChanged();
-    partial void OnFormNameChanging(string value);
-    partial void OnFormNameChanged();
-    #endregion
-		
-		public tblForm()
-		{
-			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
-			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
-			OnCreated();
-		}
-
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Name = "formId", Storage = "_FormId", DbType = "Int NOT NULL", IsPrimaryKey = true, IsDbGenerated = true)]
-		public int formId
+		public System.Data.Linq.Table<tblForm> tblForms
 		{
 			get
 			{
-				return this._FormId;
-			}
-			set
-			{
-				if ((this._FormId != value))
-				{
-					this.OnformIdChanging(value);
-					this.SendPropertyChanging();
-					this._FormId = value;
-					this.SendPropertyChanged("formId");
-					this.OnformIdChanged();
-				}
+				return this.GetTable<tblForm>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string FormName
+		public System.Data.Linq.Table<tbl_ConnectorFormFill> tbl_ConnectorFormFills
 		{
 			get
 			{
-				return this._FormName;
+				return this.GetTable<tbl_ConnectorFormFill>();
 			}
-			set
-			{
-				if ((this._FormName != value))
-				{
-					this.OnFormNameChanging(value);
-					this.SendPropertyChanging();
-					this._FormName = value;
-					this.SendPropertyChanged("FormName");
-					this.OnFormNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="FormId")]
-		public EntitySet<tbl_Section> tbl_Sections
-		{
-			get
-			{
-				return this._tbl_Sections;
-			}
-			set
-			{
-				this._tbl_Sections.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_ConnectorFormFill", Storage="_tbl_ConnectorFormFills", ThisKey="formId", OtherKey="formId")]
-		public EntitySet<tbl_ConnectorFormFill> tbl_ConnectorFormFills
-		{
-			get
-			{
-				return this._tbl_ConnectorFormFills;
-			}
-			set
-			{
-				this._tbl_ConnectorFormFills.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_Sections(tbl_Section entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_tbl_Sections(tbl_Section entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-		
-		private void attach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
 		}
 	}
 	
@@ -1823,304 +1681,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_ConnectorFormFill")]
-	public partial class tbl_ConnectorFormFill : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _companyId;
-		
-		private string _employeeFillId;
-		
-		private string _employeeOnId;
-		
-		private int _formId;
-		
-		private EntityRef<tbl_Company> _tbl_Company;
-		
-		private EntityRef<tbl_Employee> _tbl_Employee;
-		
-		private EntityRef<tbl_Employee> _tbl_Employee1;
-		
-		private EntityRef<tblForm> _tblForm;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OncompanyIdChanging(int value);
-    partial void OncompanyIdChanged();
-    partial void OnemployeeFillIdChanging(string value);
-    partial void OnemployeeFillIdChanged();
-    partial void OnemployeeOnIdChanging(string value);
-    partial void OnemployeeOnIdChanged();
-    partial void OnformIdChanging(int value);
-    partial void OnformIdChanged();
-    #endregion
-		
-		public tbl_ConnectorFormFill()
-		{
-			this._tbl_Company = default(EntityRef<tbl_Company>);
-			this._tbl_Employee = default(EntityRef<tbl_Employee>);
-			this._tbl_Employee1 = default(EntityRef<tbl_Employee>);
-			this._tblForm = default(EntityRef<tblForm>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int companyId
-		{
-			get
-			{
-				return this._companyId;
-			}
-			set
-			{
-				if ((this._companyId != value))
-				{
-					if (this._tbl_Company.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OncompanyIdChanging(value);
-					this.SendPropertyChanging();
-					this._companyId = value;
-					this.SendPropertyChanged("companyId");
-					this.OncompanyIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employeeFillId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string employeeFillId
-		{
-			get
-			{
-				return this._employeeFillId;
-			}
-			set
-			{
-				if ((this._employeeFillId != value))
-				{
-					if (this._tbl_Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnemployeeFillIdChanging(value);
-					this.SendPropertyChanging();
-					this._employeeFillId = value;
-					this.SendPropertyChanged("employeeFillId");
-					this.OnemployeeFillIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employeeOnId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string employeeOnId
-		{
-			get
-			{
-				return this._employeeOnId;
-			}
-			set
-			{
-				if ((this._employeeOnId != value))
-				{
-					if (this._tbl_Employee1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnemployeeOnIdChanging(value);
-					this.SendPropertyChanging();
-					this._employeeOnId = value;
-					this.SendPropertyChanged("employeeOnId");
-					this.OnemployeeOnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_formId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int formId
-		{
-			get
-			{
-				return this._formId;
-			}
-			set
-			{
-				if ((this._formId != value))
-				{
-					if (this._tblForm.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnformIdChanging(value);
-					this.SendPropertyChanging();
-					this._formId = value;
-					this.SendPropertyChanged("formId");
-					this.OnformIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_tbl_ConnectorFormFill", Storage="_tbl_Company", ThisKey="companyId", OtherKey="companyId", IsForeignKey=true)]
-		public tbl_Company tbl_Company
-		{
-			get
-			{
-				return this._tbl_Company.Entity;
-			}
-			set
-			{
-				tbl_Company previousValue = this._tbl_Company.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Company.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Company.Entity = null;
-						previousValue.tbl_ConnectorFormFills.Remove(this);
-					}
-					this._tbl_Company.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ConnectorFormFills.Add(this);
-						this._companyId = value.companyId;
-					}
-					else
-					{
-						this._companyId = default(int);
-					}
-					this.SendPropertyChanged("tbl_Company");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_ConnectorFormFill", Storage="_tbl_Employee", ThisKey="employeeFillId", OtherKey="employeeId", IsForeignKey=true)]
-		public tbl_Employee tbl_Employee
-		{
-			get
-			{
-				return this._tbl_Employee.Entity;
-			}
-			set
-			{
-				tbl_Employee previousValue = this._tbl_Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Employee.Entity = null;
-						previousValue.tbl_ConnectorFormFills.Remove(this);
-					}
-					this._tbl_Employee.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ConnectorFormFills.Add(this);
-						this._employeeFillId = value.employeeId;
-					}
-					else
-					{
-						this._employeeFillId = default(string);
-					}
-					this.SendPropertyChanged("tbl_Employee");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_ConnectorFormFill1", Storage="_tbl_Employee1", ThisKey="employeeOnId", OtherKey="employeeId", IsForeignKey=true)]
-		public tbl_Employee tbl_Employee1
-		{
-			get
-			{
-				return this._tbl_Employee1.Entity;
-			}
-			set
-			{
-				tbl_Employee previousValue = this._tbl_Employee1.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Employee1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Employee1.Entity = null;
-						previousValue.tbl_ConnectorFormFills1.Remove(this);
-					}
-					this._tbl_Employee1.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ConnectorFormFills1.Add(this);
-						this._employeeOnId = value.employeeId;
-					}
-					else
-					{
-						this._employeeOnId = default(string);
-					}
-					this.SendPropertyChanged("tbl_Employee1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_ConnectorFormFill", Storage="_tblForm", ThisKey="formId", OtherKey="formId", IsForeignKey=true)]
-		public tblForm tblForm
-		{
-			get
-			{
-				return this._tblForm.Entity;
-			}
-			set
-			{
-				tblForm previousValue = this._tblForm.Entity;
-				if (((previousValue != value) 
-							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tblForm.Entity = null;
-						previousValue.tbl_ConnectorFormFills.Remove(this);
-					}
-					this._tblForm.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ConnectorFormFills.Add(this);
-						this._formId = value.formId;
-					}
-					else
-					{
-						this._formId = default(int);
-					}
-					this.SendPropertyChanged("tblForm");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalAnswer")]
 	public partial class tbl_IntentionalAnswer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2355,6 +1915,494 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._QuestionId = default(int);
 					}
 					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblForm")]
+	public partial class tblForm : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _formId;
+		
+		private string _FormName;
+		
+		private System.Nullable<System.DateTime> _lastChange;
+		
+		private EntitySet<tbl_Section> _tbl_Sections;
+		
+		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnformIdChanging(int value);
+    partial void OnformIdChanged();
+    partial void OnFormNameChanging(string value);
+    partial void OnFormNameChanged();
+    partial void OnlastChangeChanging(System.Nullable<System.DateTime> value);
+    partial void OnlastChangeChanged();
+    #endregion
+		
+		public tblForm()
+		{
+			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
+			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_formId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int formId
+		{
+			get
+			{
+				return this._formId;
+			}
+			set
+			{
+				if ((this._formId != value))
+				{
+					this.OnformIdChanging(value);
+					this.SendPropertyChanging();
+					this._formId = value;
+					this.SendPropertyChanged("formId");
+					this.OnformIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string FormName
+		{
+			get
+			{
+				return this._FormName;
+			}
+			set
+			{
+				if ((this._FormName != value))
+				{
+					this.OnFormNameChanging(value);
+					this.SendPropertyChanging();
+					this._FormName = value;
+					this.SendPropertyChanged("FormName");
+					this.OnFormNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChange", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lastChange
+		{
+			get
+			{
+				return this._lastChange;
+			}
+			set
+			{
+				if ((this._lastChange != value))
+				{
+					this.OnlastChangeChanging(value);
+					this.SendPropertyChanging();
+					this._lastChange = value;
+					this.SendPropertyChanged("lastChange");
+					this.OnlastChangeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<tbl_Section> tbl_Sections
+		{
+			get
+			{
+				return this._tbl_Sections;
+			}
+			set
+			{
+				this._tbl_Sections.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_ConnectorFormFill", Storage="_tbl_ConnectorFormFills", ThisKey="formId", OtherKey="formId")]
+		public EntitySet<tbl_ConnectorFormFill> tbl_ConnectorFormFills
+		{
+			get
+			{
+				return this._tbl_ConnectorFormFills;
+			}
+			set
+			{
+				this._tbl_ConnectorFormFills.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_Sections(tbl_Section entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_tbl_Sections(tbl_Section entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
+		private void attach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_ConnectorFormFill")]
+	public partial class tbl_ConnectorFormFill : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _companyId;
+		
+		private string _employeeFillId;
+		
+		private string _employeeOnId;
+		
+		private int _formId;
+		
+		private System.Nullable<bool> _done;
+		
+		private EntityRef<tbl_Company> _tbl_Company;
+		
+		private EntityRef<tbl_Employee> _tbl_Employee;
+		
+		private EntityRef<tbl_Employee> _tbl_Employee1;
+		
+		private EntityRef<tblForm> _tblForm;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnemployeeFillIdChanging(string value);
+    partial void OnemployeeFillIdChanged();
+    partial void OnemployeeOnIdChanging(string value);
+    partial void OnemployeeOnIdChanged();
+    partial void OnformIdChanging(int value);
+    partial void OnformIdChanged();
+    partial void OndoneChanging(System.Nullable<bool> value);
+    partial void OndoneChanged();
+    #endregion
+		
+		public tbl_ConnectorFormFill()
+		{
+			this._tbl_Company = default(EntityRef<tbl_Company>);
+			this._tbl_Employee = default(EntityRef<tbl_Employee>);
+			this._tbl_Employee1 = default(EntityRef<tbl_Employee>);
+			this._tblForm = default(EntityRef<tblForm>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._tbl_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employeeFillId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string employeeFillId
+		{
+			get
+			{
+				return this._employeeFillId;
+			}
+			set
+			{
+				if ((this._employeeFillId != value))
+				{
+					if (this._tbl_Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnemployeeFillIdChanging(value);
+					this.SendPropertyChanging();
+					this._employeeFillId = value;
+					this.SendPropertyChanged("employeeFillId");
+					this.OnemployeeFillIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_employeeOnId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string employeeOnId
+		{
+			get
+			{
+				return this._employeeOnId;
+			}
+			set
+			{
+				if ((this._employeeOnId != value))
+				{
+					if (this._tbl_Employee1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnemployeeOnIdChanging(value);
+					this.SendPropertyChanging();
+					this._employeeOnId = value;
+					this.SendPropertyChanged("employeeOnId");
+					this.OnemployeeOnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_formId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int formId
+		{
+			get
+			{
+				return this._formId;
+			}
+			set
+			{
+				if ((this._formId != value))
+				{
+					if (this._tblForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnformIdChanging(value);
+					this.SendPropertyChanging();
+					this._formId = value;
+					this.SendPropertyChanged("formId");
+					this.OnformIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_done", DbType="Bit")]
+		public System.Nullable<bool> done
+		{
+			get
+			{
+				return this._done;
+			}
+			set
+			{
+				if ((this._done != value))
+				{
+					this.OndoneChanging(value);
+					this.SendPropertyChanging();
+					this._done = value;
+					this.SendPropertyChanged("done");
+					this.OndoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_tbl_ConnectorFormFill", Storage="_tbl_Company", ThisKey="companyId", OtherKey="companyId", IsForeignKey=true)]
+		public tbl_Company tbl_Company
+		{
+			get
+			{
+				return this._tbl_Company.Entity;
+			}
+			set
+			{
+				tbl_Company previousValue = this._tbl_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Company.Entity = null;
+						previousValue.tbl_ConnectorFormFills.Remove(this);
+					}
+					this._tbl_Company.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_ConnectorFormFills.Add(this);
+						this._companyId = value.companyId;
+					}
+					else
+					{
+						this._companyId = default(int);
+					}
+					this.SendPropertyChanged("tbl_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_ConnectorFormFill", Storage="_tbl_Employee", ThisKey="employeeFillId", OtherKey="employeeId", IsForeignKey=true)]
+		public tbl_Employee tbl_Employee
+		{
+			get
+			{
+				return this._tbl_Employee.Entity;
+			}
+			set
+			{
+				tbl_Employee previousValue = this._tbl_Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Employee.Entity = null;
+						previousValue.tbl_ConnectorFormFills.Remove(this);
+					}
+					this._tbl_Employee.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_ConnectorFormFills.Add(this);
+						this._employeeFillId = value.employeeId;
+					}
+					else
+					{
+						this._employeeFillId = default(string);
+					}
+					this.SendPropertyChanged("tbl_Employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_ConnectorFormFill1", Storage="_tbl_Employee1", ThisKey="employeeOnId", OtherKey="employeeId", IsForeignKey=true)]
+		public tbl_Employee tbl_Employee1
+		{
+			get
+			{
+				return this._tbl_Employee1.Entity;
+			}
+			set
+			{
+				tbl_Employee previousValue = this._tbl_Employee1.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Employee1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Employee1.Entity = null;
+						previousValue.tbl_ConnectorFormFills1.Remove(this);
+					}
+					this._tbl_Employee1.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_ConnectorFormFills1.Add(this);
+						this._employeeOnId = value.employeeId;
+					}
+					else
+					{
+						this._employeeOnId = default(string);
+					}
+					this.SendPropertyChanged("tbl_Employee1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_ConnectorFormFill", Storage="_tblForm", ThisKey="formId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.tbl_ConnectorFormFills.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_ConnectorFormFills.Add(this);
+						this._formId = value.formId;
+					}
+					else
+					{
+						this._formId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
 				}
 			}
 		}
