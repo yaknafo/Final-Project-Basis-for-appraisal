@@ -8,17 +8,34 @@
 <button><span title="הוספת טופס לארגון" data-toggle="modal" data-target="#addForm" style="cursor:pointer;">הוספת טופס ליחידה</span></button>
 
            <!-- Modal -->
+
     <div class="modal fade" id="addForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:70%; margin-left:10%" dir="rtl">
     <div class=" modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="panel panel-default" dir="rtl" style="width:95%; margin-right:2%; margin-top:5%; margin-bottom:30%; text-align:center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
+                    <h3>הוספת טופס לארגון</h3>
+                </div>
+            </div>
+            <div class="panel panel-default" dir="rtl" style="width:95%; margin-right:2%; margin-top:1%; margin-bottom: 5%; ">
+                <div class="panel-heading" style="font-size: 18px; text-align:center;text-shadow:inherit ">בחר צורת מילוי</div>
+                <h7 style="margin-left:7%; margin-right:4%"> מנהל על עובדיו </h7> <h7 style="margin-left:7%"> עובדים על עובדים</h7>
+                <h7 style="margin-left:7%">עובדים על מנהל</h7><h7 style="margin-left:5%">ניתן למלא על עצמך</h7>
+                <br />
+                <input type="checkbox" id="manger" style="margin-left:0%; margin-right:8%" />
+                <input type="checkbox" id="workers" style="margin-right:22%" />
+                <input type="checkbox" id="manger_workers" style="margin-right:20%" />
+                <input type="checkbox" id="onHimself" style="margin-right:20%" />
+
+            </div>
+
+            <div class="panel panel-default" dir="rtl" style="width:95%; margin-right:2%; margin-top:5%; margin-bottom: 10%; text-align:center">
                 <!-- Default panel contents -->
-                <div class="panel-heading" style="font-size: 22px; ">רשימת טפסים</div>
+                <div class="panel-heading" style="font-size: 18px; ">בחר טופס</div>
                 <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
                 <!---knafo-->
-                <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right" >
+                <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
                     <thead>
                         <tr style=" font-size:20px;">
                             <td align="center">שם</td>
@@ -29,42 +46,23 @@
                     <tbody>
                         @foreach (var item in Model.Forms)
                         {
-                           
+
                             <tr>
                                 <td align="center">@item.FormName</td>
                                 <td align="center">@item.Sections.Count().ToString()</td>
-                            @using (Html.BeginForm("AddConnector", "MainCompanies",new{companyid=Model.MyClass.companyId,unit=Model.MyClass.unitName,cl=Model.MyClass.className,formId=item.formId}, FormMethod.Post))
-                            {
-                                <td> <input type="submit" value="הוספת טופס זה" onclick="validate()"></td> 
-                            }
+                                @using (Html.BeginForm("AddConnector", "MainCompanies", new { companyid = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className, formId = item.formId }, FormMethod.Post))
+                                {
+                                    <td> <input type="submit" value="הוספת טופס זה" onclick="validate()"></td>
+                                }
                             </tr>
                         }
-                      
+
                     </tbody>
                 </table>
-              
             </div>
-            <div  >
-                     <h7 style="margin-left:7%; margin-right:4%"> מנהל על עובדיו </h7> <h7 style ="margin-left:7%"> עובדים על עובדים</h7>
-                     <h7 style="margin-left:7%">עובדים על מנהל</h7><h7 style="margin-left:5%">ניתן למלא על עצמך</h7>
-                     <br/> 
-                <input type="checkbox" id="manger"  style="margin-left:15%; margin-right:10%" />
-                <input type="checkbox" id="workers" style="margin-right:3%" />
-                <input type="checkbox" id="manger_workers" style="margin-right:22%" />
-                <input type="checkbox" id="onHimself" style="margin-right:20%" />
-                
         </div>
-        </div>
-     
     </div>
 </div>
-        
-
-</div>
-
-
-
-
 
 <script>
 
