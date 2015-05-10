@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Enum\WorkShopActions.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainCompaniesController.cs" />
     <Compile Include="Controllers\MainFormCreatorController.cs" />
@@ -245,6 +246,8 @@
     <Content Include="photos\folderIcon.png" />
     <Content Include="photos\info.png" />
     <Content Include="photos\logosmall.jpg" />
+    <Content Include="photos\Logo\Basis_For_evaluation _logo.jpg" />
+    <Content Include="photos\Logo\logo_for_ToolBar.PNG" />
     <Content Include="photos\NewForm.png" />
     <Content Include="photos\previewForm.png" />
     <Content Include="photos\Savef.png" />
@@ -313,7 +316,6 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -348,6 +350,9 @@
     <Content Include="Views\MainCompanies\MainEmployee.cshtml" />
     <Content Include="Views\MainCompanies\_ConecctorTable.cshtml" />
     <Content Include="Views\MainCompanies\AddEmployee.cshtml" />
+    <Content Include="Views\Guest\Guestlogin.cshtml" />
+    <Content Include="Views\Guest\GuestMain.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

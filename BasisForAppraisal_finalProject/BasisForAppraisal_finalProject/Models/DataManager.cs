@@ -7,6 +7,8 @@ using System.Data.Linq;
 using System.IO;
 using Microsoft.Office.Interop;
 using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 
 namespace BasisForAppraisal_finalProject.Models
@@ -361,10 +363,29 @@ namespace BasisForAppraisal_finalProject.Models
 
 
 
-       
+       ////  ------------------------------- secutiry --------------------------------------------------------------//
 
 
+       // public async void CreateRole(string roleName)
+       // {
+       //     var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
+       //     if (!roleManager.RoleExists(roleName))
+       //     {
+       //         var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+       //         role.Name = roleName;
+       //         roleManager.Create(role);
+
+       //     }
+
+       // }
+
+       // public async void CreateUser(string userName, string password)
+       // {
+       //     var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())); 
+       //     var user = new ApplicationUser() { UserName = userName ,};
+       //     var result = await UserManager.CreateAsync(user, password);
+       // }
 
 
 

@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@Scripts.Render("~/bundles/modernizr")
+@using (Html.BeginForm())
+{
+    <div dir="rtl" class=" col-lg-6" style="align-content: center;margin-left:15%; margin-top:4%">
+        <img src="~/photos/Logo/Basis_For_evaluation%20_logo.jpg" />
+        <br />
+        <div dir="rtl" class=" col-lg-11">
+            <strong>מייל:</strong>
+            @Html.TextBox("email")
+            <br />
+            <br />
+            <br />
+
+            <strong>ת"ז:</strong>
+            @Html.Password("id")
+
+            <br />
+            <br />
+            <br />
+
+
+
+            @if( TempData["Error"] != null)
+        {
+                <p style="color:red;"> תעודת זהות או כתובת מייל לא תקינים או לא נמצאים במערכת</p>
+        }
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width:150px; margin-right:7%;">כנס</button>
+            </div>
+        </div>
+}
+
+
+
+
