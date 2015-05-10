@@ -53,6 +53,8 @@ namespace BasisForAppraisal_finalProject.Models
                 this.manager.tbl_Employees.InsertOnSubmit(emp);
                 
                 this.manager.SubmitChanges();
+
+                CreateUserWithRole(emp.employeeId, emp.employeeId, "Guest");
             }
         }
 
@@ -202,11 +204,26 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
-        public async void CreateUser(string userName, string password)
+        public async void CreateUserWithRole(string userName, string password, string roleName)
         {
+            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var role = roleManager.FindByNameAsync(roleName);
+
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var user = new ApplicationUser() { UserName = userName, };
+            var user = new ApplicationUser() { UserName = userName };
+
             var result = await UserManager.CreateAsync(user, password);
+
+            var userExiset = UserManager.FindByName(userName);
+
+            var roleExiset = roleManager.FindByName(roleName);
+
+            if (result.Succeeded && userExiset != null && roleExiset != null)
+            {
+                await UserManager.AddToRoleAsync(userExiset.Id, roleName);
+            }
+
+
         }
 
 
