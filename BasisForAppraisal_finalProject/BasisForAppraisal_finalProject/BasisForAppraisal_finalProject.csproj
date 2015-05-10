@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Enum\WorkShopActions.cs" />
+    <Compile Include="Controllers\FormFillerController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainCompaniesController.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="ViewModel\CompanyViewModel.cs" />
     <Compile Include="ViewModel\Company\ClassUnitViewModel.cs" />
     <Compile Include="ViewModel\Company\FolderUnitPartialView.cs" />
+    <Compile Include="ViewModel\FormFillerViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />
@@ -355,6 +357,11 @@
     <Content Include="Views\MainCompanies\_ConecctorTable.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\MainCompanies\_UnitFile.cshtml" />
+    <Content Include="Views\FormFiller\FormFill.cshtml" />
+    <Content Include="Views\FormFiller\EditorTemplates\tblForm.cshtml" />
+    <Content Include="Views\FormFiller\EditorTemplates\tbl_IntentionalQuestion.cshtml" />
+    <Content Include="Views\FormFiller\EditorTemplates\tbl_IntentionalAnswer.cshtml" />
+    <Content Include="Views\FormFiller\EditorTemplates\tbl_ConnectorFormFill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

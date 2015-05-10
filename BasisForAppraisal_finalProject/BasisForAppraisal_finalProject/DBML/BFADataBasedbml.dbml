@@ -82,6 +82,7 @@
       <Column Name="Text" Type="System.String" DbType="VarChar(800)" CanBeNull="true" />
       <Column Name="AnswerOption" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_IntentionalAnswer_tbl_ConnectorAnswer" Member="tbl_ConnectorAnswers" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_ConnectorAnswer" />
       <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalQuestion" ThisKey="FormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
     </Type>
   </Table>
@@ -101,10 +102,25 @@
       <Column Name="employeeOnId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="formId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="done" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbl_ConnectorFormFill_tbl_ConnectorAnswer" Member="tbl_ConnectorAnswers" ThisKey="companyId,employeeFillId,employeeOnId,formId" OtherKey="companyId,employeeFillId,employeeOnId,formConnectorId" Type="tbl_ConnectorAnswer" />
       <Association Name="tbl_Company_tbl_ConnectorFormFill" Member="tbl_Company" ThisKey="companyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
       <Association Name="tbl_Employee_tbl_ConnectorFormFill" Member="tbl_Employee" ThisKey="employeeFillId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
       <Association Name="tbl_Employee_tbl_ConnectorFormFill1" Member="tbl_Employee1" ThisKey="employeeOnId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
       <Association Name="tblForm_tbl_ConnectorFormFill" Member="tblForm" ThisKey="formId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_ConnectorAnswers" Member="tbl_ConnectorAnswers">
+    <Type Name="tbl_ConnectorAnswer">
+      <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="employeeFillId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="employeeOnId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="formConnectorId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnswerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbl_ConnectorFormFill_tbl_ConnectorAnswer" Member="tbl_ConnectorFormFill" ThisKey="companyId,employeeFillId,employeeOnId,formConnectorId" OtherKey="companyId,employeeFillId,employeeOnId,formId" Type="tbl_ConnectorFormFill" IsForeignKey="true" />
+      <Association Name="tbl_IntentionalAnswer_tbl_ConnectorAnswer" Member="tbl_IntentionalAnswer" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_IntentionalAnswer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

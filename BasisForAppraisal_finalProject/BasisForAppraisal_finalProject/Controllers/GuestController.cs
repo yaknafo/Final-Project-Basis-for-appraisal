@@ -13,6 +13,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
 
         private DataManager MD = new DataManager();
+        private DataMangerCompany MDC = new DataMangerCompany();
         //
         // GET: /Guest/
         public ActionResult Index()
@@ -51,9 +52,15 @@ namespace BasisForAppraisal_finalProject.Controllers
            
         }
 
+        [HttpPost]
         public ActionResult GetFromForFill(int companyId, string employeeFillId, string employeeOnId, int formId)
-       {
-           return View();
-       }
+        {
+            var con = MDC.Conecctors().Where(x => x.formId == formId && x.companyId == companyId && x.employeeFillId == employeeFillId && x.employeeOnId == employeeOnId).FirstOrDefault();
+            TempData["con"] = con;
+            return RedirectToAction("FormFill", "FormFiller");
+
+        }
+
+ 
 	}
 }

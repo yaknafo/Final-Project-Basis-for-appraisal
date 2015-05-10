@@ -1,0 +1,35 @@
+﻿@model BasisForAppraisal_finalProject.ViewModel.FormFillerViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FormFill</title>
+</head>
+<body>
+    @using(Html.BeginForm())
+    { 
+        @Html.HiddenFor(x => x.CompanyId)
+        @Html.HiddenFor(x => x.FillBy)
+        @Html.HiddenFor(x => x.FillOn)
+         @Html.HiddenFor(x => x.FormIdConnector)
+    <div id="Panel" style="width: 100%; margin-top: 5%; background-color:white ">
+        <div class="panel panel-heading">
+            <div class="panel-heading">
+                @Html.EditorFor(x => x.From)
+                <div id="yair">
+                    @Html.EditorFor( x => x.Questions)
+                </div>
+                <input type="submit" class="btn-primary" value="submit" />
+            </div>
+        </div>
+    </div>
+        
+    }
+</body>
+</html>

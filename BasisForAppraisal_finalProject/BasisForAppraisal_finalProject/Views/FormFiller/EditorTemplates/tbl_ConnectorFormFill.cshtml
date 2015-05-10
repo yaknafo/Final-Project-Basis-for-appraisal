@@ -1,0 +1,59 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_ConnectorFormFill
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>tbl_ConnectorFormFill</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h4>tbl_ConnectorFormFill</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.EditorFor(model => model.companyId)
+    
+            @Html.EditorFor(model => model.employeeFillId)
+    
+            @Html.EditorFor(model => model.employeeOnId)
+    
+            @Html.EditorFor(model => model.formId)
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.done, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.done)
+                    @Html.ValidationMessageFor(model => model.done)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.IfDelete, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IfDelete)
+                    @Html.ValidationMessageFor(model => model.IfDelete)
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
