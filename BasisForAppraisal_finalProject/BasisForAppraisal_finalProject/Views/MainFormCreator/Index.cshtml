@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion>
+@{
+    ViewBag.Title = "tbl_IntentionalQuestion";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "listQuestions" }))
+{
+    <input type="search" name="searchTerm" />
+    <input type="submit" name="search by name" />
+}
+
+
+<div id="listQuestions">
+    @Html.EditorForModel()
+</div>

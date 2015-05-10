@@ -1,0 +1,35 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Employee
+           @using BasisForAppraisal_finalProject.DBML;
+@using System.Collections.Generic;
+@{
+    ViewBag.Title = "MainEmployee";
+}
+<script src="~/Scripts/jquery-2.1.3.js"></script>
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<div style="margin-top:5%; font-size:medium; margin-bottom:40%" dir="rtl">
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "conTable", }))
+{
+    <div style="width:100%; background-color: cornflowerblue; text-align:center; margin-top:7%">
+        <h2>@Model.employeeId</h2>
+    </div>
+
+
+   
+     <button type="submit"  name="submit"  class="btn btn-primary btn-lg" title="ערוך עובד" style="margin: 1%; width: 100px; background-color: black">
+             <span class="glyphicon glyphicon-pencil" title="עריכה" data-toggle="modal" data-target="#@Model.employeeId" style="cursor:pointer;"></span>
+         </button>
+     @Html.EditorForModel()
+       
+    <div id="conTable">
+         @Html.Partial("_ConecctorTable", Model)
+    </div>
+    }
+    </div>
+
+   
+
+
+

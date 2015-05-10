@@ -1,0 +1,84 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Company
+
+@{
+    ViewBag.Title = "View";
+}
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+
+    <h2 style="margin-left:40%;">הוספת לקוח חדש</h2>
+
+    @using (Html.BeginForm("addCompanie", "MainCompanies", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-horizontal" dir="rtl">
+             <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.companyId)
+
+            <div class="form-group">
+                 <div class="col-md-10">
+                    <div>שם חברה</div>
+                    @Html.TextBoxFor(model => model.comapnyName,new{placeholder="הזן שם חברה"})
+                    @Html.ValidationMessageFor(model => model.comapnyName)
+                     <br />
+                </div>
+            </div>
+
+            <div class="form-group">
+                  <div class="col-md-10">
+                    <div>כתובת חברה</div>
+                    @Html.TextBoxFor(model => model.comapnyAddress,new{id="txtPlaces"})
+                    @Html.ValidationMessageFor(model => model.comapnyAddress)
+                </div>
+            </div>
+
+            <div class="form-group">
+                 <div class="col-md-10">
+                    <div>טלפון חברה</div>
+                    @Html.TextBoxFor(model => model.comapnyPhone,new{placeholder="הזן טלפון"})
+                    @Html.ValidationMessageFor(model => model.comapnyPhone)
+                </div>
+            </div>
+
+
+        </div>
+    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-left:40%;">
+                <input type="submit" value="שמור" class="btn btn-default" style="font-weight:bold" />
+            </div>
+        </div>
+}
+
+    <div>
+        @Html.ActionLink("חזרה לרשימת חברות", "MainCompanies")
+    </div>
+
+
+
+        <title></title>
+        <style type="text/css">
+            body {
+                font-family: Arial;
+                font-size: 10pt;
+            }
+    </style>
+@*// google auto complete script*@
+<script type="text/javascript">
+  google.maps.event.addDomListener(window, 'load', function () {
+        var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
+        google.maps.event.addListener(places, 'place_changed', function () {
+            var place = places.getPlace();
+            var address = place.formatted_address;
+            var latitude = place.geometry.location.k;
+            var longitude = place.geometry.location.D;
+            var mesg = "Address: " + address;
+            mesg += "\nLatitude: " + latitude;
+            mesg += "\nLongitude: " + longitude;
+            alert(mesg);
+        });
+    });
+</script>
+  
+   

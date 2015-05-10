@@ -1,0 +1,15 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tblForm
+
+@{
+    ViewBag.Title = "tblForm";
+}
+@Html.HiddenFor(x => x.formId)
+@Html.HiddenFor(x=> x.Sections.Count)
+
+<div id="Panel" style="width:90%; ">
+
+    <h1 class="text-center" dir="rtl">@Html.EditorFor(x => x.FormName)</h1>
+
+</div>
+
+

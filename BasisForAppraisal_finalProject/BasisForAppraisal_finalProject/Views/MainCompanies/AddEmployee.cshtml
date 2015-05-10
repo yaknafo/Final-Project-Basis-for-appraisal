@@ -1,0 +1,97 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Employee
+
+@{
+    ViewBag.Title = "AddEmployee";
+}
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<div style="margin-top:7%">
+    <h2>AddEmployee</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>tbl_Employee</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.companyId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.companyId)
+                    @Html.ValidationMessageFor(model => model.companyId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.employeeId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.employeeId)
+                    @Html.ValidationMessageFor(model => model.employeeId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.unitName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.unitName)
+                    @Html.ValidationMessageFor(model => model.unitName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.className, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.className)
+                    @Html.ValidationMessageFor(model => model.className)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.firstName)
+                    @Html.ValidationMessageFor(model => model.firstName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.lastName)
+                    @Html.ValidationMessageFor(model => model.lastName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsManger, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IsManger)
+                    @Html.ValidationMessageFor(model => model.IsManger)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

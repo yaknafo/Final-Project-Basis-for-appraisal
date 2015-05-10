@@ -1,0 +1,262 @@
+﻿@model  BasisForAppraisal_finalProject.DBML.tbl_Employee
+@using BasisForAppraisal_finalProject.DBML;
+@using System.Collections.Generic;
+<link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#txtSearchForm').autocomplete({
+            source: '@Url.Action("GetFormss")'
+        });
+    });
+
+   
+
+    $(function () {
+        $('#txtSearchThemFillOnMe').autocomplete({
+            source: '@Url.Action("GetEmployee")'
+        });
+    });
+
+    $(function () {
+        $('#txtSearchFormfromNameOnMe').autocomplete({
+            source: '@Url.Action("GetForms")'
+        });
+    });
+
+    $(function () {
+        $('#txtSearch').autocomplete({
+            source: '@Url.Action("GetEmployees")'
+        });
+    });
+
+</script>
+@Html.HiddenFor(x => x.companyId)
+<div class="col-xs-4" style="align-content: center;margin-left:15%; margin-top:3%">
+    <div>
+      <br />
+         <img src="~/photos/Employee/arrow_up_2.png" title=" מי ממלא על העובד" /> 
+    </div>
+    <div style="background-color: black">
+        <button type="submit" name="submit" class="btn btn-primary btn-lg col-xs-2 " value="addMEfillOnThem" style="background-color: black; ">+</button>
+        @Html.TextBox("fromName", null, new { id = "txtSearchForm", @class = "col-xs-6", @placeholder = "טופס", @style = "height:45px;" })
+        @Html.TextBox("iFillOnThem", null, new { id = "txtSearch", @class = "col-xs-4", @placeholder = "תעודת זהות", @style = "height:45px;" })
+        <br />
+        <br />
+        @*<button type="submit" name="submit" class="btn btn-primary btn-lg col-xs-2 " value="addMEfillOnThem" style=" margin-right:10%;  background-color: black;">+</button>*@
+    </div>
+    <br />
+    <br />
+        <button type="submit" name="submit" class="btn btn-primary btn-lg col-xs-2 " value="DeleteMEfillOnThem" style=" margin-right:100%;  background-color: red;">
+            <span class="glyphicon glyphicon-trash" style="cursor:pointer;"></span>
+        </button>
+         <br />
+        <br />
+    
+    <br />
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr></tr>
+                <tr>
+                    <td style="width:40%">
+                        ת"ז
+                    </td>
+                    <td>
+                        שם טופס
+                    </td>
+                    <td>
+                        מחיקה
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.FillOnThem.Count; i++)
+                {
+                    @Html.HiddenFor(x => x.FillOnThem[i].companyId);
+                    @Html.HiddenFor(x => x.FillOnThem[i].employeeFillId);                                               
+                    @Html.HiddenFor(x => x.FillOnThem[i].employeeOnId);
+                    @Html.HiddenFor(x => x.FillOnThem[i].formId);
+                    <tr>
+                        <td>@Model.FillOnThem[i].employeeOnId</td>
+                        <td>@Model.FillOnThem[i].tblForm.FormName</td>
+                        <td>@Html.CheckBoxFor(x => x.FillOnThem[i].IfDelete)</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="col-xs-4" style="margin-left: 15%; margin-top:3%">
+    <div>
+
+      
+       
+        <img src="~/photos/Employee/arrow_down_2.png" title=" Them Fill On Me " /> 
+        </div>
+    <br />
+    <div dir="rtl" style="background-color: black">
+        <button type="submit" name="submit" class="btn btn-primary btn-lg col-xs-2 " value="addThemfillOnMe" style=" background-color: black;">+</button>
+        @Html.TextBox("fromNameOnMe", null, new { id = "txtSearchFormfromNameOnMe", @class = "col-xs-6", @placeholder = "טופס", @style = "height:45px;" })
+        @Html.TextBox("ThemFillOnMe", null, new { id = "txtSearchThemFillOnMe", @class = "col-xs-4", @placeholder = "תעודת זהות", @style = "height:45px;" })
+        <br />
+        <br />
+    </div>  
+    <br />
+    <br /> 
+        <button type="submit" name="submit" class="btn btn-primary btn-lg col-xs-2 " value="DeleteThemFillOnMe" style=" margin-right:10%;  background-color: red;">
+            <span class="glyphicon glyphicon-trash" style="cursor:pointer;"></span>
+        </button>
+         <br />
+    <br />
+    <br />    
+    <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr></tr>
+                    <tr>
+                        <td style="width:40%">
+                            ת"ז
+                        </td>
+                        <td>
+                            שם טופס
+                        </td>
+                        <td>
+                            מחיקה
+                        </td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tbody>
+                    @for(int i=0 ; i<Model.FillOnMe.Count; i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(x => x.FillOnMe[i].employeeFillId)
+                            @Html.HiddenFor(x => x.FillOnMe[i].formId)
+                            @Html.HiddenFor(x => x.FillOnMe[i].companyId)
+                            @Html.HiddenFor(x => x.FillOnMe[i].employeeOnId)
+                            <td>@Model.FillOnMe[i].employeeFillId</td>
+                            <td>@Model.FillOnMe[i].tblForm.FormName</td>
+                            <td>@Html.CheckBoxFor(x => x.FillOnMe[i].IfDelete)</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+   
+</div>
+
+    <!--  Model of add conecctor-->
+
+<div class="modal fade" id="DeleteThemFillOnMe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">מחיקה</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr></tr>
+                            <tr>
+                                <td style="width:40%">
+                                    ת"ז
+                                </td>
+                                <td>
+                                    שם טופס
+                                </td>
+                                <td>
+                                    מחיקה
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tbody>
+                            @for (int i = 0; i < Model.FillOnThem.Count; i++)
+                            {
+                                <tr>
+                                    @Html.HiddenFor(x => x.FillOnThem[i].employeeFillId)
+                                    @Html.HiddenFor(x => x.FillOnThem[i].formId)
+                                    @Html.HiddenFor(x => x.FillOnThem[i].companyId)
+                                    @Html.HiddenFor(x => x.FillOnThem[i].employeeOnId)
+                                    <td>@Model.FillOnThem[i].employeeOnId</td>
+                                    <td>@Model.FillOnThem[i].tblForm.FormName</td>
+                                    <td>@Html.CheckBox("ifDelete", Model.FillOnThem[i].IfDelete)</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%; background-color:red">מחק</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+   <!--  Model of conecctor  DeleteMEfillOnThem-->
+
+<div class="modal fade" id="DeleteMEfillOnThem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:75%">
+        <div class="modal-content" style="width:75%">
+            <div class="modal-header" style="width:100%">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size:xx-large;  text-shadow:inherit; margin-right:1%; margin-top:0%;"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" dir="rtl" style="margin-right:40%;font-size:x-large">מחיקה</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr></tr>
+                            <tr>
+                                <td style="width:40%">
+                                    ת"ז
+                                </td>
+                                <td>
+                                    שם טופס
+                                </td>
+                                <td>
+                                    מחיקה
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tbody>
+                            @foreach (var item in Model.FillOnMe)
+                            {
+                            <tr>
+                                <td>@item.employeeFillId</td>
+                                <td>@item.tblForm.FormName</td>
+                                <td>@Html.CheckBox("ifDelete", item.IfDelete)</td>
+                            </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right: 40%; background-color: red">מחק</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tbl_Company>
+
+@{
+    ViewBag.Title = "MainCompanies";
+}
+<script src="~/Scripts/DataTable/dataTables.keyTable.js"></script>
+<script src="~/Scripts/DataTable/jquery.js"></script>
+<script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
+<link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
+<link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+@Styles.Render("~/Content/bootstrapcss")
+@Styles.Render("~/Content/themes/base/css")
+<div dir="rtl" style="text-align:center;">
+<div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center">
+       <!-- Default panel contents -->
+        <div class="panel-heading" style="font-size: 22px;  ">רשימת לקוחות</div>
+         <div style="margin-right:85%">  @Html.ActionLink("הוסף חברה חדשה", "addCompanie")</div>
+        <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
+      
+        <!---knafo-->
+        <table id="myTable" class="table-bordered" cellspacing="0" width="100%" align="right">
+            <thead>
+                <tr style=" font-size:20px;">
+                    <td align="center">שם</td>
+                    <td align="center">כתובת</td>
+                    <td align="center">טלפון</td>
+                    <td align="center">מספר עובדים</td>
+                    <td align="center">מחיקה</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td align="center">@Html.ActionLink(item.comapnyName, "CompanyUnit", new { @id = item.companyId })</td>
+                        <td align="center">@item.comapnyAddress</td>
+                        <td align="center">@item.comapnyPhone</td>
+                        <td align="center">@item.Employees.Count</td>
+                        <td><p><span class="glyphicon glyphicon-trash" title="מחיקת חברה" data-toggle="modal" data-target="#@item.companyId" style="cursor:pointer;"></span></p></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+       
+    </div>
+    </div>
+
+<script>
+
+    var table = $('#myTable').DataTable();
+    new $.fn.dataTable.KeyTable(table);
+
+</script>
+
+
+@foreach (var item in Model)
+{
+
+            <!-- Modal -->
+    <div class="modal fade" id=@item.companyId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:red;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק חברה  : </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.comapnyName?</h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">מחיקה זו תמחוק את כל העובדים ואת כל המחלקות של חברה זו!</h4>
+                </div>
+                @using (Html.BeginForm("deleteCompany", "MainCompanies", new { companyid = item.companyId, FormMethod.Post }))
+                {  <div class="modal-body">
+                    <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
+                </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+}

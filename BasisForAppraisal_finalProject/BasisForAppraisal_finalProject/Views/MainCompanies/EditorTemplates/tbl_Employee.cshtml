@@ -1,0 +1,68 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Employee
+@{
+    Layout = null;
+}
+@Html.HiddenFor(x => x.employeeId)
+<table class="table-condensed" style="background-color:whitesmoke" align="center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.unitName)
+        </th>
+        <th>
+            @Html.EditorFor(x => x.unitName)
+        </th>
+    </tr>
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.className)
+        </th>
+        <th>
+            @Html.EditorFor(x => x.className)
+        </th>
+    </tr>
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.employeeId)
+        </th>
+        <th>
+            @Html.TextBoxFor(x => x.employeeId, new { @disabled = "disabled"})
+        </th>
+    </tr>
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.firstName)
+            </th>
+        <th>
+            @Html.EditorFor(x => x.firstName)
+            </th>
+</tr>
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.lastName)
+            </th>
+
+        <th>
+            @Html.EditorFor(x => x.lastName)
+            </th>
+</tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.Email)
+            </th>
+<th>
+    @Html.EditorFor(x => x.Email)
+    </th>
+</tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.IsManger)
+        </th>
+        <th>
+            @Html.CheckBoxFor(x => x.IsManger.Value, new { @disabled = "disabled" })
+            </th>
+</tr>
+</table>    
