@@ -48,7 +48,12 @@ namespace BasisForAppraisal_finalProject.Controllers
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
+
                     await SignInAsync(user, model.RememberMe);
+
+                    if(user.Roles.Select(x => x.Role.Name).Contains("Guest"))
+                        return RedirectToAction("GuestMain", "Guest", new { id = user.UserName });
+
                     return RedirectToLocal(returnUrl);
                 }
                 else
