@@ -12,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
+    
     public class MainCompaniesController : Controller
     {
+       
         // method read and save the file upload
         [HttpPost]
         public ActionResult Index( HttpPostedFileBase file = null, CompanyViewModel c= null)
@@ -49,7 +51,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var dManager = new DataManager();
             var comapny = dManager.Companyies.Where(x => x.companyId == id).First();
-            var myunit = comapny.tbl_Units.Where(x => x.unitName.Equals( unit)).FirstOrDefault();
+            var myunit = comapny.Units.Where(x => x.unitName.Equals( unit)).FirstOrDefault();
             var myclass = myunit.tbl_Classes.Where(x => x.className.Equals(cl)).FirstOrDefault();
             var unitAndForm = new ClassUnitViewModel(myclass);
             comapny.LoadEmployees();
@@ -231,16 +233,80 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             catch (Exception ex) { }
         }
+        public void intalizeCheckBox(bool workers, bool manager,bool onManger,bool onHimself)
+        {
+            Session["workers"] = workers;
+            Session["manager"] = manager;
+            Session["onManger"] = onManger;
+            Session["onHimself"] = onHimself;
+
+        }
         [HttpPost]
-        public ActionResult AddConnector(int companyid,string unit,string cl,int formId)
+        public ActionResult AddConnector(int companyid, string unit, string cl, int formId)
+        {
+            Boolean b = Boolean.Parse(Session["onHimself"].ToString());
+            if (Boolean.Parse( Session["workers"].ToString()))
+                addConectorToWorkersOnly(companyid, unit, cl, formId);
+            if (Boolean.Parse(Session["manager"].ToString()))
+                addConectorTomangerstoWorker(companyid, unit, cl, formId);
+            if (Boolean.Parse(Session["onManger"].ToString()))
+                addConectorworkersOnManager(companyid, unit, cl, formId);
+           
+            return RedirectToAction("ManageCompany", new { id = companyid, unit = unit, cl = cl });
+            
+        }
+        //
+        private void addConectorToWorkersOnly(int companyid, string unit, string cl, int formId)
         {
             var dmc = new DataMangerCompany();
-           var employes= dmc.getEmployee(companyid,unit,cl);
-            foreach(var e1 in employes)
-                foreach(var e2 in employes)
-                    if(e2.IsManger==false)
-                         dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
-            return RedirectToAction("ManageCompany", new { id = companyid, unit = unit, cl = cl });
+            var employes = dmc.getEmployee(companyid, unit, cl);
+            foreach (var e1 in employes)
+                foreach (var e2 in employes)
+                    if (!(e2.IsManger == true || e1.IsManger==true))
+                        if ((e1 == e2 && Boolean.Parse(Session["onHimself"].ToString()))||e1!=e2)
+                            dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
+                       
+
+
+        }
+        private void addConectorTomangerstoWorker(int companyid, string unit, string cl, int formId)
+        {
+            var dmc = new DataMangerCompany();
+            var employes = dmc.getEmployee(companyid, unit, cl);
+            foreach (var e1 in employes)
+            {
+                foreach (var e2 in employes)
+                    if ((e1 == e2 && Boolean.Parse(Session["onHimself"].ToString())) || e1 != e2)
+                        if (e1.IsManger == true)
+                            dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
+                Boolean b = Boolean.Parse(Session["onHimself"].ToString());
+            }
+        }
+        private void addConectorworkersOnManager(int companyid, string unit, string cl, int formId)
+        {
+            var dmc = new DataMangerCompany();
+            var employes = dmc.getEmployee(companyid, unit, cl);
+            foreach (var e1 in employes)
+                foreach (var e2 in employes)
+                  if ((e1 == e2 && Boolean.Parse(Session["onHimself"].ToString()))||e1!=e2)
+                    if (e2.IsManger == true)
+                        dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
+
+        }
+        [HttpPost]
+        public ActionResult deleteCompany(int companyid)
+        {
+            var dmc = new DataMangerCompany();
+            dmc.deleteCompany(companyid);
+            return RedirectToAction("MainCompanies");
+
+        }
+
+        public  ActionResult deleteFolder(string className, string unitid, int companyid)
+        {
+            var dmc = new DataMangerCompany();
+            dmc.deleteUnitAndClass(className, unitid, companyid);
+            return RedirectToAction("CompanyUnit", new { id = companyid});
             
         }
        

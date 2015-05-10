@@ -206,6 +206,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CompanyViewModel.cs" />
     <Compile Include="ViewModel\Company\ClassUnitViewModel.cs" />
+    <Compile Include="ViewModel\Company\FolderUnitPartialView.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />

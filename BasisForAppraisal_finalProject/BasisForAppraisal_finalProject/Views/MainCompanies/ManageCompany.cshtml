@@ -20,11 +20,8 @@
 <fieldset>
 
 
-    @using (Html.BeginForm("Index", "SendMailer", new { id = Model.MyClass.companyId, unit = Model.MyClass.unitName, cl = Model.MyClass.className }, FormMethod.Post))
-    {
+   
         
-        <input type="submit" value="Send mail" />
-    }
 </fieldset>
 @Html.EditorFor(x=>x.MyClass)
 

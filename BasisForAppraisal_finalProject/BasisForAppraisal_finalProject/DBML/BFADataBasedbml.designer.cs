@@ -63,7 +63,7 @@ namespace BasisForAppraisal_finalProject.DBML
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BasisForAppraisalDBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BasisForAppraisalDBConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
