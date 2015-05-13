@@ -27,6 +27,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
+        public DataMangerCompany DMC = new DataMangerCompany();
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -49,11 +50,16 @@ namespace BasisForAppraisal_finalProject.Controllers
                 if (user != null)
                 {
 
-                    await SignInAsync(user, model.RememberMe);
+                    var roleIds = user.Roles.Select(x => x.RoleId);
 
-                    if(user.Roles.Select(x => x.Role.Name).Contains("Guest"))
-                        return RedirectToAction("GuestMain", "Guest", new { id = user.UserName });
+                    foreach(string roleId in roleIds)
+                    {
+                        var role = DMC.getRoleById(roleId);
+                        if(role.Result.Equals("Guest"))
+                            return RedirectToAction("GuestMain", "Guest", new { id = user.UserName });
 
+                    }
+                  
                     return RedirectToLocal(returnUrl);
                 }
                 else

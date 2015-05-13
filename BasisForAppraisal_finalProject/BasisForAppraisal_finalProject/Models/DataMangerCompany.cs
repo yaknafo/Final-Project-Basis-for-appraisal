@@ -9,6 +9,7 @@ using Microsoft.Office.Interop;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Threading.Tasks;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -41,9 +42,25 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void deleteWorker(String workerid, int companyNumber)
         {
-            // find the record to delete f
+
+            // get connectorsAnswers cant delete employe before delete all connectorsAnswers that his id is key there
+            var connecAnswer = manager.tbl_ConnectorAnswers.Where(x => x.employeeFillId == workerid || x.employeeOnId == workerid).ToList();
+            manager.tbl_ConnectorAnswers.DeleteAllOnSubmit(connecAnswer);
+
+            //get connectors cant delete employe before delete all connectors that his id is key there
+            var connector = manager.tbl_ConnectorFormFills.Where(x => x.employeeFillId == workerid || x.employeeOnId == workerid).ToList();
+            manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(connector);
+
+         
+            // // delete worker --> the worker has been deleted from the DB.
             var workerToDelete = manager.tbl_Employees.Where(a => a.employeeId == workerid && a.companyId == companyNumber).FirstOrDefault();
             manager.tbl_Employees.DeleteOnSubmit(workerToDelete);
+
+            // delete Identity --> the user cant login to the system any more
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var userExiset = UserManager.FindByName(workerid);
+            UserManager.Delete(userExiset);
+
             manager.SubmitChanges();
 
         }
@@ -258,6 +275,16 @@ namespace BasisForAppraisal_finalProject.Models
 
             }
 
+        }
+
+
+        public async Task<string> getRoleById(string roleId)
+        {
+            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+            var role = roleManager.Roles.Where(x => x.Id == roleId).FirstOrDefault();
+
+            return role.Name;
         }
 
         public async void CreateUserWithRole(string userName, string password, string roleName)

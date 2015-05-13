@@ -25,7 +25,12 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult FormFill()
         {
             var xconnector = TempData["con"] as tbl_ConnectorFormFill;
+
+            // this will be deleted after yair finsish to work on it!
+            if (xconnector == null)
             xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
+            ////////////////////////////////////////////////////////////////////////////////
+
             var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector);
 
             return View(fillerViewModel);
