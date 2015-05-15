@@ -26,6 +26,17 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
        //-------------------------------------------------- Get Method --------------------------------------------------
+
+        public Table<tbl_ConnectorAnswer> ConnectorAnswer
+        {
+            get { return manager.tbl_ConnectorAnswers; }
+        }
+
+        public Table<tbl_ConnectorFormFill> ConnectorFormFill
+        {
+            get { return manager.tbl_ConnectorFormFills; }
+        }
+
         public List<tbl_ConnectorFormFill> Conecctors()
         {
             return manager.tbl_ConnectorFormFills.ToList();
@@ -120,6 +131,18 @@ namespace BasisForAppraisal_finalProject.Models
                 
         }
 
+        public void DeleteConnectorAnswers(tbl_ConnectorAnswer ca)
+         {
+             var caForDelete = ConnectorAnswer.Where(x => x.Equals(ca)).FirstOrDefault();
+
+             if (caForDelete == null)
+                 return;
+
+             ConnectorAnswer.DeleteOnSubmit(caForDelete);
+             manager.SubmitChanges();
+
+         }
+
 
         //----------------------------------------------- add Methods ---------------------------------------------------//
         public void addCompany(tbl_Company cmp)
@@ -196,6 +219,16 @@ namespace BasisForAppraisal_finalProject.Models
             manager.tbl_ConnectorFormFills.InsertOnSubmit(tempconnector);
             manager.SubmitChanges();
 
+
+        }
+
+        public void AddConnectorAnswers(tbl_ConnectorAnswer ca)
+        {
+            if (ca == null || ca.AnswerId == 0 || ca.AnswerId == null || ConnectorAnswer.Contains(ca))
+                return;
+
+            ConnectorAnswer.InsertOnSubmit(ca);
+            manager.SubmitChanges();
 
         }
 

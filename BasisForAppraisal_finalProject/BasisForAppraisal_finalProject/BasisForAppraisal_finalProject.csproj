@@ -208,6 +208,7 @@
     <Compile Include="Models\DataMangerCompany.cs" />
     <Compile Include="Models\Dictionary.cs" />
     <Compile Include="Models\FormManager.cs" />
+    <Compile Include="Models\FromFillerManager.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\PartialIntentionalAnswer.cs" />

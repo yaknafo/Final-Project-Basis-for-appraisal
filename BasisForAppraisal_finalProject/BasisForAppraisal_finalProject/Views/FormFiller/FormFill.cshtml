@@ -28,7 +28,9 @@
 
 </head>
 <body>
-
+    <div class="alert-info">
+        <h1 style="text-align: center">@Model.FillOn על</h1>
+    </div>
 
     @using(Html.BeginForm())
     { 
@@ -36,20 +38,22 @@
         @Html.HiddenFor(x => x.FillBy)
         @Html.HiddenFor(x => x.FillOn)
          @Html.HiddenFor(x => x.FormIdConnector)
-    <div id="Panel" style="width: 100%; margin-top: 5%; background-color:white ">
+    <div id="Panel" style="width: 100%; margin-top: 0%; background-color:white ">
         <div class="panel panel-heading">
             <div class="panel-heading">
-                @Html.EditorFor(x => x.From)
-                <div id="exampsle">
-                    @Html.EditorFor(x => x.Questions)
-                    <button type="submit" class="btn btn-primary btn-lg" style="width:150px; height:10%">סיים ושלח</button>
-               </div>
-                <ul class="pager">
-                    <li class="pages"></li>
-                   
+                <div class="alert-info">
+                    @Html.EditorFor(x => x.From)
+                    </div>
+                    <div id="exampsle">
+                        @Html.EditorFor(x => x.Questions)
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:150px; height:10%">סיים ושלח</button>
+                    </div>
+                    <ul class="pager">
+                        <li class="pages"></li>
+
                     </ul>
 
-               </div>
+                </div>
            </div>
         </div>
     

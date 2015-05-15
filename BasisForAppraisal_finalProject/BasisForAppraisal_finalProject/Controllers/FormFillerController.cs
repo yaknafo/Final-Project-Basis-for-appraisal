@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.ViewModel;
+using System.Threading.Tasks;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -14,6 +15,7 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
         private DataManager DM = new DataManager();
         private DataMangerCompany DMC = new DataMangerCompany();
+        private FromFillerManager ffm = new FromFillerManager();
         //
         // GET: /FormFiller/
         public ActionResult Index()
@@ -37,10 +39,9 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult FormFill(FormFillerViewModel connector)
+        public  ActionResult FormFill(FormFillerViewModel connector)
         {
             var xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
-
 
             List<tbl_ConnectorAnswer> selectedAnswer = new List<tbl_ConnectorAnswer>();
 
@@ -49,7 +50,10 @@ namespace BasisForAppraisal_finalProject.Controllers
                 selectedAnswer.Add(connector.GetSelectedAnswer(q));
             }
 
+            var taskUpLoadExcel= Task.Factory.StartNew(() => ffm.SaveConnectorAnswers(selectedAnswer));
+            taskUpLoadExcel.Wait();
 
+            
             var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector);
 
             return View(fillerViewModel);
