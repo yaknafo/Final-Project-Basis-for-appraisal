@@ -1,0 +1,50 @@
+body {
+
+}
+
+* {
+
+}
+
+ul {
+
+}
+
+a {
+
+}
+
+.gallery {
+
+}
+
+.gallery li {
+
+}
+
+.pages {
+    background-color:gold;
+	
+}
+
+.pages ul {
+	float: right;
+}
+
+    .pages ul li {
+        
+    }
+
+.pages ul li a {
+
+	
+}
+
+.pages ul li.on a {
+	background: #f9f9f9;
+	color: #333;
+}
+
+.pages ul li span span {
+	
+}
