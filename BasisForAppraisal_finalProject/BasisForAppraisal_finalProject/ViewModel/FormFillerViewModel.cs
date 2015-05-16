@@ -19,6 +19,10 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         private List<tbl_IntentionalQuestion> questions;
 
+        private List<tbl_IntentionalQuestion> unAnswerQuestions = new List<tbl_IntentionalQuestion>();
+
+        public List<tbl_ConnectorAnswer> answerQuestions =  new List<tbl_ConnectorAnswer>();
+
         // data manager for get data from DB
         private DataManager dm;
 
@@ -95,6 +99,22 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
        }
 
+
+       public List<tbl_ConnectorAnswer> AnswerQuestions
+       {
+           get
+           {
+
+               return answerQuestions;
+
+           }
+           set
+           {
+               answerQuestions = value;
+           }
+
+       }
+
          private List<tbl_IntentionalQuestion> initQuestion()
        {
           var tempList= new List<tbl_IntentionalQuestion> ();
@@ -114,10 +134,18 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
             if (question.QuestionType == "FreeText")
                 selectedAnswer = question.Answers[0];
+
             else if (question.selectedAnswer == 0)
+            {
+               
                 return null;
+            }
             else
+            {
+                
+
                 selectedAnswer = question.Answers.Where(x => x.AnswerId == question.selectedAnswer).FirstOrDefault();
+            }
 
             
             var connectorAnswer= new tbl_ConnectorAnswer{ companyId = CompanyId,
@@ -129,6 +157,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
                                                           SectionId = question.SectionId,
                                                           AnswerId = selectedAnswer.AnswerId
                                                           };
+
 
 
             return connectorAnswer;

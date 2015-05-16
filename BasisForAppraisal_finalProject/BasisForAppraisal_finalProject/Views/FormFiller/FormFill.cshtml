@@ -25,6 +25,15 @@
         });
     </script>
    
+    <script type="text/javascript">
+        $(function () {
+            setTimeout(function () { $("#UnAnswerQuestions").fadeOut(1500); }, 2500)
+            $('#btnclick').click(function () {
+                $('#testdiv').show();
+                setTimeout(function () { $("#testdiv").fadeOut(1500); }, 2500)
+            })
+        })
+    </script>
 
 </head>
 <body>
@@ -32,12 +41,22 @@
         <h1 style="text-align: center">@Model.FillOn על</h1>
     </div>
 
+    <!-- if not answers all the question this panel will show up -->
+    @if (TempData["UnAnswerQuestions"] != null)
+{
+
+    <div class="alert alert-danger" id="UnAnswerQuestions" style="text-align: right; ; margin-top:13%; position:fixed; align-self:center">
+        <strong dir="rtl">לא ענית על מספר שאלות</strong>
+    </div>
+}
+
     @using(Html.BeginForm())
     { 
         @Html.HiddenFor(x => x.CompanyId)
         @Html.HiddenFor(x => x.FillBy)
         @Html.HiddenFor(x => x.FillOn)
          @Html.HiddenFor(x => x.FormIdConnector)
+        @Html.HiddenFor(x => x.AnswerQuestions)
     <div id="Panel" style="width: 100%; margin-top: 0%; background-color:white ">
         <div class="panel panel-heading">
             <div class="panel-heading">

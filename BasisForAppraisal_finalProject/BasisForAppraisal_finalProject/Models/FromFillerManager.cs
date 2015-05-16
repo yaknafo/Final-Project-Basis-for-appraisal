@@ -10,14 +10,13 @@ namespace BasisForAppraisal_finalProject.Models
     {
         DataMangerCompany DMC = new DataMangerCompany();
 
-        public async void SaveConnectorAnswers(List<tbl_ConnectorAnswer> ca)
+        public void SaveConnectorAnswers(List<tbl_ConnectorAnswer> ca)
         {
-            var tasks = ca.Select(async item =>
-            {
-                DMC.AddConnectorAnswers(item);
-            });
-            await Task.WhenAll(tasks);
-            
+
+
+            var taskSaveAnswer = Task.Factory.StartNew(() =>  DMC.AddConnectorAnswers(ca));
+            taskSaveAnswer.Wait();
+
         }
 
 

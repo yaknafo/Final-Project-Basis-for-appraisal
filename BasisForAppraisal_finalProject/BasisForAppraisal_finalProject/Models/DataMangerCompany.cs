@@ -232,6 +232,12 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
+        public void AddConnectorAnswers(List<tbl_ConnectorAnswer> ca)
+        {
+
+            ca.ForEach(AddConnectorAnswers);
+        }
+
         //----------------------------------------------- get Methods ---------------------------------------------------//
 
          public List<tbl_Employee> getEmployee(int idCompany,string unit,string cl)

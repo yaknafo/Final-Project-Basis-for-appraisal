@@ -41,22 +41,34 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public  ActionResult FormFill(FormFillerViewModel connector)
         {
-            var xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
+           // var xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
+
+            List<tbl_IntentionalQuestion> tempAnswerQuestions;
 
             List<tbl_ConnectorAnswer> selectedAnswer = new List<tbl_ConnectorAnswer>();
 
-            foreach(tbl_IntentionalQuestion q in connector.Questions)
+             tempAnswerQuestions = new List<tbl_IntentionalQuestion>(connector.Questions);
+
+
+            foreach (tbl_IntentionalQuestion q in tempAnswerQuestions)
             {
                 selectedAnswer.Add(connector.GetSelectedAnswer(q));
             }
 
-            var taskUpLoadExcel= Task.Factory.StartNew(() => ffm.SaveConnectorAnswers(selectedAnswer));
-            taskUpLoadExcel.Wait();
+
+            if (selectedAnswer.Where(x => x == null).Any())
+            {
+                TempData["UnAnswerQuestions"] = "exist";
+                return View(connector);
+            }
+
+            var taskSaveAnswer = Task.Factory.StartNew(() => ffm.SaveConnectorAnswers(selectedAnswer));
+            taskSaveAnswer.Wait();
 
             
-            var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector);
+         //   var fillerViewModel = new FormFillerViewModel(connector.tblForm, xconnector);
 
-            return View(fillerViewModel);
+            return View(connector);
         }
 	}
 }
