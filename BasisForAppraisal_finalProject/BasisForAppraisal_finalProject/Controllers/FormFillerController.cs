@@ -71,5 +71,23 @@ namespace BasisForAppraisal_finalProject.Controllers
             // go back to main guest after fill  in the form
             return RedirectToAction("GuestMain", "Guest", new { id = connector.FillBy });
         }
+
+
+          public ActionResult ShowAnswers(int companyId ,int formId, string empOn, string empFill)
+        {
+            var dmc = new DataMangerCompany();
+            var connector = dmc.ConnectorFormFill.Where(x => x.companyId == companyId && x.employeeFillId == empFill
+                                                                        && x.employeeOnId == empOn && x.formId == formId).FirstOrDefault();
+              var answers = dmc.ConnectorAnswer.Where(x => x.companyId == companyId && x.employeeFillId == empFill
+                                                                        && x.employeeOnId == empOn && x.formConnectorId == formId).ToList();
+
+              connector.FillAnswers(answers);
+
+              var fillerViewModel = new FormFillerViewModel(connector.tblForm, connector);
+
+              return View(fillerViewModel);
+        }
+
+
 	}
 }

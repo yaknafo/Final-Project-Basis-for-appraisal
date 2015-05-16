@@ -63,11 +63,14 @@
             <thead>
                 <tr></tr>
                 <tr>
-                    <td style="width:40%">
+                    <td style="width:35%">
                         ת"ז
                     </td>
                     <td>
                         שם טופס
+                    </td>
+                    <td>
+                        בוצע?
                     </td>
                     <td>
                         מחיקה
@@ -83,7 +86,23 @@
                     @Html.HiddenFor(x => x.FillOnThem[i].formId);
                     <tr>
                         <td>@Model.FillOnThem[i].employeeOnId</td>
-                        <td>@Model.FillOnThem[i].tblForm.FormName</td>
+                        @if (@Model.FillOnThem[i].done.HasValue && @Model.FillOnThem[i].done.Value)
+                        { 
+                        <td>@Html.ActionLink(@Model.FillOnThem[i].tblForm.FormName, "ShowAnswers", "FormFiller", new
+                       {
+                           companyId = Model.FillOnThem[i].companyId,
+                           formId = Model.FillOnThem[i].formId,
+                           empOn = Model.FillOnThem[i].employeeOnId,
+                           empFill = Model.FillOnThem[i].employeeFillId},
+                           new { target = "_blank" })</td>
+                        <td class="glyphicon glyphicon-ok" style="background-color:lightgreen"></td>
+                        }
+                        else
+                        {
+                            <td>@Model.FillOnThem[i].tblForm.FormName</td>
+                        <td class="glyphicon glyphicon-remove"></td>
+                        }
+
                         <td>@Html.CheckBoxFor(x => x.FillOnThem[i].IfDelete)</td>
                     </tr>
 

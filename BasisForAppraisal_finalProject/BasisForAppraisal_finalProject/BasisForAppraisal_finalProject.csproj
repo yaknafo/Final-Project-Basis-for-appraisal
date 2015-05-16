@@ -221,7 +221,6 @@
     <Compile Include="ViewModel\FormFillerViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
-    <Compile Include="ViewModel\QuestionListPaged.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />
     <Compile Include="Common\Enum\QuestionType.cs" />
   </ItemGroup>
@@ -383,11 +382,20 @@
     <Content Include="Views\FormFiller\EditorTemplates\tbl_IntentionalQuestion.cshtml" />
     <Content Include="Views\FormFiller\EditorTemplates\tbl_IntentionalAnswer.cshtml" />
     <Content Include="Views\FormFiller\EditorTemplates\tbl_ConnectorFormFill.cshtml" />
+    <Content Include="Views\MainCompanies\ShowAnswers.cshtml" />
+    <Content Include="Views\MainCompanies\EditorTemplates\tblForm.cshtml" />
+    <Content Include="Views\MainCompanies\EditorTemplates\tbl_IntentionalQuestion.cshtml" />
+    <Content Include="Views\MainCompanies\EditorTemplates\tbl_IntentionalAnswer.cshtml" />
+    <Content Include="Views\FormFiller\DisplayTemplates\tbl_IntentionalAnswer.cshtml" />
+    <Content Include="Views\FormFiller\DisplayTemplates\tbl_IntentionalQuestion.cshtml" />
+    <Content Include="Views\FormFiller\DisplayTemplates\tblForm.cshtml" />
+    <Content Include="Views\FormFiller\ShowAnswers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
     <Folder Include="Scripts\AutoAutocomplete\" />
     <Folder Include="Views\check\" />
+    <Folder Include="Views\MainCompanies\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
