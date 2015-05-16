@@ -228,6 +228,9 @@ namespace BasisForAppraisal_finalProject.Models
                 return;
 
             ConnectorAnswer.InsertOnSubmit(ca);
+
+           
+
             manager.SubmitChanges();
 
         }
@@ -236,6 +239,18 @@ namespace BasisForAppraisal_finalProject.Models
         {
 
             ca.ForEach(AddConnectorAnswers);
+
+            // flag done should be true after saving all the answer of the from
+            if(ca.Any())
+            {
+             var connectorFalgDone = manager.tbl_ConnectorFormFills.Where(x => x.companyId == ca[0].companyId && x.employeeFillId == ca[0].employeeFillId
+                                                                        && x.employeeOnId == ca[0].employeeOnId && x.formId == ca[0].FormId).FirstOrDefault();
+
+             connectorFalgDone.done = true;
+
+             manager.SubmitChanges();
+            }
+
         }
 
         //----------------------------------------------- get Methods ---------------------------------------------------//

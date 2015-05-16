@@ -68,7 +68,8 @@ namespace BasisForAppraisal_finalProject.Controllers
             
          //   var fillerViewModel = new FormFillerViewModel(connector.tblForm, xconnector);
 
-            return View(connector);
+            // go back to main guest after fill  in the form
+            return RedirectToAction("GuestMain", "Guest", new { id = connector.FillBy });
         }
 	}
 }
