@@ -40,10 +40,7 @@
 
 </head>
 <body>
-    <div class="alert-info">
-        <h1 style="text-align: center">@Model.FillOn על</h1>
-    </div>
-
+   
     <!-- if not answers all the question this panel will show up -->
     @if (TempData["UnAnswerQuestions"] != null)
 {
@@ -64,6 +61,7 @@
         <div class="panel panel-heading">
             <div class="panel-heading">
                 <div class="alert-info">
+                    <strong>@Model.FillOn על</strong>
                     @Html.EditorFor(x => x.From)
                     </div>
                     <div id="exampsle">

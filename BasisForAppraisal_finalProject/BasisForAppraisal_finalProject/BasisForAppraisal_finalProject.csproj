@@ -261,6 +261,7 @@
     <Content Include="photos\Employee\arrow_up_2.png" />
     <Content Include="photos\folderIcon.png" />
     <Content Include="photos\info.png" />
+    <Content Include="photos\Login-Door-24.png" />
     <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\Logo\Basis_For_evaluation _logo.jpg" />
     <Content Include="photos\Logo\logo_for_ToolBar.PNG" />
@@ -390,6 +391,10 @@
     <Content Include="Views\FormFiller\DisplayTemplates\tbl_IntentionalQuestion.cshtml" />
     <Content Include="Views\FormFiller\DisplayTemplates\tblForm.cshtml" />
     <Content Include="Views\FormFiller\ShowAnswers.cshtml" />
+    <Content Include="Views\MainFormCreator\DisplayTemplates\tbl_IntentionalAnswer.cshtml" />
+    <Content Include="Views\MainFormCreator\DisplayTemplates\tbl_IntentionalQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\DisplayTemplates\tblForm.cshtml" />
+    <Content Include="Views\MainFormCreator\FormPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

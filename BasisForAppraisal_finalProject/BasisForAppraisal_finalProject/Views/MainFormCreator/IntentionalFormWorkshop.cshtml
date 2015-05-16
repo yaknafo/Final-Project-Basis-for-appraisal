@@ -26,12 +26,30 @@
     })
 </script>
 
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () { $("#danger-alert").fadeOut(1500); }, 2500)
+        $('#btnclick').click(function () {
+            $('#testdiv').show();
+            setTimeout(function () { $("#testdiv").fadeOut(1500); }, 2500)
+        })
+    })
+</script>
+
 
  @if (TempData["Success"] != null)
 {
 
     <div class="alert alert-success" id="success-alert" style="text-align: right; ; margin-top:13%; position:fixed; align-self:center">
         <strong dir="rtl">@TempData["Success"] </strong>
+    </div>
+}
+
+@if (TempData["Failed"] != null)
+{
+
+    <div class="alert alert-danger" id="danger-alert" style="text-align: right;margin-top:13%; position:fixed; align-self:center">
+        <strong dir="rtl">@TempData["Failed"] </strong>
     </div>
 }
 
@@ -82,20 +100,24 @@
     <div id="ActionBtn" style="position: fixed; margin-top: -14%; background-color: lightgrey; width: 100%; ">
 
         <!-- the exit button-->
-        <button type="button" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 100px; background-color: black; ">
-            <img src="~/photos/backTo.png" draggable="false" />
+        <button type="button" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 90px; background-color: black; ">
+            <img src="~/photos/Login-Door-24.png" />
         </button>
 
         <!-- the save button-->
-        <button type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg" title="שמירת טופס" style="margin: 1%; width: 100px; background-color: black"><img src="~/photos/savef.png" draggable="false" /></button>
+        <button type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg glyphicon glyphicon-floppy-disk" title="שמירת טופס" style="margin: 1%; width: 90px; background-color: black"></button>
 
         <!-- the delete button-->
-        <button type="submit" name="submit" value=@WorkShopActions.Delete class="btn btn-primary btn-lg" title="מחיקת שאלות מסומנות " style="margin: 1%; width: 100px; background-color: black; "><img src="~/photos/deleteQ.png" draggable="false" /></button>
+        <button type="submit" name="submit" value=@WorkShopActions.Delete class="btn btn-primary btn-lg glyphicon glyphicon-remove-sign" title="מחיקת שאלות מסומנות " style="margin: 1%; width: 90px; background-color: black; "></button>
 
         <!-- Preview button -->
-        <button type="button" class="btn btn-primary btn-lg" title="תצוגה מקדימה" data-toggle="modal" data-target="#Preview" style="margin: 1%; width: 100px; background-color: black; ">
-            <img src="~/photos/previewForm.png" draggable="false" />
-        </button>
+        
+            @Html.ActionLink(" ", "FormPreview", "MainFormCreator", new
+                       {
+                           formid = Model.form.formId
+                       },
+            new { target = "_blank", @class = "btn btn-primary btn-lg glyphicon glyphicon-list-alt", @style = "background-color: black; margin: 1%;width: 90px;" })
+       
     </div>
         
         <div style=" margin-left: 97.5%; margin-top: 20%; ">

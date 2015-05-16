@@ -82,54 +82,59 @@ namespace BasisForAppraisal_finalProject.Controllers
            // delete answer
            if (submit.All(char.IsDigit))
                formViewModel.DeleteAnswer(Convert.ToInt32(submit));
-
-
-           switch(submit)
+           try
            {
-               case "Exit":       return backToMainForm();
 
-               case "AddAnswerToMulitiChoice": formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
-                                               TempData["AddAnswerToMulitiChoice"] = "Add";
-                                               break;
+               switch (submit)
+               {
+                   case "Exit": return backToMainForm();
 
-               case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
-                                  TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                                  TempData["changes"] = "add";
-                                  break;
+                   case "AddAnswerToMulitiChoice": formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
+                       TempData["AddAnswerToMulitiChoice"] = "Add";
+                       break;
+
+                   case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "add";
+                       break;
 
 
-               case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
-                                          TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                                          TempData["changes"] = "add";
-                                          break;
-               case "AddYesNoQuestion": formViewModel.AddQuestion(formViewModel.NewQuestionYesNo);
-                                          TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                                          TempData["changes"] = "add";
-                                          break;
+                   case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "add";
+                       break;
+                   case "AddYesNoQuestion": formViewModel.AddQuestion(formViewModel.NewQuestionYesNo);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "add";
+                       break;
 
-               case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
-                                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                                        TempData["changes"] = "add";
-                                        break;
+                   case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "add";
+                       break;
 
-               case "AddMultipleChoiceQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoice);
-                                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                                        TempData["changes"] = "add";
-                                        break;
+                   case "AddMultipleChoiceQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoice);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "add";
+                       break;
 
-               case "Save":   manager.UpdateForm(formViewModel);
-                              TempData["Success"] = "שמירה בוצעה בהצלחה!";
-                               break;
-                
-               case "Delete": formViewModel.DeleteQuestions();
-                              TempData["Success"] = "מחיקה בוצעה בהצלחה!";
-                              TempData["changes"] = "remove";
-                              break;
+                   case "Save": manager.UpdateForm(formViewModel);
+                       TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                       break;
 
-               case "SaveAndClose": manager.UpdateForm(formViewModel);
-                                   TempData["Success"] = "שמירה בוצעה בהצלחה!";
-                                   return backToMainForm();
+                   case "Delete": formViewModel.DeleteQuestions();
+                       TempData["Success"] = "מחיקה בוצעה בהצלחה!";
+                       TempData["changes"] = "remove";
+                       break;
 
+                   case "SaveAndClose": manager.UpdateForm(formViewModel);
+                       TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                       return backToMainForm();
+
+               }
+           }catch(Exception e)
+           {
+               TempData["Failed"] = "פעולה נכשלה";
            }
            if(Request.IsAjaxRequest())
            {
@@ -141,12 +146,11 @@ namespace BasisForAppraisal_finalProject.Controllers
 
 
        [HttpGet]
-       public ActionResult preview(int formid=1 )
+       public ActionResult FormPreview(int formid=1 )
        {
-           var b = new DataManager();
-           var q = b.GetFormWithSections(formid);
-           var t = new ViewModel.FormViewModel(q);
-           return View(t);
+           var DM= new DataManager();
+           var formPreview = DM.GetFormWithSections(formid);
+           return View(formPreview);
        }
 
        [HttpGet]

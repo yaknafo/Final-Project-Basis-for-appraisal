@@ -1,4 +1,4 @@
-﻿@model BasisForAppraisal_finalProject.ViewModel.FormFillerViewModel
+﻿@model BasisForAppraisal_finalProject.DBML.tblForm
 @using PagedList;
 @using PagedList.Mvc;
 @{
@@ -30,16 +30,15 @@
     <title>ShowAnswers</title>
 </head>
 <body>
-   
+
     <div id="Panel" style="width: 100%; margin-top: 0%; background-color:white ">
         <div class="panel panel-heading">
             <div class="panel-heading">
                 <div class="alert-info">
-                    <h1 style="text-align: center">@Model.FillOn <strong class="glyphicon glyphicon-arrow-left"></strong>  @Model.FillBy</h1>
-                    @Html.DisplayFor(x => x.From)
+                    @Html.DisplayForModel()
                 </div>
                 <div id="exampsle">
-                    @Html.DisplayFor(x => x.Questions)
+                    @Html.DisplayFor(x => x.Sections.First().Questions)
                 </div>
                 <ul class="pager">
                     <li class="pages"></li>

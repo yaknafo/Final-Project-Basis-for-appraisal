@@ -1,0 +1,211 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+@{
+    ViewBag.Title = "tbl_IntentionalQuestion";
+}
+
+
+    <div draggable="true">
+    <div dir="rtl">
+        @Html.HiddenFor(x => x.FormId)
+        @Html.HiddenFor(x => x.SectionId)
+        @Html.HiddenFor(x => x.QuestionId)
+        @Html.HiddenFor(x => x.QuestionType)
+        @Html.HiddenFor(x => x.Title)
+        <h4>שאלה</h4>
+            @Html.DisplayFor(x => x.Title,new { @cols = 90, @rows = 2 })
+    </div>
+        
+    
+    <!--////////---------------------------------------Type of question --------------------------------------------///                      -->
+   
+        
+         @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
+    {
+        <table class="table" dir="rtl" style="border-top: hidden; border-bottom: solid;">
+            <tr dir="rtl">
+                @for (int i = 0; i < Model.Answers.Count(); i++)
+                {
+                             @Html.HiddenFor(x => x.Answers[i].FormId)
+                             @Html.HiddenFor(x => x.Answers[0].SectionId)
+                            @Html.HiddenFor(x => x.Answers[i].QuestionId)
+                            @Html.HiddenFor(x => x.Answers[i].AnswerId)
+                            @Html.HiddenFor(x => x.Answers[i].Score)
+                            @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                              @Html.HiddenFor(x => x.Answers[i].Text)
+                    <th dir="rtl">
+                        @if (i != 1 && i != 3 || Model.Answers.Count() <= 3)
+                        {
+                            @Html.TextAreaFor(x => x.Answers[i].Text, new { @disabled = "disabled", style = " margin-left: 15%;" })
+                            <br />
+                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 35%; margin-top: 10px;" })
+                        }
+                        else
+                        {
+
+                            @Html.HiddenFor(x => x.Answers[i].FormId)
+                             @Html.HiddenFor(x => x.Answers[0].SectionId)
+                            @Html.HiddenFor(x => x.Answers[i].QuestionId)
+                            @Html.HiddenFor(x => x.Answers[i].AnswerId)
+                            @Html.HiddenFor(x => x.Answers[i].Score)
+                            @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                            @Html.HiddenFor(x => x.Answers[i].Text, new { style = "height: 200px;  width:200px; margin-left:13%" })
+                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 40%; margin-top: 210px;", @disabled = "disabled" })
+                        }
+                    </th>
+                }
+            </tr>
+        </table>
+    }
+    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("FreeText"))
+    {
+        <div dir="rtl" style="border-bottom: solid;">
+            <br />
+            <br />
+            @if (@Model.Answers.Count>0)
+            { 
+            @Html.EditorFor(x => x.Answers[0])
+            }
+            <div style="margin-bottom:2%;"></div>
+        </div>
+    }
+    
+    <!----------------------------------- Part of Scale Question------------------------------------------------------------>
+    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Scale"))
+    {
+        <div dir="rtl" style="border-bottom: solid;">
+            <br />
+            <br />
+           
+                <table>
+                    <tr>
+                            @if(Model.Answers.Count>0)
+                            {
+                                <th>
+                               @Html.DisplayFor(x => x.Answers[0].Text, new { @disabled = "disabled" })
+                           
+                        </th>
+                        for (int i = 0; i < @Model.Answers.Count; i++)
+                        {
+                            <th>
+                                @Html.HiddenFor(x => x.Answers[i].FormId)
+                                @Html.HiddenFor(x => x.Answers[0].SectionId)
+                                @Html.HiddenFor(x => x.Answers[i].QuestionId)
+                                @Html.HiddenFor(x => x.Answers[i].AnswerId)
+                                @Html.HiddenFor(x => x.Answers[i].Score)
+                                @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                                @Html.HiddenFor(x => x.NumberOfAnswers)
+                                @Html.HiddenFor(x => x.Answers[i].Text)
+                                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;", @disabled = "disabled" })
+                            </th>
+                        }
+                        <th>
+                            @Html.DisplayFor(x => x.Answers[Model.Answers.Count - 1].Text, new { @disabled = "disabled" })
+                        </th>
+                            }
+                    </tr>
+                </table>
+            <div style="margin-bottom:2%;"></div>
+        </div>
+    }
+    
+        <!--------------------------- Part of  Muliti choise question--------------------------------------------------------->
+
+        @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoice"))
+        {
+            <div dir="rtl" style="border-bottom: solid;">
+                @if (@Model.Answers.Count()>0)
+                {
+                    <br />
+                    @*@Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })*@
+                    for (int i = 0; i < @Model.Answers.Count; i++ )
+                    { 
+                            @Html.HiddenFor(x => x.Answers[i].FormId)
+                            @Html.HiddenFor(x => x.Answers[0].SectionId)
+                            @Html.HiddenFor(x => x.Answers[i].QuestionId)
+                            @Html.HiddenFor(x => x.Answers[i].AnswerId)
+                            @Html.HiddenFor(x => x.Answers[i].Score)
+                            @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+                            @Html.HiddenFor(x => x.Answers[i].Text)
+                            @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;", @disabled = "disabled" })
+                            @Html.DisplayFor(x => x.Answers[i].Text, new { @disabled = "disabled" })
+                      
+                    <br />
+                     <br />
+                    }
+
+                }
+                <div style="margin-bottom:2%;"></div>
+            </div>
+        }
+        
+        <!--------------------------- Part of  YesNo question--------------------------------------------------------->
+        @if (@Model.QuestionType != null && @Model.QuestionType.Contains("YesNo"))
+        {
+            <div dir="rtl" style="border-bottom: solid;">
+                @if (@Model.Answers.Count() == 2)
+                {
+                    <br />
+                            @Html.HiddenFor(x => x.Answers[0].FormId)
+                            @Html.HiddenFor(x => x.Answers[0].SectionId)
+                            @Html.HiddenFor(x => x.Answers[0].QuestionId)
+                            @Html.HiddenFor(x => x.Answers[0].AnswerId)
+                            @Html.HiddenFor(x => x.Answers[0].Score)
+                            @Html.HiddenFor(x => x.Answers[0].AnswerOption)
+                            @Html.HiddenFor(x => x.Answers[0].Text)
+                          
+                            @Html.HiddenFor(x => x.Answers[1].FormId)
+                            @Html.HiddenFor(x => x.Answers[0].SectionId)
+                            @Html.HiddenFor(x => x.Answers[1].QuestionId)
+                            @Html.HiddenFor(x => x.Answers[1].AnswerId)
+                            @Html.HiddenFor(x => x.Answers[1].Score)
+                            @Html.HiddenFor(x => x.Answers[1].AnswerOption)
+                            @Html.HiddenFor(x => x.Answers[1].Text)
+                  
+    <table>
+        <tr>
+            <td style="width:70px;">
+                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; ", @disabled = "disabled" })
+            </td>
+            <th>
+                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[1].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; ", @disabled = "disabled" })
+            </th>
+        </tr>
+        <tr>
+            <td style="width:70px;">
+                כן
+            </td>
+            <td>
+              לא
+            </td>
+        </tr>
+    </table>
+                         <br />
+                        <br />
+                    
+
+                }
+                <div style="margin-bottom:2%;"></div>
+            </div>
+        }
+</div>
+    @*<div style=" margin-left: 73%; border-bottom:groove">
+            <p dir="ltr" style="font-size:20px;">
+                מתקשה להעריך
+                @Html.DisplayText("מתקשה להעריך")
+                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 25px;  width:25px;" })
+            </p>
+        </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
