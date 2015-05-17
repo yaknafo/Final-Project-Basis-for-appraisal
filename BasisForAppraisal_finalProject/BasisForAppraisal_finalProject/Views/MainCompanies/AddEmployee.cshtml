@@ -22,7 +22,18 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.companyId, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.companyId)
+                    @Html.ListBox("c", ViewBag.c as MultiSelectList
+
+                     , new
+
+             {
+
+                 @class = "chzn-select"
+
+             }
+
+              )
+ 
                     @Html.ValidationMessageFor(model => model.companyId)
                 </div>
             </div>

@@ -13,7 +13,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 {
     public class MainFormCreatorController : Controller
     {
-    
+
        public ActionResult IntentionalFormWorkshop(int id=0)
        {
            var b = new DataManager();

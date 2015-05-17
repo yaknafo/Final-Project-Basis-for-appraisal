@@ -1,5 +1,6 @@
 ﻿@model  BasisForAppraisal_finalProject.DBML.tbl_Employee
 @using BasisForAppraisal_finalProject.DBML;
+@using BasisForAppraisal_finalProject.Common.Constans;
 @using System.Collections.Generic;
 <link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-1.10.2.js"></script>
@@ -35,6 +36,13 @@
     });
 
 </script>
+
+<!--------------------------------------Error  section      -->
+
+@Html.Partial("_Failed")
+<!--------------------------------------Error  section      -->
+
+
 @Html.HiddenFor(x => x.companyId)
 <div class="col-xs-4" style="align-content: center;margin-left:15%; margin-top:3%">
     <div>

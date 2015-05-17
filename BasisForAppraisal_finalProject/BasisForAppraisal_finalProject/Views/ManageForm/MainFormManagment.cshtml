@@ -28,9 +28,9 @@
                     <div style="margin-right:90%;">
                         @using (Html.BeginForm("addNewForm", "ManageForm", FormMethod.Post))
                         {
-                            <button type="submit" class="btn btn-primary btn-lg" style="width:150px;"><img src="~/photos/newForm.png" /></button>
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:150px;"><img src="~/photos/newForm.png" /></button>
                         }
-                    </div>
+    </div>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -48,7 +48,7 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-
+   
 
     <div class="panel panel-default" dir="rtl" style="width:90%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center;">
         <!-- Default panel contents -->
@@ -94,32 +94,32 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!----------------------------------------------------------------------------------------------------------------->
-    @foreach (var item in Model)
-    {
+    </div>   
+           
+            <!----------------------------------------------------------------------------------------------------------------->
+@foreach (var item in Model)
+{
 
             <!-- Modal -->
-        <div class="modal fade" id=@item.formId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color:red;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק את הטופס : </h4>
-                        <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.FormName?</h4>
+            <div class="modal fade" id=@item.formId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:red;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק את הטופס : </h4>
+                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.FormName?</h4>
+                        </div>
+                        @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Post))
+                        {  <div class="modal-body">
+                               <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
+                             <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
+                        </div>
+                           
+                        }
                     </div>
-                    @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Post))
-                    {  <div class="modal-body">
-                        <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
-                    </div>
-
-                    }
                 </div>
             </div>
-        </div>
-
-
-    }
+           
+         
+}
 </div>
