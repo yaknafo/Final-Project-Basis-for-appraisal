@@ -1,14 +1,13 @@
-﻿
+﻿@Model 
      <link href="~/Content/HomePage.css" rel="stylesheet" type="text/css" media="all" />
-
-<script src="@Url.Content("~/Scripts/external.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/external.js")" type="text/javascript"></script>
 
      <div style="margin-top:7%;">
     <div id="column1" >
         <img class="image image-full" src="~/photos/HomePage/Homepage1.jpeg" style="position: absolute;z-index: -1; "/>
-       
+        <a href="/ManageForm/MainFormManagment">
             <div class="gridcontainer clearfix" style="margin-top:94%;">
-                <div class="grid_3" style="cursor: pointer; " onclick="FormPage()">
+                <div class="grid_3" style="cursor: pointer; " onclick="LoadFormMain()">
                     <div class="fmcircle_out">
 
                         <div class="fmcircle_in fmcircle_green">
@@ -19,20 +18,22 @@
 
                 </div>
             </div>
-      
-        </div>
+        </a>
+</div>
+         
          <div id="column2" >
              <img id="pic" class="image image-full" src="~/photos/HomePage/HomePage2.jpeg" style="position: absolute;z-index: -1; "/>
+             <a href="/MainCompanies/MainCompanies">
+                 <div class="grid_3" style="margin-top:94%;cursor:pointer;">
+                     <div class="fmcircle_out">
 
-             <div class="grid_3" style="margin-top:94%;cursor:pointer;">
-                 <div class="fmcircle_out">
-                    
-                             <div class="fmcircle_in fmcircle_green">
-                                 <span>ניהול חברות</span><img src="~/photos/HomePage/forms.gif" alt="" />
-                             </div>
+                         <div class="fmcircle_in fmcircle_green">
+                             <span>ניהול חברות</span><img src="~/photos/HomePage/forms.gif" alt="" />
                          </div>
-                                </div>
-             </div>
+                     </div>
+                 </div>
+             </a>
+</div>
              
          <div id="column3" >
              <img class="image image-full" src="~/photos/HomePage/HomePage3.jpeg" style="position: absolute;z-index: -1;"  />
@@ -65,6 +66,7 @@
          </div>
 
 </div>
+
 
 
 
