@@ -1,0 +1,10 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tblForm
+
+@Html.DisplayNameFor(x=> x.FormName)
+@Html.DisplayTextFor(x => x.FormName)
+
+@Html.DisplayNameFor(x => x.lastChange)
+@Html.DisplayTextFor(x => x.lastChange)
+
+@Html.DisplayNameFor(x => x.Companies)
+@Html.DisplayTextFor(x => x.Companies.Select(a => a.comapnyName))
