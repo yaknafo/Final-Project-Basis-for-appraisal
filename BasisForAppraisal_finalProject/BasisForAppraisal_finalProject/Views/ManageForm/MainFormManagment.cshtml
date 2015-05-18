@@ -95,31 +95,35 @@
             </div>
         </div>
     </div>   
+
+   
+
            
             <!----------------------------------------------------------------------------------------------------------------->
 @foreach (var item in Model)
 {
 
             <!-- Modal -->
-            <div class="modal fade" id=@item.formId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color:red;">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק את הטופס : </h4>
-                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.FormName?</h4>
-                        </div>
-                        @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Post))
-                        {  <div class="modal-body">
-                               <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
-                             <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
-                        </div>
-                           
-                        }
-                    </div>
+    <div class="modal fade" id=@item.formId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="alert alert-danger" style="background-color:#FF8080;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;text-align:center">האם אתה בטוח שאתה רוצה למחוק את הטופס : </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;text-align:center">@item.FormName?</h4>
                 </div>
+                @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Post))
+                {  <div class="modal-body">
+                       <button type="button" class="btn btn-default" data-dismiss="modal" >בטל</button>
+                       <button type="submit" class="btn btn-primary" style="background-color:#FF8080;">מחק</button>
+                    
+                </div>
+
+                }
             </div>
-           
-         
+        </div>
+    </div>
+
+
 }
 </div>

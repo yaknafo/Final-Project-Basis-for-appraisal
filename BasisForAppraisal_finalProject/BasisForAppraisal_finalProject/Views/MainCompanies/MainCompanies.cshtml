@@ -64,16 +64,16 @@
     <div class="modal fade" id=@item.companyId tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:red;">
+                <div class="alert alert-danger" style="background-color:#FF8080;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק חברה  : </h4>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@item.comapnyName?</h4>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">מחיקה זו תמחוק את כל העובדים ואת כל המחלקות של חברה זו!</h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white; text-align:center">האם אתה בטוח שאתה רוצה למחוק חברה  : </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white; text-align:center">@item.comapnyName?</h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;text-align:center">מחיקה זו תמחוק את כל העובדים ואת כל המחלקות של חברה זו!</h4>
                 </div>
                 @using (Html.BeginForm("deleteCompany", "MainCompanies", new { companyid = item.companyId, FormMethod.Post }))
                 {  <div class="modal-body">
-                    <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
+                    <button type="submit" class="btn btn-primary" style="background-color:#FF8080;margin-left:42%">מחק</button>
+                       <button type="button" class="btn btn-default" data-dismiss="modal" style="align-items:center">בטל</button>
                 </div>
 
                 }
