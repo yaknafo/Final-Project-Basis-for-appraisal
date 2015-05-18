@@ -262,10 +262,15 @@
     <Content Include="photos\Employee\arrow_down_2.png" />
     <Content Include="photos\Employee\arrow_up_2.png" />
     <Content Include="photos\folderIcon.png" />
+    <Content Include="photos\HomePage\analize.png" />
+    <Content Include="photos\HomePage\forms.gif" />
     <Content Include="photos\HomePage\Homepage1.jpeg" />
     <Content Include="photos\HomePage\HomePage2.jpeg" />
     <Content Include="photos\HomePage\HomePage3.jpeg" />
     <Content Include="photos\HomePage\HomePage4.jpeg" />
+    <Content Include="photos\HomePage\about.gif" />
+    <Content Include="photos\HomePage\imageedit_3_7682714812.gif" />
+    <Content Include="photos\HomePage\images.jpg" />
     <Content Include="photos\info.png" />
     <Content Include="photos\Login-Door-24.png" />
     <Content Include="photos\logosmall.jpg" />
