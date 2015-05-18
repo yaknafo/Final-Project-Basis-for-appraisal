@@ -175,6 +175,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Common\Constans\ResultOperationConstans.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Enum\WorkShopActions.cs" />
     <Compile Include="Controllers\FormFillerController.cs" />
@@ -401,6 +402,9 @@
     <Content Include="Views\MainFormCreator\DisplayTemplates\tblForm.cshtml" />
     <Content Include="Views\MainFormCreator\FormPreview.cshtml" />
     <Content Include="Views\ManageForm\_FormDetalis.cshtml" />
+    <Content Include="Views\Shared\_Success.cshtml" />
+    <Content Include="Views\Shared\_Failed.cshtml" />
+    <Content Include="Views\Shared\_EmployeeSreach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

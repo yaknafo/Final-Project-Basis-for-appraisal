@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.ViewModel;
+using BasisForAppraisal_finalProject.Common.Constans;
 using System.IO;
 using BasisForAppraisal_finalProject.ViewModel.Company;
 using System.Threading.Tasks;
@@ -15,7 +16,9 @@ namespace BasisForAppraisal_finalProject.Controllers
     
     public class MainCompaniesController : Controller
     {
-       
+
+       private DataMangerCompany DM = new DataMangerCompany();
+       private DataManager DMO = new DataManager();
         // method read and save the file upload
         [HttpPost]
         public ActionResult Index( HttpPostedFileBase file = null, CompanyViewModel c= null)
@@ -101,22 +104,33 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult MainEmployee(string submit, string iFillOnThem, string fromName, string ThemFillOnMe, string fromNameOnMe, tbl_Employee emp)
         {
             ModelState.Clear();
-            var DM = new DataMangerCompany();
-            var DMO = new DataManager();
             var cm = new CompanyManger();
+            bool res;
            
             if (submit.Equals("addThemfillOnMe"))
             {
                 var formID = DMO.Forms.Where(f => f.FormName == fromNameOnMe).Select(f => f.formId).FirstOrDefault();
-                var taskAddCon = Task.Factory.StartNew(() => DM.AddConnector(ThemFillOnMe, emp.employeeId, emp.companyId, formID));
-                taskAddCon.Wait();
+
+                // check if from and emp are exist
+                res = CheckParam(formID, ThemFillOnMe);
+                if (res)
+                {
+                    var taskAddCon = Task.Factory.StartNew(() => DM.AddConnector(ThemFillOnMe, emp.employeeId, emp.companyId, formID));
+                    taskAddCon.Wait();
+                }
             }
 
             else if (submit.Equals("addMEfillOnThem"))
             {
                 var formID = DMO.Forms.Where(f => f.FormName == fromName).Select(f => f.formId).FirstOrDefault();
-                var taskAddCon = Task.Factory.StartNew(() => DM.AddConnector(emp.employeeId, iFillOnThem, emp.companyId, formID));
-                taskAddCon.Wait();
+
+                // check if from and emp are exist
+                res = CheckParam(formID, iFillOnThem);
+                if (res)
+                {
+                    var taskAddCon = Task.Factory.StartNew(() => DM.AddConnector(emp.employeeId, iFillOnThem, emp.companyId, formID));
+                    taskAddCon.Wait();
+                }
             }
             else if (submit.Equals("DeleteMEfillOnThem"))
             {
@@ -139,6 +153,17 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
            
             return View(emp);
+        }
+
+        private bool CheckParam(int formID, string employeeId)
+        {
+            if (formID != 0)
+                return true;
+            if (DMO.Employees.Where(x => x.employeeId == employeeId).Any())
+                return true;
+            TempData[ResultOperationConstans.Failed] = "froms or employee not exist";
+            return false;
+
         }
 
 
@@ -187,7 +212,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         public ActionResult AddEmployee()
         {
-           
+            ViewBag.c = DMO.Companyies;
             return View();
         }
 

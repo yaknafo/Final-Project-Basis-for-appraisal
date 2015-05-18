@@ -179,8 +179,8 @@ a img {
 body {
 	font-size: 13px;
 	line-height: 20px;
-	background: url('https://dl.dropbox.com/u/65958930/OLR/dust.png') center center;
-	text-align: enter;
+	background: center;
+	text-align: center;
 }
 /* -- Circular Work -- */
 .gridcontainer {

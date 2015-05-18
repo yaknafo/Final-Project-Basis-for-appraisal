@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>בסיס להערכה</title>
     @*@Styles.Render("~/Content/css")*@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" dir="rtl">
+    <div class="navbar navbar-inverse navbar-fixed-top" dir="rtl" style="background-color:white">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,20 +24,22 @@
                
             </div>
             <div class="navbar-collapse collapse" dir="rtl">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="margin-top: 1%; font-size:medium;">
                     <li>@Html.ActionLink("ניהול טפסים", "backToMainForm", "MainFormCreator")</li>
                     <li>@Html.ActionLink("ניהול לקוחות", "MainCompanies", "MainCompanies")</li>
-                    @*<li>@Html.ActionLink("שליחת טפסים ללקוח", "About", "Home")</li>
-                <li>@Html.ActionLink("הוספת לקוח", "Contact", "Home")</li>*@
+                    @*
+                    <li>@Html.ActionLink("שליחת טפסים ללקוח", "About", "Home")</li>
+                    <li>@Html.ActionLink("הוספת לקוח", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
+                <img id="img_logo" alt="Logo" src="~/photos/logosmall.jpg" style="margin-left:40%" />
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        <hr style="margin-top:50%;" />
+        <footer style="width:100%" >
             <p>&copy; @DateTime.Now.Year - Yair & Or</p>
         </footer>
     </div>

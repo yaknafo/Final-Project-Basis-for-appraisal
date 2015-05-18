@@ -79,7 +79,7 @@
                     <tr>
                         <td align="center">@Html.ActionLink(item.FormName, "Edit", new { @id = item.formId })</td>
                         <td align="center">@item.lastChange</td>
-                        <td align="center">@html.actionlink("פרטים", "Edit" , new { @id=item.formId })</td>
+                        <td align="center">@Html.ActionLink("פרטים", "Edit", new { @id = item.formId })</td>
                         <td><p><span class="glyphicon glyphicon-trash" title="תצוגה מקדימה" data-toggle="modal" data-target="#@item.formId" style="cursor:pointer;"></span></p></td>
                     </tr>
                 }
