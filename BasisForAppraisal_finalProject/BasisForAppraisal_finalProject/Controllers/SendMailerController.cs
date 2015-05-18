@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.Controllers;
+using BasisForAppraisal_finalProject.Common.Constans;
 
 namespace SendMail.Controllers
 {
@@ -20,15 +21,16 @@ namespace SendMail.Controllers
         {
             DataMangerCompany dm = new DataMangerCompany();
             List<tbl_Employee> NotSendMail = new List<tbl_Employee>();
-            string body = "שלום רב\n" +
-          "מייל זה נשלח לך על ידי בסיס להערכה\n" +
-        "  למייל זה מצורף לינק  לאתר החברה\n" +
-          "בכניסה לאתר תצטרך להכניס שם משתמש וסיסמא אשר מצורפים למייל זה \n" +
-          "לאחר כניסה לאתר תוכל לצפות בכל הטפסים אשר עלייך למלא\n" +
-          "קישור לאתר:\n";
-            String name = " :שם משתמש\n";
-            String password = " סיסמא:\n\n\n";
-            string endbody = "תודה צוות בסיס להערכה";
+            string body ="שלום רב" +
+          "<br />מייל זה נשלח לך על ידי בסיס להערכה" +
+        " <br /> למייל זה מצורף לינק  לאתר החברה" +
+          "<br /בכניסה לאתר תצטרך להכניס שם משתמש וסיסמא אשר מצורפים למייל זה <br />" +
+          "<br />לאחר כניסה לאתר תוכל לצפות בכל הטפסים אשר עלייך למלא<br />" +
+          "<br />:קישור לאתר<br />";
+            String name = "<br /> שם משתמש:";
+            String password = "<br /> סיסמא:";
+           
+            string endbody = "<br /><br /><br />תודה צוות בסיס להערכה"+"</div>";
 
             foreach (var emp in dm.getEmpForEmail(id,unit,cl))
             {
@@ -38,7 +40,7 @@ namespace SendMail.Controllers
                     try
                     {
                         _objModelMail.From = "dontreplaybasisforappraisal@gmail.com";
-                        _objModelMail.Body = body + name + emp.employeeId + password + emp.employeeId + endbody;
+                        _objModelMail.Body = "<div dir='rtl'>" + emp.firstName + " " + emp.lastName + " " + body + name + " " + emp.employeeId + password + " " + emp.employeeId + endbody + "</div>";
 
                         _objModelMail.Subject = "בסיס להערכה- שאלון למילוי";
                         _objModelMail.To = emp.Email;
@@ -62,10 +64,15 @@ namespace SendMail.Controllers
                     {
                         NotSendMail.Add(emp);
                     }
-                
+                    
                 }
             }
-
+            var Persons = "</br > :פרט לאנשים הבאים</br>";
+            foreach(var v in NotSendMail)
+                 Persons += v.firstName + " " + v.lastName + " </br>";
+            if (NotSendMail.Count < 1)
+                Persons = "";
+            TempData[ResultOperationConstans.Success] = "שלח מייל בהצלחה"+Persons;
             return RedirectToAction("ManageCompany", "MainCompanies", new { id = id, unit = unit, cl = cl });
         }
 
