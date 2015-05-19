@@ -20,7 +20,11 @@
     });
   </script>
 
-
+<div style="margin-top: -25%; ">
+    <!--------------------------------------Error  section      -->
+    @Html.Partial("_Failed")
+    <!--------------------------------------Error  section      -->
+</div>
 
 <script>
     $(document).ready(function () {
@@ -30,10 +34,12 @@
     });
 </script>
 
-<div style="margin-top: -45%; margin-left:-10%">
+<div style="margin-top: -55%; margin-left:-10%">
 
     <div id="flip" class="btn btn-primary btn-lg glyphicon glyphicon-search"></div>
+
 </div>
+
 
 @using (Html.BeginForm("MainEmployee", "MainCompanies", FormMethod.Get))
 {

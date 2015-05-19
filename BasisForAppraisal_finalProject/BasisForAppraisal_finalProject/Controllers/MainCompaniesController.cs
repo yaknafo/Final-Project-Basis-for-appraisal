@@ -85,18 +85,18 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpGet]
         public ActionResult MainEmployee(string id = "301378242")
         {
-            if(!string.IsNullOrEmpty(id))
+            var DM = new DataManager();
+            var emp = DM.Employees.Where(e => e.employeeId == id).FirstOrDefault();
+
+            if(emp != null)
             {
-                var DM = new DataManager();
-
-                var emp = DM.Employees.Where(e => e.employeeId == id).FirstOrDefault();
                 emp.RefreshConecctors();
-
                 return View(emp);
  
             }
 
-            return View();
+            TempData[ResultOperationConstans.Failed] = "ID not exist in the system";
+            return new RedirectResult(Request.UrlReferrer.AbsoluteUri);
         }
 
 
