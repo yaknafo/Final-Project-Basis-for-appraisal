@@ -3,16 +3,53 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    #panel {
+        padding: 50px;
+        display: none;
+    }
+</style>
 <script type="text/javascript">
     $(function () {
-        $('#searchEmp').autocomplete({
+        $('#id').autocomplete({
             source: '@Url.Action("GetEmployee")'
         });
     });
   </script>
 
-<div style=" margin-top:-55%; margin-left:-9%">
-    <span class="glyphicon glyphicon-search"></span>
-    @Html.TextBox("searchEmp", null, new { id = "searchEmp", @class = "col-xs-2", @placeholder = "תעודת זהות", @style = "height:45px;" })
+
+
+<script>
+    $(document).ready(function () {
+        $("#flip").click(function () {
+            $("#panel").toggle(500)
+        });
+    });
+</script>
+
+<div style="margin-top: -45%; margin-left:-10%">
+
+    <div id="flip" class="btn btn-primary btn-lg glyphicon glyphicon-search"></div>
 </div>
+
+@using (Html.BeginForm("MainEmployee", "MainCompanies", FormMethod.Get))
+{
+
+    <div id="panel">
+        <div style=" margin-top:-11%; margin-left:-8%">
+            @Html.TextBox("id", null, new { id = "id", @class = "col-xs-2", @placeholder = "תעודת זהות", @style = "height:45px;" })
+            <hr />
+            <hr />
+            <button type="submit" class="btn btn-primary" style="margin-left:-16.7%">חפש</button>
+        </div>
+
+    </div>
+
+
+
+}
+
+
