@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "tbl_IntentionalQuestion";
 }
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
 
 
     <div draggable="true">
@@ -13,8 +14,9 @@
         <h4>שאלה</h4>
             @Html.TextAreaFor(x => x.Title,new { @cols = 90, @rows = 2 })
     </div>
-        <strong>חובה   </strong>
-        @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0.5%;" })
+        
+        @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0%;" })
+        <strong>חובה </strong>
         <br />
     @if (Model.QuestionId > 0)
     {
@@ -22,8 +24,9 @@
 
         <table>
             <tr>
-                <th>מחיקה</th>
+                
                 <th>  @Html.CheckBoxFor(x => x.deleteQuestion, new { style = "height: 20px;  width:20px; margin-left:2%;" })</th>
+               <th><strong>מחיקה </strong></th>
             </tr>
         </table>
     }
