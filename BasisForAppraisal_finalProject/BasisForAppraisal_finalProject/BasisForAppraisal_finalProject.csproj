@@ -177,10 +177,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\Constans\ResultOperationConstans.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArrayList.cs" />
     <Compile Include="Controllers\Enum\WorkShopActions.cs" />
     <Compile Include="Controllers\FormFillerController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\MainCompaniesController.cs" />
     <Compile Include="Controllers\MainFormCreatorController.cs" />
     <Compile Include="Controllers\ManageFormController.cs" />

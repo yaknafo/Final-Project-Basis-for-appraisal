@@ -77,27 +77,28 @@
         {
 
                     <!-- Modal -->
-            <div class="modal fade" id=@i tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="panel panel-danger">
-                    <div class="panel panel-danger">
-                        <div class="panel panel-danger">
-
-                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">האם אתה בטוח שאתה רוצה למחוק תיקיה  : </h4>
-                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">@Model.myClass.ToArray()[i].unitName @Model.myClass.ToArray()[i].className?</h4>
-                            <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;">מחיקה זו תמחוק את כל העובדים ואת כל המחלקות של חברה זו!</h4>
-                        </div>
-                        @using (Html.BeginForm("deleteFolder", "MainCompanies", new { className = Model.myClass.ToArray()[i].className, unitid = Model.myClass.ToArray()[i].unitName, companyid = Model.myClass.ToArray()[i].companyId, FormMethod.Post }))
-                        {  <div class="modal-body">
-                            <button type="submit" class="btn btn-primary" style="background-color:red;">מחק</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
-                        </div>
-
-                        }
-
-                    </div>
+    <div class="modal fade" id=@i tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="alert alert-danger" style="background-color:#FF8080;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;text-align:center">האם אתה בטוח שאתה רוצה למחוק תיקיה  : </h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;text-align:center">@Model.myClass.ToArray()[i].unitName @Model.myClass.ToArray()[i].className?</h4>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="color:white;text-align:center">מחיקה זו תמחוק את כל העובדים ואת כל המחלקות של חברה זו!</h4>
                 </div>
+                @using (Html.BeginForm("deleteFolder", "MainCompanies", new { className = Model.myClass.ToArray()[i].className, unitid = Model.myClass.ToArray()[i].unitName, companyid = Model.myClass.ToArray()[i].companyId, FormMethod.Post }))
+                {  <div class="modal-body">
+                       <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-right: 40%;">בטל</button>
+                    <button type="submit" class="btn btn-primary" style="background-color:#FF8080;">מחק</button>
+                    
+                </div>
+
+                }
+
             </div>
+        </div>
+    </div>
         }
-   }
+ }
    
         
