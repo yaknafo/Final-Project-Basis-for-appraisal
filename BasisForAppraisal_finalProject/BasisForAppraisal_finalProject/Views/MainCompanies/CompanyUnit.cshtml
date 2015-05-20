@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tbl_Class>
    
  <link href="~/Content/FontStyle.css" rel="stylesheet" />                     
+@using BasisForAppraisal_finalProject.DBML;
+                       
 @using BasisForAppraisal_finalProject.ViewModel.Company;
     @{
         ViewBag.Title = "CompanyUnit";
@@ -23,8 +25,8 @@
                 <h3 class="panel-title" ><strong>פרטי חברה</strong> </h3>
             </div>
             <div  style=" font-size:17px;  padding: 0px;  ">
-            <h4 ><strong> שם חברה:</strong> @ViewBag.name </h4>
-            <h4 ><strong>כתובת חברה:</strong> @ViewBag.adress</h4>
+                    <h4 ><strong> שם חברה:</strong> @ViewBag.name </h4>
+                    <h4 ><strong>כתובת חברה:</strong> @ViewBag.adress</h4>
             <h4 style="font-family:My Custom Font; font-size:23px;"><strong>טלפון חברה:</strong> @ViewBag.phone</h4>
                </div>
             <br />
@@ -67,7 +69,9 @@
 </div>
 
 
-
+        @Html.Partial("_AddEmployee", new tbl_Employee())
+        <br />
+        @Html.Partial("_AddClass", new tbl_Class { companyId = ViewBag.id })
 
 
 
