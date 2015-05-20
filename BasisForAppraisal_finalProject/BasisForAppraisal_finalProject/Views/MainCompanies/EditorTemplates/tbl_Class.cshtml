@@ -8,45 +8,12 @@
 <script src="~/Scripts/DataTable/jquery.js"></script>
 <script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
 <link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
 <br />
 <br />
-<div dir="rtl">
-<table class="table-condensed" style="background-color:none; font-size:18px; margin-right:6%; padding: 22px; border:solid">
-    <tr>
-        <th >
-            <div dir="rtl"> שם חברה:</div> 
-        </th>
-        <th>
-           <div style="font-size: 18px; text-align:center;text-shadow:inherit ">@Html.DisplayFor(x => x.tbl_Unit.tbl_Company.comapnyName)</div>
-        </th>
-    </tr>
-     <tr>
-        <th>
-           יחידה:
-        </th>
-        <th>
-            <h4>@Html.DisplayFor(x => x.tbl_Unit.unitName)</h4>
-        </th>
-    </tr>
-    <tr>
-        <th>
-           מחזור:
-        </th>
-        <th>
-            <h4>@Html.DisplayFor(x => x.className)</h4>
-        </th>
-    </tr>
-     <tr>
-        <th>
-            @using (Html.BeginForm("Index", "SendMailer", new { id = Model.companyId, unit = Model.unitName, cl = Model.className }, FormMethod.Post))
-            {
+     
 
-                <input type="submit" value="שלח טופס לאנשי קשר" />
-            }
-        </th>
-        
-    </tr>
-</table>
 
 <div class="panel panel-default" dir="rtl" style="width:80%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center ">
     <!-- Default panel contents -->
@@ -63,9 +30,9 @@
             </tr>
         </thead>
         <tbody>
-           @for (int i = 0; i <Model.Employees.Count()  ; i++)
+            @for (int i = 0; i < Model.Employees.Count(); i++)
             {
-               
+
                 <tr>
                     <td align="center">@Html.ActionLink(@Model.Employees[i].employeeId, "MainEmployee", new { @id = @Model.Employees[i].employeeId })</td>
                     <td align="center">@Model.Employees[i].firstName</td>
@@ -75,9 +42,9 @@
             }
         </tbody>.
     </table>
+
+</div>
   
-</div>
-</div>
 
 @foreach (var item in Model.Employees)
 {

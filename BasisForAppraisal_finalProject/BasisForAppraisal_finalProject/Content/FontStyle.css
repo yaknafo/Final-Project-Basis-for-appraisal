@@ -1,0 +1,11 @@
+﻿@font-face {
+    font-family: "My Custom Font";
+    src: url(/fonts/YOAVRG_.TTF);
+}
+strong{
+    font-family:'My Custom Font';
+    font-size:20px;
+}
+
+
+
