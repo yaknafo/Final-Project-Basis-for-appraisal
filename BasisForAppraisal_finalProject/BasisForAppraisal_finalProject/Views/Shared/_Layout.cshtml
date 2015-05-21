@@ -25,14 +25,16 @@
             </div>
             <div class="navbar-collapse collapse" dir="rtl">
                 <ul class="nav navbar-nav" style="margin-top: 1%; font-size:medium;">
+                  <li>@Html.Partial("_Back")</li>
                     <li>@Html.ActionLink("ניהול טפסים", "backToMainForm", "MainFormCreator")</li>
                     <li>@Html.ActionLink("ניהול לקוחות", "MainCompanies", "MainCompanies")</li>
+
                     @*
                     <li>@Html.ActionLink("שליחת טפסים ללקוח", "About", "Home")</li>
                     <li>@Html.ActionLink("הוספת לקוח", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
-                <a href="">   <img id="img_logo" alt="Logo" src="~/photos/logosmall.jpg" style="margin-left:40%" /></a>
+                <a href="">   <img id="img_logo" alt="Logo" src="~/photos/logosmall.jpg" style="margin-left:37%" /></a>
             </div>
         </div>
     </div>

@@ -45,7 +45,7 @@
             <br />
         </div>
 
-        @Html.Partial("_AddEmployee", new tbl_Employee())
+  
 
         <div class ="row">
             <div class="col-xs-6 text-left">
@@ -74,7 +74,7 @@
 
                         @Html.Partial("_UnitFile", new FolderUnitPartialView(Model, -1))
                         <br />
-                        <input class="btn btn-info" type="button" value="הוספת תיקייה" style="width:120px;" />
+                        <input id="AddCls" class="btn btn-info" type="button" value="הוספת תיקייה" style="width:120px;" />
 
                     </div>
                 </div>
@@ -82,7 +82,9 @@
 </div>
 
 
-
+        @Html.Partial("_AddEmployee", new tbl_Employee())
+        <br />
+        @Html.Partial("_AddClass", new tbl_Class { companyId = ViewBag.id })
 
 
 

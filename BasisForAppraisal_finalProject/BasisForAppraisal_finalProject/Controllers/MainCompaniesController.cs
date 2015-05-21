@@ -83,11 +83,32 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult AddClass( tbl_Class cls)
+        {
+            var unit = new tbl_Unit { companyId = cls.companyId, unitName = cls.unitName };
+            if (!string.IsNullOrEmpty(cls.unitName) && !string.IsNullOrEmpty(cls.className))
+            {
+                try
+                {
+
+                    var addUnit = Task.Factory.StartNew(() => DM.AddUnit(unit));
+                    addUnit.Wait();
+                    var addClass = Task.Factory.StartNew(() => DM.AddClass(cls));
+                    addClass.Wait();
+                    TempData[ResultOperationConstans.Success] = "הוסף בהצלחה";
+                }
+                catch (Exception e)
+                {
+                    TempData[ResultOperationConstans.Failed] = e.Message;
+                }
+            }
+            return RedirectToAction("CompanyUnit", new { id = cls.companyId });
+        }
+
+
         public ActionResult AddEmployee(tbl_Employee emp, int Companyies, string units , string clas )
         {
-
-         
-
             emp.companyId = Companyies;
             emp.unitName = units;
             emp.className = clas;

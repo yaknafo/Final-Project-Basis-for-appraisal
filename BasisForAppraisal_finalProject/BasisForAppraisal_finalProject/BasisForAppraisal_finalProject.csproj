@@ -419,6 +419,8 @@
     <Content Include="Views\MainCompanies\_UnitsForCbx.cshtml" />
     <Content Include="Views\MainCompanies\_ClassForCbx.cshtml" />
     <Content Include="Views\MainCompanies\qa.cshtml" />
+    <Content Include="Views\Shared\_Back.cshtml" />
+    <Content Include="Views\MainCompanies\_AddClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
