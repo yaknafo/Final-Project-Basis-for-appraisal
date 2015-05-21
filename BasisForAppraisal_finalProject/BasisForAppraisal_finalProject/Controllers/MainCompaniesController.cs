@@ -64,6 +64,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult CompanyUnit(int id )
         {
             var dManager = new DataManager();
+            ViewBag.Companyies = new SelectList(dManager.Companyies, "companyId", "comapnyName");
             var companyies = dManager.Companyies.Where(c => c.companyId == id).First();
             ViewBag.id = id;
             ViewBag.name = companyies.comapnyName;
@@ -80,6 +81,29 @@ namespace BasisForAppraisal_finalProject.Controllers
             ViewBag.name = companyies.comapnyName;
             return View(list);
 
+        }
+
+        public ActionResult AddEmployee(tbl_Employee emp, int Companyies, string units , string clas )
+        {
+
+         
+
+            emp.companyId = Companyies;
+            emp.unitName = units;
+            emp.className = clas;
+            emp.IsManger = false;
+            try
+            {
+
+                var addWorkerToDb = Task.Factory.StartNew(() => DM.addWorkerToDb(emp));
+                addWorkerToDb.Wait();
+                TempData[ResultOperationConstans.Success] = "הוסף בהצלחה";
+            }
+            catch(Exception e)
+            {
+                TempData[ResultOperationConstans.Failed] = e.Message;
+            }
+          return  RedirectToAction("CompanyUnit", new {id=Companyies });
         }
 
         [HttpGet]
@@ -157,15 +181,53 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         private bool CheckParam(int formID, string employeeId)
         {
-            if (formID != 0)
-                return true;
-            if (DMO.Employees.Where(x => x.employeeId == employeeId).Any())
+        
+            if (DMO.Employees.Where(x => x.employeeId == employeeId).Any() && formID != 0)
                 return true;
             TempData[ResultOperationConstans.Failed] = "froms or employee not exist";
             return false;
 
         }
 
+
+        /// ---------------------------------- Ajax Part -----------------------------------------------------------//
+        /// 
+
+
+
+        public PartialViewResult GetUnitCascadeCompany(int id)
+        {
+            ViewBag.units = new SelectList(DM.getUnitsForCompany(id), "unitName", "unitName");
+
+            ViewBag.clas = new SelectList(DM.Class.Where(x => x.unitName == "Not found"), "unitName", "unitName");
+
+            return PartialView("_UnitsForCbx");
+
+
+        }
+
+
+        public PartialViewResult GetclassCascadeUnit(string id)
+        {
+            ViewBag.clas = new SelectList(DM.Class.Where(x => x.unitName == id), "className", "className");
+
+            return PartialView("_ClassForCbx");
+
+
+        }
+
+        public ActionResult qa()
+        {
+            var dManager = new DataManager();
+            ViewBag.Companyies = new SelectList(dManager.Companyies, "companyId", "comapnyName");
+            return View();
+        }
+        [HttpPost]
+        public JsonResult AutoCompleteCountry(string term)
+        {
+            
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult GetEmployee(string term)
         {
@@ -210,11 +272,11 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View();
         }
 
-        public ActionResult AddEmployee()
-        {
-            ViewBag.c = DMO.Companyies;
-            return View();
-        }
+        //public ActionResult AddEmployee()
+        //{
+        //    ViewBag.c = DMO.Companyies;
+        //    return View();
+        //}
 
         [HttpPost]
         public ActionResult addCompanie(tbl_Company company)

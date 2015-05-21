@@ -20,11 +20,7 @@
     });
   </script>
 
-<div style="margin-top: -25%; ">
-    <!--------------------------------------Error  section      -->
-    @Html.Partial("_Failed")
-    <!--------------------------------------Error  section      -->
-</div>
+
 
 <script>
     $(document).ready(function () {
@@ -33,6 +29,7 @@
         });
     });
 </script>
+
 
 <div style="margin-top: -55%; margin-left:-10%">
 
@@ -43,7 +40,6 @@
 
 @using (Html.BeginForm("MainEmployee", "MainCompanies", FormMethod.Get))
 {
-
     <div id="panel">
         <div style=" margin-top:-11%; margin-left:-8%">
             @Html.TextBox("id", null, new { id = "id", @class = "col-xs-2", @placeholder = "תעודת זהות", @style = "height:45px;" })

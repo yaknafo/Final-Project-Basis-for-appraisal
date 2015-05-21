@@ -41,7 +41,14 @@ namespace BasisForAppraisal_finalProject.Models
         {
             return manager.tbl_ConnectorFormFills.ToList();
         }
-
+        public Table<tbl_Unit> Units
+        {
+            get { return manager.tbl_Units; }
+        }
+        public Table<tbl_Class> Class
+        {
+            get { return manager.tbl_Classes; }
+        }
       
 
         public List<tbl_Unit> getUnitsForCompany(int id)
@@ -154,7 +161,7 @@ namespace BasisForAppraisal_finalProject.Models
         // add employee to db withought company
         // check if there is double! ( not checked!!!!)
 
-        public void addWorkerToDb(tbl_Employee emp)
+        public async void addWorkerToDb(tbl_Employee emp)
         {
             if (!manager.tbl_Employees.Contains(emp))
             {
@@ -162,7 +169,7 @@ namespace BasisForAppraisal_finalProject.Models
                 
                 this.manager.SubmitChanges();
 
-                CreateUserWithRole(emp.employeeId, emp.employeeId, "Guest");
+                 CreateUserWithRole(emp.employeeId, emp.employeeId, "Guest");
             }
         }
 

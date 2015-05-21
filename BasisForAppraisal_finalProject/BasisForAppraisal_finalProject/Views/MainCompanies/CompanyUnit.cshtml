@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tbl_Class>
-   
+@using BasisForAppraisal_finalProject.DBML;
                        
 @using BasisForAppraisal_finalProject.ViewModel.Company;
     @{
@@ -41,7 +41,7 @@
             </table>
         </div>
 
-
+        @Html.Partial("_AddEmployee", new tbl_Employee())
 
         <div class ="row">
             <div class="col-xs-6 text-left">

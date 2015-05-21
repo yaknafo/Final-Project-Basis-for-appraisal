@@ -265,6 +265,7 @@
     <Content Include="photos\Employee\arrow_up_2.png" />
     <Content Include="photos\folderIcon.png" />
     <Content Include="photos\HomePage\analize.png" />
+    <Content Include="photos\HomePage\Format-Bullets-02-128.png" />
     <Content Include="photos\HomePage\forms.gif" />
     <Content Include="photos\HomePage\Homepage1.jpeg" />
     <Content Include="photos\HomePage\HomePage2.jpeg" />
@@ -412,6 +413,10 @@
     <Content Include="Views\Shared\_Success.cshtml" />
     <Content Include="Views\Shared\_Failed.cshtml" />
     <Content Include="Views\Shared\_EmployeeSreach.cshtml" />
+    <Content Include="Views\MainCompanies\_AddEmployee.cshtml" />
+    <Content Include="Views\MainCompanies\_UnitsForCbx.cshtml" />
+    <Content Include="Views\MainCompanies\_ClassForCbx.cshtml" />
+    <Content Include="Views\MainCompanies\qa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

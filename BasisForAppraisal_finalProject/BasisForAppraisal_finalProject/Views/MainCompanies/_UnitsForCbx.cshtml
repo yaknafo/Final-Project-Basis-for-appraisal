@@ -1,0 +1,28 @@
+﻿@Html.DropDownList("units", "מחלקה")
+
+
+<script type="text/javascript">
+    $("#units").change(function () {
+        var id = $(this).val();
+        if (id != null) {
+            $.ajax(
+                {
+                    url: '@Url.Action("GetclassCascadeUnit")',
+                    type: "get",
+                    data: { id: id }
+
+                }).done(function (data) {
+                    // debugger
+
+
+
+                    $("#class").html(data);
+
+
+                });
+
+        }
+    });
+
+
+</script>  
