@@ -1,0 +1,80 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_Company
+@{
+    Layout = null;
+}
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<style type="text/css">
+    #panelCom {
+        display: none;
+    }
+</style>
+<div>
+    <!--------------------------------------Error & sucess  section      -->
+    @Html.Partial("_Failed")
+    @Html.Partial("_Success")
+    <!--------------------------------------Error & sucess  section      -->
+</div>
+
+<div style="margin-right:-70%">
+    <div id="AddCom" class="btn btn-primary btn-lg">הוסף חברה</div>
+</div>
+
+@using (Html.BeginForm("addCompanie", "MainCompanies", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.companyId)
+    <div id="panelCom">
+        <table class="table-condensed" style="background-color:whitesmoke" align="center" dir="rtl">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(x => x.comapnyName)
+                </th>
+                <th>
+                    @Html.TextBoxFor(x => x.comapnyName)
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(x => x.comapnyAddress)
+                </th>
+                <th>
+                    @Html.TextBoxFor(model => model.comapnyAddress, new { id = "txtPlaces" })
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(x => x.comapnyPhone)
+                </th>
+                <th>
+                    @Html.EditorFor(x => x.comapnyPhone)
+                </th>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary btn-lg">הוסף</button>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#AddCom").click(function () {
+            $("#panelCom").toggle(500)
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    google.maps.event.addDomListener(window, 'load', function () {
+        var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
+        google.maps.event.addListener(places, 'place_changed', function () {
+            var place = places.getPlace();
+            var address = place.formatted_address;
+            var latitude = place.geometry.location.k;
+            var longitude = place.geometry.location.D;
+            var mesg = "Address: " + address;
+            mesg += "\nLatitude: " + latitude;
+            mesg += "\nLongitude: " + longitude;
+            alert(mesg);
+        });
+    });
+</script>

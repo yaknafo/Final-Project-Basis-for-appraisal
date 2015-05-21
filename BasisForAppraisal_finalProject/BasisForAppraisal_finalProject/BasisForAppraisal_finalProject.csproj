@@ -421,6 +421,7 @@
     <Content Include="Views\MainCompanies\qa.cshtml" />
     <Content Include="Views\Shared\_Back.cshtml" />
     <Content Include="Views\MainCompanies\_AddClass.cshtml" />
+    <Content Include="Views\MainCompanies\_AddCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
