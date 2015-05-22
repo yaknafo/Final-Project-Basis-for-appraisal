@@ -264,7 +264,6 @@
     <Content Include="photos\deleteQ.png" />
     <Content Include="photos\Employee\arrow_down_2.png" />
     <Content Include="photos\Employee\arrow_up_2.png" />
-    <Content Include="photos\folderIcon.png" />
     <Content Include="photos\HomePage\analize.png" />
     <Content Include="photos\HomePage\Format-Bullets-02-128.png" />
     <Content Include="photos\HomePage\forms.gif" />
@@ -275,12 +274,14 @@
     <Content Include="photos\HomePage\about.gif" />
     <Content Include="photos\HomePage\imageedit_3_7682714812.gif" />
     <Content Include="photos\HomePage\images.jpg" />
+    <Content Include="photos\folder.gif" />
     <Content Include="photos\info.png" />
     <Content Include="photos\Login-Door-24.png" />
     <Content Include="photos\logosmall.jpg" />
     <Content Include="photos\Logo\Basis_For_evaluation _logo.jpg" />
     <Content Include="photos\Logo\logo_for_ToolBar.PNG" />
     <Content Include="photos\NewForm.png" />
+    <Content Include="photos\normal_folder.png" />
     <Content Include="photos\previewForm.png" />
     <Content Include="photos\Savef.png" />
     <Content Include="photos\saveForm.png" />
