@@ -293,11 +293,6 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View();
         }
 
-        //public ActionResult AddEmployee()
-        //{
-        //    ViewBag.c = DMO.Companyies;
-        //    return View();
-        //}
 
         [HttpPost]
         public ActionResult addCompanie(tbl_Company company)

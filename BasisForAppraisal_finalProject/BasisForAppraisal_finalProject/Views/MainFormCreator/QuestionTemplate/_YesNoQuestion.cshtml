@@ -1,0 +1,34 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+<div dir="rtl" style="border-bottom: solid;">
+    @if (@Model.Answers.Count() == 2)
+    {
+        <br />
+        @Html.HiddenFor(x => x.Answers[0].AnswerOption)
+        @Html.HiddenFor(x => x.Answers[1].AnswerOption)
+        @Html.HiddenFor(x => x.Answers[0].AnswerId)
+        @Html.HiddenFor(x => x.Answers[1].AnswerId)
+        <table>
+            <tr>
+                <td style="width:70px;">
+                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; " })
+                </td>
+                <th>
+                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[1].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; " })
+                </th>
+            </tr>
+            <tr>
+                <td style="width:70px;">
+                    כן
+                </td>
+                <td>
+                    לא
+                </td>
+            </tr>
+        </table>
+        <br />
+        <br />
+
+
+    }
+    <div style="margin-bottom:2%;"></div>
+</div>

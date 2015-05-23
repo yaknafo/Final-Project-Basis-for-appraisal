@@ -422,6 +422,21 @@
     <Content Include="Views\Shared\_Back.cshtml" />
     <Content Include="Views\MainCompanies\_AddClass.cshtml" />
     <Content Include="Views\MainCompanies\_AddCompany.cshtml" />
+    <Content Include="Views\MainFormCreator\QuestionTemplate\_IntetionalQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\QuestionTemplate\_FreeTextQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\QuestionTemplate\_ScaleQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\QuestionTemplate\_MultipleChoiceQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\QuestionTemplate\_YesNoQuestion.cshtml" />
+    <Content Include="Views\FormFiller\QuestionTemplate\_FreeTextQuestion.cshtml" />
+    <Content Include="Views\FormFiller\QuestionTemplate\_IntetionalQuestion.cshtml" />
+    <Content Include="Views\FormFiller\QuestionTemplate\_MultipleChoiceQuestion.cshtml" />
+    <Content Include="Views\FormFiller\QuestionTemplate\_ScaleQuestion.cshtml" />
+    <Content Include="Views\FormFiller\QuestionTemplate\_YesNoQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\PreviewFormTemplate\_FreeTextQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\PreviewFormTemplate\_IntetionalQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\PreviewFormTemplate\_MultipleChoiceQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\PreviewFormTemplate\_ScaleQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\PreviewFormTemplate\_YesNoQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

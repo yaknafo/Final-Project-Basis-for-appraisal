@@ -1,0 +1,8 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+<div dir="rtl" style="border-bottom: solid;">
+    @if (@Model.Answers.Count > 0)
+    {
+        @Html.EditorFor(x => x.Answers[0])
+    }
+    <div style="margin-bottom:2%;"></div>
+</div>
