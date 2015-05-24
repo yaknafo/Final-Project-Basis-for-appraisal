@@ -1,73 +1,75 @@
-﻿@Model 
-     <link href="~/Content/HomePage.css" rel="stylesheet" type="text/css" media="all" />
+﻿@Model
+ <dody>
+    <link href="~/Content/HomePage.css" rel="stylesheet" type="text/css" media="all" />
+     <link href="~/Content/FontStyle.css" rel="stylesheet" type="text/css" media="all" />
     <script src="@Url.Content("~/Scripts/external.js")" type="text/javascript"></script>
 
-     <div style="margin-top:7%;">
-    <div id="column1" >
-        <img class="image image-full" src="~/photos/HomePage/Homepage1.jpeg" style="position: absolute;z-index: -1; "/>
-        <a href="/ManageForm/MainFormManagment">
-            <div class="gridcontainer clearfix" style="margin-top:94%;">
-                <div class="grid_3" style="cursor: pointer; " onclick="LoadFormMain()">
+    <div style="margin-top:7%;">
+        <div id="column1">
+            <img class="image image-full" src="~/photos/HomePage/Homepage1.jpeg" style="position: absolute;z-index: -1; " />
+            <a href="/ManageForm/MainFormManagment">
+                <div class="gridcontainer clearfix" style="margin-top:94%;">
+                    <div class="grid_3" style="cursor: pointer; " onclick="LoadFormMain()">
+                        <div class="fmcircle_out">
+
+                            <div class="fmcircle_in fmcircle_green">
+
+                                <span><strong>ניהול טפסים</strong></span><img src="~/photos/HomePage/forms.png" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div id="column2">
+            <img id="pic" class="image image-full" src="~/photos/HomePage/HomePage2.jpeg" style="position: absolute;z-index: -1; " />
+            <a href="/MainCompanies/MainCompanies">
+                <div class="grid_3" style="margin-top:94%;cursor:pointer;">
                     <div class="fmcircle_out">
 
                         <div class="fmcircle_in fmcircle_green">
-                         
-                            <span>ניהול טפסים</span><img src="~/photos/HomePage/Format-Bullets-02-128.png" />
+                            <span><strong>ניהול חברות</strong></span><img src="~/photos/HomePage/comp.png" alt="" />
                         </div>
                     </div>
-
-
                 </div>
+            </a>
+        </div>
+
+        <div id="column3">
+            <img class="image image-full" src="~/photos/HomePage/HomePage3.jpeg" style="position: absolute;z-index: -1;" />
+
+            <div class="grid_3" style="margin-top:94%;cursor:pointer;">
+                <div class="fmcircle_out">
+
+                    <div class="fmcircle_in fmcircle_green">
+                        <span><strong>ניתוח מידע</strong></span><img src="~/photos/HomePage/Graph.png" alt="" />
+                    </div>
+                </div>
+
             </div>
-        </a>
-</div>
-         
-         <div id="column2" >
-             <img id="pic" class="image image-full" src="~/photos/HomePage/HomePage2.jpeg" style="position: absolute;z-index: -1; "/>
-             <a href="/MainCompanies/MainCompanies">
-                 <div class="grid_3" style="margin-top:94%;cursor:pointer;">
-                     <div class="fmcircle_out">
 
-                         <div class="fmcircle_in fmcircle_green">
-                             <span>ניהול חברות</span><img src="~/photos/HomePage/forms.gif" alt="" />
-                         </div>
-                     </div>
-                 </div>
-             </a>
-</div>
-             
-         <div id="column3" >
-             <img class="image image-full" src="~/photos/HomePage/HomePage3.jpeg" style="position: absolute;z-index: -1;"  />
+        </div>
+        <div id="column4">
+            <img class=" image image-full" src="~/photos/HomePage/Homepage4.jpeg" style="position: absolute;z-index: -1;" />
 
-             <div class="grid_3" style="margin-top:94%;cursor:pointer;">
-                 <div class="fmcircle_out">
-                   
-                             <div class="fmcircle_in fmcircle_green">
-                                 <span>ניתוח מידע</span><img src="~/photos/HomePage/analize.png" alt="" />
-                             </div>
-                         </div>
-                  
-             </div>
+            <div class="grid_3" style="margin-top:94%; cursor:pointer;">
+                <div class="fmcircle_out">
 
-         </div>
-         <div id="column4">
-             <img class=" image image-full" src="~/photos/HomePage/Homepage4.jpeg" style="position: absolute;z-index: -1;" />
 
-             <div class="grid_3" style="margin-top:94%; cursor:pointer;">
-                 <div class="fmcircle_out">
-                   
-                         
-                     <div class="fmcircle_in fmcircle_green">
-                         <span>ניהול הרשאות</span><img src="~/photos/HomePage/about.gif" alt="" />
-                     </div>
-                         </div>
-                     
-                 
-             </div>
-         </div>
+                    <div class="fmcircle_in fmcircle_green">
+                        <span><strong>ניהול הרשאות</strong></span><img src="~/photos/HomePage/Key-128.png" alt="" />
+                    </div>
+                </div>
 
-</div>
 
+            </div>
+        </div>
+
+    </div>
+</dody>
 
 
 

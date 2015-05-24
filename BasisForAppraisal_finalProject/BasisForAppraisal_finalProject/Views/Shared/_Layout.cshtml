@@ -8,10 +8,12 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
+ 
+
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top" dir="rtl" style="background-color:white">
+<body >
+    <div class="navbar navbar-inverse navbar-fixed-top" dir="rtl" style="background-color:#F6F9F9">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,16 +36,14 @@
                     <li>@Html.ActionLink("הוספת לקוח", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
-                <a href="">   <img id="img_logo" alt="Logo" src="~/photos/logosmall.jpg" style="margin-left:37%" /></a>
+                <a href="/Home/Index">   <img id="img_logo" alt="Logo" src="~/photos/Logo/Icon_Basis_for_evaluation_Tran.gif"style="margin-left:32%; height:60px; width:200px;" /></a>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" >
         @RenderBody()
         <hr style="margin-top:50%;" />
-        <footer style="width:100%" >
-            <p>&copy; @DateTime.Now.Year - Yair & Or</p>
-        </footer>
+
     </div>
 
     @*@Scripts.Render("~/bundles/jquery")*@

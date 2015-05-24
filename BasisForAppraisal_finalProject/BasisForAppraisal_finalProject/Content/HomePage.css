@@ -235,9 +235,9 @@ body {
 	}
 	
 	.fmcircle_out:hover .fmcircle_in img {
-		margin: 30px 25px 25px 25px;
-		width: 120px;
-		height: 120px;
+		
+		width: 140px;
+		height: 140px;
 		
 		-webkit-transition: all 0.2s linear;
 		-moz-transition: all 0.2s linear;
@@ -263,9 +263,9 @@ body {
 
 .fmcircle_in img {
 	border: none;
-	margin: 30%;
-	width: 62px;
-	height: 64px;
+	margin:10%;
+	width: 120px;
+	height: 120px;
 		
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
