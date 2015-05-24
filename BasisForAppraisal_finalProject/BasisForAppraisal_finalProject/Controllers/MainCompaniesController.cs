@@ -369,6 +369,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                 addConectorTomangerstoWorker(companyid, unit, cl, formId);
             if (Boolean.Parse(Session["onManger"].ToString()))
                 addConectorworkersOnManager(companyid, unit, cl, formId);
+            TempData[ResultOperationConstans.Success] = "טופס נוסף בהצלחה ליחידה זו";
            
             return RedirectToAction("ManageCompany", new { id = companyid, unit = unit, cl = cl });
             
