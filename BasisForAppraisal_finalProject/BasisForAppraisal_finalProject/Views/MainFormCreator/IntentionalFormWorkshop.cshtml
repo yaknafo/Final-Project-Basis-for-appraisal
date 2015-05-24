@@ -101,7 +101,7 @@
     <div id="ActionBtn" style="position: fixed; margin-top: -13%; background-color: lightgrey; width: 100%; ">
 
         <!-- the exit button-->
-        <button type="button" class="btn btn-primary btn-lg" title="back to manage Forms" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 90px; background-color: black; ">
+        <button type="button" class="btn btn-primary btn-lg" title="יציאה" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 90px; background-color: black; ">
             <img src="~/photos/Login-Door-24.png" />
         </button>
 
@@ -118,13 +118,13 @@
                            formid = Model.form.formId
                        },
             new { target = "_blank", @class = "btn btn-primary btn-lg glyphicon glyphicon-list-alt", @style = "background-color: black; margin: 1%;width: 90px;" })
-       
+        
     </div>
         
         <div style=" margin-left: 97.5%; margin-top: 20%; ">
         </div>
        
-        <div id="Panel" onchange="showWorningSaveMsg()" style="width: 95%; margin-top: 20%; ">
+        <div id="Panel" onchange="showWorningSaveMsg()" style="width: 95%; margin-top: 20%;disab ">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @Html.EditorFor(x => x.form)
@@ -167,12 +167,14 @@
 <div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel" dir="rtl">האם אתה בטוח שאתה רוצה לצאת?</h4>
-            </div>
+            <div class="modal-header" style="background-color:#FF8080;" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="text-align:center"><strong>האם אתה בטוח שאתה רוצה לצאת?</strong></h4>
+             </div>
             <div class="modal-body">
-                <button type="submit" name="submit" value=@WorkShopActions.Exit class="btn btn-default">סגור וצא</button>
+                <button type="submit" name="submit" value=@WorkShopActions.Exit class="btn btn-default" style="text-align:center; margin-left:40%;">סגור וצא</button>
+                <button class="btn btn-default" style="text-align:center" data-dismiss="modal">ביטול</button>
             </div>
 
         </div>

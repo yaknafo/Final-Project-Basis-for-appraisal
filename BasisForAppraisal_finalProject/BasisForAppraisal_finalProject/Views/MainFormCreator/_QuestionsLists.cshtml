@@ -201,7 +201,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddScaleQuestion style="margin-right:40%">שמור שאלה</button>
+                <button type="submit"  class="btn btn-primary" name="submit" value=@WorkShopActions.AddScaleQuestion style="margin-right:40%">שמור שאלה</button>
             </div>
 
 
@@ -226,7 +226,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddYesNoQuestion style="margin-right:40%">שמור שאלה</button>
+                <button type="submit"  class="btn btn-primary" name="submit" value=@WorkShopActions.AddYesNoQuestion style="margin-right:40%">שמור שאלה</button>
             </div>
 
         </div>
@@ -235,5 +235,5 @@
 
 
 <!--       List of question -------------------------------------------------------------->
-@Html.EditorFor(a => a.Questions)
+<div id="edit">@Html.EditorFor(a => a.Questions)</div>
 
