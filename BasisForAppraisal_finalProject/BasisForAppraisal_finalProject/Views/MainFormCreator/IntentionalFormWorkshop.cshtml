@@ -58,12 +58,12 @@
 @if (TempData["changes"] != null)
 {
 
-   <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 100%; height: 100%; position: fixed; margin-top:0%"><strong>Your Changes are not Saved</strong></div>
+   <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 100%; height: 100%; position: fixed; margin-top:0%"><strong>@TempData["changes"]</strong></div>
 
 }
 
 <!-- if there ant changes the alret  will show up after an type of the user-->
-<div id="changes" class="alert-warning" role="grid" style=" display: none; width: 18%; height: 5%; position: fixed;"><span class="glyphicon glyphicon-comment" style="margin-right:4px;"></span><strong>Your Changes are not Saved</strong></div>
+<div id="changes" class="alert-warning" role="grid" style=" display: none; width: 18%; height: 5%; position: fixed;"><span class="glyphicon glyphicon-comment" style="margin-right:4px;"></span><strong>@TempData["changes"]</strong></div>
 
 
 

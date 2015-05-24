@@ -8,6 +8,7 @@ using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Models;
 using System.Threading.Tasks;
 using System.Globalization;
+using BasisForAppraisal_finalProject.Common.Constans;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -95,36 +96,43 @@ namespace BasisForAppraisal_finalProject.Controllers
 
                    case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                       TempData["changes"] = "add";
+                       TempData["changes"] = "שינויים לא שמורים";
                        break;
 
 
                    case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                       TempData["changes"] = "add";
+                       TempData["changes"] = "שינויים לא שמורים";
                        break;
                    case "AddYesNoQuestion": formViewModel.AddQuestion(formViewModel.NewQuestionYesNo);
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                       TempData["changes"] = "add";
+                       TempData["changes"] = "שינויים לא שמורים";
                        break;
 
                    case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                       TempData["changes"] = "add";
+                       TempData["changes"] = "שינויים לא שמורים";
                        break;
 
                    case "AddMultipleChoiceQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoice);
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
-                       TempData["changes"] = "add";
+                       TempData["changes"] = "שינויים לא שמורים";
                        break;
 
-                   case "Save": manager.UpdateForm(formViewModel);
-                       TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                   case "Save":
+                       try
+                       {
+                           manager.UpdateForm(formViewModel);
+                           TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                       }catch(Exception e)
+                       {
+                           TempData[ResultOperationConstans.Failed] = e.Message;
+                       }
                        break;
 
                    case "Delete": formViewModel.DeleteQuestions();
                        TempData["Success"] = "מחיקה בוצעה בהצלחה!";
-                       TempData["changes"] = "remove";
+                       TempData["changes"] = "שינויים לא שמורים";
                        break;
 
                    case "SaveAndClose": manager.UpdateForm(formViewModel);

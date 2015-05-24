@@ -129,7 +129,7 @@
 
       
        
-        <img src="~/photos/Employee/arrow_down_2.png" title=" Them Fill On Me " /> 
+        <img src="~/photos/Employee/arrow_down_2.png" title=" על מי העובד ממלא " /> 
         </div>
     <br />
     <div dir="rtl" style="background-color: black">
@@ -159,6 +159,10 @@
                             <strong> שם טופס</strong> 
                         </td>
                         <td>
+                            <strong>בוצע?</strong>
+
+                        </td>
+                        <td>
                             <strong>מחיקה</strong>
                             
                         </td>
@@ -173,8 +177,26 @@
                             @Html.HiddenFor(x => x.FillOnMe[i].formId)
                             @Html.HiddenFor(x => x.FillOnMe[i].companyId)
                             @Html.HiddenFor(x => x.FillOnMe[i].employeeOnId)
-                            <td>@Model.FillOnMe[i].employeeFillId</td>
-                            <td>@Model.FillOnMe[i].tblForm.FormName</td>
+                            <td>@Model.FillOnMe[i].employeeOnId</td>
+                            @if (@Model.FillOnMe[i].done.HasValue && @Model.FillOnMe[i].done.Value)
+                            {
+                                <td>
+                                    @Html.ActionLink(@Model.FillOnMe[i].tblForm.FormName, "ShowAnswers", "FormFiller", new
+                       {
+                           companyId = Model.FillOnMe[i].companyId,
+                           formId = Model.FillOnMe[i].formId,
+                           empOn = Model.FillOnMe[i].employeeOnId,
+                           empFill = Model.FillOnMe[i].employeeFillId
+                       },
+                           new { target = "_blank" })
+                            </td>
+                                <td class="glyphicon glyphicon-ok" style="background-color:lightgreen"></td>
+                            }
+                            else
+                            {
+                                <td>@Model.FillOnMe[i].tblForm.FormName</td>
+                                <td class="glyphicon glyphicon-remove"></td>
+                            }
                             <td>@Html.CheckBoxFor(x => x.FillOnMe[i].IfDelete)</td>
                         </tr>
 

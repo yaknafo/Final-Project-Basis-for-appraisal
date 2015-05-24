@@ -10,6 +10,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Threading.Tasks;
+using BasisForAppraisal_finalProject.Common.Constans;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -165,11 +166,12 @@ namespace BasisForAppraisal_finalProject.Models
         {
             if (!manager.tbl_Employees.Contains(emp))
             {
+                CreateUserWithRole(emp.employeeId, emp.employeeId, RolesConstans.Guest);
+
                 this.manager.tbl_Employees.InsertOnSubmit(emp);
                 
                 this.manager.SubmitChanges();
 
-                 CreateUserWithRole(emp.employeeId, emp.employeeId, "Guest");
             }
         }
 
