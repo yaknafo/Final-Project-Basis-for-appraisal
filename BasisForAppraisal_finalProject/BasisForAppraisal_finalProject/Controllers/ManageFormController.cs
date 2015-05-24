@@ -11,6 +11,7 @@ using BasisForAppraisal_finalProject.DBML;
 using System.Net;
 using System.Text;
 using System.IO;
+using BasisForAppraisal_finalProject.Common.Constans;
 
 
 namespace BasisForAppraisal_finalProject.Controllers
@@ -36,7 +37,13 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult DeleteForm(int id)
         {
             var fm = new FormManager();
-            fm.deleteForm(id);
+            try
+            {
+                fm.deleteForm(id);
+            }catch(Exception e)
+            {
+                TempData[ResultOperationConstans.Failed] = e.Message;
+            }
             return RedirectToAction("MainFormManagment");
         }
 

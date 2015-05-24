@@ -61,6 +61,8 @@
                 </th>
                 <th>
                     @Html.EditorFor(x => x.firstName)
+                    <br />
+                    @Html.ValidationMessageFor(x => x.firstName)
                 </th>
             </tr>
 
@@ -71,6 +73,8 @@
 
                 <th>
                     @Html.EditorFor(x => x.lastName)
+                    <br />
+                    @Html.ValidationMessageFor(x => x.lastName)
                 </th>
             </tr>
             <tr>
@@ -79,6 +83,8 @@
                 </th>
                 <th>
                     @Html.EditorFor(x => x.Email)
+                    <br />
+                    @Html.ValidationMessageFor(x => x.Email)
                 </th>
             </tr>
             <tr>
@@ -86,7 +92,9 @@
                     @Html.DisplayNameFor(x => x.IsManger)
                 </th>
                 <th>
-                    @Html.CheckBoxFor(x => x.IsManger.HasValue, new { @disabled = "disabled" })
+                    @Html.CheckBoxFor(x => x.IsManger.HasValue)
+                    <br />
+                    @Html.ValidationMessageFor(x => x.IsManger)
                 </th>
             </tr>
 

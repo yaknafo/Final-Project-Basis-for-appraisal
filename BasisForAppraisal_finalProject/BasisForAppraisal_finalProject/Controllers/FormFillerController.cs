@@ -26,16 +26,22 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpGet]
         public ActionResult FormFill()
         {
-            var xconnector = TempData["con"] as tbl_ConnectorFormFill;
+            try
+            {
+                var xconnector = TempData["con"] as tbl_ConnectorFormFill;
 
-            // this will be deleted after yair finsish to work on it!
-            if (xconnector == null)
-            xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
-            ////////////////////////////////////////////////////////////////////////////////
+                // this will be deleted after yair finsish to work on it!
+                if (xconnector == null)
+                    xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
+                ////////////////////////////////////////////////////////////////////////////////
 
-            var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector);
+                var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector);
 
-            return View(fillerViewModel);
+                return View(fillerViewModel);
+            }catch
+            {
+              return  RedirectToAction("Login", "Account");
+            }
         }
 
         [HttpPost]

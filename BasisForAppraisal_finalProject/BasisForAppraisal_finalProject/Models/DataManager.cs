@@ -219,12 +219,18 @@ namespace BasisForAppraisal_finalProject.Models
         /// <param name="quesNumber"></param>
         public void deleteForm(int formID)
         {
+
             // find the form
             var formForDelete = manager.tblForms.Where(x => x.formId == formID).FirstOrDefault();
 
             // check if exist
             if (formForDelete == null)
                 throw new Exception(string.Format("the form with number id {0} camt be delete becouse he cant be found in DB", formID));
+
+            // check that from dosnt have any connector
+            if(manager.tbl_ConnectorFormFills.Any(x => x.formId == formID))
+                throw new Exception("טופס זה מיועד למילוי לכן אינו ניתן למחיקה אנא מחק את החיבורים לפני ניסיון המחיקה הבא");
+
 
             // delete all the section of the form
             formForDelete.Sections.ForEach(q => deleteSection(q.SectionId));
