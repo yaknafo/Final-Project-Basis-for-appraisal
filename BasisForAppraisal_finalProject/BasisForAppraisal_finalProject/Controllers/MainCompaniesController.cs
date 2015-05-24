@@ -304,8 +304,17 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public ActionResult deleteWorker(String idworker, int companyNumber, string unit, string cl)
         {
-            var cm = new CompanyManger();
-            cm.deleteWorker(idworker, companyNumber);
+            try
+            {
+                var cm = new CompanyManger();
+                cm.deleteWorker(idworker, companyNumber);             
+                TempData[ResultOperationConstans.Success] = "עובד נמחק בהצלחה";           
+               
+            }
+            catch (Exception ex)
+            {
+                TempData[ResultOperationConstans.Failed] = "לא ניתן למחוק עובד";
+            }
             return RedirectToAction("ManageCompany", new { id = companyNumber, unit = unit, cl = cl });
         }
         public ActionResult test()
@@ -400,16 +409,33 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public ActionResult deleteCompany(int companyid)
         {
-            var dmc = new DataMangerCompany();
-            dmc.deleteCompany(companyid);
+            try
+            {
+                var dmc = new DataMangerCompany();
+                dmc.deleteCompany(companyid);
+                TempData[ResultOperationConstans.Success] = "חברה נמחקה בהצלחה";
+               
+                
+            }
+            catch(Exception ex)
+            {
+                TempData[ResultOperationConstans.Failed] = "לא ניתן למחוק חברה";
+            }
             return RedirectToAction("MainCompanies");
-
         }
 
         public  ActionResult deleteFolder(string className, string unitid, int companyid)
         {
-            var dmc = new DataMangerCompany();
-            dmc.deleteUnitAndClass(className, unitid, companyid);
+            try
+            {
+                var dmc = new DataMangerCompany();
+                dmc.deleteUnitAndClass(className, unitid, companyid);
+                TempData[ResultOperationConstans.Success] = "יחידה נמחקה בהצלחה";
+            }
+            catch (Exception ex)
+            {
+                TempData[ResultOperationConstans.Failed] = "לא ניתן למחוק יחידה";
+            }
             return RedirectToAction("CompanyUnit", new { id = companyid});
             
         }

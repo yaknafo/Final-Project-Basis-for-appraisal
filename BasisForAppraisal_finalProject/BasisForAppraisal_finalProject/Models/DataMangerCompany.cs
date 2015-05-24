@@ -61,28 +61,31 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void deleteWorker(String workerid, int companyNumber)
         {
+            
+                // get connectorsAnswers cant delete employe before delete all connectorsAnswers that his id is key there
+                var connecAnswer = manager.tbl_ConnectorAnswers.Where(x => x.employeeFillId == workerid || x.employeeOnId == workerid).ToList();
+                manager.tbl_ConnectorAnswers.DeleteAllOnSubmit(connecAnswer);
 
-            // get connectorsAnswers cant delete employe before delete all connectorsAnswers that his id is key there
-            var connecAnswer = manager.tbl_ConnectorAnswers.Where(x => x.employeeFillId == workerid || x.employeeOnId == workerid).ToList();
-            manager.tbl_ConnectorAnswers.DeleteAllOnSubmit(connecAnswer);
+                //get connectors cant delete employe before delete all connectors that his id is key there
+                var connector = manager.tbl_ConnectorFormFills.Where(x => x.employeeFillId == workerid || x.employeeOnId == workerid).ToList();
+                manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(connector);
 
-            //get connectors cant delete employe before delete all connectors that his id is key there
-            var connector = manager.tbl_ConnectorFormFills.Where(x => x.employeeFillId == workerid || x.employeeOnId == workerid).ToList();
-            manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(connector);
 
-         
-            // // delete worker --> the worker has been deleted from the DB.
-            var workerToDelete = manager.tbl_Employees.Where(a => a.employeeId == workerid && a.companyId == companyNumber).FirstOrDefault();
-            manager.tbl_Employees.DeleteOnSubmit(workerToDelete);
+                // // delete worker --> the worker has been deleted from the DB.
+                var workerToDelete = manager.tbl_Employees.Where(a => a.employeeId == workerid && a.companyId == companyNumber).FirstOrDefault();
+                manager.tbl_Employees.DeleteOnSubmit(workerToDelete);
 
-            // delete Identity --> the user cant login to the system any more
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var userExiset = UserManager.FindByName(workerid);
-            UserManager.Delete(userExiset);
+                // delete Identity --> the user cant login to the system any more
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var userExiset = UserManager.FindByName(workerid);
+                UserManager.Delete(userExiset);
 
-            manager.SubmitChanges();
+                manager.SubmitChanges();
+            }
+            
 
-        }
+
+        
         private void deleteConectForWorker(int companyid , List<tbl_Employee> myList)
         {
             var listcomapny= manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyid).ToList();
@@ -224,9 +227,17 @@ namespace BasisForAppraisal_finalProject.Models
 
             var tempconnector = new tbl_ConnectorFormFill { employeeFillId = employeeFillID, employeeOnId = employeeOnId, companyId = companyId, formId = formID };
             if (manager.tbl_ConnectorFormFills.Contains(tempconnector))
-                return;
-            manager.tbl_ConnectorFormFills.InsertOnSubmit(tempconnector);
-            manager.SubmitChanges();
+               return;
+            try
+            {
+                manager.tbl_ConnectorFormFills.InsertOnSubmit(tempconnector);
+                manager.SubmitChanges();
+            }
+            catch(Exception ex)
+            {
+               
+                
+            }
 
 
         }
