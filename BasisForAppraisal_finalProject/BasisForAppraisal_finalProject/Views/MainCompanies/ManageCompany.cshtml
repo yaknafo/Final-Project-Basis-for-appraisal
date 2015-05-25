@@ -1,20 +1,24 @@
 ﻿@model  BasisForAppraisal_finalProject.ViewModel.Company.ClassUnitViewModel
+@using BasisForAppraisal_finalProject.DBML;
+
 @{
     ViewBag.Title = "ManageCompany";
 }
-
-    <!--------------------------------------Error & sucess  section      -->
-@Html.Partial("_Failed")
-@Html.Partial("_Success")
-<!--------------------------------------Error & sucess  section      -->
 
 
 
       
 <div dir="rtl" style="margin-top:7%">
+    <!--------------------------------------Error & sucess  section      -->
+    <div>
+        @Html.Partial("_Failed")
+        @Html.Partial("_Success")
+    </div>
+    <!--------------------------------------Error & sucess  section      -->
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title" style=" text-align:center;font-size:24px;"><strong>@Model.MyClass.tbl_Unit.tbl_Company.comapnyName </strong></h3>
+         
         </div>
     </div>
 </div>
@@ -53,6 +57,7 @@
         <input class="btn btn-info" type="submit" style="margin-top:2%; width:145px; text-align:center;" value="שלח טופס לאנשי קשר" />
     }
 </div>
+
 @Html.EditorFor(x=>x.MyClass)
 
 
