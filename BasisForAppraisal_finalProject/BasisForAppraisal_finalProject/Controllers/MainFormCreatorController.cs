@@ -8,6 +8,7 @@ using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Models;
 using System.Threading.Tasks;
 using System.Globalization;
+using BasisForAppraisal_finalProject.Common.Constans;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -118,8 +119,15 @@ namespace BasisForAppraisal_finalProject.Controllers
                        TempData["changes"] = "שינויים לא שמורים";
                        break;
 
-                   case "Save": manager.UpdateForm(formViewModel);
-                       TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                   case "Save":
+                       try
+                       {
+                           manager.UpdateForm(formViewModel);
+                           TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                       }catch(Exception e)
+                       {
+                           TempData[ResultOperationConstans.Failed] = e.Message;
+                       }
                        break;
 
                    case "Delete": formViewModel.DeleteQuestions();

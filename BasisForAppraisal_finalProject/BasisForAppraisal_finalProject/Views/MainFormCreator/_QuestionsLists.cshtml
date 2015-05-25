@@ -2,6 +2,7 @@
 @using BasisForAppraisal_finalProject.ViewModel
 @using BasisForAppraisal_finalProject.DBML
 @using BasisForAppraisal_finalProject.Controllers.Enum
+@using BasisForAppraisal_finalProject.Common.Constans
 @{
     Layout = null;
 }
@@ -59,6 +60,12 @@
 @if (TempData["changes"] != null)
 {
     <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 3%; position: fixed; margin-top:13%"><strong>@TempData["changes"]</strong></div>
+}
+@if (TempData[ResultOperationConstans.Failed] != null)
+{
+
+   @Html.Partial("_Failed")
+
 }
 
 <!--  ------------------    question Multiple Choice             ----------------------------------------------------------->   
