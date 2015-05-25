@@ -92,28 +92,28 @@ namespace BasisForAppraisal_finalProject.DBML
     public class EmployeeMetadata
     {
         [StringLength(30, MinimumLength = 2)]
-        [Required ]
+        [Required (ErrorMessage="שדה חובה")]
         [Display(Name = "מחלקה:")]
         public string unitName { get; set; }
 
-         [Required]
+         [Required(ErrorMessage = "שדה חובה")]
         [Display(Name = "מחזור:")]
         public string className { get; set; }
-
-         [Required]
+       [EmailAddress(ErrorMessage = "מייל לא תקין")]
+        [Required(ErrorMessage = "שדה חובה")]
         [Display(Name = "מייל:")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "שדה חובה")]
         [Display(Name = "שם פרטי:")]
         public string firstName { get; set; }
         [StringLength(30, MinimumLength = 1)]
-        [Required]
-        [Display(Name = "שם פרטי:")]
+        [Required(ErrorMessage = "שדה חובה")]
+        [Display(Name = "שם משפחה:")]
         public string lastName { get; set; }
 
-        [StringLength(9, MinimumLength=9)]
-        [Required]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "תז -9 ספרות")]
+        [Required(ErrorMessage = "שדה חובה")]
         [Display(Name = "תז:")]
         public string employeeId { get; set; }
 

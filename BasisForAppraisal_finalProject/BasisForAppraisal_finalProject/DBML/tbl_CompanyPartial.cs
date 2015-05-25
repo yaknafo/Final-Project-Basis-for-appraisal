@@ -56,14 +56,17 @@ namespace BasisForAppraisal_finalProject.DBML
     {
         [Display(Name="שם")]
         [DataType(DataType.Text)]
+        [Required(ErrorMessage = "שדה חובה")]
         public string comapnyName { get; set; }
 
         [Display(Name = "טלפון:")]
         [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "שדה חובה")]
         public string comapnyPhone { get; set; }
 
         [Display(Name = "כתובת:")]
         [DataType(DataType.Text)]
+        [Required(ErrorMessage = "שדה חובה")]
         public string comapnyAddress { get; set;}
 
     }
