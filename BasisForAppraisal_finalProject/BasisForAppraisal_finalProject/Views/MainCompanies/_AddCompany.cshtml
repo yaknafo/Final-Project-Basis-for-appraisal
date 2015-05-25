@@ -30,7 +30,7 @@
                     @Html.DisplayNameFor(x => x.comapnyName)
                 </th>
                 <th>
-                    @Html.TextBoxFor(x => x.comapnyName)
+                    @Html.TextBoxFor(x => x.comapnyName, new { Style = "placeholder=שם חברה"})
                 </th>
             </tr>
 
@@ -47,7 +47,7 @@
                     @Html.DisplayNameFor(x => x.comapnyPhone)
                 </th>
                 <th>
-                    @Html.EditorFor(x => x.comapnyPhone)
+                    @Html.EditorFor(x => x.comapnyPhone, new { Style = "placeholder=טלפון חברה"})
                 </th>
             </tr>
         </table>
@@ -74,7 +74,7 @@
             var mesg = "Address: " + address;
             mesg += "\nLatitude: " + latitude;
             mesg += "\nLongitude: " + longitude;
-            alert(mesg);
+           
         });
     });
 </script>

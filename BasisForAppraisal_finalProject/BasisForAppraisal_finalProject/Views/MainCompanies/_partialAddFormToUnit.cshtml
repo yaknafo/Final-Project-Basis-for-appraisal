@@ -29,16 +29,16 @@
         <div class="panel panel-warning" dir="rtl" style="width:95%; margin-right:2%; margin-top:1%; margin-bottom: 5%; ">
             <div class="panel-heading" style="font-size:20px; text-align:center;text-shadow:inherit "><strong>בחר צורת מילוי</strong></div>
             <h7 style="margin-left:7%; margin-right:4%;"> מנהל על עובדיו </h7> <h7 style="margin-left:7%;">עובדים על עובדים </h7>
-            <h7 style="margin-left:7% ">עובדים על מנהל</h7><h7 style="margin-left:5%;">ניתן למלא על עצמך</h7>
+            <h7  style="margin-left:7% ;">עובדים על מנהל</h7><h7 style="margin-left:5%;visibility:hidden" id="textOnHimself">ניתן למלא על עצמך</h7>
             <br />
-            <input type="checkbox" id="manger" style=" margin-left:17%" />
-            <input type="checkbox" id="workers" style="margin-left:18%" />
-            <input type="checkbox" id="manger_workers" style="margin-left:19%" />
-            <input type="checkbox" id="onHimself" style="margin-left:3%" />
+            <input onclick="CheckBoxClick()" type="checkbox" id="manger" style=" margin-left:17%" />
+            <input onclick="CheckBoxClick()" type="checkbox" id="workers" style="margin-left:18%" />
+            <input onclick="CheckBoxClick()" type="checkbox" id="manger_workers" style="margin-left:19%" />
+            <input onclick="CheckBoxClick()" type="checkbox" id="onHimself" style="margin-left:3%; visibility:hidden" />
 
         </div>
 
-            <div class="panel panel-default" dir="rtl" style="width:95%; margin-right:2%; margin-top:5%; margin-bottom: 10%; text-align:center">
+            <div class="panel panel-default" dir="rtl" style="width:95%; margin-right:2%; margin-top:2%; margin-bottom: 10%; text-align:center">
                 <!-- Default panel contents -->
                 <div class="panel-heading" style="font-size: 18px; background-color:#a6cae3;"><strong>בחר טופס</strong></div>
                 <div class="panel-heading" style="font-size: 16px; text-align:right;"><span class="glyphicon glyphicon-search"></span></div>
@@ -101,5 +101,21 @@
         });
 
 
+    }
+    function CheckBoxClick()
+      
+    {
+        
+        if (document.getElementById('manger').checked || (document.getElementById('workers').checked) || (document.getElementById('manger_workers').checked))
+        {
+            document.getElementById('onHimself').style.visibility = 'visible';
+            document.getElementById('textOnHimself').style.visibility = 'visible';
+            
+        }
+        else
+        {
+            document.getElementById('onHimself').style.visibility = 'hidden';
+            document.getElementById('textOnHimself').style.visibility = 'hidden';
+        }
     }
 </script>

@@ -273,7 +273,7 @@
     <Content Include="photos\HomePage\HomePage2.jpeg" />
     <Content Include="photos\HomePage\HomePage3.jpeg" />
     <Content Include="photos\HomePage\HomePage4.jpeg" />
-    <Content Include="photos\folder.gif" />
+    <Content Include="photos\Logo\folder.gif" />
     <Content Include="photos\HomePage\Key-128.png" />
     <Content Include="photos\info.png" />
     <Content Include="photos\Login-Door-24.png" />
