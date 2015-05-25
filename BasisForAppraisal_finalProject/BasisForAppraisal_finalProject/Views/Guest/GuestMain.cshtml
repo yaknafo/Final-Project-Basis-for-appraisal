@@ -9,22 +9,23 @@
 <head>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/FontStyle.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     <meta name="viewport" content="width=device-width" />
-    <title>GuestMain</title>
+    <title>בסיס להערכה-מילוי טפסים</title>
 </head>
 <nav class="navbar navbar-default navbar-fixed-top" style="background-color:white">
     <div class="container">
         <p class="navbar-text navbar-right"><img src="~/photos/Logo/logo_for_ToolBar.PNG" /></p>
         <p class="navbar-text navbar-right"><h1>
-    שלום, @Model.firstName  @Model.lastName
+       <strong> שלום, @Model.firstName  @Model.lastName</strong> 
 </h1></p>
     </div>
 </nav>
 
          
     <div class="table-responsive" dir="rtl" style="margin-top:5%;">
-        <h2 style="background-color:beige; opacity:0.8;">רשימת טפסים שעלייך למלא:</h2>
+        <h2 style="background-color:#a6cae3; opacity:0.8; "><strong style="margin-right:37%;font-size:35px;">רשימת טפסים שעלייך למלא</strong></h2>
     </div>
 
     <div dir="rtl">

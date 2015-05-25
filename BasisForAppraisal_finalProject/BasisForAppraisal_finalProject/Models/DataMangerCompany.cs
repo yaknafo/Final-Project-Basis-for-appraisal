@@ -130,7 +130,8 @@ namespace BasisForAppraisal_finalProject.Models
             var conectionToDelete = manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyid).ToList();
             manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(conectionToDelete);
             var workersToDelete = manager.tbl_Employees.Where(x => x.companyId == companyid).ToList();
-            manager.tbl_Employees.DeleteAllOnSubmit(workersToDelete);
+             manager.tbl_Employees.DeleteAllOnSubmit(workersToDelete);
+             manager.SubmitChanges();
             var classToDelete = manager.tbl_Classes.Where(x => x.companyId == companyid).ToList();
             manager.tbl_Classes.DeleteAllOnSubmit(classToDelete);
             var unitsToDelete = manager.tbl_Units.Where(x => x.companyId == companyid).ToList();
