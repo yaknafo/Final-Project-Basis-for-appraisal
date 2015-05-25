@@ -175,6 +175,15 @@ namespace BasisForAppraisal_finalProject.Models
             }
         }
 
+        public async void EditEmployee(tbl_Employee emp)
+        {
+            if (manager.tbl_Employees.Contains(emp))
+            {
+
+            }
+        }
+
+
 
         public void AddUnit(tbl_Unit unit)
         {

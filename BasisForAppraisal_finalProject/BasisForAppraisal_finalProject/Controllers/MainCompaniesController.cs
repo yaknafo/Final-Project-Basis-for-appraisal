@@ -109,6 +109,11 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         public ActionResult AddEmployee(tbl_Employee emp, int Companyies, string units , string clas )
         {
+            if (Companyies == null || units == null || clas == null || string.IsNullOrEmpty(units) || string.IsNullOrEmpty(clas))
+            {
+                TempData[ResultOperationConstans.Failed] = "בחר כל הוספת עובד חברה מחלקה ומחזור";
+                return RedirectToAction("CompanyUnit", new { id = Companyies });
+            }
             emp.companyId = Companyies;
             emp.unitName = units;
             emp.className = clas;

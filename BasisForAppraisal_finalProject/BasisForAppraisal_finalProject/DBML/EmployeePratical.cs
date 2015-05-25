@@ -96,7 +96,7 @@ namespace BasisForAppraisal_finalProject.DBML
         [Display(Name = "מחלקה:")]
         public string unitName { get; set; }
 
-         [Required(ErrorMessage = "שדה חובה")]
+        [Required(ErrorMessage = "שדה חובה")]
         [Display(Name = "מחזור:")]
         public string className { get; set; }
        [EmailAddress(ErrorMessage = "מייל לא תקין")]
@@ -116,6 +116,11 @@ namespace BasisForAppraisal_finalProject.DBML
         [Required(ErrorMessage = "שדה חובה")]
         [Display(Name = "תז:")]
         public string employeeId { get; set; }
+
+        [Required(ErrorMessage = "שדה חובה")]
+        [Display(Name = "חברה:")]
+        public int companyId { get; set; }
+
 
         [Display(Name = "מנהל:")]
         public string IsManger { get; set; }
