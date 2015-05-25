@@ -29,21 +29,9 @@
                     <div style="margin-right:90%;">
                         @using (Html.BeginForm("addNewForm", "ManageForm", FormMethod.Post))
                         {
-                        <button type="submit" class="btn btn-primary btn-lg" style="width:150px;"><img src="~/photos/newForm.png" /></button>
+                        <button type="submit" class="btn btn-primary btn-lg" style="width:120px;"><img src="~/photos/newForm.png" /></button>
                         }
     </div>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">סוגי טפסים <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">מכוון</a></li>
-                            <li><a href="#">מספר אפשרויות</a></li>
-                            <li><a href="#">דירוג</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -51,7 +39,7 @@
 
    
 
-    <div class="panel panel-default" dir="rtl" style="width:90%; margin-right:10%; margin-top:5%; margin-bottom:30%; text-align:center;">
+    <div class="panel panel-default" dir="rtl" style="width:100%; margin-top:5%; text-align:center;">
         <!-- Default panel contents -->
         <div class="panel-heading" style="font-size: 22px;background-color:#a6cae3 "><strong>רשימת טפסים</strong></div>
         <div class="panel-heading" style="font-size: 16px; text-align:right;"><strong>חיפוש</strong></div>
@@ -83,18 +71,7 @@
             new $.fn.dataTable.KeyTable(table);
 
         </script>
-        <div class="row">
-            <div class="col-sm-5 col-md-2">
-                <div class="thumbnail">
-                    <img src="..." alt="...">
-                    <div class="caption">
-                        <h3>פרטי טופס</h3>
-                        <p>...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>   
+     
 
    
 

@@ -58,7 +58,7 @@
 }
 @if (TempData["changes"] != null)
 {
-    <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 3%; position: fixed; margin-top:13%"><strong>Your Changes are not Saved</strong></div>
+    <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 15%; height: 3%; position: fixed; margin-top:13%"><strong>@TempData["changes"]</strong></div>
 }
 
 <!--  ------------------    question Multiple Choice             ----------------------------------------------------------->   

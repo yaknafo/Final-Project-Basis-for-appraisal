@@ -13,7 +13,7 @@ namespace BasisForAppraisal_finalProject.DBML
 
 
 
-        public static BFADataBasedbmlDataContext dbDataContext = new BFADataBasedbmlDataContext(connectionStringfrenkel);
+        public static BFADataBasedbmlDataContext dbDataContext = new BFADataBasedbmlDataContext(connectionStringYair);
 
         public static BFADataBasedbmlDataContext GetDataContextInstance()
         {
