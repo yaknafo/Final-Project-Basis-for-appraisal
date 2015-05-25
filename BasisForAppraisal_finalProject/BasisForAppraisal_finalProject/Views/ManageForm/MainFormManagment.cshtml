@@ -16,6 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 @Styles.Render("~/Content/bootstrapcss")
 @Styles.Render("~/Content/themes/base/css")
+<body>
 <div dir="rtl" style="text-align:center;">
     <h2>ניהול טפסים</h2>
 
@@ -46,7 +47,8 @@
         <!---knafo-->
         <table id="myTable" class="table-bordered" cellspacing="0" align="right">
             <thead style=" background-color:#E8E8E8;">
-                <tr style=" font-size:20px;"><td align="center"><strong>שם</strong></td>
+                    <tr style=" font-size:20px;">
+                        <td align="center"><strong>שם</strong></td>
                     <td align="center"><strong>תאריך שינוי</strong> </td>
                     <td align="center"><strong>פרטים</strong> </td>
                     <td align="center"><strong>מחיקה</strong></td>
@@ -91,7 +93,7 @@
                 </div>
                 @using (Html.BeginForm("DeleteForm", "ManageForm", new { id = item.formId }, FormMethod.Post))
                 {  <div class="modal-body">
-                       <button type="button" class="btn btn-default" data-dismiss="modal" >בטל</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">בטל</button>
                        <button type="submit" class="btn btn-primary" style="background-color:#FF8080;">מחק</button>
                     
                 </div>
@@ -104,3 +106,4 @@
 
 }
 </div>
+    </body>
