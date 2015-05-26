@@ -8,6 +8,7 @@ using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.Controllers;
 using BasisForAppraisal_finalProject.Common.Constans;
+using System.Threading.Tasks;
 
 namespace SendMail.Controllers
 {
@@ -19,20 +20,27 @@ namespace SendMail.Controllers
         [HttpPost]
         public ActionResult Index(int id,string unit,string cl)
         {
+           var res =  Task.Factory.StartNew(() =>SendMails(id, unit, cl));
+            return RedirectToAction("ManageCompany", "MainCompanies", new { id = id, unit = unit, cl = cl });
+        }
+ 
+        private void             SendMails(int id, string unit, string cl)
+        {
             DataMangerCompany dm = new DataMangerCompany();
             List<tbl_Employee> NotSendMail = new List<tbl_Employee>();
-            string body ="שלום רב" +
-          "<br />מייל זה נשלח לך על ידי בסיס להערכה" +
-        " <br /> למייל זה מצורף לינק  לאתר החברה" +
-          "<br /בכניסה לאתר תצטרך להכניס שם משתמש וסיסמא אשר מצורפים למייל זה <br />" +
-          "<br />לאחר כניסה לאתר תוכל לצפות בכל הטפסים אשר עלייך למלא<br />" +
-          "<br />:קישור לאתר<br />";
+            string body = "שלום רב" +
+                          "<br />מייל זה נשלח לך על ידי בסיס להערכה" +
+                          " <br /> למייל זה מצורף לינק  לאתר החברה" +
+                          "<br /בכניסה לאתר תצטרך להכניס שם משתמש וסיסמא אשר מצורפים למייל זה <br />" +
+                          "<br />לאחר כניסה לאתר תוכל לצפות בכל הטפסים אשר עלייך למלא<br />" +
+                          "<br />:קישור לאתר<br />" +
+                          "<br />http://localhost:21981/<br />";
             String name = "<br /> שם משתמש:";
             String password = "<br /> סיסמא:";
            
-            string endbody = "<br /><br /><br />תודה צוות בסיס להערכה"+"</div>";
+            string endbody = "<br /><br /><br />תודה צוות בסיס להערכה" + "</div>";
 
-            foreach (var emp in dm.getEmpForEmail(id,unit,cl))
+            foreach (var emp in dm.getEmpForEmail(id, unit, cl))
             {
                 BasisForAppraisal_finalProject.Models.MailModel _objModelMail = new BasisForAppraisal_finalProject.Models.MailModel();
                 if (ModelState.IsValid)
@@ -55,25 +63,22 @@ namespace SendMail.Controllers
                         smtp.Host = "smtp.gmail.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new System.Net.NetworkCredential
-                        ("dontreplaybasisforappraisal@gmail.com", "basis123456");// Enter seders User name and password
+                        smtp.Credentials = new System.Net.NetworkCredential("dontreplaybasisforappraisal@gmail.com", "basis123456");// Enter seders User name and password
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         NotSendMail.Add(emp);
                     }
-                    
                 }
             }
             var Persons = "</br > :פרט לאנשים הבאים</br>";
-            foreach(var v in NotSendMail)
-                 Persons += v.firstName + " " + v.lastName + " </br>";
+            foreach (var v in NotSendMail)
+                Persons += v.firstName + " " + v.lastName + " </br>";
             if (NotSendMail.Count < 1)
                 Persons = "";
-            TempData[ResultOperationConstans.Success] = "שלח מייל בהצלחה"+Persons;
-            return RedirectToAction("ManageCompany", "MainCompanies", new { id = id, unit = unit, cl = cl });
+            TempData[ResultOperationConstans.Success] = "שלח מייל בהצלחה" + Persons;
         }
 
         private object DataMangerCompany()
