@@ -27,6 +27,24 @@
                 $("#proj").css("background-color", "inherit");
             });
         });
+
+        $(document).ready(function () {
+            $("#navInfo").mouseover(function () {
+                $("#navInfo").css("background-color", "#666666");
+            });
+            $("#navInfo").mouseout(function () {
+                $("#navInfo").css("background-color", "inherit");
+            });
+        });
+
+        $(document).ready(function () {
+            $("#navPram").mouseover(function () {
+                $("#navPram").css("background-color", "#666666");
+            });
+            $("#navPram").mouseout(function () {
+                $("#navPram").css("background-color", "inherit");
+            });
+        });
     </script>
 
 
@@ -48,8 +66,8 @@
                 <ul class="nav navbar-nav" style="margin-top: 1%; font-size:22px;font-weight: bold;">
                   @*<li>@Html.Partial("_Back")</li>*@
 
-                    <li>@Html.ActionLink("ניהול הרשאות", "", "")</li>
-                    <li>@Html.ActionLink("ניתוח מידע", "", "")</li>
+                    <li id="navPram">@Html.ActionLink("ניהול הרשאות", "", "")</li>
+                    <li id="navInfo">@Html.ActionLink("ניתוח מידע", "", "")</li>
                     <li id="lay">@Html.ActionLink("ניהול טפסים", "backToMainForm", "MainFormCreator")</li>
                     <li id="proj">@Html.ActionLink("ניהול לקוחות", "MainCompanies", "MainCompanies")</li>
 

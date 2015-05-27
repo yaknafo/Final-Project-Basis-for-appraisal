@@ -48,17 +48,16 @@
             {
                 if (Model.FillOnThem[i].done.HasValue && Model.FillOnThem[i].done.Value)
                 {
-                    <button class="alert alert-success" role="alert" style="width:30%; text-align:right">
-                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-left:4%;"></span>
+                    <button class="alert alert-success" role="alert" style="width:30%; text-align:right;">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true" style="margin-left:4%;"></span>
                         <strong style="align-content:flex-end; margin-left:10%"> שם: @Model.FillOnThem[i].tbl_Employee1.firstName @Model.FillOnThem[i].tbl_Employee1.lastName</strong>
                         <strong style="align-content:flex-end">       טופס: @Model.FillOnThem[i].tblForm.FormName</strong>
                     </button>
                 }
                 else
                 {
-                    <button class="alert alert-warning" role="alert" style="width: 30%; text-align: right">
+                    <button class="alert alert-info" role="alert" style="width: 30%; text-align: right; background-color: #FFCC66; opacity: 0.85; ">
                         <span class="glyphicon glyphicon-time" aria-hidden="true" style="margin-left:4%;"></span>
-
                         <strong style="align-content:flex-end; margin-left:10%"> שם: @Model.FillOnThem[i].tbl_Employee1.firstName @Model.FillOnThem[i].tbl_Employee1.lastName</strong>
                         <strong style="align-content:flex-end">       טופס: @Model.FillOnThem[i].tblForm.FormName</strong>
                     </button>

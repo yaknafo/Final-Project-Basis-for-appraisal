@@ -47,7 +47,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
             var empa = MD.Employees.Where(x => x.employeeId == id).FirstOrDefault();
             empa.RefreshConecctors();
-            empa.FillOnThem.OrderBy(x => x.done);
+            empa.FillOnThem=empa.FillOnThem.OrderBy(x => x.done).ToList();
             return View(empa);
            
         }
