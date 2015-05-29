@@ -128,24 +128,36 @@ namespace BasisForAppraisal_finalProject.Models
 
          public void deleteCompany(int companyid)
         {
-            //if (manager.tbl_ConnectorAnswers.Any(x => x.companyId == companyid))
-            //{
-            //    throw new Exception("לחברה יש מידע שלא ניתן למחוק לכן פעולת מחיקה נכשלה");
-            //}
+            if (manager.tbl_ConnectorAnswers.Any(x => x.companyId == companyid))
+            {
+                throw new Exception("לחברה יש מידע שלא ניתן למחוק לכן פעולת מחיקה נכשלה");
+            }
+
+            //---- Delete conection
             var conectionToDelete = manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyid).ToList();
-            if (conectionToDelete != null)
+            if (conectionToDelete != null && conectionToDelete.Count > 0)
             manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(conectionToDelete);
 
              //---- Delete Employees
             var workersToDelete = manager.tbl_Employees.Where(x => x.companyId == companyid).ToList();
+            if (workersToDelete != null && workersToDelete.Count>0)
             workersToDelete.ForEach(x => deleteWorker(x.employeeId, x.companyId));
 
+            //---- Delete Class
             var classToDelete = manager.tbl_Classes.Where(x => x.companyId == companyid).ToList();
+            if (classToDelete != null && classToDelete.Count > 0)
             manager.tbl_Classes.DeleteAllOnSubmit(classToDelete);
+
+            //---- Delete Unit
             var unitsToDelete = manager.tbl_Units.Where(x => x.companyId == companyid).ToList();
+            if (unitsToDelete != null && unitsToDelete.Count > 0)
             manager.tbl_Units.DeleteAllOnSubmit(unitsToDelete);
+
+            //---- Delete Company
             var companyToDelete = manager.tbl_Companies.Where(x => x.companyId == companyid).ToList();
+            if (companyToDelete != null && companyToDelete.Count > 0)
             manager.tbl_Companies.DeleteAllOnSubmit(companyToDelete);
+
             manager.SubmitChanges();
 
                 
