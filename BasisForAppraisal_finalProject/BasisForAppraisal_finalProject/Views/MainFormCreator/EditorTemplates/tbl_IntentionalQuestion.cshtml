@@ -36,7 +36,7 @@
     <!-----------------------------------------Type of IntetionalQuestion    --------------------------------------------///                      -->
    
         
-         @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
+    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
     {
        @Html.Partial("QuestionTemplate/_IntetionalQuestion")
     }
@@ -64,6 +64,12 @@
    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("YesNo"))
    {
       @Html.Partial("QuestionTemplate/_YesNoQuestion")
+   }
+   
+   <!--------------------------- Part of  Cbx question--------------------------------------------------------->
+   @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Cbx"))
+   {
+       @Html.Partial("QuestionTemplate/_CbxQuestion")
    }
 </div>
    

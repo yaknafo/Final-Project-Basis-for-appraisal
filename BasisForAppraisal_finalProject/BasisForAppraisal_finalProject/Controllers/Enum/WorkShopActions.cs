@@ -23,5 +23,8 @@ namespace BasisForAppraisal_finalProject.Controllers.Enum
 
         AddYesNoQuestion,
 
+        AddCbxQuestion,
+
+
     }
 }

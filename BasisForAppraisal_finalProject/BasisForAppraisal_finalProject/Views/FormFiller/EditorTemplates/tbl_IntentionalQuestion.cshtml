@@ -45,6 +45,12 @@
     {
         @Html.Partial("QuestionTemplate/_YesNoQuestion")
     }
+    
+    <!--------------------------- Part of  Cbx question--------------------------------------------------------->
+    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Cbx"))
+    {
+    @Html.Partial("QuestionTemplate/_CbxQuestion")
+    }
 </div>
 
 

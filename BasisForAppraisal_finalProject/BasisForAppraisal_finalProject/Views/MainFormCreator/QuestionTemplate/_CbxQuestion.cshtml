@@ -1,0 +1,28 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+
+<div dir="rtl" style="border-bottom: solid;">
+    <br />
+    @if (@Model.QuestionId ==  0)
+    {
+        @*@Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })*@
+        for (int i = 0; i < @Model.Answers.Count; i++)
+        {
+          @Html.HiddenFor(x => x.Answers[i].AnswerId)
+          @Html.TextBoxFor( a => a.Answers[i].Text)
+        }
+
+    }
+    else
+    {
+       for (int i = 0; i < @Model.Answers.Count; i++)
+          {
+             @Html.HiddenFor(x => x.Answers[i].AnswerId)
+             @Html.HiddenFor(a => a.Answers[i].Text)
+              ViewBag.list = new SelectList(Model.Answers, "AnswerId", "AnswerId");
+          }
+
+     
+        @Html.DropDownListFor(m => m.selectedAnswer, new SelectList(Model.Answers, "AnswerId", "Text"), new { style = "height: 30px;  width:300px" })
+    }
+    <div style="margin-bottom:2%;"></div>
+</div>

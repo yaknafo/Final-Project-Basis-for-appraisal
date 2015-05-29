@@ -78,6 +78,7 @@ namespace BasisForAppraisal_finalProject.Models
                 // delete Identity --> the user cant login to the system any more
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 var userExiset = UserManager.FindByName(workerid);
+                if (userExiset!= null)
                 UserManager.Delete(userExiset);
 
                 manager.SubmitChanges();
@@ -127,10 +128,18 @@ namespace BasisForAppraisal_finalProject.Models
 
          public void deleteCompany(int companyid)
         {
+            //if (manager.tbl_ConnectorAnswers.Any(x => x.companyId == companyid))
+            //{
+            //    throw new Exception("לחברה יש מידע שלא ניתן למחוק לכן פעולת מחיקה נכשלה");
+            //}
             var conectionToDelete = manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyid).ToList();
+            if (conectionToDelete != null)
             manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(conectionToDelete);
+
+             //---- Delete Employees
             var workersToDelete = manager.tbl_Employees.Where(x => x.companyId == companyid).ToList();
             workersToDelete.ForEach(x => deleteWorker(x.employeeId, x.companyId));
+
             var classToDelete = manager.tbl_Classes.Where(x => x.companyId == companyid).ToList();
             manager.tbl_Classes.DeleteAllOnSubmit(classToDelete);
             var unitsToDelete = manager.tbl_Units.Where(x => x.companyId == companyid).ToList();

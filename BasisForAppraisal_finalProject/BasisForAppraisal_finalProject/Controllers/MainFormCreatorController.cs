@@ -119,6 +119,11 @@ namespace BasisForAppraisal_finalProject.Controllers
                        TempData["changes"] = "שינויים לא שמורים";
                        break;
 
+                   case "AddCbxQuestion": formViewModel.AddQuestionCbx(formViewModel.NewQuestionCbx);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "שינויים לא שמורים";
+                       break;
+
                    case "Save":
                        try
                        {

@@ -187,15 +187,14 @@
                 <div style="margin-bottom:2%;"></div>
             </div>
         }
+        
+        <!--------------------------- Part of  Cbx question--------------------------------------------------------->
+        @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Cbx"))
+        {
+            @Html.Partial("QuestionTemplate/_CbxQuestion")
+        }
 </div>
-    @*<div style=" margin-left: 73%; border-bottom:groove">
-            <p dir="ltr" style="font-size:20px;">
-                מתקשה להעריך
-                @Html.DisplayText("מתקשה להעריך")
-                @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[0].AnswerId, new { style = "height: 25px;  width:25px;" })
-            </p>
-        </div>*@
-
+   
 
 
 
