@@ -55,7 +55,7 @@
     
    <!--------------------------- Part of  Muliti choise question--------------------------------------------------------->
 
-    @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoice"))
+    @if (@Model.QuestionType != null && @Model.QuestionType.Equals("MultipleChoice"))
     {
          @Html.Partial("QuestionTemplate/_MultipleChoiceQuestion")
     }
@@ -71,6 +71,12 @@
    {
        @Html.Partial("QuestionTemplate/_CbxQuestion")
    }
+   
+  <!--------------------------- Part of  Muliti choise List question-------------------------------------------------------->
+  @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoiceList"))
+  {
+      @Html.Partial("QuestionTemplate/_MultipleChoiceListQuestion")
+  }
 </div>
    
 

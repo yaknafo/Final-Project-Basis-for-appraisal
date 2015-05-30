@@ -33,7 +33,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         public int FormIdConnector { set; get; }
 
-        public FormFillerViewModel(tblForm form, tbl_ConnectorFormFill connector)
+        public FormFillerViewModel(tblForm form, tbl_ConnectorFormFill connector, bool showAnswer)
 	    {
             dm = new DataManager();
             this.From= form;
@@ -41,7 +41,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
             this.Connector = connector;
                 CurrentSection = form.Sections.First();
             this.questions = CurrentSection.Questions;
-            initQuestion();
+            initQuestion(showAnswer);
             this.FillOn = connector.employeeOnId;
             this.FillBy = connector.employeeFillId;
             this.CompanyId = connector.companyId;
@@ -115,7 +115,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
        }
 
-         private List<tbl_IntentionalQuestion> initQuestion()
+       private List<tbl_IntentionalQuestion> initQuestion(bool showAnswer)
        {
           var tempList= new List<tbl_IntentionalQuestion> ();
 
@@ -124,6 +124,11 @@ namespace BasisForAppraisal_finalProject.ViewModel
                  tempList.Add(dm.GetQuestionWithAnswers(From.formId, q.QuestionId));
              }
 
+             if (!showAnswer)
+             {
+                 tempList.ForEach(q => q.selectedAnswer = 0);
+                 tempList.ForEach(q => q.Answers.ForEach(a => a.AnswerOptionWrapper = false));
+             }
              Questions = tempList;
              return Questions;
        }
@@ -164,5 +169,53 @@ namespace BasisForAppraisal_finalProject.ViewModel
         }
 
 
+        public List<tbl_ConnectorAnswer> GetSelectedAnswersFromMulitiChoiceQuestion(tbl_IntentionalQuestion question)
+        {
+            List<tbl_ConnectorAnswer> selectedAnswers = new List<tbl_ConnectorAnswer>();
+
+            var allSelectedAnswer = question.Answers.Where(x => x.AnswerOptionWrapper).ToList();
+
+            foreach (tbl_IntentionalAnswer a in allSelectedAnswer)
+            {
+                var connectorAnswer = new tbl_ConnectorAnswer
+                {
+                    companyId = CompanyId,
+                    employeeFillId = FillBy,
+                    employeeOnId = FillOn,
+                    formConnectorId = FormIdConnector,
+                    FormId = a.FormId,
+                    QuestionId = a.QuestionId,
+                    SectionId = question.SectionId,
+                    AnswerId = a.AnswerId
+                };
+
+                selectedAnswers.Add(connectorAnswer);
+
+            }
+
+            return selectedAnswers;
+
+        }
+
+
+
+        internal void fillMyAnswer(List<tbl_ConnectorAnswer> answers)
+        {
+          
+
+            foreach(tbl_ConnectorAnswer a in answers)
+            {
+                tbl_IntentionalQuestion tempQuestion = Questions.Where(q => q.QuestionId == a.QuestionId).FirstOrDefault();
+               
+                if(tempQuestion.QuestionType.Equals("MultipleChoiceList"))
+                {
+                    tempQuestion.Answers.Where(x => x.AnswerId == a.AnswerId).FirstOrDefault().AnswerOptionWrapper = true;
+                }
+                else
+                {
+                    tempQuestion.selectedAnswer = a.AnswerId;
+                }
+            }
+        }
     }
 }

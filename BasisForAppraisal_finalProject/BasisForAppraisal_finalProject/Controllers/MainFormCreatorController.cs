@@ -94,6 +94,10 @@ namespace BasisForAppraisal_finalProject.Controllers
                        TempData["AddAnswerToMulitiChoice"] = "Add";
                        break;
 
+                   case "AddAnswerToMulitiChoiceList": formViewModel.NewQuestionMultipleChoiceList.AddAnswerOption();
+                       TempData["MultipleChoiceListQuestion"] = "Add";
+                       break;
+
                    case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
                        TempData["changes"] = "שינויים לא שמורים";
@@ -123,6 +127,13 @@ namespace BasisForAppraisal_finalProject.Controllers
                        TempData["Success"] = "הוספה בוצעה בהצלחה!";
                        TempData["changes"] = "שינויים לא שמורים";
                        break;
+
+                   case "AddMultipleChoiceListQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoiceList);
+                       TempData["Success"] = "הוספה בוצעה בהצלחה!";
+                       TempData["changes"] = "שינויים לא שמורים";
+                       break;
+
+                       
 
                    case "Save":
                        try

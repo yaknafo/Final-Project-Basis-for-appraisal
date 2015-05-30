@@ -18,7 +18,12 @@ namespace BasisForAppraisal_finalProject.DBML
 
                 if (tempQuestion == null)
                     continue;
-                tempQuestion.selectedAnswer = c.AnswerId;
+
+                if (c.tbl_IntentionalAnswer.tbl_IntentionalQuestion.QuestionType.Equals("MultipleChoiceList"))
+                    c.tbl_IntentionalAnswer.AnswerOptionWrapper = true;
+
+                else
+                    tempQuestion.selectedAnswer = c.AnswerId;
             }
         }
 

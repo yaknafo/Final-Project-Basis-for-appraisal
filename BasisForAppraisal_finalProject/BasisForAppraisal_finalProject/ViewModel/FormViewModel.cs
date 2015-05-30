@@ -24,6 +24,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_IntentionalQuestion newQuestionMultipleChoice;
         private tbl_IntentionalQuestion newQuestionYesNo;
         private tbl_IntentionalQuestion newQuestionCbx;
+        private tbl_IntentionalQuestion newQuestionMultipleChoiceList;
 
        // type of new Question
         private tbl_TypeQuestion intentionalType;
@@ -32,6 +33,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_TypeQuestion multipleChoiceType;
         private tbl_TypeQuestion yesNoType;
         private tbl_TypeQuestion cbxType;
+        private tbl_TypeQuestion multipleChoiceListType;
 
        // data manager for get data from DB
         private DataManager dm;
@@ -184,6 +186,18 @@ namespace BasisForAppraisal_finalProject.ViewModel
             {
                 yesNoType = value;
             }
+        }
+
+        public tbl_TypeQuestion MultipleChoiceListType
+        {
+            get
+            {
+                return multipleChoiceListType ?? DM.TypeQuestions.Where(x => x.Name.Equals("MultipleChoiceList")).FirstOrDefault();
+            }
+            set
+            {
+                multipleChoiceListType = value;
+            }
 
         }
 
@@ -280,7 +294,23 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         }
 
-     
+
+        public tbl_IntentionalQuestion NewQuestionMultipleChoiceList
+        {
+            get
+            {
+
+                return newQuestionMultipleChoiceList ?? InitnewQuestionMultipleChoiceList();
+
+            }
+            set
+            {
+                newQuestionMultipleChoiceList = value;
+            }
+
+        }
+
+       
         //-------------End The new Question Area 
 
        //--------------- Init New question
@@ -312,9 +342,17 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
        private tbl_IntentionalQuestion InitnewQuestionCbx()
        {
-           NewQuestionScale = new tbl_IntentionalQuestion(8, formId, CurrentSection.SectionId, CbxType);
-           return NewQuestionScale;
+           newQuestionCbx= new tbl_IntentionalQuestion(8, formId, CurrentSection.SectionId, CbxType);
+           return newQuestionCbx;
        }
+
+       private tbl_IntentionalQuestion InitnewQuestionMultipleChoiceList()
+       {
+           NewQuestionMultipleChoiceList = new tbl_IntentionalQuestion(1, formId, CurrentSection.SectionId, MultipleChoiceListType);
+           NewQuestionMultipleChoiceList.NumberOfAnswers = 1;
+           return NewQuestionMultipleChoiceList;
+       }
+
 
        //--------------- End  Init New question
 
@@ -374,6 +412,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
                question.SectionId = CurrentSection.SectionId;
                question.Answers.ForEach(a => a.FormId = form.formId);
                question.Answers.ForEach(a => a.SectionId = CurrentSection.SectionId);
+               question.tbl_TypeQuestion = ScaleType;
+               question.QuestionType = ScaleType.Name;
                Questions.Add(question);
                
            // stratup new question scale
@@ -391,7 +431,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
            Questions.Add(question);
 
            // stratup new question Muliti choice
-           NewQuestionMultipleChoice = null;
+               NewQuestionMultipleChoice = null;
+               NewQuestionMultipleChoiceList = null;
 
        }
 
@@ -415,6 +456,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
            NewQuestionCbx = null;
 
        }
+
+       
 
        public void DeleteQuestions()
        {

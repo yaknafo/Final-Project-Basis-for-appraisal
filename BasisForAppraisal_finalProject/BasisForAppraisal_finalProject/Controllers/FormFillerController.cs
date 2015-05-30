@@ -35,7 +35,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                     xconnector = DMC.Conecctors().Where(x => x.employeeFillId.Equals("301378240")).FirstOrDefault();
                 ////////////////////////////////////////////////////////////////////////////////
 
-                var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector);
+                var fillerViewModel = new FormFillerViewModel(xconnector.tblForm, xconnector, false);
 
                 return View(fillerViewModel);
             }catch
@@ -58,7 +58,10 @@ namespace BasisForAppraisal_finalProject.Controllers
 
             foreach (tbl_IntentionalQuestion q in tempAnswerQuestions)
             {
-                selectedAnswer.Add(connector.GetSelectedAnswer(q));
+                if (q.QuestionType.Equals("MultipleChoiceList"))
+                    selectedAnswer.AddRange(connector.GetSelectedAnswersFromMulitiChoiceQuestion(q));
+                else
+                    selectedAnswer.Add(connector.GetSelectedAnswer(q));
             }
 
 
@@ -87,9 +90,10 @@ namespace BasisForAppraisal_finalProject.Controllers
               var answers = dmc.ConnectorAnswer.Where(x => x.companyId == companyId && x.employeeFillId == empFill
                                                                         && x.employeeOnId == empOn && x.formConnectorId == formId).ToList();
 
-              connector.FillAnswers(answers);
 
-              var fillerViewModel = new FormFillerViewModel(connector.tblForm, connector);
+              var fillerViewModel = new FormFillerViewModel(connector.tblForm, connector, false);
+
+              fillerViewModel.fillMyAnswer(answers);
 
               return View(fillerViewModel);
         }

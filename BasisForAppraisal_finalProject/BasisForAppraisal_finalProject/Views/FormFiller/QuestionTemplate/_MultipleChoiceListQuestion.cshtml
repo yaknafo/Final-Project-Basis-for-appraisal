@@ -1,0 +1,24 @@
+﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalQuestion
+<br />
+<div dir="rtl" style="border-bottom: solid;">
+    @if (@Model.Answers.Count() > 0)
+    {
+        for (int i = 0; i < @Model.Answers.Count; i++)
+        {
+             @Html.HiddenFor(x => x.Answers[i].FormId)
+            @Html.HiddenFor(x => x.Answers[0].SectionId)
+            @Html.HiddenFor(x => x.Answers[i].QuestionId)
+            @Html.HiddenFor(x => x.Answers[i].AnswerId)
+            @Html.HiddenFor(x => x.Answers[i].Score)
+            @Html.HiddenFor(x => x.Answers[i].AnswerOption)
+            @Html.HiddenFor(x => x.Answers[i].Text)
+            @Html.CheckBoxFor(a => a.Answers[i].AnswerOptionWrapper, new { style = "height: 20px;  width:20px; margin-left:20px;" })
+            @Html.DisplayFor(x => x.Answers[i].Text)
+            @Html.HiddenFor(x => x.Answers[i].AnswerId)
+            <br />
+            <br />
+        }
+
+    }
+    <div style="margin-bottom:2%;"></div>
+</div>

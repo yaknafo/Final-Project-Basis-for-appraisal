@@ -443,6 +443,9 @@
     <Content Include="Views\MainFormCreator\QuestionTemplate\_CbxQuestion.cshtml" />
     <Content Include="Views\MainFormCreator\PreviewFormTemplate\_CbxQuestion.cshtml" />
     <Content Include="Views\FormFiller\QuestionTemplate\_CbxQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\QuestionTemplate\_MultipleChoiceListQuestion.cshtml" />
+    <Content Include="Views\MainFormCreator\PreviewFormTemplate\_MultipleChoiceListQuestion.cshtml" />
+    <Content Include="Views\FormFiller\QuestionTemplate\_MultipleChoiceListQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

@@ -25,6 +25,10 @@ namespace BasisForAppraisal_finalProject.Controllers.Enum
 
         AddCbxQuestion,
 
+        AddMultipleChoiceListQuestion,
+
+        AddAnswerToMulitiChoiceList,
+
 
     }
 }
