@@ -10,10 +10,12 @@ using BasisForAppraisal_finalProject.Common.Constans;
 using System.IO;
 using BasisForAppraisal_finalProject.ViewModel.Company;
 using System.Threading.Tasks;
+using BasisForAppraisal_finalProject.Authorize;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
-    
+
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class MainCompaniesController : Controller
     {
 
@@ -41,6 +43,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             return View();
         }
+
 
         public ActionResult MainCompanies()
         {

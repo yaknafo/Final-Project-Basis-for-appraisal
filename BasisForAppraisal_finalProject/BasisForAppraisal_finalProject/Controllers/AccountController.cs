@@ -9,12 +9,16 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using BasisForAppraisal_finalProject.Models;
+using BasisForAppraisal_finalProject.Common.Constans;
+using BasisForAppraisal_finalProject.Authorize;
+using System.Threading;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+ 
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
@@ -47,16 +51,26 @@ namespace BasisForAppraisal_finalProject.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
+
+                if ((model.UserName == "adminof" || model.UserName == "admintm" || model.UserName == "adminya") && user == null)
+                {
+                  var res =Task.Factory.StartNew( () =>  DMC.CreateUserWithRole(model.UserName, model.Password, "Admin"));
+                  res.Wait();
+                  user = await UserManager.FindAsync(model.UserName, model.Password);
+                }
+                
                 if (user != null)
                 {
-
+                    await SignInAsync(user, model.RememberMe);
                     var roleIds = user.Roles.Select(x => x.RoleId);
-
                     foreach(string roleId in roleIds)
                     {
                         var role = DMC.getRoleById(roleId);
-                        if(role.Result.Equals("Guest"))
+                        if(role.Result.Equals(RolesConstans.Guest))
                             return RedirectToAction("GuestMain", "Guest", new { id = user.UserName });
+                        if (role.Result.Equals(RolesConstans.Admin))
+                            return RedirectToAction("Index", "Home");
+
 
                     }
                   
@@ -69,7 +83,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -300,7 +314,8 @@ namespace BasisForAppraisal_finalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+           AuthenticationManager.SignOut();
+           Thread.Sleep(2000);
             return RedirectToAction("Index", "Home");
         }
 

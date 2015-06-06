@@ -29,6 +29,9 @@ namespace BasisForAppraisal_finalProject.Models
         /// <summary>
         /// get method for all tables
         /// </summary>
+        /// 
+        
+
         public Table<tbl_IntentionalAnswer> IntentionalAnswer
         {
             get { return manager.tbl_IntentionalAnswers; }

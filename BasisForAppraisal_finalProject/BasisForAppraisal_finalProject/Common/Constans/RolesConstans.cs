@@ -9,5 +9,7 @@ namespace BasisForAppraisal_finalProject.Common.Constans
     {
 
         public static string Guest = "Guest";
+
+        public static string Admin = "Admin";
     }
 }

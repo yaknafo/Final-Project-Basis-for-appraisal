@@ -9,9 +9,12 @@ using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.Controllers;
 using BasisForAppraisal_finalProject.Common.Constans;
 using System.Threading.Tasks;
+using BasisForAppraisal_finalProject.Authorize;
 
 namespace SendMail.Controllers
 {
+
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class SendMailerController : Controller
     {
         //

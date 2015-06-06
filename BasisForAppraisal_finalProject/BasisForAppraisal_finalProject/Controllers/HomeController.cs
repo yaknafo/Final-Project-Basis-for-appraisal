@@ -4,15 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.Models;
+using BasisForAppraisal_finalProject.Authorize;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            
-            
             return View();
         }
 

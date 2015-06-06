@@ -17,5 +17,6 @@ namespace BasisForAppraisal_finalProject
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
     }
 }

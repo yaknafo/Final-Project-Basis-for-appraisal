@@ -45,6 +45,22 @@
                 $("#navPram").css("background-color", "inherit");
             });
         });
+        $(document).ready(function () {
+            $("#useri").mouseover(function () {
+                $("#useri").css("background-color", "#666666");
+            });
+            $("#useri").mouseout(function () {
+                $("#useri").css("background-color", "inherit");
+            });
+        });
+        $(document).ready(function () {
+            $("#logout").mouseover(function () {
+                $("#logout").css("background-color", "#666666");
+            });
+            $("#logout").mouseout(function () {
+                $("#logout").css("background-color", "inherit");
+            });
+        });
     </script>
 
 
@@ -65,18 +81,26 @@
             <div class="navbar-collapse collapse" dir="rtl" style="font-family:My Custom Font">
                 <ul class="nav navbar-nav" style="margin-top: 1%; font-size:22px;font-weight: bold;">
                   @*<li>@Html.Partial("_Back")</li>*@
+                    <li id="useri"><a>@User.Identity.Name</a></li>
+                     <li id="logout"> @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+@Html.AntiForgeryToken()
+<ul class="nav navbar-nav navbar-right">
+   
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">צא</a></li>
+</ul>
+    }
 
                     <li id="navPram">@Html.ActionLink("ניהול הרשאות", "", "")</li>
                     <li id="navInfo">@Html.ActionLink("ניתוח מידע", "", "")</li>
                     <li id="lay">@Html.ActionLink("ניהול טפסים", "backToMainForm", "MainFormCreator")</li>
                     <li id="proj">@Html.ActionLink("ניהול לקוחות", "MainCompanies", "MainCompanies")</li>
-
                     @*
                     <li>@Html.ActionLink("שליחת טפסים ללקוח", "About", "Home")</li>
                     <li>@Html.ActionLink("הוספת לקוח", "Contact", "Home")</li>*@
                 </ul>
                 @*@Html.Partial("_LoginPartial")*@
-                <a href="/Home/Index">   <img id="img_logo" alt="Logo" src="~/photos/Logo/Icon_Basis_for_evaluation_Tran.gif"style="margin-left:30%; height:60px; width:200px;" /></a>
+                <a href="/Home/Index">   <img id="img_logo" alt="Logo" src="~/photos/Logo/Icon_Basis_for_evaluation_Tran.gif"style="margin-left:23%; height:60px; width:200px;" /></a>
             </div>
         </div>
     </div>

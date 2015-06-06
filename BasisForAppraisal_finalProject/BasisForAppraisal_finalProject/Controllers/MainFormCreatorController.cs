@@ -9,9 +9,12 @@ using BasisForAppraisal_finalProject.Models;
 using System.Threading.Tasks;
 using System.Globalization;
 using BasisForAppraisal_finalProject.Common.Constans;
+using BasisForAppraisal_finalProject.Authorize;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
+
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class MainFormCreatorController : Controller
     {
 

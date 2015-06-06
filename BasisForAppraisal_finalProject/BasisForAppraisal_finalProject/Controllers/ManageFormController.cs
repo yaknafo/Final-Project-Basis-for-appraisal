@@ -12,10 +12,13 @@ using System.Net;
 using System.Text;
 using System.IO;
 using BasisForAppraisal_finalProject.Common.Constans;
+using BasisForAppraisal_finalProject.Authorize;
 
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
+
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class ManageFormController : Controller
     {
         //
