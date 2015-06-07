@@ -21,13 +21,15 @@
                 @for (int i = Model.count; i < Model.count + 5 && i < Model.myClass.Count(); i++)
                 {
 
-                    <td style=" width:25%; margin-left:17%" ma>
-                        @using (Html.BeginForm("ManageCompany", "MainCompanies", new { id = Model.myClass.ToArray()[i].companyId, unit = Model.myClass.ToArray()[i].unitName, cl = Model.myClass.ToArray()[i].className }))
-                        {
-                            <button name="show" type="button" class="close" aria-label="Close" style="color:red; visibility:hidden;" data-toggle="modal" data-target="#@i"><span aria-hidden="true">&times;</span></button>
-                            <button class="folder" type="submit" style="padding: 0; border: none; background-color:transparent;  width:50px;margin-left:62px; "><img class="pic" src="~/photos/normal_folder.png" width="50" style="cursor:pointer" /> </button>
-                            <figcaption style="width:75px;margin-left:25%;">@Model.myClass.ToArray()[i].unitName @Model.myClass.ToArray()[i].className</figcaption>
-                        }
+                    <td >
+                        <div style="margin-left:150px;">
+                            @using (Html.BeginForm("ManageCompany", "MainCompanies", new { id = Model.myClass.ToArray()[i].companyId, unit = Model.myClass.ToArray()[i].unitName, cl = Model.myClass.ToArray()[i].className }))
+                            {
+                                <button name="show" type="button" class="close" aria-label="Close" style="color:red; visibility:hidden;" data-toggle="modal" data-target="#@i"><span aria-hidden="true">&times;</span></button>
+                                <button class="folder" type="submit" style="padding: 0; border: none; background-color:transparent;  width:50px; "><img class="pic" src="~/photos/normal_folder.png" width="50" style="cursor:pointer" /> </button>
+                                <figcaption style="width:75px;text-align:center;">@Model.myClass.ToArray()[i].unitName @Model.myClass.ToArray()[i].className</figcaption>
+                            }
+                        </div>
                     </td>
 
                 }
