@@ -9,9 +9,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using BasisForAppraisal_finalProject.Models;
+using BasisForAppraisal_finalProject.ViewModel;
 using BasisForAppraisal_finalProject.Common.Constans;
 using BasisForAppraisal_finalProject.Authorize;
 using System.Threading;
+using System.Web.Security;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -94,6 +96,35 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult> MainAccount()
+        {
+            var e =Task.Factory.StartNew( () => UserManager.Users);
+            e.Wait();      
+            var UserAnsRole = new List<UserRoleViewModel>();
+
+            foreach(ApplicationUser n in  e.Result.ToList())
+            {
+                try
+                {
+                    var temp = new UserRoleViewModel { UserName = n.UserName, Role = await DMC.getRoleById(n.Roles.Select(x => x.RoleId).FirstOrDefault()) };
+                    UserAnsRole.Add(temp);
+                }catch
+                {
+                   var temp = new UserRoleViewModel { UserName = n.UserName, Role = "non" };
+                    UserAnsRole.Add(temp);
+                }
+                
+            }
+            return View(UserAnsRole);
+        }
+
+
+
+
+
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -104,23 +135,30 @@ namespace BasisForAppraisal_finalProject.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    AddErrors(result);
-                }
+                var res = Task.Factory.StartNew(() => DMC.CreateUserWithRole(model.UserName, model.Password, model.Role));
+                res.Wait();
+                 return RedirectToAction("MainAccount");
+               
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return RedirectToAction("MainAccount");
+
         }
 
-        //
+        public async Task<ActionResult> DeketeUser(string userName)
+        {
+            try
+            {
+                var res = Task.Factory.StartNew(() => DMC.DeleteUser(userName));
+                res.Wait();
+                return RedirectToAction("MainAccount");
+
+            }
+            catch { }
+            return RedirectToAction("MainAccount");
+
+        }
+
         // POST: /Account/Disassociate
         [HttpPost]
         [ValidateAntiForgeryToken]

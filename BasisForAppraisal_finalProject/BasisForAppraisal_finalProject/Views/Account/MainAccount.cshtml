@@ -1,0 +1,13 @@
+﻿@model  IEnumerable<BasisForAppraisal_finalProject.ViewModel.UserRoleViewModel>
+            @using BasisForAppraisal_finalProject.Models
+@{
+    ViewBag.Title = "MainAccount";
+}
+
+<h2>MainAccount</h2>
+
+<input id="AddCls" class="btn btn-info" type="button" value="הוספת הרשאה" style="width:120px; margin-top:4%" />
+@Html.Partial("_AddUserWithRole", new RegisterViewModel())
+@Html.Partial("_TableUserRole",Model)
+
+

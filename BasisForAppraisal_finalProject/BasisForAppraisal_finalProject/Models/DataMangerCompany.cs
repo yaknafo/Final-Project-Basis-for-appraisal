@@ -418,11 +418,21 @@ namespace BasisForAppraisal_finalProject.Models
 
         }
 
+        public async void DeleteUser(string workerid)
+        {
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var userExiset = UserManager.FindByName(workerid);
+            if (userExiset != null)
+                UserManager.Delete(userExiset);
+        }
+
+
+    
 
     }
 
 
-    
+  
 
 
 }

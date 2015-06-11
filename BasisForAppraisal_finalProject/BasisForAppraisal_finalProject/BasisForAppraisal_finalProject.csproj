@@ -228,6 +228,7 @@
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />
     <Compile Include="Common\Enum\QuestionType.cs" />
+    <Compile Include="ViewModel\UserRoleViewModel.cs" />
     <Compile Include="ViewModel\ViewModelFromsDetalis.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +449,9 @@
     <Content Include="Views\MainFormCreator\QuestionTemplate\_MultipleChoiceListQuestion.cshtml" />
     <Content Include="Views\MainFormCreator\PreviewFormTemplate\_MultipleChoiceListQuestion.cshtml" />
     <Content Include="Views\FormFiller\QuestionTemplate\_MultipleChoiceListQuestion.cshtml" />
+    <Content Include="Views\Account\_TableUserRole.cshtml" />
+    <Content Include="Views\Account\MainAccount.cshtml" />
+    <Content Include="Views\Account\_AddUserWithRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
