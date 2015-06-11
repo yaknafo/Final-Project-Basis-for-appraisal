@@ -176,7 +176,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Authorize\CustomAuthorizeAttribute.cs" />
-    <Compile Include="Authorize\UserRoleDictionary.cs" />
     <Compile Include="Common\Constans\ResultOperationConstans.cs" />
     <Compile Include="Common\Constans\RolesConstans.cs" />
     <Compile Include="Controllers\AccountController.cs" />
