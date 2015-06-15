@@ -32,6 +32,11 @@
             </table>
         </div>
     }
+        @if (!Model.MandatoryQuestion)
+        {
+            @Html.RadioButtonFor(a => a.selectedAnswer, -1)
+            <p>איני יכול להעריך</p>
+        }
     
     <!-----------------------------------------Type of IntetionalQuestion    --------------------------------------------///                      -->
    
@@ -77,6 +82,7 @@
   {
       @Html.Partial("QuestionTemplate/_MultipleChoiceListQuestion")
   }
+  
 </div>
    
 

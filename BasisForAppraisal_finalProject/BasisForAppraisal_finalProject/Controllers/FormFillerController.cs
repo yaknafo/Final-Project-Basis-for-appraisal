@@ -56,13 +56,17 @@ namespace BasisForAppraisal_finalProject.Controllers
              tempAnswerQuestions = new List<tbl_IntentionalQuestion>(connector.Questions);
 
 
-            foreach (tbl_IntentionalQuestion q in tempAnswerQuestions)
-            {
-                if (q.QuestionType.Equals("MultipleChoiceList"))
-                    selectedAnswer.AddRange(connector.GetSelectedAnswersFromMulitiChoiceQuestion(q));
-                else
-                    selectedAnswer.Add(connector.GetSelectedAnswer(q));
-            }
+             foreach (tbl_IntentionalQuestion q in tempAnswerQuestions)
+             {
+                 if (q.QuestionType.Equals("MultipleChoiceList"))
+                     selectedAnswer.AddRange(connector.GetSelectedAnswersFromMulitiChoiceQuestion(q));
+                 else
+                 {
+                     if (q.selectedAnswer != -1)
+                     selectedAnswer.Add(connector.GetSelectedAnswer(q));
+                 }
+             }
+
 
 
             if (selectedAnswer.Where(x => x == null).Any())
