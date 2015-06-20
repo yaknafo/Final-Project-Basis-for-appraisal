@@ -350,8 +350,12 @@ namespace BasisForAppraisal_finalProject.Controllers
                         db.UploadExcelFile(path, id);
 
                     }
+                 TempData[ResultOperationConstans.Failed] = "קובץ נתונים עלה בהצלחה";
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+
+                TempData[ResultOperationConstans.Failed] = "לא ניתן לטעון קובץ נתונים זה";
+            }
         }
         public void intalizeCheckBox(bool workers, bool manager,bool onManger,bool onHimself)
         {

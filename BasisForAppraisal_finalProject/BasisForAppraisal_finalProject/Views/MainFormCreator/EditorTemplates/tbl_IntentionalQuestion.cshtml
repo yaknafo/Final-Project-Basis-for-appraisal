@@ -5,7 +5,7 @@
 <link href="~/Content/FontStyle.css" rel="stylesheet" />
 
 
-    <div draggable="true">
+    <div draggable="true" class="newEdit">
     <div dir="rtl">
         @Html.HiddenFor(x => x.FormId)
         @Html.HiddenFor(x => x.SectionId)
@@ -21,7 +21,7 @@
         
     @if (Model.QuestionId > 0)
     {
-        @*@Html.ActionLink("ערוך", "upload_excelfile", new { @path = "rrr" })*@
+       
         <div name="box" >
             <table>
                 <tr>

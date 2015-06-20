@@ -87,12 +87,12 @@
                 <div id="MultipleChoice">
                   @Html.EditorFor(x => x.NewQuestionMultipleChoice)
                 </div>
-                <button type="submit" class="btn btn-primary" name="submit" value="AddAnswerToMulitiChoice" style="margin-right:40%">+</button>
+                <button   type="submit" class="btn btn-primary" name="submit" value="AddAnswerToMulitiChoice" style="margin-right:40%">+</button>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
-                <button type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddMultipleChoiceQuestion style="margin-right:40%">שמור שאלה</button>
+                <button  type="submit" class="btn btn-primary" name="submit" value=@WorkShopActions.AddMultipleChoiceQuestion style="margin-right:40%" >שמור שאלה</button>
             </div>
 
         </div>
@@ -289,5 +289,5 @@
     </div>
 </div>
 <!--       List of question -------------------------------------------------------------->
-<div id="edit">@Html.EditorFor(a => a.Questions)</div>
+<div   id="edit">@Html.EditorFor(a => a.Questions)</div>
 

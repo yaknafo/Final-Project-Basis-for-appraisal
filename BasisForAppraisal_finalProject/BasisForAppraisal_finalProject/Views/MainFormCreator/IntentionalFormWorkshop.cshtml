@@ -57,22 +57,22 @@
    <div id="changes" class="alert-warning" role="grid" style=" display: block; width: 100%; height: 100%; position: fixed; margin-top:0%"><strong>@TempData["changes"]</strong></div>
 
 }
-
-<!-- if there ant changes the alret  will show up after an type of the user-->
-<div id="changes" class="alert-warning" role="grid" style=" display: none; width: 18%; height: 5%; position: fixed;"><span class="glyphicon glyphicon-comment" style="margin-right:4px;"></span><strong>@TempData["changes"]</strong></div>
+<body onload="edit()">
+    <!-- if there ant changes the alret  will show up after an type of the user-->
+    <div id="changes" class="alert-warning" role="grid" style=" display: none; width: 18%; height: 5%; position: fixed;"><span class="glyphicon glyphicon-comment" style="margin-right:4px;"></span><strong>@TempData["changes"]</strong></div>
 
 
 
     <!-- Add button -->
-    <div style="text-align: right; margin-left:82%; margin-top:16%; position:fixed">
+    <div  style="text-align: right; margin-left:82%; margin-top:16%; position:fixed">
         <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה" data-toggle="modal" data-target="#myModal" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
             <strong style="color:black;">מחוון</strong>
         </button>
 
         <!-- Add button free text question -->
-            <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה טקסט חופשי" data-toggle="modal" data-target="#FreeTextQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
-                <strong style="color:black;">טקסט חופשי</strong>
-            </button>
+        <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה טקסט חופשי" data-toggle="modal" data-target="#FreeTextQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
+            <strong style="color:black;">טקסט חופשי</strong>
+        </button>
 
         <!-- Add button scale question -->
         <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה קנה מידה" data-toggle="modal" data-target="#ScaleQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
@@ -80,8 +80,9 @@
         </button>
 
         <!-- Add button Muliti choise question         OnSuccess="CloseModels()"  -->
-        <button type="button" class="btn btn-primary btn-lg"  title="הוספת שאלה בחירה מרובה" data-toggle="modal" data-target="#MultipleChoiceQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
-        <strong style="color:black;">בחירה מרובה</strong></button>
+        <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה בחירה מרובה" data-toggle="modal" data-target="#MultipleChoiceQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
+            <strong style="color:black;">בחירה מרובה</strong>
+        </button>
 
         <!-- Add button Yes No Question -->
         <button type="button" class="btn btn-primary btn-lg" title="הוספת שאלה כן לא" data-toggle="modal" data-target="#YesNoQuestion" style="font-size: 18px; width: 160px;  background-color: AppWorkspace">
@@ -96,38 +97,40 @@
             <strong style="color:black;">בחירה מרובה מרשימה</strong>
         </button>
 
-        </div>
+    </div>
 
 
     @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair", }))
-{
+    {
 
-    <div id="ActionBtn" style="position: fixed; margin-top: -13%; background-color: lightgrey; width: 100%; ">
+        <div id="ActionBtn" style="position: fixed; margin-top: -13%; background-color: lightgrey; width: 100%; ">
 
-        <!-- the exit button-->
-        <button type="button" class="btn btn-primary btn-lg" title="יציאה" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 90px; background-color: black; ">
-            <img src="~/photos/Login-Door-24.png" />
-        </button>
+            <!-- the exit button-->
+            <button type="button" class="btn btn-primary btn-lg" title="יציאה" data-toggle="modal" data-target="#exit" style="margin: 1%; width: 90px; background-color: black; ">
+                <img src="~/photos/Login-Door-24.png" />
+            </button>
 
-        <!-- the save button-->
-        <button type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg glyphicon glyphicon-floppy-disk" title="שמירת טופס" style="margin: 1%; width: 90px; background-color: black"></button>
+            <!-- the save button-->
+            <button onclick="hide()" type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg glyphicon glyphicon-floppy-disk" title="שמירת טופס" style="margin: 1%; width: 90px; background-color: black"></button>
 
-        <!-- the delete button-->
-        <button type="submit" name="submit" value=@WorkShopActions.Delete class="btn btn-primary btn-lg glyphicon glyphicon-remove-sign" title="מחיקת שאלות מסומנות " style="margin: 1%; width: 90px; background-color: black; "></button>
 
-        <!-- Preview button -->
-        
+
+            <!-- Preview button -->
             @Html.ActionLink(" ", "FormPreview", "MainFormCreator", new
                        {
                            formid = Model.form.formId
                        },
             new { target = "_blank", @class = "btn btn-primary btn-lg glyphicon glyphicon-list-alt", @style = "background-color: black; margin: 1%;width: 90px;" })
-       
-    </div>
-        
+            <!-- the Edit button-->
+            <button onclick="edit()" type="button" class="btn btn-primary btn-lg glyphicon glyphicon-edit" title="עריכת שאלות " style="margin: 1%; width: 90px; background-color: black; "></button>
+            <!-- the delete button-->
+            <button  name="del" type="submit" value=@WorkShopActions.Delete class="btn btn-primary btn-lg glyphicon glyphicon-remove-sign" title="מחיקת שאלות מסומנות " style="margin: 1%; width: 90px; background-color: black; "></button>
+
+        </div>
+
         <div style=" margin-left: 97.5%; margin-top: 20%; ">
         </div>
-       
+
         <div id="Panel" onchange="showWorningSaveMsg()" style="width: 95%; margin-top: 20%;disab ">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -138,55 +141,56 @@
                 </div>
             </div>
         </div>
-        
 
 
-        
- <script>
-     function showWorningSaveMsg() {
-    document.getElementById("changes").style.display = "block";
-     }
-
-     function CloseModels() {
-
-         $('#FreeTextQuestion').modal('hide');
-         $('#myModal').modal('hide');
-         $('#MultipleChoiceQuestion').modal('hide');
-         $('#ScaleQuestion').modal('hide');
-
-         $('body').removeClass('modal-open');
-         $('.modal-backdrop').remove();
-     }
-
-     
-
-</script>
- 
 
 
-  }
+        <script>
+            function showWorningSaveMsg() {
+                document.getElementById("changes").style.display = "block";
+            }
 
- @using (Html.BeginForm())
-{     
-<div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#FF8080;" >
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="text-align:center"><strong>האם אתה בטוח שאתה רוצה לצאת?</strong></h4>
+            function CloseModels() {
+
+                $('#FreeTextQuestion').modal('hide');
+                $('#myModal').modal('hide');
+                $('#MultipleChoiceQuestion').modal('hide');
+                $('#ScaleQuestion').modal('hide');
+
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            }
+
+
+
+        </script>
+
+
+
+    }
+
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:#FF8080;">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel" dir="rtl" style="text-align:center"><strong>האם אתה בטוח שאתה רוצה לצאת?</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" name="submit" value=@WorkShopActions.Exit class="btn btn-default" style="text-align:center; margin-left:40%;">סגור וצא</button>
+                        <button class="btn btn-default" style="text-align:center" data-dismiss="modal">ביטול</button>
+                    </div>
+
+                </div>
             </div>
-            <div class="modal-body">
-                <button type="submit" name="submit" value=@WorkShopActions.Exit class="btn btn-default" style="text-align:center; margin-left:40%;">סגור וצא</button>
-                <button class="btn btn-default" style="text-align:center" data-dismiss="modal">ביטול</button>
-            </div>
-
         </div>
-    </div>
-</div>
-}
+    }
 
-          <!-- Edit Section -->
+    <!-- Edit Section -->
     <div class="modal fade" id="MySection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="width:75%">
             <div class="modal-content" style="width:75%">
@@ -210,11 +214,62 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
                     <button type="submit" class="btn btn-primary" name="submit" value="addQustion" style="margin-right:40%">שמור שאלה</button>
                 </div>
-
+                <button id="hide" hidden>visible</button>
 
             </div>
         </div>
     </div>
+</body>
+<script>
+    function edit() {
+        var list = document.getElementsByName('box');
+        var del = document.getElementsByName('del');
+        var temp = document.getElementById('hide');
+        var str = "hidden";
+        if (temp.textContent != str)
+        {
+           
+            hide();      
+            $("#edit :input").attr("readOnly", true);
+            temp.textContent = str;
+            slert("end");
+    }
+    else
+        {
+            for (i = 6; i < list.length; i++) {
+
+                list[i].style.visibility = 'visible';
+            }
+            for (i = 0; i < del.length; i++) {
+
+                del[i].style.visibility = 'visible';
+            }
+
+            $("#edit :input").attr("readOnly", false);
+            temp.textContent = 'visible';
+
+    }
+        
+    }
+    function hide()
+    {
+        var list = document.getElementsByName('box');
+        var del = document.getElementsByName('del');
+     
+        for (i = 6; i < list.length; i++) {
+
+            list[i].style.visibility = 'hidden';
+        }
+        for (i = 0; i < del.length; i++) {
+
+            del[i].style.visibility = 'hidden';
+        }
+    }
+
+</script>
+
+
+
 
 
     <!-- popup preview -->
@@ -227,21 +282,21 @@
                 <h4 class="modal-title" id="myModalLabel" dir="rtl" style="font-size:xx-large;  text-shadow:inherit; margin-left:50%; color:blue;">מצב תצוגה</h4>
 
                 @using (Html.BeginForm())
-               
+
                     <div id="Panel" style="width: 90%; margin-left:2%">
                         <div class="panel panel-default" style="margin-left:0%;width: 100%;">
                             <div class=" panel-heading" style="margin-left:0%;width: 100%;">
 
                                 <u style="font-size:xx-large;  text-shadow:inherit; margin-left:40%; color:darkblue;font-weight:bold;">@Model.form.FormName</u>
                                 <br />
-                                
-                               
-                              
+
+
+
                             </div>
                         </div>
                     </div>
-                   
-               
+
+
             </div>
         </div>
     </div>*@

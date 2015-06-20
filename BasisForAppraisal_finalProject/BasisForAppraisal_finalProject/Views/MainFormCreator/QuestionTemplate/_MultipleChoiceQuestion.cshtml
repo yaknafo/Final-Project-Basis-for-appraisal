@@ -11,7 +11,7 @@
             @Html.HiddenFor(x => x.Answers[i].AnswerId)
             if (Model.Answers[i].AnswerId != 0)
             {
-                <button type="submit" class="btn btn-danger" name="submit" value="@Model.Answers[i].AnswerId">X</button>
+                <button name="del" type="submit" class="btn btn-danger"  value="@Model.Answers[i].AnswerId">X</button>
             }
             <br />
             <br />
