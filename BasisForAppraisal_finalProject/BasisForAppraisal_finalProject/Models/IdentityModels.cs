@@ -10,7 +10,7 @@ namespace BasisForAppraisal_finalProject.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("oy2015ConnectionString")
         {
         }
     }

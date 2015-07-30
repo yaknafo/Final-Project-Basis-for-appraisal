@@ -22,7 +22,7 @@ namespace BasisForAppraisal_finalProject.DBML
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="BasisForAppraisalDB")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="oy2015")]
 	public partial class BFADataBasedbmlDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -66,7 +66,7 @@ namespace BasisForAppraisal_finalProject.DBML
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BasisForAppraisalDBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["oy2015ConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

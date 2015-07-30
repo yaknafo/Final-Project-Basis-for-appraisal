@@ -32,7 +32,7 @@
             </table>
         </div>
     }
-        @if (!Model.MandatoryQuestion)
+        @if (!Model.MandatoryQuestion && @Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))   
         {
             @Html.RadioButtonFor(a => a.selectedAnswer, -1)
             <p>איני יכול להעריך</p>

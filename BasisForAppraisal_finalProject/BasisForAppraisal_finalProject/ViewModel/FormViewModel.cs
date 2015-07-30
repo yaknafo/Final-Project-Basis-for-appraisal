@@ -209,7 +209,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
             get
             {
 
-                return newQuestion ?? new tbl_IntentionalQuestion(3, formId, CurrentSection.SectionId, IntentionalType);
+                return newQuestion ?? new tbl_IntentionalQuestion(5, formId, CurrentSection.SectionId, IntentionalType);
 
             }
             set
