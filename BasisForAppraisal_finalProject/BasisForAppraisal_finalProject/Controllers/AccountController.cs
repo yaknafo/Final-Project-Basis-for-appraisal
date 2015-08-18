@@ -54,7 +54,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
 
-                if ((model.UserName == "adminof" || model.UserName == "admintm" || model.UserName == "adminya") && user == null)
+                if ((model.UserName == "adminof" || model.UserName == "admintm" || model.UserName == "adminyk") && user == null)
                 {
                   var res =Task.Factory.StartNew( () =>  DMC.CreateUserWithRole(model.UserName, model.Password, "Admin"));
                   res.Wait();
