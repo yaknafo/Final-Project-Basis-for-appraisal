@@ -145,6 +145,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
                
                 return null;
             }
+
+
             else
             {
                 

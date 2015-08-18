@@ -14,6 +14,11 @@
         <h4>שאלה</h4>
         @Html.DisplayFor(x => x.Title, new { @cols = 90, @rows = 2 })
     </div>
+        @if (!Model.MandatoryQuestion)
+        {
+            @Html.RadioButtonFor(a => a.selectedAnswer, -1)
+            <p>איני יכול להעריך</p>
+        }
 
     <!-----------------------------------------Type of IntetionalQuestion    --------------------------------------------///                      -->
     @if (@Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))
