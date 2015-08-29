@@ -6,8 +6,19 @@
 @Html.HiddenFor(x => x.SectionId)
 @Html.HiddenFor(x => x.QuestionId)
 @Html.HiddenFor(x => x.AnswerId)
-@Html.HiddenFor(x => x.Score)
 @Html.HiddenFor(x => x.AnswerOption)
 @Html.TextAreaFor(x => x.Text, new {  @cols = 20, @rows = 10, style = "margin-left:13%" })
+@*@Html.TextBoxFor(x => x.Score)  new { style = "height: 30px;  width:100px; margin-left:28%" }*@
+@*@Html.DropDownListFor(model => model.Score, new SelectList(ViewBag.score, "score", "Tilte",Model.MyScore))*@
+
+@*@Html.TextBoxFor(s => s.MyScore, new { @class = "form-control", style = "height: 30px;  width:100px;margin-right:38% " })*@
+
+@Html.DropDownListFor(model => model.MyScore,
+                new SelectList(Model.ScoreList, "score", "Tilte", 2),
+                    new {  style = "margin-left:35%" })
+
+
+@*@Html.DropDownListFor(model => model.Score, new SelectList(ViewBag.score, "Value", "Text", 2),Model.Score.ToString())*@
+@*  *@
 
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BasisForAppraisal_finalProject.Models;
 using System.Data.Linq;
 using BasisForAppraisal_finalProject.DBML.Interface;
+using BasisForAppraisal_finalProject.ViewModel;
 
 namespace BasisForAppraisal_finalProject.DBML
 {
@@ -69,6 +70,7 @@ namespace BasisForAppraisal_finalProject.DBML
                     Text = string.Empty,
                     tbl_IntentionalQuestion = this,
                     AnswerOption = false,
+                    Score = 0,
                 };
                
                
@@ -132,6 +134,36 @@ namespace BasisForAppraisal_finalProject.DBML
                 answerOptionWrapper = value;
                 AnswerOption = value;
             }
+        }
+
+        public int MyScore
+        {
+            get
+            {
+                return Score.HasValue ? Score.Value : 0;
+            }
+            set
+            {
+                Score = value;
+            }
+        }
+      
+
+
+        public List<scoreTitleItem> ScoreList
+        {
+            get
+            {
+                var list = new List<scoreTitleItem>() {
+                new scoreTitleItem(){ score=0, Tilte="נמוך"},
+                new scoreTitleItem(){ score=1, Tilte="בינוני"},
+                new scoreTitleItem(){ score=2, Tilte="גבוה"},
+               
+             };
+
+                return list;
+            }
+
         }
     }
 

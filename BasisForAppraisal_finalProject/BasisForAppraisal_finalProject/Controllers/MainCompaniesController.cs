@@ -197,6 +197,12 @@ namespace BasisForAppraisal_finalProject.Controllers
                 var taskAddCon = Task.Factory.StartNew(() => cm.DeleteConnectors(conecntorsForDelete));
                 taskAddCon.Wait();
             }
+            else if (submit.Equals("Calculation"))
+            {
+                var form = DMO.Forms.Where(f => f.formId == 2060).FirstOrDefault();
+                var calculation = new FormReportPerEmployee { Employee = emp, Form = form };
+                calculation.GetResultForForm();
+            }
 
             emp.RefreshConecctors();
 

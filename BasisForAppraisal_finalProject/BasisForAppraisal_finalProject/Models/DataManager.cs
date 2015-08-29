@@ -67,6 +67,11 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.tbl_TypeQuestions; }
         }
 
+        public Table<tbl_ConnectorAnswer> ConnectorAnswers 
+        {
+            get { return manager.tbl_ConnectorAnswers; }
+        }
+
         //----------------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -379,6 +384,9 @@ namespace BasisForAppraisal_finalProject.Models
 
        ////  ------------------------------- secutiry --------------------------------------------------------------//
 
+        public bool IsManager(string id){
+            return (bool)Employees.FirstOrDefault(x => x.employeeId == id).IsManger;
+        }
 
        // public async void CreateRole(string roleName)
        // {

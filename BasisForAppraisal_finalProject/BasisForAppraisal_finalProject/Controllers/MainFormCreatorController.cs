@@ -51,6 +51,8 @@ namespace BasisForAppraisal_finalProject.Controllers
             var h = new tbl_IntentionalQuestion() { HelpText = "yari knafo" };
             return PartialView(h);
         }
+
+        
        // [HttpPost]
        //public ActionResult Int(FormViewModel formViewModel)
        //{
@@ -79,7 +81,6 @@ namespace BasisForAppraisal_finalProject.Controllers
        [HttpPost]
        public ActionResult IntentionalFormWorkshop(string submit, FormViewModel formViewModel)
        {
-
            var manager = new FormManager();
            ModelState.Clear();
 

@@ -42,7 +42,6 @@ namespace BasisForAppraisal_finalProject.DBML
 
 
 
-
         private List<tbl_ConnectorFormFill> InitfillOnMe()
         {
             var DM = new DataMangerCompany();
