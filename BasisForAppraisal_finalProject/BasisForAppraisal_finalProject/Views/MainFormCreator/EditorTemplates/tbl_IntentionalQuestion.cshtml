@@ -11,7 +11,9 @@
         @Html.HiddenFor(x => x.SectionId)
         @Html.HiddenFor(x => x.QuestionId)
         @Html.HiddenFor(x => x.QuestionType)
-        <h4>שאלה</h4>
+        <h6>כותרת</h6>
+        @Html.TextAreaFor(x => x.HelpText, new { @cols = 90, @rows = 2 })
+        <h6>שאלה</h6>
             @Html.TextAreaFor(x => x.Title,new { @cols = 90, @rows = 2 })
     </div>
         <div name="box" >

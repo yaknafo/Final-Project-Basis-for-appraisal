@@ -5,7 +5,7 @@
             @if (Model.Answers.Count > 0)
             {
                 <th>
-                    @Html.DisplayFor(x => x.Answers[0].Text, new { @disabled = "disabled" })
+                    @*@Html.DisplayFor(x => x.Answers[0].Text, new { @disabled = "disabled" })*@
 
                 </th>
                 for (int i = 0; i < @Model.Answers.Count; i++)
@@ -19,17 +19,17 @@
                         @Html.HiddenFor(x => x.Answers[i].AnswerOption)
                         @Html.HiddenFor(x => x.NumberOfAnswers)
                         @Html.HiddenFor(x => x.Answers[i].Text)
-                        <div style="margin-right: 50%; margin-top: 22px;">
+                        <div class="row" style="margin-right: 50%; margin-top: 22px;">
                             @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; " })
                             <br />
-                            <div style="margin-right:11% ">
-                                @(i + 1)
+                            <div  style="width:10px;">
+                                @Html.DisplayFor(x => x.Answers[i].Text)
                             </div>
                         </div>
                     </td>
                 }
                 <th>
-                    @Html.DisplayFor(x => x.Answers[Model.Answers.Count - 1].Text, new { @disabled = "disabled" })
+                    @*@Html.DisplayFor(x => x.Answers[Model.Answers.Count - 1].Text, new { @disabled = "disabled" })*@
                 </th>
             }
         </tr>
