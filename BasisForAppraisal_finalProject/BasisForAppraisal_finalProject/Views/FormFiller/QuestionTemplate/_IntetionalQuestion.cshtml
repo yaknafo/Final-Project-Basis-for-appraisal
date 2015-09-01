@@ -27,7 +27,7 @@
                     @Html.HiddenFor(x => x.Answers[i].Score)
                     @Html.HiddenFor(x => x.Answers[i].AnswerOption)
                     @Html.HiddenFor(x => x.Answers[i].Text, new { style = "height: 200px;  width:200px; margin-left:13%" })
-                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: 40%; margin-top: 210px;" })
+                    @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 25px;  width:25px; margin-left: -85%; margin-top: 210px;" })
                 }
             </th>
         }

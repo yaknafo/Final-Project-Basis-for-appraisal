@@ -72,6 +72,16 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.tbl_ConnectorAnswers; }
         }
 
+        public Table<tbl_ConnectorFormFill> ConnectorForm
+        {
+            get { return manager.tbl_ConnectorFormFills; }
+        }
+
+        public Table<tbl_IntentionalQuestion> Questions
+        {
+            get { return manager.tbl_IntentionalQuestions; }
+        }
+
         //----------------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -366,7 +376,7 @@ namespace BasisForAppraisal_finalProject.Models
             if (newAnswer != null)
             {
                 updateAnswer.Text = newAnswer.Text;
-                updateAnswer.Score = newAnswer.Score;
+                updateAnswer.Score = newAnswer.MyScore;
                 updateAnswer.AnswerOption = newAnswer.AnswerOption;
             }
             else

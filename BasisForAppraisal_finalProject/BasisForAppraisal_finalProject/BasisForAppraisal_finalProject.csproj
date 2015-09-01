@@ -189,6 +189,7 @@
     <Compile Include="Controllers\MainCompaniesController.cs" />
     <Compile Include="Controllers\MainFormCreatorController.cs" />
     <Compile Include="Controllers\ManageFormController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SendMailerController.cs" />
     <Compile Include="DBML\BFADataBasedbml.designer.cs">
       <AutoGen>True</AutoGen>
@@ -460,6 +461,7 @@
     <Content Include="Views\Account\MainAccount.cshtml" />
     <Content Include="Views\Account\_AddUserWithRole.cshtml" />
     <Content Include="Views\MainFormCreator\AnswerTemplate\_ScoreAnswerCbx.cshtml" />
+    <Content Include="Views\Report\ReportPerEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

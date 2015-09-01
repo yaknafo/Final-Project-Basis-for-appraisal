@@ -31,7 +31,7 @@ namespace BasisForAppraisal_finalProject.Models
 
          public void CalculationQuestion(string employee, int question)
          {
-
+             Question = DM.Questions.Where(x => x.QuestionId == question).FirstOrDefault();
              var listOfAnswer = DM.ConnectorAnswers.Where(ca => ca.employeeOnId.Equals(employee) && ca.QuestionId == question).ToList() ;
              if(listOfAnswer == null)
                  return;

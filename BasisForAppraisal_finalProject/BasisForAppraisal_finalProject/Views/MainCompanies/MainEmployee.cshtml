@@ -13,8 +13,16 @@
 <link href="~/Content/FontStyle.css" rel="stylesheet" />
 
 
-<div style=" font-size:medium; margin-bottom:40%" dir="rtl">
-   
+<div style=" font-size: medium; margin-bottom: 40%; margin-top:5%" dir="rtl" >
+   @using (Html.BeginForm("ReportPerEmployee", "Report", FormMethod.Post, new { target = "_blank"}))
+    {
+       @Html.Hidden("employeeId", Model.employeeId)
+    <button type="submit" name="submit" value="Calculation" class="btn btn-primary btn-lg" title="ערוך עובד" style="margin: 1%; width: 100px; background-color: black">
+        <span class="glyphicon glyphicon-pencil" title="עריכה" data-toggle="modal" data-target="#@Model.employeeId" style="cursor:pointer;"></span>
+    </button>
+    @Html.DropDownList("forms", ((SelectList)ViewBag.forms).Select(t => new SelectListItem() { Text = t.Text, Value = t.Value }), new { @class = "form-control" })
+
+   }
         @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "conTable", }))
         {
 
@@ -24,9 +32,12 @@
             </div>
     </div>
 
-    <button type="submit" name="submit" value="Calculation" class="btn btn-primary btn-lg" title="ערוך עובד" style="margin: 1%; width: 100px; background-color: black">
+    @*<button type="submit" name="submit" value="Calculation" class="btn btn-primary btn-lg" title="ערוך עובד" style="margin: 1%; width: 100px; background-color: black">
         <span class="glyphicon glyphicon-pencil" title="עריכה" data-toggle="modal" data-target="#@Model.employeeId" style="cursor:pointer;"></span>
-    </button>
+    </button>*@
+               <!-- Preview button -->
+          
+
 
               <div class="panel panel-warning">
            

@@ -1,0 +1,114 @@
+﻿@model BasisForAppraisal_finalProject.Models.FormReportPerEmployee
+@using BasisForAppraisal_finalProject.Models
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/FontStyle.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <title>ReportPerEmployee</title>
+</head>
+<body>
+    <div dir="rtl">
+        @*<div class="row title alert-success">
+            <h2 class="col-xs-12 col-sm-6 col-md-8">דו"ח: @Model.Form.FormName</h2>
+            <h2 class="col-xs-12 col-sm-6 col-md-8">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
+        </div>*@
+        <div class="row alert-success" style="border:inset">
+            <h2 class="col-md-8">דו"ח: @Model.Form.FormName</h2>
+            <h2 class="col-md-4">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
+        </div>
+        <div dir="rtl" class="row alert-info" style="border:inset">
+            <h3 class="col-md-4 alert-info">מחזור: @Model.Employee.className</h3>
+            <h3 class="col-md-4 alert-info">יחידה: @Model.Employee.unitName</h3>
+            <h3 class="col-md-4 alert-info">חברה: @Model.Employee.tbl_Class.tbl_Unit.tbl_Company.comapnyName</h3>
+        </div>
+        <table dir="rtl" class="table table-bordered" style="width:70%;">
+            <tr dir="rtl">
+                <td style="background-color: #00CC00">עומד בציפיות</td>
+                <td style="background-color: #888888;">עומד חלקית בציפיות</td>
+                <td style="background-color: #CC0000">לא עומד בציפיות</td>
+            </tr>
+            </table>
+            <table dir="rtl" class="table table-bordered" style="width:70%;">
+                <tr>
+                    <td dir="rtl">
+                        שאלה
+                    </td>
+                    <td>
+                        שגריר
+                    </td>
+                    <td>
+                        עמיתים
+                    </td>
+                    <td>
+                        ממונים
+                    </td>
+                    <td>
+                        אני ביחס לאחרים
+                    </td>
+                </tr>
+                @foreach (QuestionReport c in Model.FormQiestopnReport)
+{
+    if (@c.colleagueAverage > @c.selfAverage)
+    {
+        <tr dir="rtl" style="background-color: #00CC00">
+            <td>
+                @c.Question.Title
+            </td>
+            <td>
+                @c.selfAverage
+            </td>
+            <td>
+                @c.colleagueAverage
+            </td>
+            <td>
+                @c.directorAverage
+            </td>
+            <td>
+                @if (@c.colleagueAverage > @c.selfAverage)
+                {<p>מעריך את עצמו בצורה טובה</p> }
+                else
+                {
+                    <p>מעריך את עצמו יתר על המידה</p>
+                }
+            </td>
+        </tr>
+    }
+    else
+    {
+        <tr dir="rtl" style="background-color: #CC0000">
+            <td>
+                @c.Question.Title
+            </td>
+            <td>
+                @c.selfAverage
+            </td>
+            <td>
+                @c.colleagueAverage
+            </td>
+            <td>
+                @c.directorAverage
+            </td>
+            <td>
+                @if (@c.colleagueAverage > @c.selfAverage)
+                {<p>מעריך את עצמו בצורה טובה</p> }
+                else
+                {
+                    <p>מעריך את עצמו יתר על המידה</p>
+                }
+            </td>
+        </tr>
+    }
+}
+            </table>
+</div>
+</body>
+</html>

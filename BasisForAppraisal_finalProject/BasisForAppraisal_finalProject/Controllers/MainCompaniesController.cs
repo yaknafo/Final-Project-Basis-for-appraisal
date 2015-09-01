@@ -140,6 +140,12 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var DM = new DataManager();
             var emp = DM.Employees.Where(e => e.employeeId == id).FirstOrDefault();
+            var forms = DM.ConnectorForm.Where(x => x.employeeOnId == id).Select(x => x.tblForm).Distinct().ToList();
+
+            var listOfForms = new SelectList(forms, "formId", "FormName");
+
+            ViewBag.forms = listOfForms;
+          
 
             if(emp != null)
             {
@@ -154,7 +160,7 @@ namespace BasisForAppraisal_finalProject.Controllers
 
 
         [HttpPost]
-        public ActionResult MainEmployee(string submit, string iFillOnThem, string fromName, string ThemFillOnMe, string fromNameOnMe, tbl_Employee emp)
+        public ActionResult MainEmployee(string submit, string iFillOnThem, string fromName, string ThemFillOnMe, string fromNameOnMe, tbl_Employee emp, string forms)
         {
             ModelState.Clear();
             var cm = new CompanyManger();
@@ -199,9 +205,10 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             else if (submit.Equals("Calculation"))
             {
-                var form = DMO.Forms.Where(f => f.formId == 2060).FirstOrDefault();
+                var form = DMO.Forms.Where(f => f.formId == Int32.Parse(forms)).FirstOrDefault();
                 var calculation = new FormReportPerEmployee { Employee = emp, Form = form };
                 calculation.GetResultForForm();
+                //return View(formPreview);
             }
 
             emp.RefreshConecctors();

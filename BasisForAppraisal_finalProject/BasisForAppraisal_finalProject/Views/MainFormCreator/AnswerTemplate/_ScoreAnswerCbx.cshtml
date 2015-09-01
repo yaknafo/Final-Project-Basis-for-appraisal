@@ -1,7 +1,11 @@
 ﻿@model BasisForAppraisal_finalProject.DBML.tbl_IntentionalAnswer
-
-@Html.DropDownListFor(model => model.Score, ViewBag.score as IEnumerable<SelectListItem>)
-
-
+@Html.HiddenFor(x => x.FormId)
+@Html.HiddenFor(x => x.SectionId)
+@Html.HiddenFor(x => x.QuestionId)
+@Html.HiddenFor(x => x.AnswerId)
+@Html.HiddenFor(x => x.AnswerOption)
+@Html.HiddenFor(x => x.Text)
+@Html.DropDownListFor(model => model.MyScore,
+                new SelectList(Model.ScoreList, "score", "Tilte", 2))
 
 
