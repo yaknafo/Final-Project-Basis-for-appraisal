@@ -1,0 +1,58 @@
+﻿@model BasisForAppraisal_finalProject.ViewModel.FormViewModel
+@using BasisForAppraisal_finalProject.ViewModel
+@using BasisForAppraisal_finalProject.DBML
+@using BasisForAppraisal_finalProject.Controllers.Enum
+@{
+    ViewBag.Title = "NewIntentionalFormWorkshop";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
+<link href="~/Content/WorkShop.css" rel="stylesheet" />
+<script src="~/Content/workShopScript.js"></script>
+<h2>NewIntentionalFormWorkshop</h2>
+
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair", }))
+    {
+
+    <div id="ActionBtn" style="position: fixed; margin-top: -8%;  width: 100%; ">
+
+        <!-- the save button-->
+        <button type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg glyphicon glyphicon-floppy-disk" title="שמור שינויים" style="margin: 1%; width: 90px; background-color: black"></button>
+
+
+        <!-- Preview button -->
+        @Html.ActionLink(" ", "FormPreview", "MainFormCreator", new
+                       {
+                           formid = Model.form.formId
+                       },
+            new { target = "_blank", @class = "btn btn-primary btn-lg glyphicon glyphicon-list-alt", @style = "background-color: black; margin: 1%;width: 90px;" })
+
+
+        @Html.DropDownList("add", ViewData["ListData"] as List<SelectListItem>, new { @class = "styled-select", id = "pagesizelist" })
+     </div>
+    
+    
+   
+        <div id="Panel" onchange="showWorningSaveMsg()" style="width: 95%; margin-top: 10%; ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Html.EditorFor(x => x.form)
+                    <div id="yair">
+                        @Html.Partial("_QuestionListForWorkShop", Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+     }
+
+
+<script>
+    $('#pagesizelist').on('change', function (event) {
+        var form = $(event.target).parents('form');
+
+        form.submit();
+    });
+</script>

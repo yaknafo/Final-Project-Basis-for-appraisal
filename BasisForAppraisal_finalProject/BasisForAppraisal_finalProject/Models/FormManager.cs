@@ -58,6 +58,7 @@ namespace BasisForAppraisal_finalProject.Models
         {
             DataManager db =  new DataManager();
             db.deleteQustion(formID, quesNumber);
+
         }
 
         /// <summary>

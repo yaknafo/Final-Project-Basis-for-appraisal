@@ -24,6 +24,13 @@ namespace BasisForAppraisal_finalProject.DBML
         /// if to delete the question 
         /// </summary>
         public bool deleteQuestion { set; get; }
+
+        /// <summary>
+        /// if to delete the question 
+        /// </summary>
+        public bool EditQuestion { set; get; }
+
+        public int QuestionNumberInForm { set; get; }
        
         /// <summary>
         /// counstrator costume 

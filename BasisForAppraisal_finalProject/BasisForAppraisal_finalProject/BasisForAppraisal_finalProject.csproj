@@ -244,6 +244,7 @@
     <Content Include="Content\FontStyle.css" />
     <Content Include="Content\HomePage.css" />
     <Content Include="Content\images\animated-overlay.gif" />
+    <Content Include="Content\images\StyleSheet1.css" />
     <Content Include="Content\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\images\ui-bg_flat_10_000000_40x100.png" />
@@ -264,6 +265,8 @@
     <Content Include="Content\simplePagination.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styles.css" />
+    <Content Include="Content\WorkShop.css" />
+    <Content Include="Content\workShopScript.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -462,6 +465,8 @@
     <Content Include="Views\Account\_AddUserWithRole.cshtml" />
     <Content Include="Views\MainFormCreator\AnswerTemplate\_ScoreAnswerCbx.cshtml" />
     <Content Include="Views\Report\ReportPerEmployee.cshtml" />
+    <Content Include="Views\MainFormCreator\NewIntentionalFormWorkshop.cshtml" />
+    <Content Include="Views\MainFormCreator\_QuestionListForWorkShop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

@@ -129,6 +129,10 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void saveQuestionToDB(tbl_IntentionalQuestion question)
         {
+            // need todo something better here!!!
+            if (question.QuestionType.Contains("Scale"))
+                question.createAnswersToQuestion(question.NumberOfAnswers.Value);
+
             manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
             manager.SubmitChanges();
 
@@ -308,9 +312,6 @@ namespace BasisForAppraisal_finalProject.Models
                 // get pointer in DB
                 var updateQuestoin = manager.tbl_IntentionalQuestions.Where(x => x.QuestionId == q.QuestionId).FirstOrDefault();
 
-                
-
-
                 // check if exist
                 if (updateQuestoin == null)
                     saveQuestionToDB(q);
@@ -339,6 +340,12 @@ namespace BasisForAppraisal_finalProject.Models
 
                     var answersToDelete= manager.tbl_IntentionalAnswers.Where(x => x.QuestionId == q.QuestionId);
 
+                    // add new answer
+                    var answersToAdd = q.Answers.Where(a => a.AnswerId == 0).ToList();
+                    if (answersToAdd.Any())
+                        UpdateForgienKeyQuestionToAnswer(q, answersToAdd);
+                    manager.tbl_IntentionalAnswers.InsertAllOnSubmit(answersToAdd);
+
                     manager.SubmitChanges();
                 }
             }
@@ -355,6 +362,17 @@ namespace BasisForAppraisal_finalProject.Models
             manager.SubmitChanges();
         }
 
+
+        public void UpdateForgienKeyQuestionToAnswer(tbl_IntentionalQuestion question, List<tbl_IntentionalAnswer> answers)
+        {
+            foreach (tbl_IntentionalAnswer answer in answers)
+            {
+                answer.FormId = question.FormId;
+                answer.SectionId = question.SectionId;
+                answer.QuestionId = question.QuestionId;
+            }
+
+        }
 
         /// <summary>
         /// up date answer

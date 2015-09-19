@@ -23,6 +23,8 @@ namespace BasisForAppraisal_finalProject.Controllers
            var b = new DataManager();
            var q = b.GetFormWithSections(id);
            var t = new ViewModel.FormViewModel(q);
+           ViewBag.MovieType = GetDropDown();
+           ViewData["ListData"] = GetDropDown();
            return View(t);
        }
 
@@ -73,33 +75,36 @@ namespace BasisForAppraisal_finalProject.Controllers
          [HttpPost]
          public ActionResult AddAnswerToQuestion(int id, tbl_IntentionalQuestion q)
         {
-
-            
             var h = new tbl_IntentionalAnswer();
              return PartialView("_MultipleChoiceQuestion", h);
         }
        [HttpPost]
-       public ActionResult IntentionalFormWorkshop(string submit, FormViewModel formViewModel)
+         public ActionResult IntentionalFormWorkshop(string submit, FormViewModel formViewModel, string Dep ,string question)
        {
+           ViewBag.MovieType = GetDropDown();
+           ViewData["ListData"] = GetDropDown();
+
+         
+
            var manager = new FormManager();
            ModelState.Clear();
 
-           // delete answer
-           if (submit.All(char.IsDigit))
-               formViewModel.DeleteAnswer(Convert.ToInt32(submit));
+           if(submit == null)
+           submit = Dep;
            try
            {
 
                switch (submit)
                {
+
                    case "Exit": return backToMainForm();
 
                    case "AddAnswerToMulitiChoice": formViewModel.NewQuestionMultipleChoice.AddAnswerOption();
-                       TempData["AddAnswerToMulitiChoice"] = "Add";
+                       //TempData["AddAnswerToMulitiChoice"] = "Add";
                        break;
 
                    case "AddAnswerToMulitiChoiceList": formViewModel.NewQuestionMultipleChoiceList.AddAnswerOption();
-                       TempData["MultipleChoiceListQuestion"] = "Add";
+                       //TempData["MultipleChoiceListQuestion"] = "Add";
                        break;
 
                    case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
@@ -137,8 +142,6 @@ namespace BasisForAppraisal_finalProject.Controllers
                        TempData["changes"] = "שינויים לא שמורים";
                        break;
 
-                       
-
                    case "Save":
                        try
                        {
@@ -171,6 +174,14 @@ namespace BasisForAppraisal_finalProject.Controllers
            return View(formViewModel);
        }
 
+       public ActionResult CreateNewBook()
+       {
+
+           var bookViewModel = new tbl_IntentionalAnswer();
+
+           return PartialView("~/Views/MainFormCreator/EditorTemplates/tbl_IntentionalAnswer.cshtml", bookViewModel);
+
+       }
 
 
        [HttpGet]
@@ -186,6 +197,139 @@ namespace BasisForAppraisal_finalProject.Controllers
        {
            return RedirectToAction("MainFormManagment", "ManageForm");
        }
-       
+
+
+       public ActionResult NewIntentionalFormWorkshop(int id = 0)
+       {
+           var b = new DataManager();
+           var q = b.GetFormWithSections(id);
+           var t = new ViewModel.FormViewModel(q);
+           ViewBag.MovieType = GetDropDown();
+           ViewData["ListData"] = GetDropDown();
+           return View(t);
+       }
+
+
+       [HttpPost]
+       public ActionResult NewIntentionalFormWorkshop(string submit, FormViewModel formViewModel, string add, string question)
+       {
+           ViewData["ListData"] = GetDropDown();
+
+           var manager = new FormManager();
+           ModelState.Clear();
+
+           if (question != null)
+           {
+               char[] splitQuestionNumberAction ={' '};
+               var questionNum = question.Split(splitQuestionNumberAction).First();
+               var action = question.Split(splitQuestionNumberAction).Last();
+
+               if(action == "delete")
+               formViewModel.DeleteQuestion(Int32.Parse(questionNum));
+               //else if(action == "edit")
+
+               else if (action == "AddAnswer")
+                   formViewModel.AddAnswerOptionToQuestoin((Int32.Parse(questionNum)));
+
+              
+           }
+
+           else if(submit != null)
+           {
+               switch (submit)
+               {
+                   case "Save":
+                       try
+                       {
+                           manager.UpdateForm(formViewModel);
+                           TempData["Success"] = "שמירה בוצעה בהצלחה!";
+                       }
+                       catch (Exception e)
+                       {
+                           TempData[ResultOperationConstans.Failed] = e.Message;
+                       }
+                       break;
+               }
+           }
+
+           else if (add != string.Empty)
+           {
+               formViewModel.AddQuestion(add);
+           }
+
+           if(Request.IsAjaxRequest())
+           {
+               return PartialView("_QuestionsLists", formViewModel);
+           }
+              
+           
+           return View(formViewModel);
+       }
+
+
+
+       private static void AddQuestion(FormViewModel formViewModel, string add)
+       {
+           try
+           {
+
+               switch (add)
+               {
+                   case "addQustion": formViewModel.AddQuestion(formViewModel.NewQuestion);
+                       break;
+
+                   case "AddQustionFreeText": formViewModel.AddQuestion(formViewModel.NewQuestionFreeText);
+                       break;
+                   case "AddYesNoQuestion": formViewModel.AddQuestion(formViewModel.NewQuestionYesNo);
+                       break;
+
+                   case "AddScaleQuestion": formViewModel.AddQuestionScale(formViewModel.NewQuestionScale);
+                       break;
+
+                   case "AddMultipleChoiceQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoice);
+                       break;
+
+                   case "AddCbxQuestion": formViewModel.AddQuestionCbx(formViewModel.NewQuestionCbx);
+                       break;
+
+                   case "AddMultipleChoiceListQuestion": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionMultipleChoiceList);
+                       break;
+
+               }
+           }
+           catch
+           {
+
+
+           }
+       }
+
+
+        public void DoCommand()
+       {
+
+       }
+
+       public List<SelectListItem> GetDropDown()
+       {
+           List<SelectListItem> items = new List<SelectListItem>();
+
+           items.Add(new SelectListItem { Text = "בחר סוג שאלה", Value = "" , Selected = true});
+
+           items.Add(new SelectListItem { Text = "מחוון", Value = "addQustion" });
+
+           items.Add(new SelectListItem { Text = "טקסט חופשי", Value = "AddQustionFreeText" });
+
+           items.Add(new SelectListItem { Text = "קנה מידה", Value = "AddScaleQuestion" });
+
+           items.Add(new SelectListItem { Text = "בחירה מרשימה", Value = "AddMultipleChoiceListQuestion" });
+
+           items.Add(new SelectListItem { Text = "בחירה בודדת", Value = "AddMultipleChoiceQuestion" });
+
+           items.Add(new SelectListItem { Text = "כן לא", Value = "AddYesNoQuestion" });
+
+          return items;
+
+       }
 	}
 }

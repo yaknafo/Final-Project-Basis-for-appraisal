@@ -110,6 +110,9 @@
                 <img src="~/photos/Login-Door-24.png" />
             </button>
 
+            <!-- New veration of the workshop (Version B)-->
+            <button type="button" class="btn btn-primary btn-lg glyphicon glyphicon-flag" title="version B" data-toggle="modal" data-target="#NewVersion" style="margin: 1%; width: 90px; background-color: black; "></button>
+
             <!-- the save button-->
             <button onclick="hide()" type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg glyphicon glyphicon-floppy-disk" title="שמירת טופס" style="margin: 1%; width: 90px; background-color: black"></button>
 
@@ -188,6 +191,27 @@
                 </div>
             </div>
         </div>
+
+
+    <div class="modal fade" id="NewVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#FF8080;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" dir="rtl" style="text-align:center"><strong>מעבר לגרסא החדשה לא ישמור את השינויים שביצעת לאחר השימרה האחרונה ?</strong></h4>
+                </div>
+                <div class="modal-body">
+                    @Html.ActionLink("new version NOW!", "NewIntentionalFormWorkshop", new { @id = @Model.form.formId })
+                    <button class="btn btn-default" style="text-align:center" data-dismiss="modal">ביטול</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        //VersionB
     }
 
     <!-- Edit Section -->

@@ -56,6 +56,16 @@ namespace BasisForAppraisal_finalProject.ViewModel
             if (section == 0)
                 CurrentSection = form.Sections.First();
             this.questions = CurrentSection.Questions;
+
+            var firstQuestionToEdit = Questions.FirstOrDefault();
+
+            if (firstQuestionToEdit != null)
+                firstQuestionToEdit.EditQuestion = true;
+
+            for(int i =0 ; i< Questions.Count ; i++)
+            {
+                Questions[i].QuestionNumberInForm = i;
+            }
             
 
 	}
@@ -457,7 +467,22 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
        }
 
-       
+       public void DeleteQuestion(int questionId)
+       {
+           var questionToDelete = Questions.Where(q => q.QuestionNumberInForm == questionId).FirstOrDefault();
+
+           if (questionToDelete == null)
+               return;
+
+           if (questionToDelete.QuestionId != 0)
+           {
+               var manager = new FormManager();
+               manager.deleteQustion(formId, questionToDelete.QuestionId);
+           }
+
+           Questions.RemoveAll(x => x.QuestionNumberInForm == questionId);
+       }
+
 
        public void DeleteQuestions()
        {
@@ -483,7 +508,57 @@ namespace BasisForAppraisal_finalProject.ViewModel
        }
 
 
-     
+     //------------------------------------- TODO make it better after juist a try for now ----------------------------------
+
+       public void AddQuestion(string add)
+       {
+           try
+           {
+
+               switch (add)
+               {
+                   case "addQustion": AddQuestion(NewQuestion);
+                       break;
+
+                   case "AddQustionFreeText": AddQuestion(NewQuestionFreeText);
+                       break;
+                   case "AddYesNoQuestion": AddQuestion(NewQuestionYesNo);
+                       break;
+
+                   case "AddScaleQuestion": AddQuestionScale(NewQuestionScale);
+                       break;
+
+                   case "AddMultipleChoiceQuestion": AddQuestionMultipleChoice(NewQuestionMultipleChoice);
+                       break;
+
+                   case "AddCbxQuestion":AddQuestionCbx(NewQuestionCbx);
+                       break;
+
+                   case "AddMultipleChoiceListQuestion": AddQuestionMultipleChoice(NewQuestionMultipleChoiceList);
+                       break;
+
+               }
+           }
+           catch
+           {
+
+
+           }
+
+           Questions.Last().QuestionNumberInForm = Questions.Max(q => q.QuestionNumberInForm) + 1;
+       }
+
+
+
+       public void AddAnswerOptionToQuestoin(int questionNumberInForm)
+       {
+           var question = Questions.Where(x => x.QuestionNumberInForm == questionNumberInForm).FirstOrDefault();
+
+           if (question == null)
+               return;
+
+           question.AddAnswerOption();
+       }
 
     }
 }

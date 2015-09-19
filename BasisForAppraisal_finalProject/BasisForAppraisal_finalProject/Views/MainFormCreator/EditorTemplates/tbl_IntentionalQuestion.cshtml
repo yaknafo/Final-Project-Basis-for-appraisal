@@ -4,13 +4,16 @@
 }
 <link href="~/Content/FontStyle.css" rel="stylesheet" />
 
+<button type="submit" name="question" value="@Model.QuestionId edit" class=" glyphicon glyphicon-pencil"></button>
+<button type="submit" name="question" value="@Model.QuestionNumberInForm delete" class="glyphicon glyphicon-trash"></button>
 
-    <div draggable="true" class="newEdit">
-    <div dir="rtl">
+    <div draggable="true" class="newEdit s" >
+    <div dir="rtl" >
         @Html.HiddenFor(x => x.FormId)
         @Html.HiddenFor(x => x.SectionId)
         @Html.HiddenFor(x => x.QuestionId)
         @Html.HiddenFor(x => x.QuestionType)
+        @Html.HiddenFor(x => x.QuestionNumberInForm)
         <h6>כותרת</h6>
         @Html.TextAreaFor(x => x.HelpText, new { @cols = 90, @rows = 2 })
         <h6>שאלה</h6>

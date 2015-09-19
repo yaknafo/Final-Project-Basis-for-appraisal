@@ -1,0 +1,16 @@
+﻿body {
+}
+
+
+.styled-select {
+                background: black;
+                margin-top: 2%;
+                font-size: 18px;
+                line-height: 1;
+                border: 0;
+                border-radius: 0;
+                height: 45px;
+                -webkit-appearance: none;
+                color: white;
+                direction: rtl;
+            }
