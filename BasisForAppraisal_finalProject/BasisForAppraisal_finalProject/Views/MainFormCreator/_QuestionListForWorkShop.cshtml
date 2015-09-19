@@ -1,7 +1,9 @@
 ﻿@model BasisForAppraisal_finalProject.ViewModel.FormViewModel
 
-@Html.EditorFor(x => x.Sections)
+<div style="visibility:hidden">
+    @Html.EditorFor(x => x.Sections)
 @Html.EditorFor(x => x.CurrentSection)
 @Html.EditorForModel();
+</div>
 <!--       List of question -------------------------------------------------------------->
 <div id="edit">@Html.EditorFor(a => a.Questions)</div>
