@@ -345,14 +345,15 @@ namespace BasisForAppraisal_finalProject.Controllers
        
         private void SendUploadExcel(HttpPostedFileBase file, int id)
         {
+            try
+            {
             var db = new CompanyManger();
             if (!Directory.Exists(Server.MapPath("~/App_Data/uploads")))
             {
                 Directory.CreateDirectory(Server.MapPath("~/App_Data/uploads"));
             }
 
-            try
-            {
+          
                 string[] str = Path.GetFileName(file.FileName).Split('.');
                 if (file.ContentLength > 0)
                     if (str[str.Count() - 1].Equals("xlsx") || str[str.Count() - 1].Equals("csv") || str[str.Count() - 1].Equals("xls"))
@@ -363,11 +364,11 @@ namespace BasisForAppraisal_finalProject.Controllers
                         db.UploadExcelFile(path, id);
 
                     }
-                 TempData[ResultOperationConstans.Failed] = "קובץ נתונים עלה בהצלחה";
+                 TempData[ResultOperationConstans.Success] = "קובץ נתונים עלה בהצלחה";
             }
             catch (Exception ex) {
 
-                TempData[ResultOperationConstans.Failed] = "לא ניתן לטעון קובץ נתונים זה";
+                TempData[ResultOperationConstans.Failed] = "לא ניתן לטעון קובץ נתונים זה\n:" + ex.Message;
             }
         }
         public void intalizeCheckBox(bool workers, bool manager,bool onManger,bool onHimself)
