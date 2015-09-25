@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArrayList.cs" />
     <Compile Include="Controllers\Enum\WorkShopActions.cs" />
+    <Compile Include="Controllers\ExportDataController.cs" />
     <Compile Include="Controllers\FormFillerController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -467,6 +468,7 @@
     <Content Include="Views\Report\ReportPerEmployee.cshtml" />
     <Content Include="Views\MainFormCreator\NewIntentionalFormWorkshop.cshtml" />
     <Content Include="Views\MainFormCreator\_QuestionListForWorkShop.cshtml" />
+    <Content Include="Views\ExportData\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

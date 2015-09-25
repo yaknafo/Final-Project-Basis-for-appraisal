@@ -843,7 +843,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private string _Email;
 		
-		private System.Nullable<bool> _IsManger;
+		private bool _IsManger;
 		
 		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
 		
@@ -1034,7 +1034,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsManger", DbType="Bit")]
-		public System.Nullable<bool> IsManger
+		public bool IsManger
 		{
 			get
 			{

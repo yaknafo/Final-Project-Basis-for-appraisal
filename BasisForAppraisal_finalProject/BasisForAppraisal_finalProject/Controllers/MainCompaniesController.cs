@@ -120,7 +120,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             emp.companyId = Companyies;
             emp.unitName = units;
             emp.className = clas;
-            emp.IsManger = false;
+            
             try
             {
 

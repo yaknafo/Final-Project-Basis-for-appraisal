@@ -206,6 +206,7 @@ namespace BasisForAppraisal_finalProject.Controllers
            var t = new ViewModel.FormViewModel(q);
            ViewBag.MovieType = GetDropDown();
            ViewData["ListData"] = GetDropDown();
+           ViewBag.NV = "true";
            return View(t);
        }
 
@@ -214,7 +215,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        public ActionResult NewIntentionalFormWorkshop(string submit, FormViewModel formViewModel, string add, string question)
        {
            ViewData["ListData"] = GetDropDown();
-
+           ViewBag.NV = "true";
            var manager = new FormManager();
            ModelState.Clear();
 

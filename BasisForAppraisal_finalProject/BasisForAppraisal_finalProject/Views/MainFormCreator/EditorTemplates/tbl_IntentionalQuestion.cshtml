@@ -3,9 +3,11 @@
     ViewBag.Title = "tbl_IntentionalQuestion";
 }
 <link href="~/Content/FontStyle.css" rel="stylesheet" />
-
+@if(ViewBag.NV!= null)
+{ 
 <button type="submit" name="question" value="@Model.QuestionId edit" class=" glyphicon glyphicon-pencil"></button>
 <button type="submit" name="question" value="@Model.QuestionNumberInForm delete" class="glyphicon glyphicon-trash"></button>
+}
 
     <div draggable="true" class="newEdit s" >
     <div dir="rtl" >

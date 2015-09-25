@@ -85,6 +85,19 @@ namespace BasisForAppraisal_finalProject.DBML
           InitfillOnMe();
           InitfillOnThem();
       }
+
+
+        public bool IsManagerWrapper
+      {
+          get
+          {
+              return IsManger;
+          }
+          set
+          {
+              IsManger = value;
+          }
+      }
       
     }
 
