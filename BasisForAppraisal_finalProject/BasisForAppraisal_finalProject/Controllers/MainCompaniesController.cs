@@ -383,7 +383,8 @@ namespace BasisForAppraisal_finalProject.Controllers
         [HttpPost]
         public ActionResult AddConnector(int companyid, string unit, string cl, int formId)
         {
-            Boolean b = Boolean.Parse(Session["onHimself"].ToString());
+            if(Boolean.Parse(Session["onHimself"].ToString()))
+                addConectorToOnHimself(companyid, unit, cl, formId);
             if (Boolean.Parse( Session["workers"].ToString()))
                 addConectorToWorkersOnly(companyid, unit, cl, formId);
             if (Boolean.Parse(Session["manager"].ToString()))
@@ -395,6 +396,15 @@ namespace BasisForAppraisal_finalProject.Controllers
             return RedirectToAction("ManageCompany", new { id = companyid, unit = unit, cl = cl });
             
         }
+
+        private void addConectorToOnHimself(int companyid, string unit, string cl, int formId)
+        {
+            var dmc = new DataMangerCompany();
+            var employes = dmc.getEmployee(companyid, unit, cl);
+            foreach (var e in employes)
+                if(!e.IsManagerWrapper)
+              dmc.AddConnector(e.employeeId, e.employeeId, companyid, formId);
+        }
         //
         private void addConectorToWorkersOnly(int companyid, string unit, string cl, int formId)
         {
@@ -403,7 +413,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             foreach (var e1 in employes)
                 foreach (var e2 in employes)
                     if (!(e2.IsManger == true || e1.IsManger==true))
-                        if ((e1 == e2 && Boolean.Parse(Session["onHimself"].ToString()))||e1!=e2)
+                        if (e1!=e2)
                             dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
                        
 
@@ -428,7 +438,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             var employes = dmc.getEmployee(companyid, unit, cl);
             foreach (var e1 in employes)
                 foreach (var e2 in employes)
-                  if ((e1 == e2 && Boolean.Parse(Session["onHimself"].ToString()))||e1!=e2)
+                  if (e1!=e2)
                     if (e2.IsManger == true)
                         dmc.AddConnector(e1.employeeId, e2.employeeId, companyid, formId);
 
