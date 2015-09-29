@@ -28,11 +28,24 @@ namespace BasisForAppraisal_finalProject.Models
              CalculationQuestion(employee, question);
          }
 
-
-         public void CalculationQuestion(string employee, int question)
+         public QuestionReport()
          {
+         } 
+
+
+         public void CalculationQuestion(string employee, int question, List<tbl_ConnectorAnswer> ConnectorAnswers = null , List<tbl_IntentionalQuestion> allQuestions = null) 
+         {
+             List<tbl_ConnectorAnswer> listOfAnswer = null;
+             if(allQuestions == null)
              Question = DM.Questions.Where(x => x.QuestionId == question).FirstOrDefault();
-             var listOfAnswer = DM.ConnectorAnswers.Where(ca => ca.employeeOnId.Equals(employee) && ca.QuestionId == question).ToList() ;
+             else
+                 Question = allQuestions.Where(x => x.QuestionId == question).FirstOrDefault();
+             if(ConnectorAnswers == null)
+               listOfAnswer = DM.ConnectorAnswers.Where(ca => ca.employeeOnId.Equals(employee) && ca.QuestionId == question).ToList() ;
+             else
+                 listOfAnswer = ConnectorAnswers.Where(ca => ca.employeeOnId.Equals(employee) && ca.QuestionId == question).ToList();
+
+
              if(listOfAnswer == null)
                  return;
              foreach (tbl_ConnectorAnswer ca in listOfAnswer)

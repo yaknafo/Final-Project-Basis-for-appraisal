@@ -216,6 +216,7 @@
     <Compile Include="Models\Dictionary.cs" />
     <Compile Include="Models\EmployeeExcelRecord.cs" />
     <Compile Include="Models\EmployeeReports.cs" />
+    <Compile Include="Models\ExcelExportDataService.cs" />
     <Compile Include="Models\FormManager.cs" />
     <Compile Include="Models\FormReport.cs" />
     <Compile Include="Models\FromFillerManager.cs" />

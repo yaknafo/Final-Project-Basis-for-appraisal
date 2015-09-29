@@ -8,6 +8,7 @@ using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.ViewModel.ExportData;
 using System.IO;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -59,40 +60,41 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             if (formCheckList.First().FormId == null)
                 Redirect("Index");
+
             var dManager = new DataMangerCompany();
             var res = dManager.ConnectorFormFill.Where(x => x.companyId == Companyiesa && x.tbl_Employee1.className == cls && x.tbl_Employee1.unitName == units).Select(s => s.tblForm).Distinct().ToList();
-           
+            var EmployeeOfTheUnit = dManager.getEmployee(Companyiesa, units,cls);
+
+            //StringWriter sw = new StringWriter();
+            //var excelService = new ExcelExportDataService();
+
+            //excelService.createCloumns(sw, res, EmployeeOfTheUnit);
+            ExportToCSV(res, EmployeeOfTheUnit);
             return View();
         }
 
-       public void ExportToCSV()
+        public void ExportToCSV(List<DBML.tblForm> res, List<DBML.tbl_Employee> EmployeeOfTheUnit)
         {
-            var Employies = DMO.Employees.ToList();
-
-            StringWriter sw = new StringWriter();
-
-            sw.WriteLine("\"ID\",\"First Name\",\"Last Name\",\"Company\",\"Unit\",\"Class\",\"Email\"");
-
+           
+            var excelService = new ExcelExportDataService();
+            var grid = excelService.ExportToCSV(res, EmployeeOfTheUnit);
             Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=ExportEmployee" + DateTime.Now + ".csv");
-            Response.ContentType = "text/csv";
-
-            foreach (var line in Employies)
-            {
-                sw.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\"",
-                                           line.employeeId,
-                                           line.firstName,
-                                           line.lastName,
-                                           line.companyId,
-                                           line.unitName,
-                                           line.className,
-                                           line.Email));
-            }
-
-            Response.Write(sw.ToString());
-
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=MyExcelFile.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            Response.ContentEncoding = System.Text.Encoding.Unicode;
+            Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+            grid.RenderControl(htw);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
             Response.End();
+
         }
+
+       
 
        public void ExportClientsListToExcel()
        {
