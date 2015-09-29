@@ -1,0 +1,12 @@
+﻿@model BasisForAppraisal_finalProject.ViewModel.ExportData.FormCheckBoxViewModel
+
+@Html.HiddenFor(x => x.FormId)
+@Html.HiddenFor(x => x.FormName)
+
+<table>
+    <tr>
+        <td> @Html.CheckBoxFor(x => x.IsSelected, new { style = "height: 20px;  width:20px;" })</td>
+        <td style="font-size:large"> @Html.DisplayFor(x => x.FormName)</td>
+    </tr>
+</table>
+

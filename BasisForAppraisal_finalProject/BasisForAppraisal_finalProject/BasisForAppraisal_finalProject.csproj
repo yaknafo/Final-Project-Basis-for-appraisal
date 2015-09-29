@@ -214,6 +214,7 @@
     <Compile Include="Models\DataManager.cs" />
     <Compile Include="Models\DataMangerCompany.cs" />
     <Compile Include="Models\Dictionary.cs" />
+    <Compile Include="Models\EmployeeExcelRecord.cs" />
     <Compile Include="Models\EmployeeReports.cs" />
     <Compile Include="Models\FormManager.cs" />
     <Compile Include="Models\FormReport.cs" />
@@ -222,12 +223,14 @@
     <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\PartialIntentionalAnswer.cs" />
     <Compile Include="Models\QuestionReport.cs" />
+    <Compile Include="Models\ReportForExcelSheetEmployee.cs" />
     <Compile Include="Models\WordDocumentAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CompanyViewModel.cs" />
     <Compile Include="ViewModel\Company\ClassUnitViewModel.cs" />
     <Compile Include="ViewModel\Company\FolderUnitPartialView.cs" />
+    <Compile Include="ViewModel\ExportData\FormCheckBoxViewModel.cs" />
     <Compile Include="ViewModel\FormFillerViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
@@ -469,6 +472,11 @@
     <Content Include="Views\MainFormCreator\NewIntentionalFormWorkshop.cshtml" />
     <Content Include="Views\MainFormCreator\_QuestionListForWorkShop.cshtml" />
     <Content Include="Views\ExportData\Index.cshtml" />
+    <Content Include="Views\ExportData\_UnitsForCbx.cshtml" />
+    <Content Include="Views\ExportData\_ClassForCbx.cshtml" />
+    <Content Include="Views\ExportData\EditorTemplates\FormCheckBoxViewModel.cshtml" />
+    <Content Include="Views\ExportData\_ListOfFormCheckBoxViewModel.cshtml" />
+    <Content Include="Views\ExportData\_FormList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
