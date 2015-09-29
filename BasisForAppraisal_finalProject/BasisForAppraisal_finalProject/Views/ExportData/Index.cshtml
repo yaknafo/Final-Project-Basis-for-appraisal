@@ -6,12 +6,12 @@
 
 <h2>Export Data</h2>
 
-@Html.ActionLink("Export", "ExportToCSV")
+@*@Html.ActionLink("Export", "ExportToCSV")*@
 
 
-@Html.ActionLink("ExportToExcel", "ExportClientsListToExcel")
+@*@Html.ActionLink("ExportToExcel", "ExportClientsListToExcel")*@
 
-<body dir="rtl">
+<body dir="rtl" style="margin-top:10%">
 @using (Html.BeginForm("Index", "ExportData", FormMethod.Post))
 { 
 
@@ -26,7 +26,7 @@
     </table>
    
     <div id="formCheckList" class="col-lg-5" style="margin-top:2%"></div>
-    <button type="submit" class="btn btn-primary btn-lg">GO</button>
+    @*<button type="submit" class="btn btn-primary btn-lg">GO</button>*@
     }
 </body>
     <script type="text/javascript">

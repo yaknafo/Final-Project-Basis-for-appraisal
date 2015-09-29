@@ -65,10 +65,6 @@ namespace BasisForAppraisal_finalProject.Controllers
             var res = dManager.ConnectorFormFill.Where(x => x.companyId == Companyiesa && x.tbl_Employee1.className == cls && x.tbl_Employee1.unitName == units).Select(s => s.tblForm).Distinct().ToList();
             var EmployeeOfTheUnit = dManager.getEmployee(Companyiesa, units,cls);
 
-            //StringWriter sw = new StringWriter();
-            //var excelService = new ExcelExportDataService();
-
-            //excelService.createCloumns(sw, res, EmployeeOfTheUnit);
             ExportToCSV(res, EmployeeOfTheUnit);
             return View();
         }
@@ -130,39 +126,6 @@ namespace BasisForAppraisal_finalProject.Controllers
 
        }
 
-       public void ExportClientsListToExcelForYair(List<tbl_ConnectorAnswer> a)
-       {
-           var grid = new System.Web.UI.WebControls.GridView();
-           var ClientsList = DMO.Employees.ToList();
-
-           grid.DataSource =
-                            from d in ClientsList
-                            select new
-                            {
-                                ID = d.employeeId,
-                                FirstName = d.firstName,
-                                LastName = d.lastName,
-                                Email = d.Email
-
-                            };
-
-           grid.DataBind();
-
-           Response.ClearContent();
-           Response.AddHeader("content-disposition", "attachment; filename=Exported_Diners.xls");
-           Response.ContentType = "application/excel";
-           Response.ContentEncoding = System.Text.Encoding.Unicode;
-           Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
-           StringWriter sw = new StringWriter();
-           HtmlTextWriter htw = new HtmlTextWriter(sw);
-
-           grid.RenderControl(htw);
-
-           Response.Write(sw.ToString());
-
-           Response.End();
-
-       }
 
        public List<SelectListItem> GetDropDownCompany(List<tbl_Company> com)
        {
