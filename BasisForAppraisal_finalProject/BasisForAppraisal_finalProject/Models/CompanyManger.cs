@@ -59,16 +59,29 @@ namespace BasisForAppraisal_finalProject.Models
             ////4. DataSet - Create column names from first row
             //excelReader.IsFirstRowAsColumnNames = true;
             //DataSet result = excelReader.AsDataSet();
-
+            var unitName = string.Empty;
+            string className = string.Empty;
+            var DM = new DataMangerCompany();
             //5. Data Reader methods
-            while (excelReader.Read())
-            {
-                tbl_Employee emp1 = GetEmployeeFromRow(result.Tables[0].Rows[1], result.Tables[0].Columns.Count, idCompany);
-                tbl_Employee emp2 = GetEmployeeFromRow(result.Tables[0].Rows[2], result.Tables[0].Columns.Count, idCompany);
+            for (int i = 0; i < result.Tables[0].Rows.Count; i++)
+             {
+                 if (result.Tables[0].Rows[i][0] != string.Empty)
+                 {
+                     tbl_Employee emp = GetEmployeeFromRow(result.Tables[0].Rows[i], result.Tables[0].Columns.Count, idCompany);
+                     var inputStatus = validationRowInput(emp, ref unitName, ref className);
 
-                if (emp2.firstName != "")
-                    throw new Exception(emp2.firstName);
+                     if (inputStatus)
+                     {
+                          unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
 
+
+                          className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
+
+                         DM.addWorkerToDb(emp);
+                     }
+                 }
+
+             
             }
 
             //6. Free resources (IExcelDataReader is IDisposable)
