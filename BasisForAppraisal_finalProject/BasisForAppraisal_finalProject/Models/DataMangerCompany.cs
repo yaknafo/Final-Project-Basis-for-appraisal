@@ -107,28 +107,37 @@ namespace BasisForAppraisal_finalProject.Models
         }
              public void deleteUnitAndClass(string className, string unitid, int companyid)
         {
-            // find the record to delete f
-            var unitToDelete = manager.tbl_Units.Where(a => a.companyId == companyid && a.unitName.Equals(unitid)).FirstOrDefault();
-            var classToDelete = manager.tbl_Classes.Where(x => x.companyId == companyid && x.tbl_Unit.unitName == unitToDelete.unitName&&x.className.Equals(className)).FirstOrDefault();
-            var workersToDelete = manager.tbl_Employees.Where(x => x.companyId == companyid&&x.className.Equals(className)&&x.unitName.Equals(unitid)).ToList();
-            deleteConectForWorker(companyid, workersToDelete);
-            manager.SubmitChanges();
-            manager.tbl_Employees.DeleteAllOnSubmit(workersToDelete);
-            manager.SubmitChanges();
-            var workersAfterDelete = manager.tbl_Employees.Where(x => x.className.Equals(unitid)).ToList();
-            // if somone use this class-> dont delete it!
-            if (!(workersAfterDelete.Count() > 0))
+            try
+            {
+                // find the record to delete f
+                var unitToDelete = manager.tbl_Units.Where(a => a.companyId == companyid && a.unitName.Equals(unitid)).FirstOrDefault();
+                var classToDelete = manager.tbl_Classes.Where(x => x.companyId == companyid && x.tbl_Unit.unitName == unitToDelete.unitName && x.className.Equals(className)).FirstOrDefault();
+                var workersToDelete = manager.tbl_Employees.Where(x => x.companyId == companyid && x.className.Equals(className) && x.unitName.Equals(unitid)).ToList();
+                if (workersToDelete.Count > 0)
+                    deleteConectForWorker(companyid, workersToDelete);
+                manager.SubmitChanges();
+                manager.tbl_Employees.DeleteAllOnSubmit(workersToDelete);
+                manager.SubmitChanges();
+                var workersAfterDelete = manager.tbl_Employees.Where(x => x.className.Equals(unitid)).ToList();
+                // if somone use this class-> dont delete it!
+                if (!(workersAfterDelete.Count() > 0))
                 {
                     manager.tbl_Classes.DeleteOnSubmit(classToDelete);
                     manager.SubmitChanges();
                 }
-            workersAfterDelete = manager.tbl_Employees.Where(x => x.unitName.Equals(unitid)).ToList();
-            manager.SubmitChanges();
-            // if somone use this unit-> dont delete it!
-            if (!(workersAfterDelete.Count() > 0))
-            {
-                manager.tbl_Units.DeleteOnSubmit(unitToDelete);
+                workersAfterDelete = manager.tbl_Employees.Where(x => x.unitName.Equals(unitid)).ToList();
                 manager.SubmitChanges();
+                // if somone use this unit-> dont delete it!
+                if (!(workersAfterDelete.Count() > 0))
+                {
+                    manager.tbl_Units.DeleteOnSubmit(unitToDelete);
+                    manager.SubmitChanges();
+                }
+            }
+            catch
+            {
+                manager = manager = DbmlBFADataContext.GetNewDataContextInstance();
+                throw;
             }
           
         }
