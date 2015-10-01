@@ -42,60 +42,61 @@ namespace BasisForAppraisal_finalProject.Models
         // method add data from excel file to sql server db- workers to company
         public void UploadExcelFile(string path, int idCompany)
         {
-            var DM = new DataMangerCompany();
 
-            string unitName = string.Empty;
+            //var DM = new DataMangerCompany();
 
-            string className = string.Empty;
+            //string unitName = string.Empty;
 
-            Excel.Application xlApp = new Excel.Application();
+            //string className = string.Empty;
 
-            var dictionary = new Dictionary<string , int>();
+            //Excel.Application xlApp = new Excel.Application();
 
-            dictionary.Add("Add", 0);
-            dictionary.Add("Not Add", 0);
+            //var dictionary = new Dictionary<string , int>();
 
-            try
-            {
-                Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
-                Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-                Excel.Range xlRange = xlWorksheet.UsedRange;
-                int rowCount = xlRange.Rows.Count;
-                int colCount = xlRange.Columns.Count;
+            //dictionary.Add("Add", 0);
+            //dictionary.Add("Not Add", 0);
 
-                for (int i = 1; i <= rowCount; i++)
-                {
-                    String[] data = new string[colCount];
+            //try
+            //{
+            //    Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
+            //    Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            //    Excel.Range xlRange = xlWorksheet.UsedRange;
+            //    int rowCount = xlRange.Rows.Count;
+            //    int colCount = xlRange.Columns.Count;
 
-                    // getting the data of every row to data array string
-                    GatDataOfRow(xlRange, colCount, i, data);
+            //    for (int i = 1; i <= rowCount; i++)
+            //    {
+            //        String[] data = new string[colCount];
 
-                    // setting all the valuues from the row in the excel into the new emoloyee
-                    var emp = SetValuesInEmployee(idCompany, ref unitName, ref className, data);
+            //        // getting the data of every row to data array string
+            //        GatDataOfRow(xlRange, colCount, i, data);
 
-                    // check stauts of the input of the current row
-                    var inputStatus = validationRowInput(emp, ref unitName, ref className);
+            //        // setting all the valuues from the row in the excel into the new emoloyee
+            //        var emp = SetValuesInEmployee(idCompany, ref unitName, ref className, data);
 
-                    if (inputStatus)
-                    {
-                        unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
+            //        // check stauts of the input of the current row
+            //        var inputStatus = validationRowInput(emp, ref unitName, ref className);
+
+            //        if (inputStatus)
+            //        {
+            //            unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
 
 
-                        className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
+            //            className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
-                        DM.addWorkerToDb(emp);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+            //            DM.addWorkerToDb(emp);
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-            }
-            finally
-            {
-                xlApp.Workbooks.Close();
-                File.Delete(path);
-            }
+            //}
+            //finally
+            //{
+            //    xlApp.Workbooks.Close();
+            //    File.Delete(path);
+            //}
         }
 
 

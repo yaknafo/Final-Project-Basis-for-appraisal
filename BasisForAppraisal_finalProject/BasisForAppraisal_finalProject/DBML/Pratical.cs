@@ -162,9 +162,11 @@ namespace BasisForAppraisal_finalProject.DBML
             get
             {
                 var list = new List<scoreTitleItem>() {
-                new scoreTitleItem(){ score=0, Tilte="נמוך"},
-                new scoreTitleItem(){ score=1, Tilte="בינוני"},
-                new scoreTitleItem(){ score=2, Tilte="גבוה"},
+                new scoreTitleItem(){ score=1, Tilte="נמוך"},
+                new scoreTitleItem(){ score=2, Tilte="נמוך-בינוני"},
+                new scoreTitleItem(){ score=3, Tilte="בינוני"},
+                new scoreTitleItem(){ score=4, Tilte="בינוני-גבוה"},
+                new scoreTitleItem(){ score=5, Tilte="גבוה"},
                
              };
 
