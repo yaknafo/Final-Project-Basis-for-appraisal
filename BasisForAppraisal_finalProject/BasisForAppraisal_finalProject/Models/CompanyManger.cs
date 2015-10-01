@@ -68,6 +68,8 @@ namespace BasisForAppraisal_finalProject.Models
                  if (result.Tables[0].Rows[i][0] != string.Empty)
                  {
                      tbl_Employee emp = GetEmployeeFromRow(result.Tables[0].Rows[i], result.Tables[0].Columns.Count, idCompany);
+                     unitName = emp.unitName;
+                     className = emp.className;
                      var inputStatus = validationRowInput(emp, ref unitName, ref className);
 
                      if (inputStatus)
