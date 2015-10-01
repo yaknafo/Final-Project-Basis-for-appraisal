@@ -51,8 +51,8 @@ namespace BasisForAppraisal_finalProject.Models
             string className = string.Empty;
               string excelConnectionString = string.Empty;
 
-              excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-              path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+              excelConnectionString = "Provider=Microsoft.ACE.OLEDB.4.0;Data Source=" +
+              path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
               //connection String for xls file format.
               if (fileName == ".xls")
               {
