@@ -6,6 +6,7 @@ using BasisForAppraisal_finalProject.DBML;
 using System.Data.OleDb;
 using System.IO;
 using System.Data;
+using Excel;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -44,64 +45,97 @@ namespace BasisForAppraisal_finalProject.Models
         public void UploadExcelFile(string path, int idCompany, string fileName)
         {
 
-            var DM = new DataMangerCompany();
+            FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read);
 
-            string unitName = string.Empty;
-            DataSet ds = new DataSet();
-            string className = string.Empty;
-              string excelConnectionString = string.Empty;
+            ////1. Reading from a binary Excel file ('97-2003 format; *.xls)
+            //IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+            //...
+            //2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
+            IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            //...
+            //3. DataSet - The result of each spreadsheet will be created in the result.Tables
+            DataSet result = excelReader.AsDataSet();
+            //...
+            ////4. DataSet - Create column names from first row
+            //excelReader.IsFirstRowAsColumnNames = true;
+            //DataSet result = excelReader.AsDataSet();
 
-              excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-              path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-              //connection String for xls file format.
-              if (fileName.EndsWith(".xls"))
-              {
-                  excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
-                  path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
-              }
-              //connection String for xlsx file format.
-              else if (fileName.EndsWith(".xlsx"))
-              {
-                  excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                  path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-              }
+            //5. Data Reader methods
+            while (excelReader.Read())
+            {
+                tbl_Employee emp1 = GetEmployeeFromRow(result.Tables[0].Rows[1], result.Tables[0].Columns.Count, idCompany);
+                tbl_Employee emp2 = GetEmployeeFromRow(result.Tables[0].Rows[2], result.Tables[0].Columns.Count, idCompany);
 
-              //Create Connection to Excel work book and add oledb namespace
-              OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
-              excelConnection.Open();
-              DataTable dt = new DataTable();
+                if (emp2.firstName != "")
+                    throw new Exception(emp2.firstName);
 
-              dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            }
+
+            //6. Free resources (IExcelDataReader is IDisposable)
+            excelReader.Close();
+
+
+            //------------------------------------------------- start of try 2---------------------------------------------------------
+            //var DM = new DataMangerCompany();
+
+            //string unitName = string.Empty;
+            //DataSet ds = new DataSet();
+            //string className = string.Empty;
+            //  string excelConnectionString = string.Empty;
+
+            //  excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+            //  path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+            //  //connection String for xls file format.
+            //  if (fileName.EndsWith(".xls"))
+            //  {
+            //      excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+            //      path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+            //  }
+            //  //connection String for xlsx file format.
+            //  else if (fileName.EndsWith(".xlsx"))
+            //  {
+            //      excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+            //      path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+            //  }
+
+            //  //Create Connection to Excel work book and add oledb namespace
+            //  OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
+            //  excelConnection.Open();
+            //  DataTable dt = new DataTable();
+
+            //  dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
               
 
-              String[] excelSheets = new String[dt.Rows.Count];
-              int t = 0;
-              //excel data saves in temp file here.
-              foreach (DataRow row in dt.Rows)
-              {
-                  excelSheets[t] = row["TABLE_NAME"].ToString();
-                  t++;
-              }
-              OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
+            //  String[] excelSheets = new String[dt.Rows.Count];
+            //  int t = 0;
+            //  //excel data saves in temp file here.
+            //  foreach (DataRow row in dt.Rows)
+            //  {
+            //      excelSheets[t] = row["TABLE_NAME"].ToString();
+            //      t++;
+            //  }
+            //  OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
 
 
-              string query = string.Format("Select * from [{0}]", excelSheets[0]);
-              using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
-              {
-                  dataAdapter.Fill(ds);
-              }
+            //  string query = string.Format("Select * from [{0}]", excelSheets[0]);
+            //  using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
+            //  {
+            //      dataAdapter.Fill(ds);
+            //  }
 
-              for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-              {
+            //  for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            //  {
 
-                  tbl_Employee emp = GetEmployeeFromRow(ds.Tables[0].Rows[i], ds.Tables[0].Columns.Count, idCompany);
-                  string querty = "Insert into Person(Name,Email,Mobile) Values('" +
-                  ds.Tables[0].Rows[i][0].ToString() + "','" + ds.Tables[0].Rows[i][1].ToString() +
-                  "','" + ds.Tables[0].Rows[i][2].ToString() + "')";
-                  if (i == 0)
-                      throw new Exception(emp.firstName + " " + emp.lastName);
+            //      tbl_Employee emp = GetEmployeeFromRow(ds.Tables[0].Rows[i], ds.Tables[0].Columns.Count, idCompany);
+            //      string querty = "Insert into Person(Name,Email,Mobile) Values('" +
+            //      ds.Tables[0].Rows[i][0].ToString() + "','" + ds.Tables[0].Rows[i][1].ToString() +
+            //      "','" + ds.Tables[0].Rows[i][2].ToString() + "')";
+            //      if (i == 0)
+            //          throw new Exception(emp.firstName + " " + emp.lastName);
                  
-              }
+            //  }
+
+            //-------------------------------- End of try 2-------------------------------------------------------------
 
             //Excel.Application xlApp = new Excel.Application();
 
