@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BasisForAppraisal_finalProject.DBML;
-using Excel = Microsoft.Office.Interop.Excel;
+using System.Data.OleDb;
 using System.IO;
+using System.Data;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -40,14 +41,67 @@ namespace BasisForAppraisal_finalProject.Models
 
 
         // method add data from excel file to sql server db- workers to company
-        public void UploadExcelFile(string path, int idCompany)
+        public void UploadExcelFile(string path, int idCompany, string fileName)
         {
 
-            //var DM = new DataMangerCompany();
+            var DM = new DataMangerCompany();
 
-            //string unitName = string.Empty;
+            string unitName = string.Empty;
+            DataSet ds = new DataSet();
+            string className = string.Empty;
+              string excelConnectionString = string.Empty;
 
-            //string className = string.Empty;
+              excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+              path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+              //connection String for xls file format.
+              if (fileName == ".xls")
+              {
+                  excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+                  path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+              }
+              //connection String for xlsx file format.
+              else if (fileName == ".xlsx")
+              {
+                  excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                  path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+              }
+
+              //Create Connection to Excel work book and add oledb namespace
+              OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
+              excelConnection.Open();
+              DataTable dt = new DataTable();
+
+              dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+              
+
+              String[] excelSheets = new String[dt.Rows.Count];
+              int t = 0;
+              //excel data saves in temp file here.
+              foreach (DataRow row in dt.Rows)
+              {
+                  excelSheets[t] = row["TABLE_NAME"].ToString();
+                  t++;
+              }
+              OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
+
+
+              string query = string.Format("Select * from [{0}]", excelSheets[0]);
+              using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
+              {
+                  dataAdapter.Fill(ds);
+              }
+
+              for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+              {
+
+                  tbl_Employee emp = GetEmployeeFromRow(ds.Tables[0].Rows[i], ds.Tables[0].Columns.Count, idCompany);
+                  string querty = "Insert into Person(Name,Email,Mobile) Values('" +
+                  ds.Tables[0].Rows[i][0].ToString() + "','" + ds.Tables[0].Rows[i][1].ToString() +
+                  "','" + ds.Tables[0].Rows[i][2].ToString() + "')";
+                  if (i == 0)
+                      throw new Exception(emp.firstName + " " + emp.lastName);
+                 
+              }
 
             //Excel.Application xlApp = new Excel.Application();
 
@@ -56,8 +110,8 @@ namespace BasisForAppraisal_finalProject.Models
             //dictionary.Add("Add", 0);
             //dictionary.Add("Not Add", 0);
 
-            //try
-            //{
+            try
+            {
             //    Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
             //    Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
             //    Excel.Range xlRange = xlWorksheet.UsedRange;
@@ -87,16 +141,32 @@ namespace BasisForAppraisal_finalProject.Models
             //            DM.addWorkerToDb(emp);
             //        }
             //    }
-            //}
-            //catch (Exception ex)
-            //{
+            }
+            catch (Exception ex)
+            {
 
-            //}
-            //finally
-            //{
-            //    xlApp.Workbooks.Close();
-            //    File.Delete(path);
-            //}
+            }
+            finally
+            {
+                //xlApp.Workbooks.Close();
+                File.Delete(path);
+            }
+        }
+
+        private tbl_Employee GetEmployeeFromRow(DataRow dataRow, int numberOfCol, int idCompany)
+        {
+            if (numberOfCol < 7)
+                throw new Exception("הטבלה אינה תקינה מכילה פחות מ7 עמודות");
+            var emp = new tbl_Employee();
+            emp.companyId = idCompany;
+            emp.employeeId = dataRow[0].ToString();
+            emp.firstName = dataRow[1].ToString();
+            emp.lastName = dataRow[2].ToString();
+            emp.Email = dataRow[3].ToString();
+            emp.className = dataRow[4].ToString();
+            emp.unitName = dataRow[5].ToString();
+            emp.IsManagerWrapper = (dataRow[6] == "כן");
+            return emp;
         }
 
 
@@ -191,22 +261,6 @@ namespace BasisForAppraisal_finalProject.Models
             return emp;
         }
 
-        private static void GatDataOfRow(Excel.Range xlRange, int colCount, int i, String[] data)
-        {
-            for (int j = 1; j <= colCount; j++)
-            {
-                try
-                {
-                    data[j - 1] = (xlRange.Cells[i, j] as Excel.Range).Value2.ToString();
-                }
-                catch
-                {
-                    // the col of the unit and class
-                    if (j == 5 || j == 6)
-                        data[j - 1] = string.Empty;
-                }
-            }
-        }
 
 
     }

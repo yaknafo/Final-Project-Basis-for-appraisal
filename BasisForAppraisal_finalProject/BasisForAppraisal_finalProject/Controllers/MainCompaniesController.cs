@@ -361,7 +361,7 @@ namespace BasisForAppraisal_finalProject.Controllers
                         var fileName = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), Guid.NewGuid() + fileName);
                         file.SaveAs(path);
-                        db.UploadExcelFile(path, id);
+                        db.UploadExcelFile(path, id, fileName);
 
                     }
                  TempData[ResultOperationConstans.Success] = "קובץ נתונים עלה בהצלחה";
