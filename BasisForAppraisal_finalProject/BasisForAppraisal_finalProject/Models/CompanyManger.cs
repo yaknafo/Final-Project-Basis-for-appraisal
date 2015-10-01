@@ -62,8 +62,8 @@ namespace BasisForAppraisal_finalProject.Models
               //connection String for xlsx file format.
               else if (fileName == ".xlsx")
               {
-                  excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                  path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                  excelConnectionString = "Provider=Microsoft.ACE.OLEDB.4.0;Data Source=" +
+                  path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
               }
 
               //Create Connection to Excel work book and add oledb namespace
