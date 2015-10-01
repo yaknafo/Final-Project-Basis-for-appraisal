@@ -80,8 +80,15 @@ namespace BasisForAppraisal_finalProject.Models
                 var userExiset = UserManager.FindByName(workerid);
                 if (userExiset!= null)
                 UserManager.Delete(userExiset);
-
-                manager.SubmitChanges();
+                try
+                {
+                    manager.SubmitChanges();
+                }
+                catch
+                {
+                    manager = DbmlBFADataContext.GetNewDataContextInstance();
+                    throw;
+                }
             }
             
 

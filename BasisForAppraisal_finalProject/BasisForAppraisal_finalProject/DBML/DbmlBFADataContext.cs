@@ -20,5 +20,10 @@ namespace BasisForAppraisal_finalProject.DBML
         {
             return dbDataContext;
         }
+
+        public static BFADataBasedbmlDataContext GetNewDataContextInstance()
+        {
+            return dbDataContext = new BFADataBasedbmlDataContext(connectionStringServer); ;
+        }
     }
 }

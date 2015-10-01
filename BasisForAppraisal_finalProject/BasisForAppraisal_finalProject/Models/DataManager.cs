@@ -272,13 +272,20 @@ namespace BasisForAppraisal_finalProject.Models
         /// <param name="form"></param>
         public void UpdateFormToDB(tblForm form)
         {
-            if (manager.tblForms.Where(f => f.FormName == form.FormName).Count() > 1)
-                throw new Exception("השם של טופס זה תפוס אנא בחר שם אחר");
+            try
+            {
+                if (manager.tblForms.Where(f => f.FormName == form.FormName).Count() > 1)
+                    throw new Exception("השם של טופס זה תפוס אנא בחר שם אחר");
 
-            var formUpdate = manager.tblForms.Where(f => f.formId == form.formId).FirstOrDefault();
-            formUpdate.FormName = form.FormName;
-            formUpdate.lastChange = DateTime.Now;
-            manager.SubmitChanges();
+                var formUpdate = manager.tblForms.Where(f => f.formId == form.formId).FirstOrDefault();
+                formUpdate.FormName = form.FormName;
+                formUpdate.lastChange = DateTime.Now;
+                manager.SubmitChanges();
+            }
+            catch
+            {
+                manager = DbmlBFADataContext.GetNewDataContextInstance();
+            }
         }
 
 
