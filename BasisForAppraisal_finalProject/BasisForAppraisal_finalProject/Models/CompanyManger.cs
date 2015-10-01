@@ -51,28 +51,23 @@ namespace BasisForAppraisal_finalProject.Models
             string className = string.Empty;
               string excelConnectionString = string.Empty;
 
-              OleDbConnectionStringBuilder csbuilder = new OleDbConnectionStringBuilder();
-              csbuilder.Provider = "Microsoft.ACE.OLEDB.12.0";
-              csbuilder.DataSource = path;
-              csbuilder.Add("Extended Properties", "Excel 12.0 Xml;HDR=YES");
-
               excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
               path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
               //connection String for xls file format.
-              if (fileName == ".xls")
+              if (fileName.EndsWith(".xls"))
               {
                   excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
                   path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
               }
               //connection String for xlsx file format.
-              else if (fileName == ".xlsx")
+              else if (fileName.EndsWith(".xlsx"))
               {
                   excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                   path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
               }
 
               //Create Connection to Excel work book and add oledb namespace
-              OleDbConnection excelConnection = new OleDbConnection(csbuilder.ConnectionString);
+              OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
               excelConnection.Open();
               DataTable dt = new DataTable();
 
