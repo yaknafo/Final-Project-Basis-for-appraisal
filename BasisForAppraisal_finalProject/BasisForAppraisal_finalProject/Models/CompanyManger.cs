@@ -44,7 +44,7 @@ namespace BasisForAppraisal_finalProject.Models
         // method add data from excel file to sql server db- workers to company
         public void UploadExcelFile(string path, int idCompany, string fileName)
         {
-
+            try{
             FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read);
 
             ////1. Reading from a binary Excel file ('97-2003 format; *.xls)
@@ -64,132 +64,31 @@ namespace BasisForAppraisal_finalProject.Models
             var DM = new DataMangerCompany();
             //5. Data Reader methods
             for (int i = 0; i < result.Tables[0].Rows.Count; i++)
-             {
-                 if (result.Tables[0].Rows[i][0] != string.Empty)
-                 {
-                     tbl_Employee emp = GetEmployeeFromRow(result.Tables[0].Rows[i], result.Tables[0].Columns.Count, idCompany);
-                     unitName = emp.unitName;
-                     className = emp.className;
-                     var inputStatus = validationRowInput(emp, ref unitName, ref className);
+            {
+                if (result.Tables[0].Rows[i][0] != string.Empty)
+                {
+                    tbl_Employee emp = GetEmployeeFromRow(result.Tables[0].Rows[i], result.Tables[0].Columns.Count, idCompany);
+                    unitName = emp.unitName;
+                    className = emp.className;
+                    var inputStatus = validationRowInput(emp, ref unitName, ref className);
 
-                     if (inputStatus)
-                     {
-                          unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
+                    if (inputStatus)
+                    {
+                        unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
 
 
-                          className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
+                        className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
-                         DM.addWorkerToDb(emp);
-                     }
-                 }
+                        DM.addWorkerToDb(emp);
+                    }
+                }
+            }
 
              
-            }
+            
 
             //6. Free resources (IExcelDataReader is IDisposable)
             excelReader.Close();
-
-
-            //------------------------------------------------- start of try 2---------------------------------------------------------
-            //var DM = new DataMangerCompany();
-
-            //string unitName = string.Empty;
-            //DataSet ds = new DataSet();
-            //string className = string.Empty;
-            //  string excelConnectionString = string.Empty;
-
-            //  excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            //  path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-            //  //connection String for xls file format.
-            //  if (fileName.EndsWith(".xls"))
-            //  {
-            //      excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
-            //      path + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
-            //  }
-            //  //connection String for xlsx file format.
-            //  else if (fileName.EndsWith(".xlsx"))
-            //  {
-            //      excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-            //      path + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-            //  }
-
-            //  //Create Connection to Excel work book and add oledb namespace
-            //  OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
-            //  excelConnection.Open();
-            //  DataTable dt = new DataTable();
-
-            //  dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-              
-
-            //  String[] excelSheets = new String[dt.Rows.Count];
-            //  int t = 0;
-            //  //excel data saves in temp file here.
-            //  foreach (DataRow row in dt.Rows)
-            //  {
-            //      excelSheets[t] = row["TABLE_NAME"].ToString();
-            //      t++;
-            //  }
-            //  OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
-
-
-            //  string query = string.Format("Select * from [{0}]", excelSheets[0]);
-            //  using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
-            //  {
-            //      dataAdapter.Fill(ds);
-            //  }
-
-            //  for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            //  {
-
-            //      tbl_Employee emp = GetEmployeeFromRow(ds.Tables[0].Rows[i], ds.Tables[0].Columns.Count, idCompany);
-            //      string querty = "Insert into Person(Name,Email,Mobile) Values('" +
-            //      ds.Tables[0].Rows[i][0].ToString() + "','" + ds.Tables[0].Rows[i][1].ToString() +
-            //      "','" + ds.Tables[0].Rows[i][2].ToString() + "')";
-            //      if (i == 0)
-            //          throw new Exception(emp.firstName + " " + emp.lastName);
-                 
-            //  }
-
-            //-------------------------------- End of try 2-------------------------------------------------------------
-
-            //Excel.Application xlApp = new Excel.Application();
-
-            //var dictionary = new Dictionary<string , int>();
-
-            //dictionary.Add("Add", 0);
-            //dictionary.Add("Not Add", 0);
-
-            try
-            {
-            //    Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@path);
-            //    Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
-            //    Excel.Range xlRange = xlWorksheet.UsedRange;
-            //    int rowCount = xlRange.Rows.Count;
-            //    int colCount = xlRange.Columns.Count;
-
-            //    for (int i = 1; i <= rowCount; i++)
-            //    {
-            //        String[] data = new string[colCount];
-
-            //        // getting the data of every row to data array string
-            //        GatDataOfRow(xlRange, colCount, i, data);
-
-            //        // setting all the valuues from the row in the excel into the new emoloyee
-            //        var emp = SetValuesInEmployee(idCompany, ref unitName, ref className, data);
-
-            //        // check stauts of the input of the current row
-            //        var inputStatus = validationRowInput(emp, ref unitName, ref className);
-
-            //        if (inputStatus)
-            //        {
-            //            unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
-
-
-            //            className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
-
-            //            DM.addWorkerToDb(emp);
-            //        }
-            //    }
             }
             catch (Exception ex)
             {

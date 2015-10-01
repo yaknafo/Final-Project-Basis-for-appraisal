@@ -118,7 +118,7 @@ namespace BasisForAppraisal_finalProject.Models
                 manager.SubmitChanges();
                 manager.tbl_Employees.DeleteAllOnSubmit(workersToDelete);
                 manager.SubmitChanges();
-                var workersAfterDelete = manager.tbl_Employees.Where(x => x.className.Equals(unitid)).ToList();
+                var workersAfterDelete = manager.tbl_Employees.Where(x => x.className.Equals(className) && x.unitName == unitid).ToList();
                 // if somone use this class-> dont delete it!
                 if (!(workersAfterDelete.Count() > 0))
                 {
