@@ -75,11 +75,11 @@ namespace BasisForAppraisal_finalProject.Models
                     if (inputStatus)
                     {
                         unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
-
+                        throw new Exception(emp.employeeId + "    " + result.Tables[0].Rows.Count);
 
                         className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
-                        throw new Exception(emp.employeeId + "    " + result.Tables[0].Rows.Count);
+                     
                         DM.addWorkerToDb(emp);
                     }
                 }
