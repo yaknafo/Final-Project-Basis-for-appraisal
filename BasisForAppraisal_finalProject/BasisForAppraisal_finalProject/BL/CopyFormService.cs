@@ -13,29 +13,35 @@ namespace BasisForAppraisal_finalProject.BL
 
       public int CopyFormById(int formID)
       {
+          // get source form from DB
           var sourceForm = DM.GetFormWithSections(formID);
           var fm = new FormManager();
+
+          // Create new form
           var numberOfForm = fm.AddNewForm(false);
           var newForm = DM.GetFormWithSections(numberOfForm);
-          CopyFormFull(sourceForm, newForm);
-          SaveCopyOfForm(newForm);
+
+          //Copy Form And Form Sections only from Source form
+          CopyFormWithSectionOnly(sourceForm, newForm);
+
+          //Save in data base
+          DM.UpdateFormToDB(newForm);
+          DM.UpdateSectionsToDB(newForm.Sections);
+
+          // in this part we copy all the questions from source form and save it to data base
+          int counter =0;
+          foreach(tbl_Section sec in sourceForm.Sections)
+          {
+             var tempQuestions = CopyQuestionPerSection(sec.Questions, newForm.formId, newForm.Sections.ToArray()[counter].SectionId);
+             DM.UpdateQuestionsToDB(tempQuestions);
+              counter++;
+          }
+
           return newForm.formId;
       }
 
-      private void SaveCopyOfForm(tblForm newForm)
-      {
-          DM.UpdateFormToDB(newForm);
-          DM.UpdateSectionsToDB(newForm.Sections);
-          foreach (tbl_Section sec in newForm.Sections)
-          {
-              sec.Questions.ForEach(ques => ques.SectionId = sec.SectionId);
-              sec.Questions.ForEach(ques => ques.FormId = sec.FormId);
 
-              DM.UpdateQuestionsToDB(sec.Questions);
-          }
-      }
-
-      private tblForm CopyFormFull(tblForm form, tblForm newForm)
+      private tblForm CopyFormWithSectionOnly(tblForm form, tblForm newForm)
       {
           newForm.FormName = form.FormName + " העתק " + DateTime.Now;
           newForm.lastChange = DateTime.Now;
@@ -57,16 +63,14 @@ namespace BasisForAppraisal_finalProject.BL
               tempSection.Name = sec.Name;
               tempSection.HelpExplanation = sec.HelpExplanation;
               tempSection.FormId = newForm.formId;
-          
 
-              //----- copy question ------//
-              tempSection.Questions = CopyQuestionPerSection(sec.Questions);
               newSection.Add(tempSection);
+
           }
          return newSection;
       }
 
-      private List<tbl_IntentionalQuestion> CopyQuestionPerSection(List<tbl_IntentionalQuestion> sourceQuestions)
+      private List<tbl_IntentionalQuestion> CopyQuestionPerSection(List<tbl_IntentionalQuestion> sourceQuestions, int formId ,int secId)
       {
           var newQuestions = new List<tbl_IntentionalQuestion>();
           foreach(tbl_IntentionalQuestion sourceQuestion in sourceQuestions)
@@ -79,6 +83,8 @@ namespace BasisForAppraisal_finalProject.BL
               tempQuestion.QuestionNumberInForm = sourceQuestion.QuestionNumberInForm;
               tempQuestion.QuestionType = sourceQuestion.QuestionType;
               tempQuestion.Title = sourceQuestion.Title;
+              tempQuestion.FormId = formId;
+              tempQuestion.SectionId = secId;
 
              //----- copy Answers ------//
               tempQuestion.Answers = CopyAnswerPerQuestion(sourceQuestion.Answers);

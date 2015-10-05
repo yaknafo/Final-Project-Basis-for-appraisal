@@ -29,14 +29,14 @@ namespace BasisForAppraisal_finalProject.Controllers
         public PartialViewResult GetUnitCascadeCompany(int id)
         {
             var dManager = new DataMangerCompany();
-            ViewData["ListDataUnit"] = GetDropDownUnit(dManager.getUnitsForCompany(id).ToList());
+            ViewData["ListDataUnit"] = GetDropDownUnit(dManager.getUnitsForCompany(id).Distinct().ToList());
             return PartialView("_UnitsForCbx",id.ToString());
         }
 
         public PartialViewResult GetclassCascadeUnit(string id, string unit)
         {
             var dManager = new DataMangerCompany();
-            ViewData["ListDataClass"] = GetDropDownClass(dManager.Class.Where(x => x.unitName == id).ToList());
+            ViewData["ListDataClass"] = GetDropDownClass(dManager.Class.Where(x => x.unitName == id && x.companyId.ToString() == unit).Distinct().ToList());
             return PartialView("_ClassForCbx",new string[]{unit ,id});
         }
 

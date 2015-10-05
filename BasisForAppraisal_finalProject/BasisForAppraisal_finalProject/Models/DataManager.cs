@@ -136,12 +136,16 @@ namespace BasisForAppraisal_finalProject.Models
             manager.tbl_IntentionalQuestions.InsertOnSubmit(question);
             manager.SubmitChanges();
 
-            question.Answers.ForEach(x => x.QuestionId = question.QuestionId);
-            question.Answers.ForEach(x => x.SectionId = question.SectionId);
-            question.Answers.ForEach(x => x.FormId = question.FormId);
+            if (!question.QuestionType.Contains("Scale"))
+            {
+                question.Answers.ForEach(x => x.QuestionId = question.QuestionId);
+                question.Answers.ForEach(x => x.SectionId = question.SectionId);
+                question.Answers.ForEach(x => x.FormId = question.FormId);
+                manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
+                manager.SubmitChanges();
+            }
 
-            manager.tbl_IntentionalAnswers.InsertAllOnSubmit(question.Answers);
-            manager.SubmitChanges();
+           
         }
 
 
@@ -217,11 +221,16 @@ namespace BasisForAppraisal_finalProject.Models
             // find the record to delete from the right form and right ques number
             var questionToDelete = manager.tbl_IntentionalQuestions.Where(a=>  a.QuestionId == quesNumber).FirstOrDefault();
             var answersToDelete = manager.tbl_IntentionalAnswers.Where(a => a.QuestionId == quesNumber);
-            if(answersToDelete != null)
-            manager.tbl_IntentionalAnswers.DeleteAllOnSubmit(answersToDelete);
+            if (answersToDelete != null)
+            {
+                manager.tbl_IntentionalAnswers.DeleteAllOnSubmit(answersToDelete);
+                manager.SubmitChanges();
+            }
             if (questionToDelete != null)
-            manager.tbl_IntentionalQuestions.DeleteOnSubmit(questionToDelete);
-            manager.SubmitChanges();
+            {
+                manager.tbl_IntentionalQuestions.DeleteOnSubmit(questionToDelete);
+                manager.SubmitChanges();
+            }
 
         }
 
