@@ -97,13 +97,16 @@ namespace BasisForAppraisal_finalProject.Models
         ///  add new form to DB
         /// </summary>
         /// <returns></returns>
-        public int AddNewForm()
+        public int AddNewForm(bool withSection = true)
         {
             var manager = new DataManager();
             var newform= new tblForm{ FormName="שאלון חדש"};
             var section = new tbl_Section { Name= "חלק חדש"};
            section.FormId = manager.AddForm(newform);
+           if (withSection)
            return manager.SaveSection(section);
+
+           return newform.formId;
         }
 
     }

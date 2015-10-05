@@ -13,6 +13,7 @@ using System.Text;
 using System.IO;
 using BasisForAppraisal_finalProject.Common.Constans;
 using BasisForAppraisal_finalProject.Authorize;
+using BasisForAppraisal_finalProject.BL;
 
 
 namespace BasisForAppraisal_finalProject.Controllers
@@ -34,6 +35,15 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = id });
         }
+
+        public ActionResult CopyForm(int id)
+        {
+            var CopyService = new CopyFormService();
+            var newForm = CopyService.CopyFormById(id);
+            return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = newForm });
+        }
+
+
 
        
         [HttpPost]

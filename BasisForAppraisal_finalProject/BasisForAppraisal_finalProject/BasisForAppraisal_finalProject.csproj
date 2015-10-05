@@ -187,6 +187,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Authorize\CustomAuthorizeAttribute.cs" />
+    <Compile Include="BL\CopyFormService.cs" />
     <Compile Include="BL\FormFillByManager.cs" />
     <Compile Include="Common\Constans\ResultOperationConstans.cs" />
     <Compile Include="Common\Constans\RolesConstans.cs" />
@@ -321,6 +322,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="photos\Uploading\ajax-loading.gif" />
+    <Content Include="photos\Uploading\loading.gif" />
+    <Content Include="photos\Uploading\loadingSave.gif" />
     <Content Include="Scripts\bootstrap-paginator.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -489,6 +492,8 @@
     <Content Include="Views\ExportData\EditorTemplates\FormCheckBoxViewModel.cshtml" />
     <Content Include="Views\ExportData\_ListOfFormCheckBoxViewModel.cshtml" />
     <Content Include="Views\ExportData\_FormList.cshtml" />
+    <Content Include="Views\MainFormCreator\_LoadindFeedBack.cshtml" />
+    <Content Include="Views\Shared\_LoadindFeedBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

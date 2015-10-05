@@ -17,7 +17,8 @@ namespace BasisForAppraisal_finalProject.DBML
         {
             get
             {
-                questions = GetAllQuestions();
+                if(questions == null || questions.Count ==0)
+                    questions = GetAllQuestions();
                 return questions;
             }
             set

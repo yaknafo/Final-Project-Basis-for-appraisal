@@ -19,6 +19,7 @@ namespace BasisForAppraisal_finalProject.DBML
         {
             get
             {
+                if(sections == null || sections.Count == 0)
                 sections = GetAllSections();
                 return sections;
             }

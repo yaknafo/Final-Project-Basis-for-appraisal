@@ -171,10 +171,21 @@ namespace BasisForAppraisal_finalProject.Models
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>
-        public int AddForm(tblForm form)
+        public int AddForm(tblForm form, bool ifCopy = false)
         {
             manager.tblForms.InsertOnSubmit(form);
-            manager.SubmitChanges();
+
+          if (ifCopy)
+          {
+           UpdateFormToDB(form);
+            foreach(tbl_Section sec in form.Sections)
+            {
+            SaveSection(sec);
+            SaveQuestionsToDB(sec.Questions);
+            }
+        }
+
+          manager.SubmitChanges();
             return form.formId;
         }
         //////////////////////////////////////////////////////////////////////////Delete method////////////////////////////////////////
@@ -204,9 +215,11 @@ namespace BasisForAppraisal_finalProject.Models
         public void deleteQustion(int formID, int quesNumber)
         {
             // find the record to delete from the right form and right ques number
-            var questionToDelete = manager.tbl_IntentionalQuestions.Where(a => a.FormId == formID && a.QuestionId == quesNumber).FirstOrDefault();
-            var answersToDelete = manager.tbl_IntentionalAnswers.Where(a => a.FormId == formID && a.QuestionId == quesNumber);
+            var questionToDelete = manager.tbl_IntentionalQuestions.Where(a=>  a.QuestionId == quesNumber).FirstOrDefault();
+            var answersToDelete = manager.tbl_IntentionalAnswers.Where(a => a.QuestionId == quesNumber);
+            if(answersToDelete != null)
             manager.tbl_IntentionalAnswers.DeleteAllOnSubmit(answersToDelete);
+            if (questionToDelete != null)
             manager.tbl_IntentionalQuestions.DeleteOnSubmit(questionToDelete);
             manager.SubmitChanges();
 
@@ -299,8 +312,15 @@ namespace BasisForAppraisal_finalProject.Models
             {
                 var sectionUpdate = manager.tbl_Sections.Where(f => s.SectionId == f.SectionId).FirstOrDefault();
 
-                sectionUpdate.Name = s.Name;
-                sectionUpdate.HelpExplanation = s.HelpExplanation;
+                if (sectionUpdate != null)
+                {
+                    sectionUpdate.Name = s.Name;
+                    sectionUpdate.HelpExplanation = s.HelpExplanation;
+                }
+                else
+                {
+                    manager.tbl_Sections.InsertOnSubmit(s);
+                }
                 manager.SubmitChanges();
                 
             }
