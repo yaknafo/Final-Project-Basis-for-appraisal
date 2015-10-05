@@ -65,6 +65,8 @@ namespace BasisForAppraisal_finalProject.Models
             //5. Data Reader methods
             for (int i = 0; i < result.Tables[0].Rows.Count; i++)
             {
+                throw new Exception( "    " + result.Tables[0].Rows.Count);
+
                 if (result.Tables[0].Rows[i][0] != string.Empty)
                 {
                     tbl_Employee emp = GetEmployeeFromRow(result.Tables[0].Rows[i], result.Tables[0].Columns.Count, idCompany);
@@ -75,8 +77,7 @@ namespace BasisForAppraisal_finalProject.Models
                     if (inputStatus)
                     {
                         unitName = SetUnitTOEmployee(idCompany, DM, unitName, emp);
-                        throw new Exception(emp.employeeId + "    " + result.Tables[0].Rows.Count);
-
+                       
                         className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
                      
