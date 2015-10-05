@@ -11,6 +11,7 @@ using System.IO;
 using BasisForAppraisal_finalProject.ViewModel.Company;
 using System.Threading.Tasks;
 using BasisForAppraisal_finalProject.Authorize;
+using System.Web.UI;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -23,11 +24,13 @@ namespace BasisForAppraisal_finalProject.Controllers
        private DataManager DMO = new DataManager();
         // method read and save the file upload
         [HttpPost]
-        public ActionResult Index( HttpPostedFileBase file = null, CompanyViewModel c= null)
+       public ActionResult Index(HttpPostedFileBase file = null, CompanyViewModel c = null)
         {
            
             var id = Convert.ToInt32( Session["companyId"]);
-            var taskUpLoadExcel= Task.Factory.StartNew(() => SendUploadExcel(file, id));
+
+
+            var taskUpLoadExcel = Task.Factory.StartNew(() => SendUploadExcel(file, id));
             taskUpLoadExcel.Wait();
 
             return RedirectToAction("CompanyUnit", new { id = id });

@@ -219,7 +219,7 @@ namespace BasisForAppraisal_finalProject.Models
         {
             if (!manager.tbl_Employees.Contains(emp))
             {
-                CreateUserWithRole(emp.employeeId, emp.employeeId, RolesConstans.Guest);
+                CreateUserWithRoleNotasync(emp.employeeId, emp.employeeId, RolesConstans.Guest);
 
                 this.manager.tbl_Employees.InsertOnSubmit(emp);
 
@@ -442,6 +442,33 @@ namespace BasisForAppraisal_finalProject.Models
             if (result.Succeeded && userExiset != null && roleExiset != null)
             {
                 await UserManager.AddToRoleAsync(userExiset.Id, roleName);
+            }
+
+
+        }
+
+        public  void CreateUserWithRoleNotasync(string userName, string password, string roleName)
+        {
+            var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var role = roleManager.FindByNameAsync(roleName);
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var user = new ApplicationUser() { UserName = userName };
+
+            var result =  UserManager.Create(user, password);
+
+            var userExiset = UserManager.FindByName(userName);
+
+            var roleExiset = roleManager.FindByName(roleName);
+            if (roleExiset == null)
+            {
+                CreateRole(roleName);
+                roleExiset = roleManager.FindByName(roleName);
+            }
+
+            if (result.Succeeded && userExiset != null && roleExiset != null)
+            {
+                UserManager.AddToRole(userExiset.Id, roleName);
             }
 
 
