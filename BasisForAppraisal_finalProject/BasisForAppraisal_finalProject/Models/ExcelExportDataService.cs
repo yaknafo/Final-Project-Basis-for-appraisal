@@ -24,7 +24,7 @@ namespace BasisForAppraisal_finalProject.Models
             var listOfConnecorAnswers =dmo.ConnectorAnswer.ToList();
             var listOfConnecor = dmo.ConnectorFormFill.ToList();
 
-
+            //------------------------- here is the part for know which Manager fill what column 
             var resForYair = new List<FormFillByManager>();
 
             Dictionary<tblForm, List<string>> managerNameForColumn = new Dictionary<tblForm, List<string>>();
@@ -32,12 +32,13 @@ namespace BasisForAppraisal_finalProject.Models
             //---- check if frim need to be print more than 1
 
             var numberOfFormToPrint = NumerOfFromColumnToPrint(EmployeeOfTheUnit, listOfConnecor, resForYair, managerNameForColumn);
-
      
             List<int> avrageQuestionsId = new List<int>();
 
             getQuestionIDForAvrageMangers(numberOfFormToPrint, avrageQuestionsId);
             
+            //-------------------------------End of the part ---------------------------------------------------------
+
             //he-IL
             int counter = 0;
             List<int> questionsId = new List<int>();
@@ -64,6 +65,7 @@ namespace BasisForAppraisal_finalProject.Models
                                 products.Columns.Add(string.Format(",\"{0}\"", form.FormName + ":" + question.Title), typeof(string));
                             else
                             {
+                                // if we here we know that question is by manager 
                                 var managerName = managerNameForColumn[form].ToArray()[numberOfFormToPrint[sec.tblForm] - 1];
                                 products.Columns.Add(string.Format(",\"{0}\"", form.FormName + "\n [ " + managerName + " ] :  " + question.Title), typeof(string));
                             }
@@ -72,8 +74,10 @@ namespace BasisForAppraisal_finalProject.Models
                         }
                         if (numberOfFormToPrint.ContainsKey(sec.tblForm))
                         {
+                            // make sure we will not go Out of bounes 
                         if (numberOfFormToPrint[sec.tblForm] > 0)
                         numberOfFormToPrint[sec.tblForm]--;
+
                         if (numberOfFormToPrint[sec.tblForm] == 0)
                             toPrintMore = false;
                         }
@@ -82,6 +86,7 @@ namespace BasisForAppraisal_finalProject.Models
                     }
                 }
             }
+            // if need to calculcation avrage for Question only for manager!!
             var toDoCalculateAvrageForMangers = false;
 
                foreach (tbl_Employee emp in EmployeeOfTheUnit)
@@ -99,6 +104,8 @@ namespace BasisForAppraisal_finalProject.Models
                        var currentQuestion = questionsId.ToArray()[i - 7];
                        if (avrageQuestionsId.Contains(currentQuestion))
                        {
+                           // if that is true that mean we got the first time we print question for manager --> we need to print avrage
+                           // might be problem is the question id in order is not first or last --> will need refactor after a while :-(
                            avrageQuestionsId.Remove(currentQuestion);
                            toDoCalculateAvrageForMangers = true;
                        }
