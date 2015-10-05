@@ -79,6 +79,7 @@ namespace BasisForAppraisal_finalProject.Models
 
                         className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
+                        throw new Exception(emp.employeeId + "    " + result.Tables[0].Rows.Count);
                         DM.addWorkerToDb(emp);
                     }
                 }
