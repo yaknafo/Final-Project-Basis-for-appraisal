@@ -98,6 +98,14 @@ namespace BasisForAppraisal_finalProject.DBML
               IsManger = value;
           }
       }
+
+        public string FullName
+        {
+            get
+            {
+                return firstName + " " + lastName;
+            }
+        }
       
     }
 

@@ -8,6 +8,7 @@ using System.IO;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Globalization;
+using BasisForAppraisal_finalProject.BL;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -18,8 +19,25 @@ namespace BasisForAppraisal_finalProject.Models
         {
             var dm = new DataManager();
              var dmo = new DataMangerCompany();
+
             var listOfQuestions = dm.Questions.ToList();
             var listOfConnecorAnswers =dmo.ConnectorAnswer.ToList();
+            var listOfConnecor = dmo.ConnectorFormFill.ToList();
+
+
+            var resForYair = new List<FormFillByManager>();
+
+            Dictionary<tblForm, List<string>> managerNameForColumn = new Dictionary<tblForm, List<string>>();
+
+            //---- check if frim need to be print more than 1
+
+            var numberOfFormToPrint = NumerOfFromColumnToPrint(EmployeeOfTheUnit, listOfConnecor, resForYair, managerNameForColumn);
+
+     
+            List<int> avrageQuestionsId = new List<int>();
+
+            getQuestionIDForAvrageMangers(numberOfFormToPrint, avrageQuestionsId);
+            
             //he-IL
             int counter = 0;
             List<int> questionsId = new List<int>();
@@ -37,14 +55,34 @@ namespace BasisForAppraisal_finalProject.Models
             {
                 foreach (tbl_Section sec in form.Sections)
                 {
-                    foreach (tbl_IntentionalQuestion question in sec.Questions)
+                    var toPrintMore = true;
+                    while (toPrintMore)
                     {
-                        products.Columns.Add(string.Format(",\"{0}\"", form.FormName + ":" + question.Title), typeof(string));
-                        questionsId.Add(question.QuestionId);
-                        counter++;
+                        foreach (tbl_IntentionalQuestion question in sec.Questions)
+                        {
+                            if (!numberOfFormToPrint.ContainsKey(sec.tblForm))
+                                products.Columns.Add(string.Format(",\"{0}\"", form.FormName + ":" + question.Title), typeof(string));
+                            else
+                            {
+                                var managerName = managerNameForColumn[form].ToArray()[numberOfFormToPrint[sec.tblForm] - 1];
+                                products.Columns.Add(string.Format(",\"{0}\"", form.FormName + "\n [ " + managerName + " ] :  " + question.Title), typeof(string));
+                            }
+                            questionsId.Add(question.QuestionId);
+                            counter++;
+                        }
+                        if (numberOfFormToPrint.ContainsKey(sec.tblForm))
+                        {
+                        if (numberOfFormToPrint[sec.tblForm] > 0)
+                        numberOfFormToPrint[sec.tblForm]--;
+                        if (numberOfFormToPrint[sec.tblForm] == 0)
+                            toPrintMore = false;
+                        }
+                        else
+                            toPrintMore = false;
                     }
                 }
             }
+            var toDoCalculateAvrageForMangers = false;
 
                foreach (tbl_Employee emp in EmployeeOfTheUnit)
                {
@@ -58,7 +96,15 @@ namespace BasisForAppraisal_finalProject.Models
                    row[6] = emp.Email;
                    for (int i = 7; i < counter + 7; i++)
                    {
-                       row[i] = getScoreForQuestion(questionsId.ToArray()[i - 7], emp.employeeId, listOfConnecorAnswers,listOfQuestions).ToString();
+                       var currentQuestion = questionsId.ToArray()[i - 7];
+                       if (avrageQuestionsId.Contains(currentQuestion))
+                       {
+                           avrageQuestionsId.Remove(currentQuestion);
+                           toDoCalculateAvrageForMangers = true;
+                       }
+                       row[i] = getScoreForQuestion(currentQuestion, emp.employeeId, listOfConnecorAnswers, listOfQuestions, toDoCalculateAvrageForMangers).ToString();
+
+                       toDoCalculateAvrageForMangers= false;
                    }
                        products.Rows.Add(row);
                }
@@ -71,17 +117,77 @@ namespace BasisForAppraisal_finalProject.Models
             return grid;
         }
 
+        private void getQuestionIDForAvrageMangers(Dictionary<tblForm, int> numberOfFormToPrint, List<int> avrageQuestionsId)
+        {
+            foreach(tblForm form in numberOfFormToPrint.Keys)
+            {
+                avrageQuestionsId.Add(form.Sections.First().Questions.Last().QuestionId);
+            }
+        }
 
-        private int getScoreForQuestion(int questionId, string employeeId, List<tbl_ConnectorAnswer> ConnectorAnswers, List<tbl_IntentionalQuestion> allQuestions)
+        private Dictionary<tblForm, int> NumerOfFromColumnToPrint(List<DBML.tbl_Employee> EmployeeOfTheUnit, List<tbl_ConnectorFormFill> listOfConnecor, List<FormFillByManager> resForYair, Dictionary<tblForm, List<string>> managerNameForColumn)
+        {
+            var className = EmployeeOfTheUnit.First().tbl_Class;
+
+
+            foreach (tbl_ConnectorFormFill c in listOfConnecor)
+            {
+                var temp = new FormFillByManager { Employee = c.tbl_Employee, Form= c.tblForm };
+                if (c.tbl_Employee1.tbl_Class.Equals(className) && c.tbl_Employee.IsManagerWrapper && !resForYair.Contains(temp))
+                {
+                    resForYair.Add(temp);
+                    if (!managerNameForColumn.ContainsKey(temp.Form))
+                    managerNameForColumn.Add(temp.Form, new List<string>());
+                }
+            }
+
+            Dictionary<tblForm, int> numberOfFormToPrint = new Dictionary<tblForm, int>();
+
+            foreach (FormFillByManager c in resForYair)
+            {
+                if (numberOfFormToPrint.ContainsKey(c.Form))
+                {
+                    numberOfFormToPrint[c.Form]++;
+                    managerNameForColumn[c.Form].Add(c.Employee.FullName);
+                }
+                else
+                {
+                    numberOfFormToPrint.Add(c.Form, 2);
+                    managerNameForColumn[c.Form].Add(c.Employee.FullName);
+                }
+            }
+
+            // for the name in Avrage coulmn for Managers
+            foreach(List<string> s in managerNameForColumn.Values)
+            {
+                s.Add("Avrage");
+            }
+
+         
+            return numberOfFormToPrint;
+        }
+
+
+        private string getScoreForQuestion(int questionId, string employeeId, List<tbl_ConnectorAnswer> ConnectorAnswers, List<tbl_IntentionalQuestion> allQuestions, bool toDoCalculateAvrageForMangers)
         {
             var quetionResult = new QuestionReport();
-            quetionResult.CalculationQuestion(employeeId, questionId, ConnectorAnswers, allQuestions);
-            if (quetionResult.directorCounter > 0)
-                return quetionResult.directorAverage;
-            if (quetionResult.colleagueCounter > 0)
-                return quetionResult.colleagueAverage;
+            if (toDoCalculateAvrageForMangers)
+            {
+                quetionResult.CalculationQuestion(employeeId, questionId, ConnectorAnswers, allQuestions);
+                if (quetionResult.directorCounter > 0)
+                    return quetionResult.directorAverage.ToString();
+                if (quetionResult.colleagueCounter > 0)
+                    return quetionResult.colleagueAverage.ToString();
+                if(quetionResult.selfCounter>0)
+                return quetionResult.selfAverage.ToString();
+                return "ריק";
+            }
+      
+              var res  = quetionResult.CalculationQuestionFoeType(employeeId, questionId, ConnectorAnswers, allQuestions);
+              if (res == -1)
+                  return "ריק";
 
-            return quetionResult.selfAverage;
+                    return res.ToString();
         }
     }
 }

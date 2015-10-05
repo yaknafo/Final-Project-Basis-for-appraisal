@@ -61,8 +61,12 @@ namespace BasisForAppraisal_finalProject.Controllers
             if (formCheckList.First().FormId == null)
                 Redirect("Index");
 
+            var formSelected = formCheckList.Where(x => x.IsSelected).Select(f => f.FormId).ToList();
             var dManager = new DataMangerCompany();
-            var res = dManager.ConnectorFormFill.Where(x => x.companyId == Companyiesa && x.tbl_Employee1.className == cls && x.tbl_Employee1.unitName == units).Select(s => s.tblForm).Distinct().ToList();
+            var res = dManager.ConnectorFormFill.Where(x => x.companyId == Companyiesa && x.tbl_Employee1.className == cls && x.tbl_Employee1.unitName == units && formSelected.Contains(x.formId)).Select(s => s.tblForm).Distinct().ToList();
+
+           
+            
             var EmployeeOfTheUnit = dManager.getEmployee(Companyiesa, units,cls);
 
             ExportToCSV(res, EmployeeOfTheUnit);
