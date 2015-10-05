@@ -65,7 +65,7 @@ namespace BasisForAppraisal_finalProject.Models
             //5. Data Reader methods
             for (int i = 0; i < result.Tables[0].Rows.Count; i++)
             {
-                throw new Exception( "    " + result.Tables[0].Rows.Count);
+             
 
                 if (result.Tables[0].Rows[i][0] != string.Empty)
                 {
@@ -94,6 +94,7 @@ namespace BasisForAppraisal_finalProject.Models
             }
             catch (Exception ex)
             {
+                throw ex;
 
             }
             finally
