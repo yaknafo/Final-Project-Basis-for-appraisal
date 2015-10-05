@@ -215,6 +215,19 @@ namespace BasisForAppraisal_finalProject.Models
             }
         }
 
+        public void addWorkerToDbNotAsync(tbl_Employee emp)
+        {
+            if (!manager.tbl_Employees.Contains(emp))
+            {
+                CreateUserWithRole(emp.employeeId, emp.employeeId, RolesConstans.Guest);
+
+                this.manager.tbl_Employees.InsertOnSubmit(emp);
+
+                this.manager.SubmitChanges();
+
+            }
+        }
+
         public async void EditEmployee(tbl_Employee emp)
         {
             if (manager.tbl_Employees.Contains(emp))

@@ -81,7 +81,7 @@ namespace BasisForAppraisal_finalProject.Models
                         className = SetClassToEmployee(idCompany, DM, unitName, className, emp);
 
                      
-                        DM.addWorkerToDb(emp);
+                        DM.addWorkerToDbNotAsync(emp);
                     }
                 }
             }
