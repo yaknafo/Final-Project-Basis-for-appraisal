@@ -33,14 +33,14 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         public ActionResult Edit(int id)
         {
-            return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = id });
+            return RedirectToAction("NewIntentionalFormWorkshop", "MainFormCreator", new { id = id });
         }
 
         public ActionResult CopyForm(int id)
         {
             var CopyService = new CopyFormService();
             var newForm = CopyService.CopyFormById(id);
-            return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = newForm });
+            return RedirectToAction("NewIntentionalFormWorkshop", "MainFormCreator", new { id = newForm });
         }
 
 
