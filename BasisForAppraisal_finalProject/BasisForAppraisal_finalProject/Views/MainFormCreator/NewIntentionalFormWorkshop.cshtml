@@ -19,7 +19,7 @@
     <div id="ActionBtn" style="position: fixed; margin-top: -8%;  width: 100%; ">
 
         <!-- the save button-->
-        <button type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-primary btn-lg glyphicon glyphicon-floppy-disk" title="שמור שינויים" style="margin: 1%; width: 90px; background-color: black"></button>
+        <button type="submit" name="submit" value=@WorkShopActions.Save class="btn btn-lg glyphicon glyphicon-floppy-save" title="שמור שינויים" style="margin: 1%; width: 90px; background-color: gray;color:white; border-color: gray; "></button>
 
 
         <!-- Preview button -->
@@ -27,14 +27,14 @@
                        {
                            formid = Model.form.formId
                        },
-            new { target = "_blank", @class = "btn btn-primary btn-lg glyphicon glyphicon-list-alt", @style = "background-color: black; margin: 1%;width: 90px;" })
+                                               new { target = "_blank", @class = " btn btn-lg glyphicon glyphicon-sunglasses", @style = "background-color:gray;color:white; margin: 1%;width: 90px;" })
 
 
-        @Html.DropDownList("add", ViewData["ListData"] as List<SelectListItem>, new { @class = "styled-select", id = "pagesizelist" })
+        @Html.DropDownList("add", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "pagesizelist", @style = "margin: 1%;background-color:gray;color:white" })
      </div>
     
     
-   
+        //class ="btn-lg dropdown-toggle"
         <div id="Panel" onchange="showWorningSaveMsg()" style="width: 95%; margin-top: 10%; ">
             <div class="panel panel-default">
                 <div class="panel-heading">

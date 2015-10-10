@@ -201,13 +201,22 @@ namespace BasisForAppraisal_finalProject.Controllers
 
        public ActionResult NewIntentionalFormWorkshop(int id = 0)
        {
-           var b = new DataManager();
-           var q = b.GetFormWithSections(id);
-           var t = new ViewModel.FormViewModel(q);
-           ViewBag.MovieType = GetDropDown();
-           ViewData["ListData"] = GetDropDown();
-           ViewBag.NV = "true";
-           return View(t);
+             var dataManager = new DataManager();
+           try
+           {
+               var q = dataManager.GetFormWithSections(id);
+               var t = new ViewModel.FormViewModel(q);
+               ViewBag.MovieType = GetDropDown();
+               ViewData["ListData"] = GetDropDown();
+               ViewBag.NV = "true";
+               return View(t);
+           }
+           catch(Exception ex)
+           {
+               TempData[ResultOperationConstans.Failed] = ex.Message;
+               return backToMainForm();
+
+           }
        }
 
 
