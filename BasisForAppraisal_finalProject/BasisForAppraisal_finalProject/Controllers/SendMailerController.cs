@@ -37,7 +37,7 @@ namespace SendMail.Controllers
                           "<br /בכניסה לאתר תצטרך להכניס שם משתמש וסיסמא אשר מצורפים למייל זה <br />" +
                           "<br />לאחר כניסה לאתר תוכל לצפות בכל הטפסים אשר עלייך למלא<br />" +
                           "<br />:קישור לאתר<br />" +
-                          "<br />http://localhost:21981/Account/Login<br />";
+                          "<br />http://132.75.252.109/oy2015/Account/Login<br />";
             String name = "<br /> שם משתמש:";
             String password = "<br /> סיסמא:";
            

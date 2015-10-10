@@ -27,10 +27,10 @@
                        {
                            formid = Model.form.formId
                        },
-                                               new { target = "_blank", @class = " btn btn-lg glyphicon glyphicon-sunglasses", @style = "background-color:gray;color:white; margin: 1%;width: 90px;" })
+                                                    new { target = "_blank", @class = " btn btn-lg glyphicon glyphicon-sunglasses", @style = "background-color:gray;color:white; margin: 1%;width: 90px;", title = "תצוגה מקדימה" })
 
 
-        @Html.DropDownList("add", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "pagesizelist", @style = "margin: 1%;background-color:gray;color:white" })
+        @Html.DropDownList("add", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "pagesizelist", @style = "margin: 1%;background-color:gray;color:white", title = "הוספת שאלה" })
      </div>
     
     
