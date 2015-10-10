@@ -65,7 +65,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var fm = new FormManager();
             var numberOfForm=fm.AddNewForm();
-            return RedirectToAction("IntentionalFormWorkshop", "MainFormCreator", new { id = numberOfForm });
+            return RedirectToAction("NewIntentionalFormWorkshop", "MainFormCreator", new { id = numberOfForm });
 
         }
 
