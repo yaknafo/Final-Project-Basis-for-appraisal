@@ -66,7 +66,7 @@ namespace SendMail.Controllers
                         smtp.Host = "smtp.gmail.com";
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new System.Net.NetworkCredential("dontreplaybasisforappraisal@gmail.com", "basis123456");// Enter seders User name and password
+                        smtp.Credentials = new System.Net.NetworkCredential(_objModelMail.From, "basisFor#Workshop#gmail");// Enter seders User name and password
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
                     }
