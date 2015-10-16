@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BasisForAppraisal_finalProject.DBML.tblForm>
+<script src="~/Scripts/DataTable/dataTables.keyTable.js"></script>
+<script src="~/Scripts/DataTable/jquery.js"></script>
+<script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
+<link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
+<link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
+
+<button class="btn btn-info" style="width:145px; text-align:center; margin-top:2%;"><span title="הוספת טופס לארגון" data-toggle="modal" data-target="#TableFormsModel" style="cursor:pointer;  margin-top:2%;">טפסים קיימים </span></button>
+<!-- Modal -->
+
+<div class="modal fade" id="TableFormsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:60%;height:90%; margin-top:2%; margin-left:17%" dir="rtl">
+
+    <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div dir="rtl" style="margin-top:3%">
+            <div class="panel panel-info">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title" style=" text-align:center;font-size:24px;"><strong>טפסים  קיימים למילוי במחזור </strong></h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default" dir="rtl" style="width:95%; margin-right:2%; margin-top:2%; margin-bottom: 10%; text-align:center">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="font-size: 16px; text-align:right;"><span class="glyphicon glyphicon-search"></span></div>
+            <!---knafo-->
+            <table id="myTable3" class="table-bordered" cellspacing="0" width="100%" align="right" style=" background-color:#E8E8E8;">
+                <thead>
+                    <tr style=" font-size:20px;">
+                        <td align="center"><strong>שם</strong></td>
+                        <td align="center"><strong>שינוי אחרון</strong></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td align="center">@item.FormName</td>
+                            <td align="center">@item.lastChange</td>
+                         
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var table = $('#myTable3').DataTable();
+    new $.fn.dataTable.KeyTable(table);
+
+</script>
+
+

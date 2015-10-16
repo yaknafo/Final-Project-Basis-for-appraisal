@@ -59,9 +59,15 @@ namespace BasisForAppraisal_finalProject.Controllers
         public ActionResult ManageCompany(int id,string unit,string cl)
         {
             var dManager = new DataManager();
+            var dManagerC = new DataMangerCompany();
             var comapny = dManager.Companyies.Where(x => x.companyId == id).First();
             var myunit = comapny.Units.Where(x => x.unitName.Equals( unit)).FirstOrDefault();
             var myclass = myunit.tbl_Classes.Where(x => x.className.Equals(cl)).FirstOrDefault();
+
+            // get all forms that has connection to that class
+            var res = dManagerC.ConnectorFormFill.Where(x => x.companyId == comapny.companyId && (x.tbl_Employee1.className == myclass.className && x.tbl_Employee1.unitName == myunit.unitName) || (x.tbl_Employee.className == myclass.className && x.tbl_Employee.unitName == myunit.unitName)).Select(s => s.tblForm).Distinct().ToList();
+           ViewData["FromsList"] = res;
+
             var unitAndForm = new ClassUnitViewModel(myclass);
             comapny.LoadEmployees();
             return View(unitAndForm);

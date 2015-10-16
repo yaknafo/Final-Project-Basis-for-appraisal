@@ -494,6 +494,7 @@
     <Content Include="Views\ExportData\_FormList.cshtml" />
     <Content Include="Views\MainFormCreator\_LoadindFeedBack.cshtml" />
     <Content Include="Views\Shared\_LoadindFeedBack.cshtml" />
+    <Content Include="Views\MainCompanies\_ListOfFormsPerClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
