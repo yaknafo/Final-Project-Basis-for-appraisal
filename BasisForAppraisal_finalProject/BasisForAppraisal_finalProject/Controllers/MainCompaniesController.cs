@@ -240,6 +240,11 @@ namespace BasisForAppraisal_finalProject.Controllers
 
         }
 
+        public ActionResult GoToWorkShop(int id)
+        {
+            return RedirectToAction("NewIntentionalFormWorkshop", "MainFormCreator", new { id = id });
+        }
+
 
         /// ---------------------------------- Ajax Part -----------------------------------------------------------//
         /// 
