@@ -96,11 +96,16 @@ namespace BasisForAppraisal_finalProject.Models
         
         private void deleteConectForWorker(int companyid , List<tbl_Employee> myList)
         {
-            var listcomapny= manager.tbl_ConnectorFormFills.Where(x => x.companyId == companyid).ToList();
+         
             foreach(var person in myList)
             {
-                var delete= listcomapny.Where(x=>x.employeeFillId==person.employeeId||x.employeeOnId==person.employeeId).ToList();
+                var deleteAnswerFromForms = manager.tbl_ConnectorAnswers.Where(x => x.employeeFillId == person.employeeId || x.employeeOnId == person.employeeId).ToList();
+                manager.tbl_ConnectorAnswers.DeleteAllOnSubmit(deleteAnswerFromForms);
+                manager.SubmitChanges();
+
+                var delete = manager.tbl_ConnectorFormFills.Where(x => x.employeeFillId == person.employeeId || x.employeeOnId == person.employeeId).ToList();
                 manager.tbl_ConnectorFormFills.DeleteAllOnSubmit(delete);
+                manager.SubmitChanges();
                
 
             }
@@ -118,21 +123,21 @@ namespace BasisForAppraisal_finalProject.Models
                 manager.SubmitChanges();
                 manager.tbl_Employees.DeleteAllOnSubmit(workersToDelete);
                 manager.SubmitChanges();
-                var workersAfterDelete = manager.tbl_Employees.Where(x => x.className.Equals(className) && x.unitName == unitid).ToList();
+                var workersAfterDelete = manager.tbl_Employees.Where(x =>x.companyId == companyid && x.className.Equals(className) && x.unitName == unitid).ToList();
                 // if somone use this class-> dont delete it!
                 if (!(workersAfterDelete.Count() > 0))
                 {
                     manager.tbl_Classes.DeleteOnSubmit(classToDelete);
                     manager.SubmitChanges();
                 }
-                workersAfterDelete = manager.tbl_Employees.Where(x => x.unitName.Equals(unitid)).ToList();
-                manager.SubmitChanges();
-                // if somone use this unit-> dont delete it!
-                if (!(workersAfterDelete.Count() > 0))
-                {
-                    manager.tbl_Units.DeleteOnSubmit(unitToDelete);
-                    manager.SubmitChanges();
-                }
+                //workersAfterDelete = manager.tbl_Employees.Where(x => x.unitName.Equals(unitid)).ToList();
+                //manager.SubmitChanges();
+                //// if somone use this unit-> dont delete it!
+                //if (!(workersAfterDelete.Count() > 0))
+                //{
+                //    manager.tbl_Units.DeleteOnSubmit(unitToDelete);
+                //    manager.SubmitChanges();
+                //}
             }
             catch
             {
