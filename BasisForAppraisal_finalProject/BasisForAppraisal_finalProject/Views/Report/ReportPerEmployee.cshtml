@@ -13,14 +13,70 @@
     <link href="~/Content/FontStyle.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+    <script src="~/JS/GoogleCharts/PieChart.js"></script>
+    @*<script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['מתחת למידה', @Model.Below],
+              ['במידה נכונה',  @Model.Tie],
+              ['יתר על למידה',  @Model.Over]
+            ]);
+
+            var options = {
+                title: 'סיכום טבלה',
+                pieHole: 0.4,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+    </script>*@
+    <script type="text/javascript">
+        google.charts.setOnLoadCallback(drawStuff);
+
+        function drawStuff() {
+            var data = new google.visualization.arrayToDataTable([
+              ['Move', 'ממוצע'],
+              ["הערכה עצמית", @Model.SelfAvg],
+              ["הערכת עמיתים", @Model.ColAvg],
+               
+            ]);
+
+            var options = {
+                title: 'ממוצעי הערכות',
+                width: 600,
+                legend: { position: 'none' },
+                chart: { subtitle: 'Avrage' },
+                axes: {
+                    x: {
+                        0: { side: 'top', label: 'Avrages' } // Top x-axis.
+                    }
+                },
+                bar: { groupWidth: "90%" }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+            // Convert the Classic options to Material options.
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        };
+    </script>
+
     <title>ReportPerEmployee</title>
 </head>
 <body>
     <div dir="rtl">
+        <input type="number" id="BelowId" value="@Model.Below" class="collapse" />
+        <div id="TieId" class="collapse">@Model.Tie</div>
+        <div id="OverId" class="collapse">@Model.Over</div>
         @*<div class="row title alert-success">
-            <h2 class="col-xs-12 col-sm-6 col-md-8">דו"ח: @Model.Form.FormName</h2>
-            <h2 class="col-xs-12 col-sm-6 col-md-8">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
-        </div>*@
+                <h2 class="col-xs-12 col-sm-6 col-md-8">דו"ח: @Model.Form.FormName</h2>
+                <h2 class="col-xs-12 col-sm-6 col-md-8">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
+            </div>*@
         <div class="row alert-success" style="border:inset">
             <h2 class="col-md-8">דו"ח: @Model.Form.FormName</h2>
             <h2 class="col-md-4">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
@@ -32,83 +88,87 @@
         </div>
         <table dir="rtl" class="table table-bordered" style="width:70%;">
             <tr dir="rtl">
-                <td style="background-color: #00CC00">עומד בציפיות</td>
-                <td style="background-color: #888888;">עומד חלקית בציפיות</td>
-                <td style="background-color: #CC0000">לא עומד בציפיות</td>
+                <td class="alert-success">עומד בציפיות</td>
+                <td class="alert-dismissible">עומד חלקית בציפיות</td>
+                <td class="alert-danger">לא עומד בציפיות</td>
             </tr>
-            </table>
-            <table dir="rtl" class="table table-bordered" style="width:70%;">
-                <tr>
-                    <td dir="rtl">
-                        שאלה
-                    </td>
-                    <td>
-                        שגריר
-                    </td>
-                    <td>
-                        עמיתים
-                    </td>
-                    <td>
-                        ממונים
-                    </td>
-                    <td>
-                        אני ביחס לאחרים
-                    </td>
-                </tr>
-                @foreach (QuestionReport c in Model.FormQiestopnReport)
-{
-    if (@c.colleagueAverage > @c.selfAverage)
-    {
-        <tr dir="rtl" style="background-color: #00CC00">
-            <td>
-                @c.Question.Title
-            </td>
-            <td>
-                @c.selfAverage
-            </td>
-            <td>
-                @c.colleagueAverage
-            </td>
-            <td>
-                @c.directorAverage
-            </td>
-            <td>
-                @if (@c.colleagueAverage > @c.selfAverage)
-                {<p>מעריך את עצמו בצורה טובה</p> }
+        </table>
+        <table dir="rtl" class="table table-sm" style="width:70%;">
+            <tr style="font-size:large">
+                <td dir="rtl">
+                    שאלה
+                </td>
+                <td>
+                    שגריר
+                </td>
+                <td>
+                    עמיתים
+                </td>
+                <td>
+                    ממונים
+                </td>
+                <td>
+                    השוואה
+                </td>
+            </tr>
+            @foreach (QuestionReport c in Model.FormQiestopnReport)
+            {
+                if (@c.colleagueAverage > @c.selfAverage)
+                {
+                    <tr dir="rtl">
+                        <td class="table-success">
+                            @c.Question.Title
+                        </td>
+                        <td>
+                            @c.selfAverage
+                        </td>
+                        <td>
+                            @c.colleagueAverage
+                        </td>
+                        <td>
+                            @c.directorAverage
+                        </td>
+                        <td>
+                            @if (@c.colleagueAverage > @c.selfAverage)
+                            {<p class="glyphicon glyphicon-ok alert-success"></p> }
+                            else
+                            {
+                                <p class="glyphicon glyphicon-remove"></p>
+                            }
+                        </td>
+                    </tr>
+                }
                 else
                 {
-                    <p>מעריך את עצמו יתר על המידה</p>
+                    <tr dir="rtl">
+                        <td>
+                            @c.Question.Title
+                        </td>
+                        <td>
+                            @c.selfAverage
+                        </td>
+                        <td>
+                            @c.colleagueAverage
+                        </td>
+                        <td>
+                            @c.directorAverage
+                        </td>
+                        <td>
+                            @if (@c.colleagueAverage > @c.selfAverage)
+                            {<p class="glyphicon glyphicon-remove alert-danger"></p>}
+                            else
+                            {
+                                <p class="glyphicon glyphicon-remove alert-danger"></p>
+                            }
+                        </td>
+                    </tr>
                 }
-            </td>
-        </tr>
-    }
-    else
-    {
-        <tr dir="rtl" style="background-color: #CC0000">
-            <td>
-                @c.Question.Title
-            </td>
-            <td>
-                @c.selfAverage
-            </td>
-            <td>
-                @c.colleagueAverage
-            </td>
-            <td>
-                @c.directorAverage
-            </td>
-            <td>
-                @if (@c.colleagueAverage > @c.selfAverage)
-                {<p>מעריך את עצמו בצורה טובה</p> }
-                else
-                {
-                    <p>מעריך את עצמו יתר על המידה</p>
-                }
-            </td>
-        </tr>
-    }
-}
-            </table>
-</div>
+            }
+        </table>
+    </div>
+    <div class="row">
+                <div class="col-lg-6"id="donutchart" style="width: 50%; height: 500px;"></div>
+        <div class="col-lg-9" id="top_x_div" style="width: 25%; height: 500px;"></div>
+    </div>
 </body>
 </html>

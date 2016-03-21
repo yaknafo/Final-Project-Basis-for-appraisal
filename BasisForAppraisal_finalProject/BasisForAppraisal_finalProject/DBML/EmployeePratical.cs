@@ -91,7 +91,7 @@ namespace BasisForAppraisal_finalProject.DBML
       {
           get
           {
-              return IsManger;
+              return IsManger.HasValue?IsManger.Value:false;
           }
           set
           {

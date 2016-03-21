@@ -17,11 +17,11 @@ namespace BasisForAppraisal_finalProject.Models
          public int selfCounter { get; set; }
 
 
-        public int colleagueAverage{get ;set;}
+        public double colleagueAverage{get ;set;}
 
         public int colleagueCounter { get; set; }
 
-         public int directorAverage{get ;set;}
+         public double directorAverage{get ;set;}
 
          public int directorCounter { get; set; }
 

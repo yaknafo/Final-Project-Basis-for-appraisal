@@ -8,12 +8,12 @@
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<link href="~/Content/FontStyle.css" rel="stylesheet" />
+@*<link href="~/Content/FontStyle.css" rel="stylesheet" />*@
 <link href="~/Content/WorkShop.css" rel="stylesheet" />
 <script src="~/Content/workShopScript.js"></script>
 <h2>NewIntentionalFormWorkshop</h2>
 
-@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair", }))
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "yair" }))
     {
 
     <div id="ActionBtn" style="position: fixed; margin-top: -8%;  width: 100%; ">
@@ -55,4 +55,5 @@
         form.submit();
         $("#pagesizelist").val("");
     });
+ 
 </script>

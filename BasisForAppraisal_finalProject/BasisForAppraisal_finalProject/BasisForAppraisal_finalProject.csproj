@@ -289,6 +289,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
+    <Content Include="JS\GoogleCharts\PieChart.js" />
     <Content Include="photos\addQues.png" />
     <Content Include="photos\backTo.png" />
     <Content Include="photos\deleteQ.png" />
@@ -341,6 +342,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="fonts\YOAVRG_.TTF" />
+    <None Include="Properties\PublishProfiles\BFEAmzon.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -499,6 +501,7 @@
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
     <Folder Include="Scripts\AutoAutocomplete\" />
+    <Folder Include="Scripts\Charts\" />
     <Folder Include="Views\check\" />
     <Folder Include="Views\MainCompanies\DisplayTemplates\" />
   </ItemGroup>

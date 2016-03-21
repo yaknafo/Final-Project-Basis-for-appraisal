@@ -9,6 +9,7 @@ using Microsoft.Office.Interop;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 
 namespace BasisForAppraisal_finalProject.Models
@@ -24,6 +25,15 @@ namespace BasisForAppraisal_finalProject.Models
             var cultureinfo = new System.Globalization.CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = cultureinfo;
             System.Threading.Thread.CurrentThread.CurrentUICulture = cultureinfo;
+        }
+
+        public BFADataBasedbmlDataContext GetNewDataManager()
+        {
+            var manager = DbmlBFADataContext.GetDataContextInstance();
+            var cultureinfo = new System.Globalization.CultureInfo("en-US");
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureinfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureinfo;
+            return manager;
         }
 
         /// <summary>
@@ -445,6 +455,73 @@ namespace BasisForAppraisal_finalProject.Models
             manager.SubmitChanges();
         }
 
+        ////  ------------------------------- Reports --------------------------------------------------------------//
+
+        public void SaveReportForIndividual(ReportForIndividual report)
+        {
+            if (!manager.ReportForIndividuals.Any(x => x.IndividualId == report.IndividualId && x.FormId == report.FormId))
+            {
+                manager.ReportForIndividuals.InsertOnSubmit(report);
+                manager.SubmitChanges();
+            }
+        }
+
+        public void SaveReportForIndividualLines(string IndividualId,int formId,int sectionId, int QuestionId, double SelfEvaluation, double collegesEvaluation, double SupervisorEvaluation)
+        {
+            ReportForIndividualLine lineUpdate;
+
+            if (manager.ReportForIndividualLines.Any(x => x.IndividualId == IndividualId && x.QuestionId == QuestionId))
+            {
+                lineUpdate = manager.ReportForIndividualLines.FirstOrDefault(x => x.IndividualId == IndividualId &&  x.QuestionId == QuestionId);
+                if (lineUpdate != null)
+                {
+                    lineUpdate.SelfEvaluation = SelfEvaluation;
+                    lineUpdate.collegesEvaluation = collegesEvaluation;
+                    lineUpdate.SupervisorEvaluation = SupervisorEvaluation;
+                    manager.SubmitChanges();
+                }
+                   
+            }
+            else
+            {
+                var newLine = new ReportForIndividualLine()
+                {
+                    QuestionId = QuestionId,
+                    IndividualId = IndividualId,
+                    QuestioFormId = formId,
+                    FromId = formId,
+                    SectionId = sectionId,
+                    SelfEvaluation = SelfEvaluation,
+                    collegesEvaluation = collegesEvaluation,
+                    SupervisorEvaluation = SupervisorEvaluation
+                };
+
+                manager.ReportForIndividualLines.InsertOnSubmit(newLine);
+                manager.SubmitChanges();
+              
+            }
+              //manager.SubmitChanges();
+        }
+
+
+        public ReportForIndividual GetReportForIndividual(string IndividualId, int formid )
+        {
+            return manager.ReportForIndividuals.FirstOrDefault(x => x.IndividualId == IndividualId && x.FormId == formid);
+        }
+
+        public bool Save()
+        {
+            try
+            {
+                manager.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
 
        ////  ------------------------------- secutiry --------------------------------------------------------------//

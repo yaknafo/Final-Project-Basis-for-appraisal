@@ -250,9 +250,9 @@ namespace BasisForAppraisal_finalProject.Models
                 var compantForUnit = manager.tbl_Companies.Where(x => x.companyId == unit.companyId).FirstOrDefault();
                 if (compantForUnit != null)
                 {
-                    unit.tbl_Classes = null;
                     manager.tbl_Units.InsertOnSubmit(unit);
-                    unit.tbl_Classes = null;
+                    //unit.tbl_classes = null;
+                    compantForUnit.Units.Add(unit);
                     manager.SubmitChanges();
                 }
             }
