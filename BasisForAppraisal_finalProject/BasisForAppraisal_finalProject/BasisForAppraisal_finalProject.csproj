@@ -261,6 +261,8 @@
     <Content Include="Content\FontStyle.css" />
     <Content Include="Content\HomePage.css" />
     <Content Include="Content\images\animated-overlay.gif" />
+    <Content Include="Content\images\OopsError.png" />
+    <Content Include="Content\images\OopsErrorSimliy.png" />
     <Content Include="Content\images\StyleSheet1.css" />
     <Content Include="Content\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -497,6 +499,8 @@
     <Content Include="Views\MainFormCreator\_LoadindFeedBack.cshtml" />
     <Content Include="Views\Shared\_LoadindFeedBack.cshtml" />
     <Content Include="Views\MainCompanies\_ListOfFormsPerClass.cshtml" />
+    <Content Include="Views\Shared\GuestError.cshtml" />
+    <Content Include="Views\Shared\_LayoutGuest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

@@ -70,6 +70,7 @@
 </head>
 <body>
     <div dir="rtl">
+        
         <input type="number" id="BelowId" value="@Model.Below" class="collapse" />
         <div id="TieId" class="collapse">@Model.Tie</div>
         <div id="OverId" class="collapse">@Model.Over</div>
@@ -77,14 +78,19 @@
                 <h2 class="col-xs-12 col-sm-6 col-md-8">דו"ח: @Model.Form.FormName</h2>
                 <h2 class="col-xs-12 col-sm-6 col-md-8">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
             </div>*@
-        <div class="row alert-success" style="border:inset">
-            <h2 class="col-md-8">דו"ח: @Model.Form.FormName</h2>
-            <h2 class="col-md-4">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>
+        <div class="row" style="border:inset">
+            <img id="img_logo" alt="Logo" src="~/photos/Logo/Icon_Basis_for_evaluation_Tran.gif" style="margin-left:15%; height:60px; width:190px;" />
+            <h1 class="col-md-8">דו"ח לשגריר</h1>
+            @*<h2 class="col-md-4">שם: @Model.Employee.lastName @Model.Employee.firstName</h2>*@
         </div>
-        <div dir="rtl" class="row alert-info" style="border:inset">
-            <h3 class="col-md-4 alert-info">מחזור: @Model.Employee.className</h3>
-            <h3 class="col-md-4 alert-info">יחידה: @Model.Employee.unitName</h3>
-            <h3 class="col-md-4 alert-info">חברה: @Model.Employee.tbl_Class.tbl_Unit.tbl_Company.comapnyName</h3>
+        <div class="row" style="border:inset">
+            <h2 class="col-lg-12"><u>פרטי שגריר</u></h2>
+            <br />
+            <h4 class="col-lg-12">תעדות זהות: @Model.Employee.employeeId</h4>
+            <h4 class="col-lg-12">שם מלא: @Model.Employee.firstName  @Model.Employee.lastName</h4>
+            <h4 class="col-lg-12">חברה: @Model.Employee.tbl_Class.tbl_Unit.tbl_Company.comapnyName</h4>
+            <h4 class="col-lg-12">מחזור: @Model.Employee.className</h4>
+            <h4 class="col-lg-12">יחידה: @Model.Employee.unitName</h4>
         </div>
         <table dir="rtl" class="table table-bordered" style="width:70%;">
             <tr dir="rtl">
@@ -93,7 +99,7 @@
                 <td class="alert-danger">לא עומד בציפיות</td>
             </tr>
         </table>
-        <table dir="rtl" class="table table-sm" style="width:70%;">
+        <table dir="rtl" class="table table-sm" style="width: 70%; border: inset">
             <tr style="font-size:large">
                 <td dir="rtl">
                     שאלה
@@ -166,7 +172,7 @@
             }
         </table>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top:2%">
                 <div class="col-lg-6"id="donutchart" style="width: 50%; height: 500px;"></div>
         <div class="col-lg-9" id="top_x_div" style="width: 25%; height: 500px;"></div>
     </div>
