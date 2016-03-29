@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BasisForAppraisalDB" Class="BFADataBasedbmlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=LENOVO-PC-YAIR;Initial Catalog=BasisForAppraisalDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BasisForAppraisalDBConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BasisForAppraisalAWS" Class="BFADataBasedbmlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=basisfor.cba825xpbtm6.us-west-2.rds.amazonaws.com,1433;Initial Catalog=BasisForAppraisalAWS;Persist Security Info=True;User ID=BFE;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BasisForAppraisalAWSConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
     <Type Name="tbl_IntentionalQuestion">
       <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -30,22 +30,6 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="tbl_Section_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="FormId,SectionId" OtherKey="FormId,SectionId" Type="tbl_IntentionalQuestion" />
       <Association Name="tblForm_tbl_Section" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Employee" Member="tbl_Employees">
-    <Type Name="tbl_Employee">
-      <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="unitName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="className" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="employeeId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="firstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="lastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="IsManger" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbl_Employee_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="employeeId" OtherKey="employeeFillId" Type="tbl_ConnectorFormFill" />
-      <Association Name="tbl_Employee_tbl_ConnectorFormFill1" Member="tbl_ConnectorFormFills1" ThisKey="employeeId" OtherKey="employeeOnId" Type="tbl_ConnectorFormFill" />
-      <Association Name="tbl_Employee_ReportForIndividual" Member="ReportForIndividuals" ThisKey="employeeId" OtherKey="IndividualId" Type="ReportForIndividual" />
-      <Association Name="tbl_Class_tbl_Employee" Member="tbl_Class" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="tbl_Class" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Company" Member="tbl_Companies">
@@ -107,9 +91,9 @@
       <Column Name="done" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="tbl_ConnectorFormFill_tbl_ConnectorAnswer" Member="tbl_ConnectorAnswers" ThisKey="companyId,employeeFillId,employeeOnId,formId" OtherKey="companyId,employeeFillId,employeeOnId,formConnectorId" Type="tbl_ConnectorAnswer" />
       <Association Name="tbl_Company_tbl_ConnectorFormFill" Member="tbl_Company" ThisKey="companyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
+      <Association Name="tblForm_tbl_ConnectorFormFill" Member="tblForm" ThisKey="formId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
       <Association Name="tbl_Employee_tbl_ConnectorFormFill" Member="tbl_Employee" ThisKey="employeeFillId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
       <Association Name="tbl_Employee_tbl_ConnectorFormFill1" Member="tbl_Employee1" ThisKey="employeeOnId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
-      <Association Name="tblForm_tbl_ConnectorFormFill" Member="tblForm" ThisKey="formId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_ConnectorAnswers" Member="tbl_ConnectorAnswers">
@@ -150,6 +134,23 @@
       <Column Name="SupervisorEvaluation" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividual" ThisKey="IndividualId,FromId" OtherKey="IndividualId,FormId" Type="ReportForIndividual" IsForeignKey="true" />
       <Association Name="tbl_IntentionalQuestion_ReportForIndividualLine" Member="tbl_IntentionalQuestion" ThisKey="QuestioFormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Employee" Member="tbl_Employees">
+    <Type Name="tbl_Employee">
+      <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="unitName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="className" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="employeeId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="firstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="lastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="IsManger" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="IsAccompanied" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_Employee_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="employeeId" OtherKey="employeeFillId" Type="tbl_ConnectorFormFill" />
+      <Association Name="tbl_Employee_tbl_ConnectorFormFill1" Member="tbl_ConnectorFormFills1" ThisKey="employeeId" OtherKey="employeeOnId" Type="tbl_ConnectorFormFill" />
+      <Association Name="tbl_Employee_ReportForIndividual" Member="ReportForIndividuals" ThisKey="employeeId" OtherKey="IndividualId" Type="ReportForIndividual" />
+      <Association Name="tbl_Class_tbl_Employee" Member="tbl_Class" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="tbl_Class" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

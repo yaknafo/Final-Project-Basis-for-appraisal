@@ -530,6 +530,11 @@ namespace BasisForAppraisal_finalProject.Models
             return (bool)Employees.FirstOrDefault(x => x.employeeId == id).IsManger;
         }
 
+        public bool IsAccompanied(string id)
+        {
+            return (bool)Employees.FirstOrDefault(x => x.employeeId == id).IsAccompanied;
+        }
+
        // public async void CreateRole(string roleName)
        // {
        //     var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));

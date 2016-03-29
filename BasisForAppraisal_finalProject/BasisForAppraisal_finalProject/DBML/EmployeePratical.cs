@@ -145,6 +145,9 @@ namespace BasisForAppraisal_finalProject.DBML
         [Display(Name = "מנהל:")]
         public string IsManger { get; set; }
 
+        [Display(Name = "מלווה בארגון:")]
+        public bool IsAccompanied { get; set; }
+
 
 
 

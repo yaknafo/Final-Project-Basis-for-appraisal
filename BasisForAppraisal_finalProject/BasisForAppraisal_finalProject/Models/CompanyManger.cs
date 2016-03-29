@@ -106,8 +106,8 @@ namespace BasisForAppraisal_finalProject.Models
 
         private tbl_Employee GetEmployeeFromRow(DataRow dataRow, int numberOfCol, int idCompany)
         {
-            if (numberOfCol < 7)
-                throw new Exception("הטבלה אינה תקינה מכילה פחות מ7 עמודות");
+            if (numberOfCol < 8)
+                throw new Exception("הטבלה אינה תקינה מכילה פחות מ8 עמודות");
             var emp = new tbl_Employee();
             emp.companyId = idCompany;
             emp.employeeId = dataRow[0].ToString();
@@ -116,7 +116,8 @@ namespace BasisForAppraisal_finalProject.Models
             emp.Email = dataRow[3].ToString();
             emp.className = dataRow[4].ToString();
             emp.unitName = dataRow[5].ToString();
-            emp.IsManagerWrapper = (dataRow[6] == "כן");
+            emp.IsManagerWrapper = (dataRow[6].ToString() == "כן");
+            emp.IsAccompanied = (dataRow[7].ToString() == "כן");
             return emp;
         }
 

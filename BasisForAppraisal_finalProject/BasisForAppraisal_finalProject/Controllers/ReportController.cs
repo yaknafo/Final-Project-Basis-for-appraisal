@@ -35,8 +35,6 @@ namespace BasisForAppraisal_finalProject.Controllers
 
                 foreach (QuestionReport c in calculation.FormQiestopnReport)
                 {
-
-
                     DMO.SaveReportForIndividualLines(employeeId, form.formId, form.Sections.First().SectionId, c.Question.QuestionId, c.selfAverage, c.colleagueAverage, c.directorAverage);
                 }
             }
