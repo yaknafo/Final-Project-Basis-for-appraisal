@@ -46,10 +46,20 @@ namespace BasisForAppraisal_finalProject.ViewModel
             this.FillBy = connector.employeeFillId;
             this.CompanyId = connector.companyId;
             this.FormIdConnector = connector.formId;
+            FillterQuestions();
 
 	    }
 
-        public FormFillerViewModel()
+        public void  FillterQuestions()
+        {
+            if (dm.IsManager(FillBy))
+                questions = questions.Where(x => x.ForManager).ToList();
+            if (dm.IsAccompanied(FillBy))
+                questions = questions.Where(x => x.ForAccompanied).ToList();
+
+        }
+
+        public void FillterQuestionForUserType()
         {
 
         }

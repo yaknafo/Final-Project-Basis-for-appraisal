@@ -21,10 +21,20 @@
         <h6>שאלה</h6>
             @Html.TextAreaFor(x => x.Title,new { @cols = 90, @rows = 2 })
     </div>
-        <div name="box" >
-            @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
-            <strong>חובה </strong>
-        </div>
+        <table>
+                <td>
+                @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                <strong>חובה    </strong>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(x => x.ForManager, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                    <strong>  מוביל </strong>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(x => x.ForAccompanied, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                    <strong>מלווה   </strong>
+                </td>
+        </table>
         
     @*@if (Model.QuestionId > 0)
     {

@@ -375,6 +375,8 @@ namespace BasisForAppraisal_finalProject.Models
                     updateQuestoin.Title = q.Title;
                     updateQuestoin.HelpText = q.HelpText;
                     updateQuestoin.MandatoryQuestion = q.MandatoryQuestion;
+                    updateQuestoin.ForManager = q.ForManager;
+                    updateQuestoin.ForAccompanied = q.ForAccompanied;
 
                     var answerAndNewAnswer = q.Answers.Zip(updateQuestoin.Answers, (o, n) => new { newAnswer = o, oldAnswer = n });
 
