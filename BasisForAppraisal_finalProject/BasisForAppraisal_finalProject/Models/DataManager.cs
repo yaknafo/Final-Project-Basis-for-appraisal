@@ -461,14 +461,30 @@ namespace BasisForAppraisal_finalProject.Models
 
         public void SaveReportForIndividual(ReportForIndividual report)
         {
-            if (!manager.ReportForIndividuals.Any(x => x.IndividualId == report.IndividualId && x.FormId == report.FormId))
+            var reportFromDb = manager.ReportForIndividuals.SingleOrDefault(x => x.IndividualId == report.IndividualId && x.FormId == report.FormId);
+            if (reportFromDb ==null)
             {
                 manager.ReportForIndividuals.InsertOnSubmit(report);
                 manager.SubmitChanges();
             }
+            else{
+                report.feedback = reportFromDb.feedback;
+                report.IsClose = reportFromDb.IsClose;
+            }
         }
 
-        public void SaveReportForIndividualLines(string IndividualId,int formId,int sectionId, int QuestionId, double SelfEvaluation, double collegesEvaluation, double SupervisorEvaluation)
+        public void EditReportForIndividual(string text, bool isClose, string IndividualId, int FormId)
+        {
+            var report = manager.ReportForIndividuals.SingleOrDefault(x => x.IndividualId == IndividualId && x.FormId == FormId);
+            if (report !=null)
+            {
+               report.feedback = text;
+                report.IsClose = isClose;
+                manager.SubmitChanges();
+            }
+        }
+
+        public void SaveReportForIndividualLines(string IndividualId, int formId, int sectionId, int QuestionId, double SelfEvaluation, double collegesEvaluation, double SupervisorEvaluation, double AccompaniedEvaluation, int CountOfFormsFilled, double TotalAverage)
         {
             ReportForIndividualLine lineUpdate;
 
@@ -480,6 +496,9 @@ namespace BasisForAppraisal_finalProject.Models
                     lineUpdate.SelfEvaluation = SelfEvaluation;
                     lineUpdate.collegesEvaluation = collegesEvaluation;
                     lineUpdate.SupervisorEvaluation = SupervisorEvaluation;
+                    lineUpdate.AccompaniedEvaluation = AccompaniedEvaluation;
+                    lineUpdate.CountOfFormsFilled = CountOfFormsFilled;
+                    lineUpdate.TotalAverage = TotalAverage;
                     manager.SubmitChanges();
                 }
                    
@@ -495,7 +514,11 @@ namespace BasisForAppraisal_finalProject.Models
                     SectionId = sectionId,
                     SelfEvaluation = SelfEvaluation,
                     collegesEvaluation = collegesEvaluation,
-                    SupervisorEvaluation = SupervisorEvaluation
+                    SupervisorEvaluation = SupervisorEvaluation,
+                    AccompaniedEvaluation = AccompaniedEvaluation,
+                    CountOfFormsFilled = CountOfFormsFilled,
+                    TotalAverage = TotalAverage
+
                 };
 
                 manager.ReportForIndividualLines.InsertOnSubmit(newLine);

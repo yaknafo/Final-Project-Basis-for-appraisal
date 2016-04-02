@@ -19,10 +19,10 @@ namespace BasisForAppraisal_finalProject.Helpr
         public string AverageToColor(double avrage)
         {
             if (avrage >= 2.5)
-                return "green";
+                return "alert-success";
             if (avrage >= 1.5)
-                return "Gray";
-            return "Red";
+                return "alert-dismissible";
+            return "alert-danger";
         }
 
         public string ScoreTitle(double avrage)

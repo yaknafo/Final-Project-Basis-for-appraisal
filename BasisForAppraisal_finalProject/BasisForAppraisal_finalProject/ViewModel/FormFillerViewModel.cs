@@ -33,6 +33,11 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         public int FormIdConnector { set; get; }
 
+
+        public FormFillerViewModel()
+        {
+
+        }
         public FormFillerViewModel(tblForm form, tbl_ConnectorFormFill connector, bool showAnswer)
 	    {
             dm = new DataManager();
@@ -47,7 +52,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
             this.CompanyId = connector.companyId;
             this.FormIdConnector = connector.formId;
             FillterQuestions();
-
+            
 	    }
 
         public void  FillterQuestions()

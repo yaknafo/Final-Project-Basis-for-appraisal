@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BasisForAppraisal_finalProject.DBML;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace BasisForAppraisal_finalProject.Models
 {
@@ -27,6 +28,11 @@ namespace BasisForAppraisal_finalProject.Models
          public int SelfCounter { get; set; }
          public int ColCounter { get; set; }
          public int SupCounter { get; set; }
+
+         [DataType(DataType.MultilineText)]
+         public string GroupLeaderSummry { get; set; }
+
+         public bool IsClose { get; set; }
          
 
          public FormReportPerEmployee()

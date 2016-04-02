@@ -76,7 +76,19 @@ namespace BasisForAppraisal_finalProject.Models
 
          public QuestionReport()
          {
+         }
+         public QuestionReport(double SelfEvaluation, double collegesEvaluation, double SupervisorEvaluation, double AccompaniedEvaluation, int CountOfFormsFilled, double TotalAverage, tbl_IntentionalQuestion question)
+         {
+             this.selfAverage = (int)SelfEvaluation;
+             this.colleagueAverage =collegesEvaluation;
+             this.directorAverage = SupervisorEvaluation;
+             this.AccompaniedAverage = AccompaniedEvaluation;
+             this.TotalCounter =CountOfFormsFilled;
+             this.TotalAverage = TotalAverage;
+             this.Question = question;
+             helper = new ConvertAnswerHelperScore();
          } 
+
 
 
          public void CalculationQuestion(string employee, int question, List<tbl_ConnectorAnswer> ConnectorAnswers = null , List<tbl_IntentionalQuestion> allQuestions = null) 
@@ -218,6 +230,18 @@ namespace BasisForAppraisal_finalProject.Models
 
          }
 
+
+        public void CalculationLinesForCloseReport()
+         {
+            directorAverageTitle = helper.ScoreTitle(directorAverage);
+            selfAverageTtitle = helper.ScoreTitle(selfAverage);
+            colleagueAverageTitle = helper.ScoreTitle(colleagueAverage);
+            AccompaniedAverageTitle = helper.ScoreTitle(AccompaniedAverage);
+             ColorOfLine = helper.AverageToColor(TotalAverage);
+             var AvrageOther = TotalAverage - selfAverage;
+             UnderOver = helper.OverUnder(selfAverage, AvrageOther);
+
+         }
 
          public void CalculationQuestionForManagers(string employee, int question, List<tbl_ConnectorAnswer> ConnectorAnswers = null, List<tbl_IntentionalQuestion> allQuestions = null)
          {
