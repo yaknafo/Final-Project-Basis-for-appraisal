@@ -8,6 +8,9 @@
         {
             @Html.RadioButtonFor(a => a.selectedAnswer, Model.Answers[i].AnswerId, new { style = "height: 20px;  width:20px; margin-top: 10px; margin-left: 50px;" })
             @Html.TextBoxFor(x => x.Answers[i].Text)
+         @Html.DropDownListFor(model => model.Answers[i].MyScore,
+                          new SelectList(Model.Answers[i].ScoreList, "score", "Tilte", Model.Answers[i].MyScore),
+                                  new { style = "height: 30px;margin-right:2%;margin-left:2%;" })
             @Html.HiddenFor(x => x.Answers[i].AnswerId)
             if (Model.Answers[i].AnswerId != 0)
             {
