@@ -17,7 +17,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View();
         }
 
-        [HttpPost]
+        
         public ActionResult ReportPerEmployee(string employeeId, string forms,FormReportPerEmployee formReport = null)
         {
             DataManager DMO = new DataManager();

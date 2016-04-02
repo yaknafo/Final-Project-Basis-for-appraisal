@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "דוח לשגריר";
+}
+<div dir="rtl" style="margin-top:10%">
+    <h2>דוח לשגריר</h2>
+    @using (Html.BeginForm("ReportForStudent", "ExportData", FormMethod.Post))
+    {
+
+        <table style="width:40%">
+            <tr>
+                <td style="margin-left:3%"> @Html.DropDownList("Companyiesa", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "Companyies" })</td>
+
+                <td id="unit" style="margin:3%"></td>
+
+                <td id="class" style="margin:3%"></td>
+
+
+                <td id="Emp" style="margin:3%"></td>
+
+            </tr>
+        </table>
+
+        <div id="formCheckList" class="col-lg-5" style="margin-top:2%"></div>
+        @*<button type="submit" class="btn btn-primary btn-lg">GO</button>*@
+    }
+    </body>
+    <script type="text/javascript">
+
+        $("#Companyies").change(function () {
+            var sv = $(this).val();
+            if (sv != null) {
+                $.ajax(
+                    {
+                        url: '@Url.Action("GetUnitCascadeCompanyEmp")',
+                        type: "get",
+                        data: { id: sv }
+
+                    }).done(function (data) {
+                        $("#unit").html(data);
+                    });
+            }
+        });
+
+
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").toggle(500)
+            });
+        });
+
+    </script>
+
+
+</div>
+

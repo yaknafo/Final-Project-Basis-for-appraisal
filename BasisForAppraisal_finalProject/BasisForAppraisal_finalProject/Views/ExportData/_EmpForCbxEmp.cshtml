@@ -1,0 +1,24 @@
+﻿@model string[]
+@Html.DropDownList("emp", ViewData["ListDataClass"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "empBox" })
+@if (Model.Count() == 2)
+{
+    <div id="empName" title=@Model[0]></div>
+    <div id="empId" title=@Model[1]></div>
+}
+<script type="text/javascript">
+    $("#empBox").change(function () {
+        var id = $(this).val();
+        if (id != null) {
+            $.ajax(
+                {
+                    url: '@Url.Action("GetFromsForEmp")',
+                    type: "get",
+                    data: { id: id }
+
+                }).done(function (data) {
+                    $("#formCheckList").html(data);
+                });
+        }
+    });
+</script>
+

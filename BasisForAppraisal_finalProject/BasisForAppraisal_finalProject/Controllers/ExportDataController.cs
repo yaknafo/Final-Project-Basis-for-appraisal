@@ -16,6 +16,16 @@ namespace BasisForAppraisal_finalProject.Controllers
     {
 
         public DataManager DMO = new DataManager();
+
+        //
+        // GET: /ExportData/
+        public ActionResult MainData()
+        {
+            
+            return View();
+        }
+
+
         //
         // GET: /ExportData/
         public ActionResult Index()
@@ -51,6 +61,41 @@ namespace BasisForAppraisal_finalProject.Controllers
             var formCheckBoxList = new List<FormCheckBoxViewModel>();
 
             res.ForEach(x => formCheckBoxList.Add(new FormCheckBoxViewModel { IsSelected = false,FormId = x.formId , FormName = x.FormName} ));
+            return PartialView("_FormList", formCheckBoxList);
+        }
+
+        //-------------------------- for student report----------------------------------------------
+
+        public PartialViewResult GetUnitCascadeCompanyEmp(int id)
+        {
+            var dManager = new DataMangerCompany();
+            ViewData["ListDataUnit"] = GetDropDownUnit(dManager.getUnitsForCompany(id).Distinct().ToList());
+            return PartialView("_UnitsForEmpCbx", id.ToString());
+        }
+
+        public PartialViewResult GetclassCascadeUnitEmp(string id, string unit)
+        {
+            var dManager = new DataMangerCompany();
+            ViewData["ListDataClass"] = GetDropDownClass(dManager.Class.Where(x => x.unitName == id && x.companyId.ToString() == unit).Distinct().ToList());
+            return PartialView("_ClassForCbxEmp", new string[] { unit, id });
+        }
+        public PartialViewResult GetEmpCascadeUnit(string id, string unit, string classanme)
+        {
+            var dManager = new DataManager();
+            ViewData["ListDataClass"] = GetDropDownClass(dManager.Employees.Where(x => x.className == id && x.unitName.ToString() == unit && x.companyId.ToString() == classanme).Distinct().ToList());
+            return PartialView("_EmpForCbxEmp", new string[] { unit, id });
+        }
+
+        public PartialViewResult GetFromsForEmp(string id, string empId)
+        {
+            var dManager = new DataMangerCompany();
+            var unitFromDb = dManager.getUnitByName(id, 1);
+            var res = dManager.ConnectorFormFill.Where(x => x.employeeOnId == id).Select(s => s.tblForm).Distinct().ToList();
+            ViewBag.emp = id;
+
+            var formCheckBoxList = new List<FormCheckBoxViewModel>();
+
+            res.ForEach(x => formCheckBoxList.Add(new FormCheckBoxViewModel { IsSelected = false, FormId = x.formId, FormName = x.FormName }));
             return PartialView("_FormList", formCheckBoxList);
         }
         //------------------------------------ End Combo Box Area----------------------------------------------------------------
@@ -155,5 +200,31 @@ namespace BasisForAppraisal_finalProject.Controllers
            items.Add(new SelectListItem { Text = ".....", Value = "", Selected = true });
            return items;
        }
+
+       public List<SelectListItem> GetDropDownClass(List<tbl_Employee> emp)
+       {
+           List<SelectListItem> items = new List<SelectListItem>();
+           emp.ForEach(x => items.Add(new SelectListItem { Text = x.firstName+" "+x.lastName, Value = x.employeeId }));
+           items.Add(new SelectListItem { Text = "שגריר", Value = "", Selected = true });
+           return items;
+       }
+
+        [HttpGet]
+       public ActionResult ReportForStudent()
+       {
+           var dManager = new DataManager();
+           ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
+           return View();
+       }
+
+        [HttpPost]
+        public ActionResult ReportForStudent(int Companyiesa, string units, string emp, string cls, List<FormCheckBoxViewModel> formCheckList)
+        {
+            var dManager = new DataManager();
+            var formSelected = formCheckList.Where(x => x.IsSelected).Select(f => f.FormId).ToList();
+            if(formSelected.Count> 0)
+                return RedirectToAction("ReportPerEmployee", "Report", new { employeeId = emp, forms = formSelected.First().ToString() });
+            return View();
+        }
 	}
 }
