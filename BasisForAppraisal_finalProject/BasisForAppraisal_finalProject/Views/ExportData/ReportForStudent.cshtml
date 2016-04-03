@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "דוח לשגריר";
 }
+<script src="~/Scripts/DataTable/dataTables.keyTable.js"></script>
+<script src="~/Scripts/DataTable/jquery.js"></script>
+<script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
+<link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
+<link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+
 <div dir="rtl" style="margin-top:10%">
     <h2>דוח לשגריר</h2>
     @using (Html.BeginForm("ReportForStudent", "ExportData", FormMethod.Post))
@@ -18,6 +28,14 @@
 
                 <td id="Emp" style="margin:3%"></td>
 
+            </tr>
+            <tr></tr>
+            <tr>
+                <td>
+                    <br />
+                    <br />
+                     @Html.TextBox("id", null, new { id = "id", @placeholder = "תעודת זהות", @style = "height:45px;" })
+                    </td>
             </tr>
         </table>
 
@@ -49,6 +67,34 @@
             });
         });
 
+    </script>
+
+    <script type="text/javascript">
+    $(function () {
+        $('#id').autocomplete({
+            source: '@Url.Action("GetEmployee", "MainCompanies")'
+        });
+    });
+    </script>
+
+
+    <script type="text/javascript">
+        $("#id").on('blur', function()  {
+            var id = $(this).val();
+        if (id.length > 8)
+        {
+            
+            $.ajax(
+                {
+                    url: '@Url.Action("GetFromsForEmp")',
+                    type: "get",
+                    data: { id: id }
+
+                }).done(function (data) {
+                    $("#formCheckList").html(data);
+                });
+        }
+    });
     </script>
 
 

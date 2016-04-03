@@ -218,7 +218,7 @@ namespace BasisForAppraisal_finalProject.Controllers
        }
 
         [HttpPost]
-        public ActionResult ReportForStudent(int Companyiesa, string units, string emp, string cls, List<FormCheckBoxViewModel> formCheckList)
+        public ActionResult ReportForStudent( string emp, List<FormCheckBoxViewModel> formCheckList)
         {
             var dManager = new DataManager();
             var formSelected = formCheckList.Where(x => x.IsSelected).Select(f => f.FormId).ToList();
