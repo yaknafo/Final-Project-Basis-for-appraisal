@@ -26,6 +26,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_IntentionalQuestion newQuestionCbx;
         private tbl_IntentionalQuestion newQuestionMultipleChoiceList;
         private tbl_IntentionalQuestion newQuestionsocialStatus;
+        private tbl_IntentionalQuestion newQuestionenEmploymentStatus;
 
 
        // type of new Question
@@ -37,6 +38,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_TypeQuestion cbxType;
         private tbl_TypeQuestion multipleChoiceListType;
         private tbl_TypeQuestion socialStatus;
+        private tbl_TypeQuestion employmentStatus;
 
 
        // data manager for get data from DB
@@ -219,18 +221,32 @@ namespace BasisForAppraisal_finalProject.ViewModel
         {
             get
             {
-                return multipleChoiceListType ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("social status")).FirstOrDefault();
+                return socialStatus ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("social status")).FirstOrDefault();
             }
             set
             {
-                multipleChoiceListType = value;
+                socialStatus = value;
             }
 
         }
 
-        //-------------End The Type Question Area 
+         public tbl_TypeQuestion EmploymentStatus
+        {
+            get
+            {
+                return employmentStatus ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("employment status")).FirstOrDefault();
+            }
+            set
+            {
+                employmentStatus = value;
+            }
 
-       //------------- The new Question Area 
+        }
+
+
+        //-------------End The Type Question Area -------------------------------------------------------------------
+
+       //------------- The new Question Area --------------------------------------------------------------------------
         public tbl_IntentionalQuestion NewQuestion
         {
             get
@@ -352,6 +368,23 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         }
 
+        public tbl_IntentionalQuestion NewQuestionenEmploymentStatus
+        {
+            get
+            {
+
+                return newQuestionenEmploymentStatus ?? InitNewQuestionenEmploymentStatus();
+
+            }
+            set
+            {
+                newQuestionenEmploymentStatus = value;
+            }
+
+        }
+
+
+
        
         //-------------End The new Question Area 
 
@@ -401,6 +434,13 @@ namespace BasisForAppraisal_finalProject.ViewModel
        NewQuestionsocialStatus.NumberOfAnswers = 1;
        return NewQuestionsocialStatus;
    }
+
+       private tbl_IntentionalQuestion InitNewQuestionenEmploymentStatus()
+{
+ 	NewQuestionenEmploymentStatus = new tbl_IntentionalQuestion(1, formId, CurrentSection.SectionId, EmploymentStatus);
+       NewQuestionenEmploymentStatus.NumberOfAnswers = 1;
+       return NewQuestionenEmploymentStatus;
+}
        //--------------- End  Init New question
 
        public void AddQuestion(tbl_IntentionalQuestion question)
@@ -575,6 +615,9 @@ namespace BasisForAppraisal_finalProject.ViewModel
                        break;
 
                    case "AddNewQuestionSocialStatus": AddQuestionMultipleChoice(NewQuestionsocialStatus);
+                       break;
+
+                   case "AddNewQuestionenEmploymentStatus": AddQuestionMultipleChoice(NewQuestionenEmploymentStatus);
                        break;
 
                }

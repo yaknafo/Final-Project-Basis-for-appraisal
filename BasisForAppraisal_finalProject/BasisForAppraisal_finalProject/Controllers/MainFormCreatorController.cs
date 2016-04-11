@@ -307,6 +307,8 @@ namespace BasisForAppraisal_finalProject.Controllers
 
                    case "AddNewQuestionSocialStatus": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionsocialStatus);
                        break;
+                   case "AddNewQuestionenEmploymentStatus": formViewModel.AddQuestionMultipleChoice(formViewModel.NewQuestionenEmploymentStatus);
+                       break;
 
                }
            }
@@ -342,6 +344,9 @@ namespace BasisForAppraisal_finalProject.Controllers
            items.Add(new SelectListItem { Text = "כן לא", Value = "AddYesNoQuestion" });
 
            items.Add(new SelectListItem { Text = "מעמד חברתי", Value = "AddNewQuestionSocialStatus" });
+
+           items.Add(new SelectListItem { Text = "מעמד תעסוקתי", Value = "AddNewQuestionenEmploymentStatus" });
+
 
           return items;
 
