@@ -136,8 +136,15 @@ namespace BasisForAppraisal_finalProject.Models
                  }
              }
 
-             //--------- Calculate the total:
-             TotalCounter = colleagueCounter + AccompaniedCounter + directorCounter + selfCounter;
+             //--------- Calculate the total:`
+             if (colleagueCounter > 0)
+                 TotalCounter++;
+             if (AccompaniedCounter > 0)
+                 TotalCounter++;
+             if (directorCounter > 0)
+                 TotalCounter++;
+             if (selfCounter > 0)
+                 TotalCounter++;
 
              TotalAverage = colleagueAverage + AccompaniedAverage + directorAverage + selfAverage;
 

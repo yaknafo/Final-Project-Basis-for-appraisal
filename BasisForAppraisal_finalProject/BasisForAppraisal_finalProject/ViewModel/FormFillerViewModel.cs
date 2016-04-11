@@ -59,8 +59,12 @@ namespace BasisForAppraisal_finalProject.ViewModel
         {
             if (dm.IsManager(FillBy))
                 questions = questions.Where(x => x.ForManager).ToList();
-            if (dm.IsAccompanied(FillBy))
+            else if (dm.IsAccompanied(FillBy))
                 questions = questions.Where(x => x.ForAccompanied).ToList();
+            else if (FillBy.Equals(FillOn))
+                questions = questions.Where(x => x.ForSelf).ToList();
+            else
+                questions = questions.Where(x => x.Forcolleagues).ToList();
 
         }
 

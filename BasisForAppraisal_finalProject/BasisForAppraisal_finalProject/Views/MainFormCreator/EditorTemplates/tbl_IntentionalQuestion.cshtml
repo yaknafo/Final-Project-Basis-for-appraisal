@@ -22,9 +22,10 @@
             @Html.TextAreaFor(x => x.Title,new { @cols = 90, @rows = 2 })
     </div>
         <table>
+            <tr>
                 <td>
-                @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
-                <strong>חובה    </strong>
+                    @Html.CheckBoxFor(x => x.MandatoryQuestion, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                    <strong>חובה    </strong>
                 </td>
                 <td>
                     @Html.CheckBoxFor(x => x.ForManager, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
@@ -34,6 +35,21 @@
                     @Html.CheckBoxFor(x => x.ForAccompanied, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
                     <strong>מלווה   </strong>
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(x => x.ForSelf, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                    <strong>שגריר</strong>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(x => x.Forcolleagues, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                    <strong>  עמיתים</strong>
+                </td>
+                <td>
+                    @Html.CheckBoxFor(x => x.ForReports, new { style = "height: 20px;  width:20px; margin-left:0%;dis" })
+                    <strong>דוח </strong>
+                </td>
+            </tr>
         </table>
         
     @*@if (Model.QuestionId > 0)

@@ -155,6 +155,9 @@
       <Column Name="NumberOfAnswers" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ForManager" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="ForAccompanied" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ForSelf" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Forcolleagues" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ForReports" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers" ThisKey="FormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalAnswer" />
       <Association Name="tbl_IntentionalQuestion_ReportForIndividualLine" Member="ReportForIndividualLines" ThisKey="FormId,SectionId,QuestionId" OtherKey="QuestioFormId,SectionId,QuestionId" Type="ReportForIndividualLine" />
       <Association Name="tbl_Section_tbl_IntentionalQuestion" Member="tbl_Section" ThisKey="FormId,SectionId" OtherKey="FormId,SectionId" Type="tbl_Section" IsForeignKey="true" />

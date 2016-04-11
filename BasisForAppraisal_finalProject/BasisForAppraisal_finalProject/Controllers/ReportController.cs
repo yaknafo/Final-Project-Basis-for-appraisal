@@ -30,6 +30,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
 
             var emp = DMO.Employees.Where(e => e.employeeId == employeeId).First();
+            
             var form = DMO.Forms.Where(f => f.formId == Int32.Parse(forms)).FirstOrDefault();
             var calculation = new FormReportPerEmployee { Employee = emp, Form = form };
             var reportDb = DMO.GetReportForIndividual(employeeId, form.formId);

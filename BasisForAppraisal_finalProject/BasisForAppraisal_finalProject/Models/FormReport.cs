@@ -33,6 +33,8 @@ namespace BasisForAppraisal_finalProject.Models
          public string GroupLeaderSummry { get; set; }
 
          public bool IsClose { get; set; }
+
+         public string Leader { get; set; }
          
 
          public FormReportPerEmployee()
@@ -42,7 +44,15 @@ namespace BasisForAppraisal_finalProject.Models
 
          public void GetResultForForm()
          {
-             foreach(tbl_IntentionalQuestion question in Form.tbl_Sections.FirstOrDefault().tbl_IntentionalQuestions)
+             var classLeader = Employee.tbl_Class.Employees.FirstOrDefault(x => x.IsManagerWrapper);
+             if (classLeader == null)
+                 Leader = "לא נמצא מוביל לשגריר";
+             else
+             {
+                 Leader = string.Format("{0} {1}", classLeader.firstName, classLeader.lastName);
+             }
+             var listOfQuestionForReport = Form.tbl_Sections.FirstOrDefault().tbl_IntentionalQuestions.Where(x => x.ForReports).ToList();
+             foreach (tbl_IntentionalQuestion question in listOfQuestionForReport)
              {
                  FormQiestopnReport.Add(new QuestionReport(Employee.employeeId, question.QuestionId));
              }

@@ -3367,6 +3367,12 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private bool _ForAccompanied;
 		
+		private bool _ForSelf;
+		
+		private bool _Forcolleagues;
+		
+		private bool _ForReports;
+		
 		private EntitySet<tbl_IntentionalAnswer> _tbl_IntentionalAnswers;
 		
 		private EntitySet<ReportForIndividualLine> _ReportForIndividualLines;
@@ -3399,6 +3405,12 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void OnForManagerChanged();
     partial void OnForAccompaniedChanging(bool value);
     partial void OnForAccompaniedChanged();
+    partial void OnForSelfChanging(bool value);
+    partial void OnForSelfChanged();
+    partial void OnForcolleaguesChanging(bool value);
+    partial void OnForcolleaguesChanged();
+    partial void OnForReportsChanging(bool value);
+    partial void OnForReportsChanged();
     #endregion
 		
 		public tbl_IntentionalQuestion()
@@ -3618,6 +3630,66 @@ namespace BasisForAppraisal_finalProject.DBML
 					this._ForAccompanied = value;
 					this.SendPropertyChanged("ForAccompanied");
 					this.OnForAccompaniedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForSelf", DbType="Bit NOT NULL")]
+		public bool ForSelf
+		{
+			get
+			{
+				return this._ForSelf;
+			}
+			set
+			{
+				if ((this._ForSelf != value))
+				{
+					this.OnForSelfChanging(value);
+					this.SendPropertyChanging();
+					this._ForSelf = value;
+					this.SendPropertyChanged("ForSelf");
+					this.OnForSelfChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Forcolleagues", DbType="Bit NOT NULL")]
+		public bool Forcolleagues
+		{
+			get
+			{
+				return this._Forcolleagues;
+			}
+			set
+			{
+				if ((this._Forcolleagues != value))
+				{
+					this.OnForcolleaguesChanging(value);
+					this.SendPropertyChanging();
+					this._Forcolleagues = value;
+					this.SendPropertyChanged("Forcolleagues");
+					this.OnForcolleaguesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ForReports", DbType="Bit NOT NULL")]
+		public bool ForReports
+		{
+			get
+			{
+				return this._ForReports;
+			}
+			set
+			{
+				if ((this._ForReports != value))
+				{
+					this.OnForReportsChanging(value);
+					this.SendPropertyChanging();
+					this._ForReports = value;
+					this.SendPropertyChanged("ForReports");
+					this.OnForReportsChanged();
 				}
 			}
 		}
