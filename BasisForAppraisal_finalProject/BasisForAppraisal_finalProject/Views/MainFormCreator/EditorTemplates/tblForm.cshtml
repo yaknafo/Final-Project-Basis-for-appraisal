@@ -6,9 +6,11 @@
 @Html.HiddenFor(x => x.formId)
 @Html.HiddenFor(x=> x.Sections.Count)
 
-<div id="Panel" style="width:90%; ">
+<div id="Panel" dir="rtl" style="width:90%; ">
 
     <h1 class="text-center" dir="rtl">@Html.EditorFor(x => x.FormName)</h1>
+    <h3>הקדמה:</h3>
+    <h5 class="text-right" dir="rtl">@Html.TextAreaFor(x => x.introduction, new { @cols = 100, @rows = 10 })</h5>
 
 </div>
 

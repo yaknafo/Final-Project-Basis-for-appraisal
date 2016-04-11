@@ -18,7 +18,7 @@
     <title>FormFill</title>
     <script type="text/javascript">
         $(function () {
-            var perPage = 3;
+            var perPage = 1;
             var opened = 1;
             var onClass = 'on';
             var paginationSelector = '.pages';
@@ -57,13 +57,19 @@
         @Html.HiddenFor(x => x.FillOn)
          @Html.HiddenFor(x => x.FormIdConnector)
         @Html.HiddenFor(x => x.AnswerQuestions)
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:white">
+    <div class="container">
+        <p class="navbar-text navbar-right"><img src="~/photos/Logo/logo_for_ToolBar.PNG" /></p>
+        <p class="navbar-text navbar-right"><h1>
+</h1></p>
+    </div>
+</nav>
+
     <div id="Panel" style="width: 100%; margin-top: 0%; background-color:white ">
         <div class="panel panel-heading">
             <div class="panel-heading">
-                <div class="alert-info">
                     <strong>@Model.FillOn על</strong>
                     @Html.EditorFor(x => x.From)
-                    </div>
                     <div id="exampsle">
                         @Html.EditorFor(x => x.Questions)
                         <button type="submit" class="btn btn-primary btn-lg" style="width:150px; height:10%">סיים ושלח</button>

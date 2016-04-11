@@ -311,6 +311,7 @@ namespace BasisForAppraisal_finalProject.Models
 
                 var formUpdate = manager.tblForms.Where(f => f.formId == form.formId).FirstOrDefault();
                 formUpdate.FormName = form.FormName;
+                formUpdate.introduction = form.introduction;
                 formUpdate.lastChange = DateTime.Now;
                 manager.SubmitChanges();
             }

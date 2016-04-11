@@ -11,7 +11,7 @@
         @Html.HiddenFor(x => x.QuestionId)
         @Html.HiddenFor(x => x.QuestionType)
         @Html.HiddenFor(x => x.Title)
-        @Html.DisplayFor(x => x.HelpText, new { @cols = 90, @rows = 2 })
+        <strong>@Html.DisplayFor(x => x.HelpText, new { @cols = 90, @rows = 2 })</strong>
         <br />
         <div style="font-size:16px;">
             @Html.DisplayFor(x => x.Title, new { @cols = 90, @rows = 2 })
