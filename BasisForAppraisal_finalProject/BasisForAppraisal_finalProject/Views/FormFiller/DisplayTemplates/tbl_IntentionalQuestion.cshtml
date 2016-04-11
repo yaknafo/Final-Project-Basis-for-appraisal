@@ -119,8 +119,8 @@
     
         <!--------------------------- Part of  Muliti choise question--------------------------------------------------------->
 
-        @if (@Model.QuestionType != null && @Model.QuestionType.Equals("MultipleChoice"))
-        {
+@if (@Model.QuestionType != null && (@Model.QuestionType.Equals("MultipleChoice") || @Model.QuestionType.ToLower().Contains("social") || @Model.QuestionType.ToLower().Contains("employment")))
+{
             <div dir="rtl" style="border-bottom: solid;">
                 @if (@Model.Answers.Count()>0)
                 {
