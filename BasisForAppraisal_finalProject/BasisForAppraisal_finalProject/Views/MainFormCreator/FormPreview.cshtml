@@ -17,7 +17,7 @@
     <title>תצוגה מקדימה-@Model.FormName </title>
     <script type="text/javascript">
         $(function () {
-            var perPage = 3;
+            var perPage = 1;
             var opened = 1;
             var onClass = 'on';
             var paginationSelector = '.pages';
@@ -30,13 +30,19 @@
     <title>ShowAnswers</title>
 </head>
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color:white">
+        <div class="container">
+            <p class="navbar-text navbar-right"><img src="~/photos/Logo/logo_for_ToolBar.PNG" /></p>
+            <p class="navbar-text navbar-right">
+                <h1></h1>
+            </p>
+        </div>
+    </nav>
 
     <div id="Panel" style="width: 100%; margin-top: 0%; background-color:white ">
         <div class="panel panel-heading">
             <div class="panel-heading">
-                <div class="alert-info">
                     @Html.DisplayForModel()
-                </div>
                 <div id="exampsle">
                     @Html.DisplayFor(x => x.Sections.First().Questions)
                 </div>
