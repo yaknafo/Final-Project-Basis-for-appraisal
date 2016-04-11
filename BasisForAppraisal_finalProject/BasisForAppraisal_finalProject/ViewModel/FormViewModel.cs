@@ -25,6 +25,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_IntentionalQuestion newQuestionYesNo;
         private tbl_IntentionalQuestion newQuestionCbx;
         private tbl_IntentionalQuestion newQuestionMultipleChoiceList;
+        private tbl_IntentionalQuestion newQuestionsocialStatus;
+
 
        // type of new Question
         private tbl_TypeQuestion intentionalType;
@@ -34,6 +36,8 @@ namespace BasisForAppraisal_finalProject.ViewModel
         private tbl_TypeQuestion yesNoType;
         private tbl_TypeQuestion cbxType;
         private tbl_TypeQuestion multipleChoiceListType;
+        private tbl_TypeQuestion socialStatus;
+
 
        // data manager for get data from DB
         private DataManager dm;
@@ -211,6 +215,19 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         }
 
+        public tbl_TypeQuestion SocialStatus
+        {
+            get
+            {
+                return multipleChoiceListType ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("social status")).FirstOrDefault();
+            }
+            set
+            {
+                multipleChoiceListType = value;
+            }
+
+        }
+
         //-------------End The Type Question Area 
 
        //------------- The new Question Area 
@@ -320,6 +337,21 @@ namespace BasisForAppraisal_finalProject.ViewModel
 
         }
 
+        public tbl_IntentionalQuestion NewQuestionsocialStatus
+        {
+            get
+            {
+
+                return newQuestionsocialStatus ?? InitnewQuestionsocialStatus();
+
+            }
+            set
+            {
+                newQuestionsocialStatus = value;
+            }
+
+        }
+
        
         //-------------End The new Question Area 
 
@@ -363,7 +395,12 @@ namespace BasisForAppraisal_finalProject.ViewModel
            return NewQuestionMultipleChoiceList;
        }
 
-
+       public tbl_IntentionalQuestion InitnewQuestionsocialStatus()
+   {
+       NewQuestionsocialStatus = new tbl_IntentionalQuestion(1, formId, CurrentSection.SectionId, SocialStatus);
+       NewQuestionsocialStatus.NumberOfAnswers = 1;
+       return NewQuestionsocialStatus;
+   }
        //--------------- End  Init New question
 
        public void AddQuestion(tbl_IntentionalQuestion question)
@@ -535,6 +572,9 @@ namespace BasisForAppraisal_finalProject.ViewModel
                        break;
 
                    case "AddMultipleChoiceListQuestion": AddQuestionMultipleChoice(NewQuestionMultipleChoiceList);
+                       break;
+
+                   case "AddNewQuestionSocialStatus": AddQuestionMultipleChoice(NewQuestionsocialStatus);
                        break;
 
                }

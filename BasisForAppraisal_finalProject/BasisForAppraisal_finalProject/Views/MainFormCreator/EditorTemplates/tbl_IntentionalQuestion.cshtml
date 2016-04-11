@@ -77,7 +77,7 @@
     
    <!--------------------------- Part of  Muliti choise question--------------------------------------------------------->
 
-    @if (@Model.QuestionType != null && @Model.QuestionType.Equals("MultipleChoice"))
+    @if (@Model.QuestionType != null && (@Model.QuestionType.Equals("MultipleChoice")|| @Model.QuestionType.ToLower().Contains("social")))
     {
          @Html.Partial("QuestionTemplate/_MultipleChoiceQuestion")
     }
@@ -95,7 +95,7 @@
    }
    
   <!--------------------------- Part of  Muliti choise List question-------------------------------------------------------->
-  @if (@Model.QuestionType != null && @Model.QuestionType.Contains("MultipleChoiceList"))
+  @if (@Model.QuestionType != null && (@Model.QuestionType.Contains("MultipleChoiceList")))
   {
       @Html.Partial("QuestionTemplate/_MultipleChoiceListQuestion")
   }

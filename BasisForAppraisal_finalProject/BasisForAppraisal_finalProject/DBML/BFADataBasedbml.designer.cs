@@ -63,12 +63,12 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_Employee(tbl_Employee instance);
     partial void Updatetbl_Employee(tbl_Employee instance);
     partial void Deletetbl_Employee(tbl_Employee instance);
-    partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
-    partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
-    partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void InsertReportForIndividualLine(ReportForIndividualLine instance);
     partial void UpdateReportForIndividualLine(ReportForIndividualLine instance);
     partial void DeleteReportForIndividualLine(ReportForIndividualLine instance);
+    partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
+    partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
+    partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -189,19 +189,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_IntentionalQuestion> tbl_IntentionalQuestions
-		{
-			get
-			{
-				return this.GetTable<tbl_IntentionalQuestion>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ReportForIndividualLine> ReportForIndividualLines
 		{
 			get
 			{
 				return this.GetTable<ReportForIndividualLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_IntentionalQuestion> tbl_IntentionalQuestions
+		{
+			get
+			{
+				return this.GetTable<tbl_IntentionalQuestion>();
 			}
 		}
 	}
@@ -2867,6 +2867,408 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForIndividualLines")]
+	public partial class ReportForIndividualLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _IndividualId;
+		
+		private int _FromId;
+		
+		private int _QuestioFormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private double _SelfEvaluation;
+		
+		private double _collegesEvaluation;
+		
+		private double _SupervisorEvaluation;
+		
+		private double _AccompaniedEvaluation;
+		
+		private int _CountOfFormsFilled;
+		
+		private double _TotalAverage;
+		
+		private EntityRef<ReportForIndividual> _ReportForIndividual;
+		
+		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIndividualIdChanging(string value);
+    partial void OnIndividualIdChanged();
+    partial void OnFromIdChanging(int value);
+    partial void OnFromIdChanged();
+    partial void OnQuestioFormIdChanging(int value);
+    partial void OnQuestioFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnSelfEvaluationChanging(double value);
+    partial void OnSelfEvaluationChanged();
+    partial void OncollegesEvaluationChanging(double value);
+    partial void OncollegesEvaluationChanged();
+    partial void OnSupervisorEvaluationChanging(double value);
+    partial void OnSupervisorEvaluationChanged();
+    partial void OnAccompaniedEvaluationChanging(double value);
+    partial void OnAccompaniedEvaluationChanged();
+    partial void OnCountOfFormsFilledChanging(int value);
+    partial void OnCountOfFormsFilledChanged();
+    partial void OnTotalAverageChanging(double value);
+    partial void OnTotalAverageChanged();
+    #endregion
+		
+		public ReportForIndividualLine()
+		{
+			this._ReportForIndividual = default(EntityRef<ReportForIndividual>);
+			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndividualId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IndividualId
+		{
+			get
+			{
+				return this._IndividualId;
+			}
+			set
+			{
+				if ((this._IndividualId != value))
+				{
+					if (this._ReportForIndividual.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIndividualIdChanging(value);
+					this.SendPropertyChanging();
+					this._IndividualId = value;
+					this.SendPropertyChanged("IndividualId");
+					this.OnIndividualIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FromId
+		{
+			get
+			{
+				return this._FromId;
+			}
+			set
+			{
+				if ((this._FromId != value))
+				{
+					if (this._ReportForIndividual.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFromIdChanging(value);
+					this.SendPropertyChanging();
+					this._FromId = value;
+					this.SendPropertyChanged("FromId");
+					this.OnFromIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestioFormId", DbType="Int NOT NULL")]
+		public int QuestioFormId
+		{
+			get
+			{
+				return this._QuestioFormId;
+			}
+			set
+			{
+				if ((this._QuestioFormId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestioFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestioFormId = value;
+					this.SendPropertyChanged("QuestioFormId");
+					this.OnQuestioFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL")]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelfEvaluation", DbType="Float NOT NULL")]
+		public double SelfEvaluation
+		{
+			get
+			{
+				return this._SelfEvaluation;
+			}
+			set
+			{
+				if ((this._SelfEvaluation != value))
+				{
+					this.OnSelfEvaluationChanging(value);
+					this.SendPropertyChanging();
+					this._SelfEvaluation = value;
+					this.SendPropertyChanged("SelfEvaluation");
+					this.OnSelfEvaluationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_collegesEvaluation", DbType="Float NOT NULL")]
+		public double collegesEvaluation
+		{
+			get
+			{
+				return this._collegesEvaluation;
+			}
+			set
+			{
+				if ((this._collegesEvaluation != value))
+				{
+					this.OncollegesEvaluationChanging(value);
+					this.SendPropertyChanging();
+					this._collegesEvaluation = value;
+					this.SendPropertyChanged("collegesEvaluation");
+					this.OncollegesEvaluationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupervisorEvaluation", DbType="Float NOT NULL")]
+		public double SupervisorEvaluation
+		{
+			get
+			{
+				return this._SupervisorEvaluation;
+			}
+			set
+			{
+				if ((this._SupervisorEvaluation != value))
+				{
+					this.OnSupervisorEvaluationChanging(value);
+					this.SendPropertyChanging();
+					this._SupervisorEvaluation = value;
+					this.SendPropertyChanged("SupervisorEvaluation");
+					this.OnSupervisorEvaluationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccompaniedEvaluation", DbType="Float NOT NULL")]
+		public double AccompaniedEvaluation
+		{
+			get
+			{
+				return this._AccompaniedEvaluation;
+			}
+			set
+			{
+				if ((this._AccompaniedEvaluation != value))
+				{
+					this.OnAccompaniedEvaluationChanging(value);
+					this.SendPropertyChanging();
+					this._AccompaniedEvaluation = value;
+					this.SendPropertyChanged("AccompaniedEvaluation");
+					this.OnAccompaniedEvaluationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountOfFormsFilled", DbType="Int NOT NULL")]
+		public int CountOfFormsFilled
+		{
+			get
+			{
+				return this._CountOfFormsFilled;
+			}
+			set
+			{
+				if ((this._CountOfFormsFilled != value))
+				{
+					this.OnCountOfFormsFilledChanging(value);
+					this.SendPropertyChanging();
+					this._CountOfFormsFilled = value;
+					this.SendPropertyChanged("CountOfFormsFilled");
+					this.OnCountOfFormsFilledChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAverage", DbType="Float NOT NULL")]
+		public double TotalAverage
+		{
+			get
+			{
+				return this._TotalAverage;
+			}
+			set
+			{
+				if ((this._TotalAverage != value))
+				{
+					this.OnTotalAverageChanging(value);
+					this.SendPropertyChanging();
+					this._TotalAverage = value;
+					this.SendPropertyChanged("TotalAverage");
+					this.OnTotalAverageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForIndividual_ReportForIndividualLine", Storage="_ReportForIndividual", ThisKey="IndividualId,FromId", OtherKey="IndividualId,FormId", IsForeignKey=true)]
+		public ReportForIndividual ReportForIndividual
+		{
+			get
+			{
+				return this._ReportForIndividual.Entity;
+			}
+			set
+			{
+				ReportForIndividual previousValue = this._ReportForIndividual.Entity;
+				if (((previousValue != value) 
+							|| (this._ReportForIndividual.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ReportForIndividual.Entity = null;
+						previousValue.ReportForIndividualLines.Remove(this);
+					}
+					this._ReportForIndividual.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividualLines.Add(this);
+						this._IndividualId = value.IndividualId;
+						this._FromId = value.FormId;
+					}
+					else
+					{
+						this._IndividualId = default(string);
+						this._FromId = default(int);
+					}
+					this.SendPropertyChanged("ReportForIndividual");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForIndividualLine", Storage="_tbl_IntentionalQuestion", ThisKey="QuestioFormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
+		public tbl_IntentionalQuestion tbl_IntentionalQuestion
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestion.Entity;
+			}
+			set
+			{
+				tbl_IntentionalQuestion previousValue = this._tbl_IntentionalQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalQuestion.Entity = null;
+						previousValue.ReportForIndividualLines.Remove(this);
+					}
+					this._tbl_IntentionalQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividualLines.Add(this);
+						this._QuestioFormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+					}
+					else
+					{
+						this._QuestioFormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalQuestion")]
 	public partial class tbl_IntentionalQuestion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3286,408 +3688,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this.SendPropertyChanging();
 			entity.tbl_IntentionalQuestion = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForIndividualLines")]
-	public partial class ReportForIndividualLine : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _IndividualId;
-		
-		private int _FromId;
-		
-		private int _QuestioFormId;
-		
-		private int _SectionId;
-		
-		private int _QuestionId;
-		
-		private double _SelfEvaluation;
-		
-		private double _collegesEvaluation;
-		
-		private double _SupervisorEvaluation;
-		
-		private double _AccompaniedEvaluation;
-		
-		private int _CountOfFormsFilled;
-		
-		private double _TotalAverage;
-		
-		private EntityRef<ReportForIndividual> _ReportForIndividual;
-		
-		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIndividualIdChanging(string value);
-    partial void OnIndividualIdChanged();
-    partial void OnFromIdChanging(int value);
-    partial void OnFromIdChanged();
-    partial void OnQuestioFormIdChanging(int value);
-    partial void OnQuestioFormIdChanged();
-    partial void OnSectionIdChanging(int value);
-    partial void OnSectionIdChanged();
-    partial void OnQuestionIdChanging(int value);
-    partial void OnQuestionIdChanged();
-    partial void OnSelfEvaluationChanging(double value);
-    partial void OnSelfEvaluationChanged();
-    partial void OncollegesEvaluationChanging(double value);
-    partial void OncollegesEvaluationChanged();
-    partial void OnSupervisorEvaluationChanging(double value);
-    partial void OnSupervisorEvaluationChanged();
-    partial void OnAccompaniedEvaluationChanging(double value);
-    partial void OnAccompaniedEvaluationChanged();
-    partial void OnCountOfFormsFilledChanging(int value);
-    partial void OnCountOfFormsFilledChanged();
-    partial void OnTotalAverageChanging(double value);
-    partial void OnTotalAverageChanged();
-    #endregion
-		
-		public ReportForIndividualLine()
-		{
-			this._ReportForIndividual = default(EntityRef<ReportForIndividual>);
-			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndividualId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string IndividualId
-		{
-			get
-			{
-				return this._IndividualId;
-			}
-			set
-			{
-				if ((this._IndividualId != value))
-				{
-					if (this._ReportForIndividual.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIndividualIdChanging(value);
-					this.SendPropertyChanging();
-					this._IndividualId = value;
-					this.SendPropertyChanged("IndividualId");
-					this.OnIndividualIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int FromId
-		{
-			get
-			{
-				return this._FromId;
-			}
-			set
-			{
-				if ((this._FromId != value))
-				{
-					if (this._ReportForIndividual.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFromIdChanging(value);
-					this.SendPropertyChanging();
-					this._FromId = value;
-					this.SendPropertyChanged("FromId");
-					this.OnFromIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestioFormId", DbType="Int NOT NULL")]
-		public int QuestioFormId
-		{
-			get
-			{
-				return this._QuestioFormId;
-			}
-			set
-			{
-				if ((this._QuestioFormId != value))
-				{
-					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestioFormIdChanging(value);
-					this.SendPropertyChanging();
-					this._QuestioFormId = value;
-					this.SendPropertyChanged("QuestioFormId");
-					this.OnQuestioFormIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL")]
-		public int SectionId
-		{
-			get
-			{
-				return this._SectionId;
-			}
-			set
-			{
-				if ((this._SectionId != value))
-				{
-					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSectionIdChanging(value);
-					this.SendPropertyChanging();
-					this._SectionId = value;
-					this.SendPropertyChanged("SectionId");
-					this.OnSectionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int QuestionId
-		{
-			get
-			{
-				return this._QuestionId;
-			}
-			set
-			{
-				if ((this._QuestionId != value))
-				{
-					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestionIdChanging(value);
-					this.SendPropertyChanging();
-					this._QuestionId = value;
-					this.SendPropertyChanged("QuestionId");
-					this.OnQuestionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelfEvaluation", DbType="Float NOT NULL")]
-		public double SelfEvaluation
-		{
-			get
-			{
-				return this._SelfEvaluation;
-			}
-			set
-			{
-				if ((this._SelfEvaluation != value))
-				{
-					this.OnSelfEvaluationChanging(value);
-					this.SendPropertyChanging();
-					this._SelfEvaluation = value;
-					this.SendPropertyChanged("SelfEvaluation");
-					this.OnSelfEvaluationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_collegesEvaluation", DbType="Float NOT NULL")]
-		public double collegesEvaluation
-		{
-			get
-			{
-				return this._collegesEvaluation;
-			}
-			set
-			{
-				if ((this._collegesEvaluation != value))
-				{
-					this.OncollegesEvaluationChanging(value);
-					this.SendPropertyChanging();
-					this._collegesEvaluation = value;
-					this.SendPropertyChanged("collegesEvaluation");
-					this.OncollegesEvaluationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupervisorEvaluation", DbType="Float NOT NULL")]
-		public double SupervisorEvaluation
-		{
-			get
-			{
-				return this._SupervisorEvaluation;
-			}
-			set
-			{
-				if ((this._SupervisorEvaluation != value))
-				{
-					this.OnSupervisorEvaluationChanging(value);
-					this.SendPropertyChanging();
-					this._SupervisorEvaluation = value;
-					this.SendPropertyChanged("SupervisorEvaluation");
-					this.OnSupervisorEvaluationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccompaniedEvaluation", DbType="Float NOT NULL")]
-		public double AccompaniedEvaluation
-		{
-			get
-			{
-				return this._AccompaniedEvaluation;
-			}
-			set
-			{
-				if ((this._AccompaniedEvaluation != value))
-				{
-					this.OnAccompaniedEvaluationChanging(value);
-					this.SendPropertyChanging();
-					this._AccompaniedEvaluation = value;
-					this.SendPropertyChanged("AccompaniedEvaluation");
-					this.OnAccompaniedEvaluationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountOfFormsFilled", DbType="Int NOT NULL")]
-		public int CountOfFormsFilled
-		{
-			get
-			{
-				return this._CountOfFormsFilled;
-			}
-			set
-			{
-				if ((this._CountOfFormsFilled != value))
-				{
-					this.OnCountOfFormsFilledChanging(value);
-					this.SendPropertyChanging();
-					this._CountOfFormsFilled = value;
-					this.SendPropertyChanged("CountOfFormsFilled");
-					this.OnCountOfFormsFilledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAverage", DbType="Float NOT NULL")]
-		public double TotalAverage
-		{
-			get
-			{
-				return this._TotalAverage;
-			}
-			set
-			{
-				if ((this._TotalAverage != value))
-				{
-					this.OnTotalAverageChanging(value);
-					this.SendPropertyChanging();
-					this._TotalAverage = value;
-					this.SendPropertyChanged("TotalAverage");
-					this.OnTotalAverageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForIndividual_ReportForIndividualLine", Storage="_ReportForIndividual", ThisKey="IndividualId,FromId", OtherKey="IndividualId,FormId", IsForeignKey=true)]
-		public ReportForIndividual ReportForIndividual
-		{
-			get
-			{
-				return this._ReportForIndividual.Entity;
-			}
-			set
-			{
-				ReportForIndividual previousValue = this._ReportForIndividual.Entity;
-				if (((previousValue != value) 
-							|| (this._ReportForIndividual.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ReportForIndividual.Entity = null;
-						previousValue.ReportForIndividualLines.Remove(this);
-					}
-					this._ReportForIndividual.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForIndividualLines.Add(this);
-						this._IndividualId = value.IndividualId;
-						this._FromId = value.FormId;
-					}
-					else
-					{
-						this._IndividualId = default(string);
-						this._FromId = default(int);
-					}
-					this.SendPropertyChanged("ReportForIndividual");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForIndividualLine", Storage="_tbl_IntentionalQuestion", ThisKey="QuestioFormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
-		public tbl_IntentionalQuestion tbl_IntentionalQuestion
-		{
-			get
-			{
-				return this._tbl_IntentionalQuestion.Entity;
-			}
-			set
-			{
-				tbl_IntentionalQuestion previousValue = this._tbl_IntentionalQuestion.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_IntentionalQuestion.Entity = null;
-						previousValue.ReportForIndividualLines.Remove(this);
-					}
-					this._tbl_IntentionalQuestion.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForIndividualLines.Add(this);
-						this._QuestioFormId = value.FormId;
-						this._SectionId = value.SectionId;
-						this._QuestionId = value.QuestionId;
-					}
-					else
-					{
-						this._QuestioFormId = default(int);
-						this._SectionId = default(int);
-						this._QuestionId = default(int);
-					}
-					this.SendPropertyChanged("tbl_IntentionalQuestion");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }
