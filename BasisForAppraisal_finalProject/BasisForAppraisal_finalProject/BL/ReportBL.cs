@@ -1,4 +1,5 @@
 ﻿using BasisForAppraisal_finalProject.DBML;
+using BasisForAppraisal_finalProject.Helpr;
 using BasisForAppraisal_finalProject.Models;
 using System;
 using System.Collections.Generic;
@@ -118,6 +119,7 @@ namespace BasisForAppraisal_finalProject.BL
             //   ------------- Report Muliti choice for Organiztion use--------------------------------------------
             var questionsNotInRepostForIndividual = allQuestions.Where(x => !x.ForReports).ToList();
 
+
             var MulitiChoiceListQuestion = questionsNotInRepostForIndividual.Where(x => x.QuestionType == "MultipleChoiceList").ToList();
 
             foreach(tbl_IntentionalQuestion q in MulitiChoiceListQuestion)
@@ -130,6 +132,16 @@ namespace BasisForAppraisal_finalProject.BL
                     CountScoreForReportForOrganiztionLinesMulitiChoice(i.Count(), line);
                 }
 
+            }
+
+            var notMulitiChoiceListQuestion = questionsNotInRepostForIndividual.Where(x => x.QuestionType != "MultipleChoiceList").ToList();
+            var notMulitiChoiceAnswerForQuestion = DMO.ConnectorAnswers.Where(x => x.tbl_IntentionalAnswer.tbl_IntentionalQuestion.QuestionType != "MultipleChoiceList" && x.companyId == companyId && x.FormId == formId && !x.tbl_IntentionalAnswer.tbl_IntentionalQuestion.ForReports).ToList();
+
+            foreach (tbl_IntentionalQuestion q in notMulitiChoiceListQuestion)
+            {
+                var answerForQuestion = notMulitiChoiceAnswerForQuestion.Where(x => x.QuestionId == q.QuestionId).ToList();
+                var line = listOfReportLInes.FirstOrDefault(x => x.QuestionId == q.QuestionId);
+                answerForQuestion.ForEach(x => CountScoreForReportForOrganiztionLinesSpecialCatgory(x.tbl_IntentionalAnswer.MyScore, line));
             }
 
             //   -------------End Report Muliti choice for Organiztion use--------------------------------------------
@@ -149,6 +161,18 @@ namespace BasisForAppraisal_finalProject.BL
                 organiztion.MidScore++;
             else
              organiztion.LowScore++;
+        }
+
+        public void CountScoreForReportForOrganiztionLinesSpecialCatgory(int NumberOfTime, ReportForOrganiztionLine organiztion)
+        {
+            var helper = new ConvertAnswerHelperScore();
+            var ConvertScore = helper.ConvertAnswerHelperScoreForReport(NumberOfTime);
+            if (ConvertScore >= 2.5)
+                organiztion.HighScore++;
+            else if (ConvertScore >= 1.5)
+                organiztion.MidScore++;
+            else
+                organiztion.LowScore++;
         }
 
         public void CountScoreForReportForOrganiztionLines(ReportForIndividualLine individual, ReportForOrganiztionLine organiztion)
