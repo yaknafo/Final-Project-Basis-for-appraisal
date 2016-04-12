@@ -246,6 +246,8 @@
     <Compile Include="ViewModel\Company\ClassUnitViewModel.cs" />
     <Compile Include="ViewModel\Company\FolderUnitPartialView.cs" />
     <Compile Include="ViewModel\ExportData\FormCheckBoxViewModel.cs" />
+    <Compile Include="ViewModel\ExportData\ReportForOrganiztionLinesViewModel.cs" />
+    <Compile Include="ViewModel\ExportData\ReportForOrgViewModel.cs" />
     <Compile Include="ViewModel\FormFillerViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
@@ -512,6 +514,9 @@
     <Content Include="Views\ExportData\_ClassForCbxEmp.cshtml" />
     <Content Include="Views\ExportData\_EmpForCbxEmp.cshtml" />
     <Content Include="Views\ExportData\ReportForOrganiztion.cshtml" />
+    <Content Include="Views\Report\ReportPerOrganiztion.cshtml" />
+    <Content Include="Views\Report\EditorTemplates\ReportForOrganiztionLine.cshtml" />
+    <Content Include="Views\Report\PieGraphForReportOrg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

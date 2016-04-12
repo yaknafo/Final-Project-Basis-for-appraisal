@@ -57,7 +57,8 @@ namespace BasisForAppraisal_finalProject.BL
             var OrganiztionEmployessId = DMO.ConnectorAnswers.Where(x => x.companyId == organiztion.companyId && x.FormId == formId).Select(x => x.employeeOnId).ToList();
 
             // create report for invidual for all the employee in the company
-            OrganiztionEmployessId.ForEach(x => ReportPerEmployee(x, formId));
+            //TODO: this is so slow we need to with that something
+           OrganiztionEmployessId.ForEach(x => ReportPerEmployee(x, formId));
 
             var report = new ReportForOrganiztion() { CompanyId = organiztion.companyId, FormId = formId };
             DMO.SaveReportForOrganiztion(report);
@@ -114,6 +115,24 @@ namespace BasisForAppraisal_finalProject.BL
 
             //   -------------End Report individual for Organiztion use--------------------------------------------
 
+            //   ------------- Report Muliti choice for Organiztion use--------------------------------------------
+            var questionsNotInRepostForIndividual = allQuestions.Where(x => !x.ForReports).ToList();
+
+            var MulitiChoiceListQuestion = questionsNotInRepostForIndividual.Where(x => x.QuestionType == "MultipleChoiceList").ToList();
+
+            foreach(tbl_IntentionalQuestion q in MulitiChoiceListQuestion)
+            {
+                var AnswerForQuestion = DMO.ConnectorAnswers.Where(x => x.QuestionId == q.QuestionId && x.companyId == companyId).ToList();
+                var groupByEmp = AnswerForQuestion.GroupBy(x => x.employeeOnId).ToList();
+                var line = listOfReportLInes.FirstOrDefault(x => x.QuestionId == q.QuestionId);
+                foreach(var i in groupByEmp)
+                {
+                    CountScoreForReportForOrganiztionLinesMulitiChoice(i.Count(), line);
+                }
+
+            }
+
+            //   -------------End Report Muliti choice for Organiztion use--------------------------------------------
 
             // ------------ Save all lines  for report For Organiztion
             listOfReportLInes.ForEach(x => DMO.SaveReportForOrganiztionLines(x));
@@ -122,14 +141,24 @@ namespace BasisForAppraisal_finalProject.BL
         }
 
 
+        public void CountScoreForReportForOrganiztionLinesMulitiChoice(int NumberOfTime, ReportForOrganiztionLine organiztion)
+        {
+            if (NumberOfTime >= 4)
+                organiztion.HighScore++;
+            else if (NumberOfTime >= 2)
+                organiztion.MidScore++;
+            else
+             organiztion.LowScore++;
+        }
+
         public void CountScoreForReportForOrganiztionLines(ReportForIndividualLine individual, ReportForOrganiztionLine organiztion)
         {
             if (individual.TotalAverage >= 2.5)
                 organiztion.HighScore++;
             else if (individual.TotalAverage >= 1.5)
-                organiztion.LowScore++;
+                organiztion.MidScore++;
             else
-             organiztion.LowScore++;
+                organiztion.LowScore++;
         }
 
        

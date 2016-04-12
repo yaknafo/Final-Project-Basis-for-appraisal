@@ -1,13 +1,18 @@
-﻿using BasisForAppraisal_finalProject.DBML;
+﻿using BasisForAppraisal_finalProject.Authorize;
+using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using BasisForAppraisal_finalProject.ViewModel;
+using BasisForAppraisal_finalProject.ViewModel.ExportData;
+using System.Web.Helpers;
 namespace BasisForAppraisal_finalProject.Controllers
 {
+
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class ReportController : Controller
     {
         //
@@ -60,5 +65,32 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             return View(calculation);
         }
+
+
+        public ActionResult ReportPerOrganiztion(int companyId, int forms)
+        {
+            var dm = new DataManager();
+            var reportForOrganiztion = dm.ReportForOrganiztions.SingleOrDefault(x => x.CompanyId == companyId && x.FormId == forms);
+            if (reportForOrganiztion == null)
+                return View();
+            var viewModel = new ReportForOrgViewModel(reportForOrganiztion);
+            return View(viewModel);
+        }
+
+        public JsonResult GetReportsLines(int companyId, int form )
+        {
+
+            var dm = new DataManager();
+            var reportForOrganiztion = dm.ReportForOrganiztions.SingleOrDefault(x => x.CompanyId == companyId && x.FormId == form);
+             var data = new List<ReportForOrganiztionLinesViewModel>();
+            var listData = reportForOrganiztion.ReportForOrganiztionLines.ToArray();
+            foreach(ReportForOrganiztionLine r in listData)
+            {
+                var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = r.QuestionId, TypeQuestion = r.TypeQuestionName, HighScore = r.HighScore, MidScore = r.MidScore, LowScore = r.LowScore,TitleQuestion=r.tbl_IntentionalQuestion.Title };
+                data.Add(tempLine);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 	}
 }

@@ -1,0 +1,71 @@
+﻿@model  BasisForAppraisal_finalProject.ViewModel.ExportData.ReportForOrgViewModel
+
+@using BasisForAppraisal_finalProject.DBML;
+@{
+    ViewBag.Title = "ReportPerOrganiztion";
+}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(GetLines);
+
+    function GetLines() {  
+        var Companyid =  +document.getElementById('Companyid').value; 
+        var formid =  +document.getElementById('formid').value; 
+        var getReportColumnsParams = {  
+            "companyId": Companyid  ,
+            "form":formid
+        };  
+        $.ajax({
+            type: "Get",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: 'GetReportsLines',
+            data: getReportColumnsParams,
+            success: function (data) {
+                drawChart(data);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        })};
+
+    function drawChart(list) {
+
+        var numberOfQuestions = +document.getElementById('numberOfQuestions').value;
+        for (i = 0; i < numberOfQuestions; i++) {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['גבוהה', list[i].HighScore],
+              ['בינוני', list[i].MidScore],
+              ['נמוך', list[i].LowScore],
+            ]);
+
+            var options = {
+                //title: list[i].TitleQuestion,
+                pieHole: 0.4,
+                colors: ['#4CC417', '#C0C0C0', '#FF0000']
+            };
+
+
+            var chart = new google.visualization.PieChart(document.getElementById(list[i].QuestionId));
+            chart.draw(data, options);
+        }
+    }
+</script>
+<input id="numberOfQuestions" value="@Model.ReportForOrganiztionLinesModel.Count" class="collapse"></input>
+<input id="Companyid" value="@Model.ReportForOrganiztionModel.CompanyId" class="collapse"></input>
+<input id="formid" value="@Model.ReportForOrganiztionModel.FormId" class="collapse"></input>
+<div dir="rtl" style="margin-top:10%">
+        <div class="row">
+            @foreach (ReportForOrganiztionLine line in Model.ReportForOrganiztionLinesModel)
+            {
+                <div>@line.tbl_IntentionalQuestion.Title</div>
+                <div id="@line.QuestionId" class="col-sm-pull-1" style="border-bottom:groove"></div>
+
+            }
+        </div>
+</div>

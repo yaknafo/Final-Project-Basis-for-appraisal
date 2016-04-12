@@ -238,7 +238,7 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult ReportForOrganiztion(int Companyiesa, List<FormCheckBoxViewModel> formCheckList)
+        public ActionResult ReportForOrganiztion(int Companyiesa, List<FormCheckBoxViewModel> formCheckList, bool noCalculation= true)
         {
             var dManager = new DataManager();
             var reportBL = new ReportBL();
@@ -248,9 +248,9 @@ namespace BasisForAppraisal_finalProject.Controllers
                 ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
                 return View();
             }
+            if (!noCalculation)
             reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId);
-            ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
-            return View();
+            return RedirectToAction("ReportPerOrganiztion", "Report", new { companyId = Companyiesa, forms = form.FormId });
         }
         public PartialViewResult GetFromsForOrganiztion(int organiztionid)
         {
