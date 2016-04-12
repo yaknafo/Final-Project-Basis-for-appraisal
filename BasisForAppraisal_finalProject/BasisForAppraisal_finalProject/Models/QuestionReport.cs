@@ -111,30 +111,37 @@ namespace BasisForAppraisal_finalProject.Models
                  return;
              foreach (tbl_ConnectorAnswer ca in listOfAnswer)
              {
+                 int questionScore = helper.ConvertAnswerHelperScoreForReport(ca.tbl_IntentionalAnswer.MyScore);
+                 if (ca.tbl_IntentionalAnswer.tbl_IntentionalQuestion.QuestionType.ToLower().Contains("multiplechoicelist"))
+                 {
+                     continue;
+                 }
+                     
                  if(ca.employeeFillId == ca.employeeOnId)
                  {
                      selfCounter++;
-                     selfAverage = helper.ConvertAnswerHelperScoreForReport(ca.tbl_IntentionalAnswer.MyScore);
+                     selfAverage = questionScore;
                  }
 
                  else if(DM.IsAccompanied(ca.employeeFillId))
                  {
                      AccompaniedCounter++;
-                     AccompaniedAverage = AccompaniedAverage + helper.ConvertAnswerHelperScoreForReport(ca.tbl_IntentionalAnswer.MyScore);
+                     AccompaniedAverage = AccompaniedAverage + questionScore;
                  }
 
                  else if (DM.IsManager(ca.employeeFillId))
                  {
                      directorCounter++;
-                     directorAverage = directorAverage + helper.ConvertAnswerHelperScoreForReport(ca.tbl_IntentionalAnswer.MyScore);
+                     directorAverage = directorAverage + questionScore;
                  }
 
                  else
                  {
                      colleagueCounter++;
-                     colleagueAverage = colleagueAverage + helper.ConvertAnswerHelperScoreForReport(ca.tbl_IntentionalAnswer.MyScore);
+                     colleagueAverage = colleagueAverage + questionScore;
                  }
              }
+
 
              //--------- Calculate the total:`
              if (colleagueCounter > 0)

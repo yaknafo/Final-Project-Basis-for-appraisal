@@ -17,6 +17,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View();
         }
 
+
         
         public ActionResult ReportPerEmployee(string employeeId, string forms,FormReportPerEmployee formReport = null)
         {
@@ -36,7 +37,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             var reportDb = DMO.GetReportForIndividual(employeeId, form.formId);
             if (reportDb == null || !reportDb.IsClose)
             {
-                var report = new ReportForIndividual() { IndividualId = employeeId, FormId = form.formId, createDate = DateTime.Now };
+                var report = new ReportForIndividual() { IndividualId = employeeId, FormId = form.formId, createDate = DateTime.Now, CompanyId = emp.companyId };
                 DMO.SaveReportForIndividual(report);
                 
                 calculation.GetResultForForm();

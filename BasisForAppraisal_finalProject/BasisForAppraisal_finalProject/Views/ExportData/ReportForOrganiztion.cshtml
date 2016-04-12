@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "ReportForOrganiztion";
+}
+
+
+<script src="~/Scripts/DataTable/dataTables.keyTable.js"></script>
+<script src="~/Scripts/DataTable/jquery.js"></script>
+<script src="~/Scripts/DataTable/jquery.dataTables.js"></script>
+<link href="~/Scripts/DataTable/dataTables.keyTable.css" rel="stylesheet" />
+<link href="~/Scripts/DataTable/jquery.dataTables.css" rel="stylesheet" />
+<link href="~/Content/FontStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+
+<div dir="rtl" style="margin-top:10%">
+    <h2>דוח לארגון</h2>
+    @using (Html.BeginForm("ReportForOrganiztion", "ExportData", FormMethod.Post))
+    {
+
+        <table style="width:40%">
+            <tr>
+                <td style="margin-left:3%"> @Html.DropDownList("Companyiesa", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "Companyies" })</td>
+
+            </tr>
+        </table>
+
+        <div id="formCheckList" class="col-lg-5" style="margin-top:2%"></div>
+    }
+    <script type="text/javascript">
+
+        $("#Companyies").change(function () {
+            var sv = $(this).val();
+            if (sv != null) {
+                $.ajax(
+                    {
+                        url: '@Url.Action("GetFromsForOrganiztion")',
+                        type: "get",
+                        data: { organiztionid: sv }
+
+                    }).done(function (data) {
+                        $("#formCheckList").html(data);
+                    });
+            }
+        });
+
+
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").toggle(500)
+            });
+        });
+
+    </script>
+
+    
+
+</div>
+
+

@@ -4,6 +4,7 @@
     <Type Name="tbl_TypeQuestion">
       <Column Name="Name" Type="System.String" DbType="VarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="Name" OtherKey="QuestionType" Type="tbl_IntentionalQuestion" />
+      <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="ReportForOrganiztionLines" ThisKey="Name" OtherKey="TypeQuestionName" Type="ReportForOrganiztionLine" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Section" Member="tbl_Sections">
@@ -24,6 +25,8 @@
       <Column Name="comapnyPhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="tbl_Company_tbl_Unit" Member="tbl_Units" ThisKey="companyId" OtherKey="companyId" Type="tbl_Unit" />
       <Association Name="tbl_Company_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="companyId" OtherKey="companyId" Type="tbl_ConnectorFormFill" />
+      <Association Name="tbl_Company_ReportForOrganiztion" Member="ReportForOrganiztions" ThisKey="companyId" OtherKey="CompanyId" Type="ReportForOrganiztion" />
+      <Association Name="tbl_Company_ReportForIndividual" Member="ReportForIndividuals" ThisKey="companyId" OtherKey="CompanyId" Type="ReportForIndividual" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Class" Member="tbl_Classes">
@@ -84,18 +87,6 @@
       <Association Name="tbl_IntentionalAnswer_tbl_ConnectorAnswer" Member="tbl_IntentionalAnswer" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_IntentionalAnswer" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ReportForIndividual" Member="ReportForIndividuals">
-    <Type Name="ReportForIndividual">
-      <Column Name="IndividualId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="feedback" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="createDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="IsClose" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividualLines" ThisKey="IndividualId,FormId" OtherKey="IndividualId,FromId" Type="ReportForIndividualLine" />
-      <Association Name="tbl_Employee_ReportForIndividual" Member="tbl_Employee" ThisKey="IndividualId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
-      <Association Name="tblForm_ReportForIndividual" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_Employee" Member="tbl_Employees">
     <Type Name="tbl_Employee">
       <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -126,8 +117,8 @@
       <Column Name="AccompaniedEvaluation" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="CountOfFormsFilled" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TotalAverage" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividual" ThisKey="IndividualId,FromId" OtherKey="IndividualId,FormId" Type="ReportForIndividual" IsForeignKey="true" />
       <Association Name="tbl_IntentionalQuestion_ReportForIndividualLine" Member="tbl_IntentionalQuestion" ThisKey="QuestioFormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
+      <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividual" ThisKey="IndividualId,FromId" OtherKey="IndividualId,FormId" Type="ReportForIndividual" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tblForm" Member="tblForms">
@@ -140,6 +131,7 @@
       <Column Name="introduction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="tblForm_tbl_Section" Member="tbl_Sections" ThisKey="formId" OtherKey="FormId" Type="tbl_Section" />
       <Association Name="tblForm_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="formId" OtherKey="formId" Type="tbl_ConnectorFormFill" />
+      <Association Name="tblForm_ReportForOrganiztion" Member="ReportForOrganiztions" ThisKey="formId" OtherKey="FormId" Type="ReportForOrganiztion" />
       <Association Name="tblForm_ReportForIndividual" Member="ReportForIndividuals" ThisKey="formId" OtherKey="FormId" Type="ReportForIndividual" />
     </Type>
   </Table>
@@ -160,8 +152,51 @@
       <Column Name="ForReports" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalAnswers" ThisKey="FormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalAnswer" />
       <Association Name="tbl_IntentionalQuestion_ReportForIndividualLine" Member="ReportForIndividualLines" ThisKey="FormId,SectionId,QuestionId" OtherKey="QuestioFormId,SectionId,QuestionId" Type="ReportForIndividualLine" />
+      <Association Name="tbl_IntentionalQuestion_ReportForOrganiztionLine" Member="ReportForOrganiztionLines" ThisKey="FormId,SectionId,QuestionId" OtherKey="QuestioFormId,SectionId,QuestionId" Type="ReportForOrganiztionLine" />
       <Association Name="tbl_Section_tbl_IntentionalQuestion" Member="tbl_Section" ThisKey="FormId,SectionId" OtherKey="FormId,SectionId" Type="tbl_Section" IsForeignKey="true" />
       <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_TypeQuestion" ThisKey="QuestionType" OtherKey="Name" Type="tbl_TypeQuestion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportForOrganiztion" Member="ReportForOrganiztions">
+    <Type Name="ReportForOrganiztion">
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="LastCalculationDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Isclose" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ReportForOrganiztion_ReportForOrganiztionLine" Member="ReportForOrganiztionLines" ThisKey="CompanyId,FormId" OtherKey="CompanyId,FormId" Type="ReportForOrganiztionLine" />
+      <Association Name="tbl_Company_ReportForOrganiztion" Member="tbl_Company" ThisKey="CompanyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
+      <Association Name="tblForm_ReportForOrganiztion" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportForIndividual" Member="ReportForIndividuals">
+    <Type Name="ReportForIndividual">
+      <Column Name="IndividualId" Type="System.String" DbType="VarChar(9) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="feedback" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="createDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="IsClose" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividualLines" ThisKey="IndividualId,FormId" OtherKey="IndividualId,FromId" Type="ReportForIndividualLine" />
+      <Association Name="tbl_Company_ReportForIndividual" Member="tbl_Company" ThisKey="CompanyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
+      <Association Name="tblForm_ReportForIndividual" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
+      <Association Name="tbl_Employee_ReportForIndividual" Member="tbl_Employee" ThisKey="IndividualId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportForOrganiztionLines" Member="ReportForOrganiztionLines">
+    <Type Name="ReportForOrganiztionLine">
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestioFormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HighScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LowScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeQuestionName" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="MidScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="tbl_TypeQuestion" ThisKey="TypeQuestionName" OtherKey="Name" Type="tbl_TypeQuestion" IsForeignKey="true" />
+      <Association Name="ReportForOrganiztion_ReportForOrganiztionLine" Member="ReportForOrganiztion" ThisKey="CompanyId,FormId" OtherKey="CompanyId,FormId" Type="ReportForOrganiztion" IsForeignKey="true" />
+      <Association Name="tbl_IntentionalQuestion_ReportForOrganiztionLine" Member="tbl_IntentionalQuestion" ThisKey="QuestioFormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

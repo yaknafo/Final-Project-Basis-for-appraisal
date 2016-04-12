@@ -54,9 +54,6 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_ConnectorAnswer(tbl_ConnectorAnswer instance);
     partial void Updatetbl_ConnectorAnswer(tbl_ConnectorAnswer instance);
     partial void Deletetbl_ConnectorAnswer(tbl_ConnectorAnswer instance);
-    partial void InsertReportForIndividual(ReportForIndividual instance);
-    partial void UpdateReportForIndividual(ReportForIndividual instance);
-    partial void DeleteReportForIndividual(ReportForIndividual instance);
     partial void Inserttbl_Employee(tbl_Employee instance);
     partial void Updatetbl_Employee(tbl_Employee instance);
     partial void Deletetbl_Employee(tbl_Employee instance);
@@ -69,6 +66,15 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
+    partial void InsertReportForOrganiztion(ReportForOrganiztion instance);
+    partial void UpdateReportForOrganiztion(ReportForOrganiztion instance);
+    partial void DeleteReportForOrganiztion(ReportForOrganiztion instance);
+    partial void InsertReportForIndividual(ReportForIndividual instance);
+    partial void UpdateReportForIndividual(ReportForIndividual instance);
+    partial void DeleteReportForIndividual(ReportForIndividual instance);
+    partial void InsertReportForOrganiztionLine(ReportForOrganiztionLine instance);
+    partial void UpdateReportForOrganiztionLine(ReportForOrganiztionLine instance);
+    partial void DeleteReportForOrganiztionLine(ReportForOrganiztionLine instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -165,14 +171,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<ReportForIndividual> ReportForIndividuals
-		{
-			get
-			{
-				return this.GetTable<ReportForIndividual>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_Employee> tbl_Employees
 		{
 			get
@@ -204,6 +202,30 @@ namespace BasisForAppraisal_finalProject.DBML
 				return this.GetTable<tbl_IntentionalQuestion>();
 			}
 		}
+		
+		public System.Data.Linq.Table<ReportForOrganiztion> ReportForOrganiztions
+		{
+			get
+			{
+				return this.GetTable<ReportForOrganiztion>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForIndividual> ReportForIndividuals
+		{
+			get
+			{
+				return this.GetTable<ReportForIndividual>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForOrganiztionLine> ReportForOrganiztionLines
+		{
+			get
+			{
+				return this.GetTable<ReportForOrganiztionLine>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_TypeQuestion")]
@@ -216,6 +238,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
 		
+		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -227,6 +251,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		public tbl_TypeQuestion()
 		{
 			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
+			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
 			OnCreated();
 		}
 		
@@ -263,6 +288,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForOrganiztionLine", Storage="_ReportForOrganiztionLines", ThisKey="Name", OtherKey="TypeQuestionName")]
+		public EntitySet<ReportForOrganiztionLine> ReportForOrganiztionLines
+		{
+			get
+			{
+				return this._ReportForOrganiztionLines;
+			}
+			set
+			{
+				this._ReportForOrganiztionLines.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -290,6 +328,18 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = null;
+		}
+		
+		private void attach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = this;
+		}
+		
+		private void detach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_TypeQuestion = null;
@@ -517,6 +567,10 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
 		
+		private EntitySet<ReportForOrganiztion> _ReportForOrganiztions;
+		
+		private EntitySet<ReportForIndividual> _ReportForIndividuals;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -535,6 +589,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this._tbl_Units = new EntitySet<tbl_Unit>(new Action<tbl_Unit>(this.attach_tbl_Units), new Action<tbl_Unit>(this.detach_tbl_Units));
 			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
+			this._ReportForOrganiztions = new EntitySet<ReportForOrganiztion>(new Action<ReportForOrganiztion>(this.attach_ReportForOrganiztions), new Action<ReportForOrganiztion>(this.detach_ReportForOrganiztions));
+			this._ReportForIndividuals = new EntitySet<ReportForIndividual>(new Action<ReportForIndividual>(this.attach_ReportForIndividuals), new Action<ReportForIndividual>(this.detach_ReportForIndividuals));
 			OnCreated();
 		}
 		
@@ -644,6 +700,32 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_ReportForOrganiztion", Storage="_ReportForOrganiztions", ThisKey="companyId", OtherKey="CompanyId")]
+		public EntitySet<ReportForOrganiztion> ReportForOrganiztions
+		{
+			get
+			{
+				return this._ReportForOrganiztions;
+			}
+			set
+			{
+				this._ReportForOrganiztions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_ReportForIndividual", Storage="_ReportForIndividuals", ThisKey="companyId", OtherKey="CompanyId")]
+		public EntitySet<ReportForIndividual> ReportForIndividuals
+		{
+			get
+			{
+				return this._ReportForIndividuals;
+			}
+			set
+			{
+				this._ReportForIndividuals.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -683,6 +765,30 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = null;
+		}
+		
+		private void attach_ReportForOrganiztions(ReportForOrganiztion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = this;
+		}
+		
+		private void detach_ReportForOrganiztions(ReportForOrganiztion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = null;
+		}
+		
+		private void attach_ReportForIndividuals(ReportForIndividual entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = this;
+		}
+		
+		private void detach_ReportForIndividuals(ReportForIndividual entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Company = null;
@@ -2014,274 +2120,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForIndividual")]
-	public partial class ReportForIndividual : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _IndividualId;
-		
-		private int _FormId;
-		
-		private string _feedback;
-		
-		private System.DateTime _createDate;
-		
-		private bool _IsClose;
-		
-		private EntitySet<ReportForIndividualLine> _ReportForIndividualLines;
-		
-		private EntityRef<tbl_Employee> _tbl_Employee;
-		
-		private EntityRef<tblForm> _tblForm;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIndividualIdChanging(string value);
-    partial void OnIndividualIdChanged();
-    partial void OnFormIdChanging(int value);
-    partial void OnFormIdChanged();
-    partial void OnfeedbackChanging(string value);
-    partial void OnfeedbackChanged();
-    partial void OncreateDateChanging(System.DateTime value);
-    partial void OncreateDateChanged();
-    partial void OnIsCloseChanging(bool value);
-    partial void OnIsCloseChanged();
-    #endregion
-		
-		public ReportForIndividual()
-		{
-			this._ReportForIndividualLines = new EntitySet<ReportForIndividualLine>(new Action<ReportForIndividualLine>(this.attach_ReportForIndividualLines), new Action<ReportForIndividualLine>(this.detach_ReportForIndividualLines));
-			this._tbl_Employee = default(EntityRef<tbl_Employee>);
-			this._tblForm = default(EntityRef<tblForm>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndividualId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string IndividualId
-		{
-			get
-			{
-				return this._IndividualId;
-			}
-			set
-			{
-				if ((this._IndividualId != value))
-				{
-					if (this._tbl_Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIndividualIdChanging(value);
-					this.SendPropertyChanging();
-					this._IndividualId = value;
-					this.SendPropertyChanged("IndividualId");
-					this.OnIndividualIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int FormId
-		{
-			get
-			{
-				return this._FormId;
-			}
-			set
-			{
-				if ((this._FormId != value))
-				{
-					if (this._tblForm.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFormIdChanging(value);
-					this.SendPropertyChanging();
-					this._FormId = value;
-					this.SendPropertyChanged("FormId");
-					this.OnFormIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_feedback", DbType="VarChar(MAX)")]
-		public string feedback
-		{
-			get
-			{
-				return this._feedback;
-			}
-			set
-			{
-				if ((this._feedback != value))
-				{
-					this.OnfeedbackChanging(value);
-					this.SendPropertyChanging();
-					this._feedback = value;
-					this.SendPropertyChanged("feedback");
-					this.OnfeedbackChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createDate", DbType="Date NOT NULL")]
-		public System.DateTime createDate
-		{
-			get
-			{
-				return this._createDate;
-			}
-			set
-			{
-				if ((this._createDate != value))
-				{
-					this.OncreateDateChanging(value);
-					this.SendPropertyChanging();
-					this._createDate = value;
-					this.SendPropertyChanged("createDate");
-					this.OncreateDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsClose", DbType="Bit NOT NULL")]
-		public bool IsClose
-		{
-			get
-			{
-				return this._IsClose;
-			}
-			set
-			{
-				if ((this._IsClose != value))
-				{
-					this.OnIsCloseChanging(value);
-					this.SendPropertyChanging();
-					this._IsClose = value;
-					this.SendPropertyChanged("IsClose");
-					this.OnIsCloseChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForIndividual_ReportForIndividualLine", Storage="_ReportForIndividualLines", ThisKey="IndividualId,FormId", OtherKey="IndividualId,FromId")]
-		public EntitySet<ReportForIndividualLine> ReportForIndividualLines
-		{
-			get
-			{
-				return this._ReportForIndividualLines;
-			}
-			set
-			{
-				this._ReportForIndividualLines.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_ReportForIndividual", Storage="_tbl_Employee", ThisKey="IndividualId", OtherKey="employeeId", IsForeignKey=true)]
-		public tbl_Employee tbl_Employee
-		{
-			get
-			{
-				return this._tbl_Employee.Entity;
-			}
-			set
-			{
-				tbl_Employee previousValue = this._tbl_Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Employee.Entity = null;
-						previousValue.ReportForIndividuals.Remove(this);
-					}
-					this._tbl_Employee.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForIndividuals.Add(this);
-						this._IndividualId = value.employeeId;
-					}
-					else
-					{
-						this._IndividualId = default(string);
-					}
-					this.SendPropertyChanged("tbl_Employee");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
-		public tblForm tblForm
-		{
-			get
-			{
-				return this._tblForm.Entity;
-			}
-			set
-			{
-				tblForm previousValue = this._tblForm.Entity;
-				if (((previousValue != value) 
-							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tblForm.Entity = null;
-						previousValue.ReportForIndividuals.Remove(this);
-					}
-					this._tblForm.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForIndividuals.Add(this);
-						this._FormId = value.formId;
-					}
-					else
-					{
-						this._FormId = default(int);
-					}
-					this.SendPropertyChanged("tblForm");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_ReportForIndividualLines(ReportForIndividualLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.ReportForIndividual = this;
-		}
-		
-		private void detach_ReportForIndividualLines(ReportForIndividualLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.ReportForIndividual = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Employee")]
 	public partial class tbl_Employee : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2701,9 +2539,9 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private double _TotalAverage;
 		
-		private EntityRef<ReportForIndividual> _ReportForIndividual;
-		
 		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
+		
+		private EntityRef<ReportForIndividual> _ReportForIndividual;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2735,8 +2573,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		public ReportForIndividualLine()
 		{
-			this._ReportForIndividual = default(EntityRef<ReportForIndividual>);
 			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
+			this._ReportForIndividual = default(EntityRef<ReportForIndividual>);
 			OnCreated();
 		}
 		
@@ -2980,42 +2818,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForIndividual_ReportForIndividualLine", Storage="_ReportForIndividual", ThisKey="IndividualId,FromId", OtherKey="IndividualId,FormId", IsForeignKey=true)]
-		public ReportForIndividual ReportForIndividual
-		{
-			get
-			{
-				return this._ReportForIndividual.Entity;
-			}
-			set
-			{
-				ReportForIndividual previousValue = this._ReportForIndividual.Entity;
-				if (((previousValue != value) 
-							|| (this._ReportForIndividual.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ReportForIndividual.Entity = null;
-						previousValue.ReportForIndividualLines.Remove(this);
-					}
-					this._ReportForIndividual.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForIndividualLines.Add(this);
-						this._IndividualId = value.IndividualId;
-						this._FromId = value.FormId;
-					}
-					else
-					{
-						this._IndividualId = default(string);
-						this._FromId = default(int);
-					}
-					this.SendPropertyChanged("ReportForIndividual");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForIndividualLine", Storage="_tbl_IntentionalQuestion", ThisKey="QuestioFormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
 		public tbl_IntentionalQuestion tbl_IntentionalQuestion
 		{
@@ -3050,6 +2852,42 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._QuestionId = default(int);
 					}
 					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForIndividual_ReportForIndividualLine", Storage="_ReportForIndividual", ThisKey="IndividualId,FromId", OtherKey="IndividualId,FormId", IsForeignKey=true)]
+		public ReportForIndividual ReportForIndividual
+		{
+			get
+			{
+				return this._ReportForIndividual.Entity;
+			}
+			set
+			{
+				ReportForIndividual previousValue = this._ReportForIndividual.Entity;
+				if (((previousValue != value) 
+							|| (this._ReportForIndividual.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ReportForIndividual.Entity = null;
+						previousValue.ReportForIndividualLines.Remove(this);
+					}
+					this._ReportForIndividual.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividualLines.Add(this);
+						this._IndividualId = value.IndividualId;
+						this._FromId = value.FormId;
+					}
+					else
+					{
+						this._IndividualId = default(string);
+						this._FromId = default(int);
+					}
+					this.SendPropertyChanged("ReportForIndividual");
 				}
 			}
 		}
@@ -3097,6 +2935,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
 		
+		private EntitySet<ReportForOrganiztion> _ReportForOrganiztions;
+		
 		private EntitySet<ReportForIndividual> _ReportForIndividuals;
 		
     #region Extensibility Method Definitions
@@ -3121,6 +2961,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
 			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
+			this._ReportForOrganiztions = new EntitySet<ReportForOrganiztion>(new Action<ReportForOrganiztion>(this.attach_ReportForOrganiztions), new Action<ReportForOrganiztion>(this.detach_ReportForOrganiztions));
 			this._ReportForIndividuals = new EntitySet<ReportForIndividual>(new Action<ReportForIndividual>(this.attach_ReportForIndividuals), new Action<ReportForIndividual>(this.detach_ReportForIndividuals));
 			OnCreated();
 		}
@@ -3271,6 +3112,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForOrganiztion", Storage="_ReportForOrganiztions", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<ReportForOrganiztion> ReportForOrganiztions
+		{
+			get
+			{
+				return this._ReportForOrganiztions;
+			}
+			set
+			{
+				this._ReportForOrganiztions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_ReportForIndividuals", ThisKey="formId", OtherKey="FormId")]
 		public EntitySet<ReportForIndividual> ReportForIndividuals
 		{
@@ -3328,6 +3182,18 @@ namespace BasisForAppraisal_finalProject.DBML
 			entity.tblForm = null;
 		}
 		
+		private void attach_ReportForOrganiztions(ReportForOrganiztion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_ReportForOrganiztions(ReportForOrganiztion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
 		private void attach_ReportForIndividuals(ReportForIndividual entity)
 		{
 			this.SendPropertyChanging();
@@ -3377,6 +3243,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<ReportForIndividualLine> _ReportForIndividualLines;
 		
+		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
+		
 		private EntityRef<tbl_Section> _tbl_Section;
 		
 		private EntityRef<tbl_TypeQuestion> _tbl_TypeQuestion;
@@ -3417,6 +3285,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
 			this._ReportForIndividualLines = new EntitySet<ReportForIndividualLine>(new Action<ReportForIndividualLine>(this.attach_ReportForIndividualLines), new Action<ReportForIndividualLine>(this.detach_ReportForIndividualLines));
+			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
 			this._tbl_Section = default(EntityRef<tbl_Section>);
 			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
 			OnCreated();
@@ -3720,6 +3589,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForOrganiztionLine", Storage="_ReportForOrganiztionLines", ThisKey="FormId,SectionId,QuestionId", OtherKey="QuestioFormId,SectionId,QuestionId")]
+		public EntitySet<ReportForOrganiztionLine> ReportForOrganiztionLines
+		{
+			get
+			{
+				return this._ReportForOrganiztionLines;
+			}
+			set
+			{
+				this._ReportForOrganiztionLines.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Section_tbl_IntentionalQuestion", Storage="_tbl_Section", ThisKey="FormId,SectionId", OtherKey="FormId,SectionId", IsForeignKey=true)]
 		public tbl_Section tbl_Section
 		{
@@ -3832,6 +3714,1014 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this.SendPropertyChanging();
 			entity.tbl_IntentionalQuestion = null;
+		}
+		
+		private void attach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalQuestion = this;
+		}
+		
+		private void detach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalQuestion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForOrganiztion")]
+	public partial class ReportForOrganiztion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CompanyId;
+		
+		private int _FormId;
+		
+		private System.DateTime _CreationDate;
+		
+		private System.DateTime _LastCalculationDate;
+		
+		private bool _Isclose;
+		
+		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
+		
+		private EntityRef<tbl_Company> _tbl_Company;
+		
+		private EntityRef<tblForm> _tblForm;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCompanyIdChanging(int value);
+    partial void OnCompanyIdChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnCreationDateChanging(System.DateTime value);
+    partial void OnCreationDateChanged();
+    partial void OnLastCalculationDateChanging(System.DateTime value);
+    partial void OnLastCalculationDateChanged();
+    partial void OnIscloseChanging(bool value);
+    partial void OnIscloseChanged();
+    #endregion
+		
+		public ReportForOrganiztion()
+		{
+			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
+			this._tbl_Company = default(EntityRef<tbl_Company>);
+			this._tblForm = default(EntityRef<tblForm>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CompanyId
+		{
+			get
+			{
+				return this._CompanyId;
+			}
+			set
+			{
+				if ((this._CompanyId != value))
+				{
+					if (this._tbl_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._CompanyId = value;
+					this.SendPropertyChanged("CompanyId");
+					this.OnCompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tblForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreationDate", DbType="Date NOT NULL")]
+		public System.DateTime CreationDate
+		{
+			get
+			{
+				return this._CreationDate;
+			}
+			set
+			{
+				if ((this._CreationDate != value))
+				{
+					this.OnCreationDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreationDate = value;
+					this.SendPropertyChanged("CreationDate");
+					this.OnCreationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastCalculationDate", DbType="Date NOT NULL")]
+		public System.DateTime LastCalculationDate
+		{
+			get
+			{
+				return this._LastCalculationDate;
+			}
+			set
+			{
+				if ((this._LastCalculationDate != value))
+				{
+					this.OnLastCalculationDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastCalculationDate = value;
+					this.SendPropertyChanged("LastCalculationDate");
+					this.OnLastCalculationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Isclose", DbType="Bit NOT NULL")]
+		public bool Isclose
+		{
+			get
+			{
+				return this._Isclose;
+			}
+			set
+			{
+				if ((this._Isclose != value))
+				{
+					this.OnIscloseChanging(value);
+					this.SendPropertyChanging();
+					this._Isclose = value;
+					this.SendPropertyChanged("Isclose");
+					this.OnIscloseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForOrganiztion_ReportForOrganiztionLine", Storage="_ReportForOrganiztionLines", ThisKey="CompanyId,FormId", OtherKey="CompanyId,FormId")]
+		public EntitySet<ReportForOrganiztionLine> ReportForOrganiztionLines
+		{
+			get
+			{
+				return this._ReportForOrganiztionLines;
+			}
+			set
+			{
+				this._ReportForOrganiztionLines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_ReportForOrganiztion", Storage="_tbl_Company", ThisKey="CompanyId", OtherKey="companyId", IsForeignKey=true)]
+		public tbl_Company tbl_Company
+		{
+			get
+			{
+				return this._tbl_Company.Entity;
+			}
+			set
+			{
+				tbl_Company previousValue = this._tbl_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Company.Entity = null;
+						previousValue.ReportForOrganiztions.Remove(this);
+					}
+					this._tbl_Company.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForOrganiztions.Add(this);
+						this._CompanyId = value.companyId;
+					}
+					else
+					{
+						this._CompanyId = default(int);
+					}
+					this.SendPropertyChanged("tbl_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForOrganiztion", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.ReportForOrganiztions.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForOrganiztions.Add(this);
+						this._FormId = value.formId;
+					}
+					else
+					{
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.ReportForOrganiztion = this;
+		}
+		
+		private void detach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.ReportForOrganiztion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForIndividual")]
+	public partial class ReportForIndividual : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _IndividualId;
+		
+		private int _FormId;
+		
+		private string _feedback;
+		
+		private System.DateTime _createDate;
+		
+		private bool _IsClose;
+		
+		private System.Nullable<int> _CompanyId;
+		
+		private EntitySet<ReportForIndividualLine> _ReportForIndividualLines;
+		
+		private EntityRef<tbl_Company> _tbl_Company;
+		
+		private EntityRef<tblForm> _tblForm;
+		
+		private EntityRef<tbl_Employee> _tbl_Employee;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIndividualIdChanging(string value);
+    partial void OnIndividualIdChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnfeedbackChanging(string value);
+    partial void OnfeedbackChanged();
+    partial void OncreateDateChanging(System.DateTime value);
+    partial void OncreateDateChanged();
+    partial void OnIsCloseChanging(bool value);
+    partial void OnIsCloseChanged();
+    partial void OnCompanyIdChanging(System.Nullable<int> value);
+    partial void OnCompanyIdChanged();
+    #endregion
+		
+		public ReportForIndividual()
+		{
+			this._ReportForIndividualLines = new EntitySet<ReportForIndividualLine>(new Action<ReportForIndividualLine>(this.attach_ReportForIndividualLines), new Action<ReportForIndividualLine>(this.detach_ReportForIndividualLines));
+			this._tbl_Company = default(EntityRef<tbl_Company>);
+			this._tblForm = default(EntityRef<tblForm>);
+			this._tbl_Employee = default(EntityRef<tbl_Employee>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndividualId", DbType="VarChar(9) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IndividualId
+		{
+			get
+			{
+				return this._IndividualId;
+			}
+			set
+			{
+				if ((this._IndividualId != value))
+				{
+					if (this._tbl_Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIndividualIdChanging(value);
+					this.SendPropertyChanging();
+					this._IndividualId = value;
+					this.SendPropertyChanged("IndividualId");
+					this.OnIndividualIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tblForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_feedback", DbType="VarChar(MAX)")]
+		public string feedback
+		{
+			get
+			{
+				return this._feedback;
+			}
+			set
+			{
+				if ((this._feedback != value))
+				{
+					this.OnfeedbackChanging(value);
+					this.SendPropertyChanging();
+					this._feedback = value;
+					this.SendPropertyChanged("feedback");
+					this.OnfeedbackChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createDate", DbType="Date NOT NULL")]
+		public System.DateTime createDate
+		{
+			get
+			{
+				return this._createDate;
+			}
+			set
+			{
+				if ((this._createDate != value))
+				{
+					this.OncreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._createDate = value;
+					this.SendPropertyChanged("createDate");
+					this.OncreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsClose", DbType="Bit NOT NULL")]
+		public bool IsClose
+		{
+			get
+			{
+				return this._IsClose;
+			}
+			set
+			{
+				if ((this._IsClose != value))
+				{
+					this.OnIsCloseChanging(value);
+					this.SendPropertyChanging();
+					this._IsClose = value;
+					this.SendPropertyChanged("IsClose");
+					this.OnIsCloseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyId", DbType="Int")]
+		public System.Nullable<int> CompanyId
+		{
+			get
+			{
+				return this._CompanyId;
+			}
+			set
+			{
+				if ((this._CompanyId != value))
+				{
+					if (this._tbl_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._CompanyId = value;
+					this.SendPropertyChanged("CompanyId");
+					this.OnCompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForIndividual_ReportForIndividualLine", Storage="_ReportForIndividualLines", ThisKey="IndividualId,FormId", OtherKey="IndividualId,FromId")]
+		public EntitySet<ReportForIndividualLine> ReportForIndividualLines
+		{
+			get
+			{
+				return this._ReportForIndividualLines;
+			}
+			set
+			{
+				this._ReportForIndividualLines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_ReportForIndividual", Storage="_tbl_Company", ThisKey="CompanyId", OtherKey="companyId", IsForeignKey=true)]
+		public tbl_Company tbl_Company
+		{
+			get
+			{
+				return this._tbl_Company.Entity;
+			}
+			set
+			{
+				tbl_Company previousValue = this._tbl_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Company.Entity = null;
+						previousValue.ReportForIndividuals.Remove(this);
+					}
+					this._tbl_Company.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividuals.Add(this);
+						this._CompanyId = value.companyId;
+					}
+					else
+					{
+						this._CompanyId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.ReportForIndividuals.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividuals.Add(this);
+						this._FormId = value.formId;
+					}
+					else
+					{
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_ReportForIndividual", Storage="_tbl_Employee", ThisKey="IndividualId", OtherKey="employeeId", IsForeignKey=true)]
+		public tbl_Employee tbl_Employee
+		{
+			get
+			{
+				return this._tbl_Employee.Entity;
+			}
+			set
+			{
+				tbl_Employee previousValue = this._tbl_Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Employee.Entity = null;
+						previousValue.ReportForIndividuals.Remove(this);
+					}
+					this._tbl_Employee.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividuals.Add(this);
+						this._IndividualId = value.employeeId;
+					}
+					else
+					{
+						this._IndividualId = default(string);
+					}
+					this.SendPropertyChanged("tbl_Employee");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ReportForIndividualLines(ReportForIndividualLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.ReportForIndividual = this;
+		}
+		
+		private void detach_ReportForIndividualLines(ReportForIndividualLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.ReportForIndividual = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForOrganiztionLines")]
+	public partial class ReportForOrganiztionLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CompanyId;
+		
+		private int _FormId;
+		
+		private int _QuestioFormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private int _HighScore;
+		
+		private int _LowScore;
+		
+		private string _TypeQuestionName;
+		
+		private int _MidScore;
+		
+		private EntityRef<tbl_TypeQuestion> _tbl_TypeQuestion;
+		
+		private EntityRef<ReportForOrganiztion> _ReportForOrganiztion;
+		
+		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCompanyIdChanging(int value);
+    partial void OnCompanyIdChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnQuestioFormIdChanging(int value);
+    partial void OnQuestioFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnHighScoreChanging(int value);
+    partial void OnHighScoreChanged();
+    partial void OnLowScoreChanging(int value);
+    partial void OnLowScoreChanged();
+    partial void OnTypeQuestionNameChanging(string value);
+    partial void OnTypeQuestionNameChanged();
+    partial void OnMidScoreChanging(int value);
+    partial void OnMidScoreChanged();
+    #endregion
+		
+		public ReportForOrganiztionLine()
+		{
+			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
+			this._ReportForOrganiztion = default(EntityRef<ReportForOrganiztion>);
+			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int CompanyId
+		{
+			get
+			{
+				return this._CompanyId;
+			}
+			set
+			{
+				if ((this._CompanyId != value))
+				{
+					if (this._ReportForOrganiztion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._CompanyId = value;
+					this.SendPropertyChanged("CompanyId");
+					this.OnCompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._ReportForOrganiztion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestioFormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestioFormId
+		{
+			get
+			{
+				return this._QuestioFormId;
+			}
+			set
+			{
+				if ((this._QuestioFormId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestioFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestioFormId = value;
+					this.SendPropertyChanged("QuestioFormId");
+					this.OnQuestioFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HighScore", DbType="Int NOT NULL")]
+		public int HighScore
+		{
+			get
+			{
+				return this._HighScore;
+			}
+			set
+			{
+				if ((this._HighScore != value))
+				{
+					this.OnHighScoreChanging(value);
+					this.SendPropertyChanging();
+					this._HighScore = value;
+					this.SendPropertyChanged("HighScore");
+					this.OnHighScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LowScore", DbType="Int NOT NULL")]
+		public int LowScore
+		{
+			get
+			{
+				return this._LowScore;
+			}
+			set
+			{
+				if ((this._LowScore != value))
+				{
+					this.OnLowScoreChanging(value);
+					this.SendPropertyChanging();
+					this._LowScore = value;
+					this.SendPropertyChanged("LowScore");
+					this.OnLowScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeQuestionName", DbType="VarChar(300) NOT NULL", CanBeNull=false)]
+		public string TypeQuestionName
+		{
+			get
+			{
+				return this._TypeQuestionName;
+			}
+			set
+			{
+				if ((this._TypeQuestionName != value))
+				{
+					if (this._tbl_TypeQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTypeQuestionNameChanging(value);
+					this.SendPropertyChanging();
+					this._TypeQuestionName = value;
+					this.SendPropertyChanged("TypeQuestionName");
+					this.OnTypeQuestionNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MidScore", DbType="Int NOT NULL")]
+		public int MidScore
+		{
+			get
+			{
+				return this._MidScore;
+			}
+			set
+			{
+				if ((this._MidScore != value))
+				{
+					this.OnMidScoreChanging(value);
+					this.SendPropertyChanging();
+					this._MidScore = value;
+					this.SendPropertyChanged("MidScore");
+					this.OnMidScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForOrganiztionLine", Storage="_tbl_TypeQuestion", ThisKey="TypeQuestionName", OtherKey="Name", IsForeignKey=true)]
+		public tbl_TypeQuestion tbl_TypeQuestion
+		{
+			get
+			{
+				return this._tbl_TypeQuestion.Entity;
+			}
+			set
+			{
+				tbl_TypeQuestion previousValue = this._tbl_TypeQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_TypeQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_TypeQuestion.Entity = null;
+						previousValue.ReportForOrganiztionLines.Remove(this);
+					}
+					this._tbl_TypeQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForOrganiztionLines.Add(this);
+						this._TypeQuestionName = value.Name;
+					}
+					else
+					{
+						this._TypeQuestionName = default(string);
+					}
+					this.SendPropertyChanged("tbl_TypeQuestion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForOrganiztion_ReportForOrganiztionLine", Storage="_ReportForOrganiztion", ThisKey="CompanyId,FormId", OtherKey="CompanyId,FormId", IsForeignKey=true)]
+		public ReportForOrganiztion ReportForOrganiztion
+		{
+			get
+			{
+				return this._ReportForOrganiztion.Entity;
+			}
+			set
+			{
+				ReportForOrganiztion previousValue = this._ReportForOrganiztion.Entity;
+				if (((previousValue != value) 
+							|| (this._ReportForOrganiztion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ReportForOrganiztion.Entity = null;
+						previousValue.ReportForOrganiztionLines.Remove(this);
+					}
+					this._ReportForOrganiztion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForOrganiztionLines.Add(this);
+						this._CompanyId = value.CompanyId;
+						this._FormId = value.FormId;
+					}
+					else
+					{
+						this._CompanyId = default(int);
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("ReportForOrganiztion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForOrganiztionLine", Storage="_tbl_IntentionalQuestion", ThisKey="QuestioFormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
+		public tbl_IntentionalQuestion tbl_IntentionalQuestion
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestion.Entity;
+			}
+			set
+			{
+				tbl_IntentionalQuestion previousValue = this._tbl_IntentionalQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalQuestion.Entity = null;
+						previousValue.ReportForOrganiztionLines.Remove(this);
+					}
+					this._tbl_IntentionalQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForOrganiztionLines.Add(this);
+						this._QuestioFormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+					}
+					else
+					{
+						this._QuestioFormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

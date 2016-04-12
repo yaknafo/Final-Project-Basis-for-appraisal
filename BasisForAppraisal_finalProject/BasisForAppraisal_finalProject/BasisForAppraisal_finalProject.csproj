@@ -189,6 +189,7 @@
     <Compile Include="Authorize\CustomAuthorizeAttribute.cs" />
     <Compile Include="BL\CopyFormService.cs" />
     <Compile Include="BL\FormFillByManager.cs" />
+    <Compile Include="BL\ReportBL.cs" />
     <Compile Include="Common\Constans\ResultOperationConstans.cs" />
     <Compile Include="Common\Constans\RolesConstans.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -510,9 +511,11 @@
     <Content Include="Views\ExportData\_UnitsForEmpCbx.cshtml" />
     <Content Include="Views\ExportData\_ClassForCbxEmp.cshtml" />
     <Content Include="Views\ExportData\_EmpForCbxEmp.cshtml" />
+    <Content Include="Views\ExportData\ReportForOrganiztion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="Scripts\AutoAutocomplete\" />
     <Folder Include="Scripts\Charts\" />
     <Folder Include="Views\check\" />

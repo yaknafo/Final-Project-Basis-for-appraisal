@@ -9,6 +9,7 @@ using BasisForAppraisal_finalProject.ViewModel.ExportData;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BasisForAppraisal_finalProject.BL;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -217,6 +218,7 @@ namespace BasisForAppraisal_finalProject.Controllers
            return View();
        }
 
+
         [HttpPost]
         public ActionResult ReportForStudent( string emp, List<FormCheckBoxViewModel> formCheckList)
         {
@@ -225,6 +227,39 @@ namespace BasisForAppraisal_finalProject.Controllers
             if(formSelected.Count> 0)
                 return RedirectToAction("ReportPerEmployee", "Report", new { employeeId = emp, forms = formSelected.First().ToString() });
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult ReportForOrganiztion()
+        {
+            var dManager = new DataManager();
+            ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ReportForOrganiztion(int Companyiesa, List<FormCheckBoxViewModel> formCheckList)
+        {
+            var dManager = new DataManager();
+            var reportBL = new ReportBL();
+            var form = formCheckList.FirstOrDefault(x => x.IsSelected);
+            if (form == null)
+            {
+                ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
+                return View();
+            }
+            reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId);
+            ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
+            return View();
+        }
+        public PartialViewResult GetFromsForOrganiztion(int organiztionid)
+        {
+            var dManager = new DataMangerCompany();
+            var res = dManager.ConnectorAnswer.Where(x => x.companyId == organiztionid).Select(s => s.tbl_ConnectorFormFill.tblForm).Distinct().ToList();
+            var formCheckBoxList = new List<FormCheckBoxViewModel>();
+
+            res.ForEach(x => formCheckBoxList.Add(new FormCheckBoxViewModel { IsSelected = false, FormId = x.formId, FormName = x.FormName }));
+            return PartialView("_FormList", formCheckBoxList);
         }
 	}
 }

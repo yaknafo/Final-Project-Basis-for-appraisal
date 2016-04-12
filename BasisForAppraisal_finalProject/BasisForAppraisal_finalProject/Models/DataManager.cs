@@ -92,6 +92,26 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.tbl_IntentionalQuestions; }
         }
 
+        public Table<ReportForIndividual> ReportForIndividuals
+        {
+            get { return manager.ReportForIndividuals; }
+        }
+
+        public Table<ReportForIndividualLine> ReportForIndividualLines
+        {
+            get { return manager.ReportForIndividualLines; }
+        }
+
+        public Table<ReportForOrganiztion> ReportForOrganiztions
+        {
+            get { return manager.ReportForOrganiztions; }
+        }
+
+        public Table<ReportForOrganiztionLine> ReportForOrganiztionLines
+        {
+            get { return manager.ReportForOrganiztionLines; }
+        }
+
         //----------------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -477,6 +497,38 @@ namespace BasisForAppraisal_finalProject.Models
             }
         }
 
+        public void SaveReportForOrganiztion(ReportForOrganiztion report)
+        {
+            var reportFromDb = manager.ReportForOrganiztions.SingleOrDefault(x => x.CompanyId == report.CompanyId && x.FormId == report.FormId);
+            if (reportFromDb == null)
+            {
+                report.CreationDate = DateTime.Now;
+                report.LastCalculationDate = DateTime.Now; 
+                manager.ReportForOrganiztions.InsertOnSubmit(report);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                reportFromDb.LastCalculationDate = DateTime.Now;
+                manager.SubmitChanges();
+            }
+        }
+
+
+        public void SaveReportForOrganiztionLines(ReportForOrganiztionLine line)
+        {
+            var lineFromDb = manager.ReportForOrganiztionLines.FirstOrDefault(x => x.CompanyId == line.CompanyId && x.FormId == line.FormId && line.QuestionId == x.QuestionId);
+            if (lineFromDb == null)
+            {
+                manager.ReportForOrganiztionLines.InsertOnSubmit(line);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                manager.SubmitChanges();
+            }
+        }
+
         public void EditReportForIndividual(string text, bool isClose, string IndividualId, int FormId)
         {
             var report = manager.ReportForIndividuals.SingleOrDefault(x => x.IndividualId == IndividualId && x.FormId == FormId);
@@ -552,6 +604,16 @@ namespace BasisForAppraisal_finalProject.Models
             return true;
         }
 
+
+        public ReportForOrganiztionLine GetReportOrganiztionLine(int formId,int OrganiztionId, int questionId)
+        {
+            return manager.ReportForOrganiztionLines.FirstOrDefault(x => x.FormId == formId && x.CompanyId == OrganiztionId && x.QuestionId == questionId);
+        }
+
+        public List<ReportForIndividualLine> GetReportForIndividualLineForOrganiztion(int formId, int OrganiztionId)
+        {
+            return manager.ReportForIndividualLines.Where(x => x.FromId == formId && x.ReportForIndividual.CompanyId == OrganiztionId).ToList();
+        }
 
        ////  ------------------------------- secutiry --------------------------------------------------------------//
 
