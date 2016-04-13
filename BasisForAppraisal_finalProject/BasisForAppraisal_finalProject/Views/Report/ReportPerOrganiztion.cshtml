@@ -73,7 +73,13 @@
 <input id="Companyid" value="@Model.ReportForOrganiztionModel.CompanyId" class="collapse"></input>
 <input id="formid" value="@Model.ReportForOrganiztionModel.FormId" class="collapse"></input>
 <div dir="rtl" style="margin-top: 10%; align-items: center">
-
+    <div class="row" style="border:inset">
+        <br />
+        <h2 class="col-lg-12">ארגון: @Model.ReportForOrganiztionModel.tbl_Company.comapnyName</h2>
+        <h2 class="col-lg-12">שאלון: @Model.ReportForOrganiztionModel.tblForm.FormName </h2>
+        <h4 class="col-lg-12">עודכן לאחרונה: @Model.ReportForOrganiztionModel.LastCalculationDate.ToString("MMMM dd, yyyy")</h4>
+        
+    </div>
     <ul class="nav nav-tabs" role="tablist">
         @foreach (tbl_TypeQuestion catgoryName in Model.Categories)
         {
