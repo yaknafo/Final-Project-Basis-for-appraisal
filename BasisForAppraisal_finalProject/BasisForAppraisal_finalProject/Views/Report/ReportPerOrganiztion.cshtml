@@ -52,25 +52,22 @@
             };
 
 
+            var chart_div = document.getElementById(list[i].QuestionId);
             var chart = new google.visualization.PieChart(document.getElementById(list[i].QuestionId));
+
+
+            // Wait for the chart to finish drawing before calling the getImageURI() method.
+            //google.visualization.events.addListener(chart, 'ready', function () {
+            //    chart_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+            //    console.log(chart_div.innerHTML);
+            //});
+
             chart.draw(data, options);
         }
     }
-
-
 </script>
 
-<script>
-    function changeCatgory() {
-        var btnActive = $(".catgoryNameBtn").select();
-        alert(btnActive.text)
-        var num = null;
 
-        num = +this.innerHTML;
-        alert("Value is " + this.Text);
-
-    }
-</script>
 
 <input id="numberOfQuestions" value="@Model.ReportForOrganiztionLinesModel.Count" class="collapse"></input>
 <input id="Companyid" value="@Model.ReportForOrganiztionModel.CompanyId" class="collapse"></input>
@@ -78,16 +75,16 @@
 <div dir="rtl" style="margin-top: 10%; align-items: center">
 
     <ul class="nav nav-tabs" role="tablist">
-        @foreach (string catgoryName in Model.Categories)
+        @foreach (tbl_TypeQuestion catgoryName in Model.Categories)
         {
 
-            if (catgoryName.StartsWith("Int"))
+            if (catgoryName.Name.StartsWith("Int"))
             {
-                <li role="presentation" class="active"><a href="#@catgoryName" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName</a></li>
+                <li role="presentation" class="active"><a href="#@catgoryName.Name" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName.Description</a></li>
             }
             else
             {
-                <li role="presentation"><a href="#@catgoryName" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName</a></li>
+                <li role="presentation"><a href="#@catgoryName.Name" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName.Description</a></li>
             }
         }
     </ul>
@@ -100,6 +97,7 @@
                 @foreach (ReportForOrganiztionLine line in Model.CategoriesDictionaryLines[c])
                 {
                     <div>@line.tbl_IntentionalQuestion.Title</div>
+                    @*<button onclick="saveAsImg($('#' + @line.QuestionId.ToString()));">Save as PNG Image</button>*@
                     <div id="@line.QuestionId" class="col-sm-pull-1" style="border-bottom:groove"></div>
 
                 }

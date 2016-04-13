@@ -14,7 +14,7 @@ namespace BasisForAppraisal_finalProject.ViewModel.ExportData
 
         public ReportForOrganiztionLine[] ReportForOrganiztionLinesArrayModel { set; get; }
 
-        public List<string> Categories { set; get; }
+        public List<tbl_TypeQuestion> Categories { set; get; }
 
         public Dictionary<string, List<ReportForOrganiztionLine>> CategoriesDictionaryLines { set; get; }
 
@@ -23,13 +23,12 @@ namespace BasisForAppraisal_finalProject.ViewModel.ExportData
             ReportForOrganiztionModel = report;
             ReportForOrganiztionLinesModel = report.ReportForOrganiztionLines.ToList();
             //eportForOrganiztionLinesArrayModel = ReportForOrganiztionLinesModel.ToArray();
-            Categories = ReportForOrganiztionLinesModel.Select(x => x.TypeQuestionName).Distinct().ToList();
-            Categories.ForEach(x => x.Replace(" ", ""));
+            Categories = ReportForOrganiztionLinesModel.Select(x => x.tbl_TypeQuestion).Distinct().ToList();
             CategoriesDictionaryLines = new Dictionary<string, List<ReportForOrganiztionLine>>();
-            foreach(string c in Categories)
+            foreach (tbl_TypeQuestion c in Categories)
             {
-                var listOfLines = ReportForOrganiztionLinesModel.Where(x => x.TypeQuestionName == c).ToList();
-                CategoriesDictionaryLines.Add(c, listOfLines);
+                var listOfLines = ReportForOrganiztionLinesModel.Where(x => x.TypeQuestionName == c.Name).ToList();
+                CategoriesDictionaryLines.Add(c.Name, listOfLines);
 
             }
 

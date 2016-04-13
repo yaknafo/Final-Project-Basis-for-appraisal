@@ -517,6 +517,7 @@
     <Content Include="Views\Report\ReportPerOrganiztion.cshtml" />
     <Content Include="Views\Report\EditorTemplates\ReportForOrganiztionLine.cshtml" />
     <Content Include="Views\Report\PieGraphForReportOrg.cshtml" />
+    <Content Include="Views\ExportData\chartimage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

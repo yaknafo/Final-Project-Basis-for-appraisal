@@ -1,0 +1,90 @@
+﻿<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    Layout=null
+}
+<div id="img_div" style="margin-top:10%; position: fixed; top: 0; right: 0; z-index: 10; border: 1px solid #b9b9b9">Image will be placed here</div>
+
+<div id="pie_div"></div>
+<button onclick="saveAsImg($('#pie_div'));">Save as PNG Image</button>
+<button onclick="toImg($('#pie_div'), $('#img_div'));">Convert to image</button>
+<button onclick="saveViaREST($('#pie_div'));">Save via REST</button>
+<form accept-charset="UTF-8" action="save_via_rest" id="png_hidden" method="post">
+    <input id="image_data_input" name="image_data" type="text" value="" />
+    <input id="graph_container_div" type="hidden" value="gauge_div" />
+    <input class="btn" name="commit" type="submit" value="Grafik" />
+</form>
+<script type="text/javascript">
+    google.load("visualization", "1", {
+        packages: ["corechart", "treemap", "geochart"]
+    });
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        // Pie chart
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Task');
+        data.addColumn('number', 'Hours per Day');
+        data.addRows(5);
+        data.setValue(0, 0, 'Work');
+        data.setValue(0, 1, 11);
+        data.setValue(1, 0, 'Eat');
+        data.setValue(1, 1, 2);
+        data.setValue(2, 0, 'Commute');
+        data.setValue(2, 1, 2);
+        data.setValue(3, 0, 'Watch TV');
+        data.setValue(3, 1, 2);
+        data.setValue(4, 0, 'Sleep');
+        data.setValue(4, 1, 7);
+
+        var chart = new google.visualization.PieChart(document.getElementById('pie_div'));
+        chart.draw(data, {
+            width: 450,
+            height: 300,
+            title: 'My Daily Activities'
+        });
+
+    }
+
+
+    function getImgData(chartContainer) {
+        chartArea = chartContainer.find('svg').parent();
+        svg = chartArea.html();
+
+        canvas = $('<canvas>', {
+            width: chartArea.width(),
+            height: chartArea.height()
+        }).appendTo(document.body).css({
+            position: 'absolute',
+            top: (-chartArea.offsetHeight * 2) + 'px',
+            left: (-chartArea.offsetWidth * 2) + 'px'
+        })
+
+        canvasElem = canvas.get(0);
+        canvg(canvasElem, svg);
+
+        imgData = canvasElem.toDataURL("image/png");
+
+        canvas.remove();
+        return imgData;
+    }
+
+    function saveAsImg(chartContainer) {
+        imgData = getImgData(chartContainer);
+
+        // Replacing the mime-type will force the browser to trigger a download
+        // rather than displaying the image in the browser window.
+        window.location = imgData.replace("image/png", "image/octet-stream");
+    }
+
+    function toImg(chartContainer, imgContainer) {
+        imgContainer.children().remove();
+        imgData = getImgData(chartContainer);
+        $('<img>', {
+            src: imgData
+        }).appendTo(imgContainer);
+    }
+
+    function saveViaREST(chartContainer) {
+        imgData = getImgData(chartContainer);
+        $('#image_data_input').val(imgData);
+    }
+</script>

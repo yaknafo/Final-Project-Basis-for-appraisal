@@ -30,9 +30,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Inserttbl_TypeQuestion(tbl_TypeQuestion instance);
-    partial void Updatetbl_TypeQuestion(tbl_TypeQuestion instance);
-    partial void Deletetbl_TypeQuestion(tbl_TypeQuestion instance);
     partial void Inserttbl_Section(tbl_Section instance);
     partial void Updatetbl_Section(tbl_Section instance);
     partial void Deletetbl_Section(tbl_Section instance);
@@ -75,6 +72,9 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void InsertReportForOrganiztionLine(ReportForOrganiztionLine instance);
     partial void UpdateReportForOrganiztionLine(ReportForOrganiztionLine instance);
     partial void DeleteReportForOrganiztionLine(ReportForOrganiztionLine instance);
+    partial void Inserttbl_TypeQuestion(tbl_TypeQuestion instance);
+    partial void Updatetbl_TypeQuestion(tbl_TypeQuestion instance);
+    partial void Deletetbl_TypeQuestion(tbl_TypeQuestion instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -105,14 +105,6 @@ namespace BasisForAppraisal_finalProject.DBML
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<tbl_TypeQuestion> tbl_TypeQuestions
-		{
-			get
-			{
-				return this.GetTable<tbl_TypeQuestion>();
-			}
 		}
 		
 		public System.Data.Linq.Table<tbl_Section> tbl_Sections
@@ -226,123 +218,13 @@ namespace BasisForAppraisal_finalProject.DBML
 				return this.GetTable<ReportForOrganiztionLine>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_TypeQuestion")]
-	public partial class tbl_TypeQuestion : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Name;
-		
-		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
-		
-		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public tbl_TypeQuestion()
-		{
-			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
-			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(300) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Name
+		public System.Data.Linq.Table<tbl_TypeQuestion> tbl_TypeQuestions
 		{
 			get
 			{
-				return this._Name;
+				return this.GetTable<tbl_TypeQuestion>();
 			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="Name", OtherKey="QuestionType")]
-		public EntitySet<tbl_IntentionalQuestion> tbl_IntentionalQuestions
-		{
-			get
-			{
-				return this._tbl_IntentionalQuestions;
-			}
-			set
-			{
-				this._tbl_IntentionalQuestions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForOrganiztionLine", Storage="_ReportForOrganiztionLines", ThisKey="Name", OtherKey="TypeQuestionName")]
-		public EntitySet<ReportForOrganiztionLine> ReportForOrganiztionLines
-		{
-			get
-			{
-				return this._ReportForOrganiztionLines;
-			}
-			set
-			{
-				this._ReportForOrganiztionLines.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_TypeQuestion = this;
-		}
-		
-		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_TypeQuestion = null;
-		}
-		
-		private void attach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_TypeQuestion = this;
-		}
-		
-		private void detach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_TypeQuestion = null;
 		}
 	}
 	
@@ -4354,11 +4236,11 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private int _MidScore;
 		
-		private EntityRef<tbl_TypeQuestion> _tbl_TypeQuestion;
-		
 		private EntityRef<ReportForOrganiztion> _ReportForOrganiztion;
 		
 		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
+		
+		private EntityRef<tbl_TypeQuestion> _tbl_TypeQuestion;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4386,9 +4268,9 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		public ReportForOrganiztionLine()
 		{
-			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
 			this._ReportForOrganiztion = default(EntityRef<ReportForOrganiztion>);
 			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
+			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
 			OnCreated();
 		}
 		
@@ -4596,40 +4478,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForOrganiztionLine", Storage="_tbl_TypeQuestion", ThisKey="TypeQuestionName", OtherKey="Name", IsForeignKey=true)]
-		public tbl_TypeQuestion tbl_TypeQuestion
-		{
-			get
-			{
-				return this._tbl_TypeQuestion.Entity;
-			}
-			set
-			{
-				tbl_TypeQuestion previousValue = this._tbl_TypeQuestion.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_TypeQuestion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_TypeQuestion.Entity = null;
-						previousValue.ReportForOrganiztionLines.Remove(this);
-					}
-					this._tbl_TypeQuestion.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForOrganiztionLines.Add(this);
-						this._TypeQuestionName = value.Name;
-					}
-					else
-					{
-						this._TypeQuestionName = default(string);
-					}
-					this.SendPropertyChanged("tbl_TypeQuestion");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForOrganiztion_ReportForOrganiztionLine", Storage="_ReportForOrganiztion", ThisKey="CompanyId,FormId", OtherKey="CompanyId,FormId", IsForeignKey=true)]
 		public ReportForOrganiztion ReportForOrganiztion
 		{
@@ -4704,6 +4552,40 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForOrganiztionLine", Storage="_tbl_TypeQuestion", ThisKey="TypeQuestionName", OtherKey="Name", IsForeignKey=true)]
+		public tbl_TypeQuestion tbl_TypeQuestion
+		{
+			get
+			{
+				return this._tbl_TypeQuestion.Entity;
+			}
+			set
+			{
+				tbl_TypeQuestion previousValue = this._tbl_TypeQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_TypeQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_TypeQuestion.Entity = null;
+						previousValue.ReportForOrganiztionLines.Remove(this);
+					}
+					this._tbl_TypeQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForOrganiztionLines.Add(this);
+						this._TypeQuestionName = value.Name;
+					}
+					else
+					{
+						this._TypeQuestionName = default(string);
+					}
+					this.SendPropertyChanged("tbl_TypeQuestion");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4722,6 +4604,148 @@ namespace BasisForAppraisal_finalProject.DBML
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_TypeQuestion")]
+	public partial class tbl_TypeQuestion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Name;
+		
+		private string _Description;
+		
+		private EntitySet<tbl_IntentionalQuestion> _tbl_IntentionalQuestions;
+		
+		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tbl_TypeQuestion()
+		{
+			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
+			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(300) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_tbl_IntentionalQuestion", Storage="_tbl_IntentionalQuestions", ThisKey="Name", OtherKey="QuestionType")]
+		public EntitySet<tbl_IntentionalQuestion> tbl_IntentionalQuestions
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestions;
+			}
+			set
+			{
+				this._tbl_IntentionalQuestions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForOrganiztionLine", Storage="_ReportForOrganiztionLines", ThisKey="Name", OtherKey="TypeQuestionName")]
+		public EntitySet<ReportForOrganiztionLine> ReportForOrganiztionLines
+		{
+			get
+			{
+				return this._ReportForOrganiztionLines;
+			}
+			set
+			{
+				this._ReportForOrganiztionLines.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = this;
+		}
+		
+		private void detach_tbl_IntentionalQuestions(tbl_IntentionalQuestion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = null;
+		}
+		
+		private void attach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = this;
+		}
+		
+		private void detach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = null;
 		}
 	}
 }

@@ -261,5 +261,10 @@ namespace BasisForAppraisal_finalProject.Controllers
             res.ForEach(x => formCheckBoxList.Add(new FormCheckBoxViewModel { IsSelected = false, FormId = x.formId, FormName = x.FormName }));
             return PartialView("_FormList", formCheckBoxList);
         }
+
+        public ActionResult chartimage()
+        {
+            return View();
+        }
 	}
 }

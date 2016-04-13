@@ -1,12 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BasisForAppraisalAWS" Class="BFADataBasedbmlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=basisfor.cba825xpbtm6.us-west-2.rds.amazonaws.com,1433;Initial Catalog=BasisForAppraisalAWS;Persist Security Info=True;User ID=BFE;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BasisForAppraisalAWSConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.tbl_TypeQuestion" Member="tbl_TypeQuestions">
-    <Type Name="tbl_TypeQuestion">
-      <Column Name="Name" Type="System.String" DbType="VarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="Name" OtherKey="QuestionType" Type="tbl_IntentionalQuestion" />
-      <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="ReportForOrganiztionLines" ThisKey="Name" OtherKey="TypeQuestionName" Type="ReportForOrganiztionLine" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_Section" Member="tbl_Sections">
     <Type Name="tbl_Section">
       <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -194,9 +187,17 @@
       <Column Name="LowScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TypeQuestionName" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="MidScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="tbl_TypeQuestion" ThisKey="TypeQuestionName" OtherKey="Name" Type="tbl_TypeQuestion" IsForeignKey="true" />
       <Association Name="ReportForOrganiztion_ReportForOrganiztionLine" Member="ReportForOrganiztion" ThisKey="CompanyId,FormId" OtherKey="CompanyId,FormId" Type="ReportForOrganiztion" IsForeignKey="true" />
       <Association Name="tbl_IntentionalQuestion_ReportForOrganiztionLine" Member="tbl_IntentionalQuestion" ThisKey="QuestioFormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
+      <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="tbl_TypeQuestion" ThisKey="TypeQuestionName" OtherKey="Name" Type="tbl_TypeQuestion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_TypeQuestion" Member="tbl_TypeQuestions">
+    <Type Name="tbl_TypeQuestion">
+      <Column Name="Name" Type="System.String" DbType="VarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="Name" OtherKey="QuestionType" Type="tbl_IntentionalQuestion" />
+      <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="ReportForOrganiztionLines" ThisKey="Name" OtherKey="TypeQuestionName" Type="ReportForOrganiztionLine" />
     </Type>
   </Table>
 </Database>
