@@ -75,6 +75,12 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_TypeQuestion(tbl_TypeQuestion instance);
     partial void Updatetbl_TypeQuestion(tbl_TypeQuestion instance);
     partial void Deletetbl_TypeQuestion(tbl_TypeQuestion instance);
+    partial void InsertReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
+    partial void UpdateReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
+    partial void DeleteReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
+    partial void InsertReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer instance);
+    partial void UpdateReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer instance);
+    partial void DeleteReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -224,6 +230,22 @@ namespace BasisForAppraisal_finalProject.DBML
 			get
 			{
 				return this.GetTable<tbl_TypeQuestion>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this.GetTable<ReportForClassMultipleChoiceListAnswer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this.GetTable<ReportForCompanyMultipleChoiceListAnswer>();
 			}
 		}
 	}
@@ -453,6 +475,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<ReportForIndividual> _ReportForIndividuals;
 		
+		private EntitySet<ReportForCompanyMultipleChoiceListAnswer> _ReportForCompanyMultipleChoiceListAnswers;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -473,6 +497,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
 			this._ReportForOrganiztions = new EntitySet<ReportForOrganiztion>(new Action<ReportForOrganiztion>(this.attach_ReportForOrganiztions), new Action<ReportForOrganiztion>(this.detach_ReportForOrganiztions));
 			this._ReportForIndividuals = new EntitySet<ReportForIndividual>(new Action<ReportForIndividual>(this.attach_ReportForIndividuals), new Action<ReportForIndividual>(this.detach_ReportForIndividuals));
+			this._ReportForCompanyMultipleChoiceListAnswers = new EntitySet<ReportForCompanyMultipleChoiceListAnswer>(new Action<ReportForCompanyMultipleChoiceListAnswer>(this.attach_ReportForCompanyMultipleChoiceListAnswers), new Action<ReportForCompanyMultipleChoiceListAnswer>(this.detach_ReportForCompanyMultipleChoiceListAnswers));
 			OnCreated();
 		}
 		
@@ -608,6 +633,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_ReportForCompanyMultipleChoiceListAnswer", Storage="_ReportForCompanyMultipleChoiceListAnswers", ThisKey="companyId", OtherKey="companyId")]
+		public EntitySet<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this._ReportForCompanyMultipleChoiceListAnswers;
+			}
+			set
+			{
+				this._ReportForCompanyMultipleChoiceListAnswers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -675,6 +713,18 @@ namespace BasisForAppraisal_finalProject.DBML
 			this.SendPropertyChanging();
 			entity.tbl_Company = null;
 		}
+		
+		private void attach_ReportForCompanyMultipleChoiceListAnswers(ReportForCompanyMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = this;
+		}
+		
+		private void detach_ReportForCompanyMultipleChoiceListAnswers(ReportForCompanyMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Company = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Class")]
@@ -690,6 +740,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		private string _className;
 		
 		private EntitySet<tbl_Employee> _tbl_Employees;
+		
+		private EntitySet<ReportForClassMultipleChoiceListAnswer> _ReportForClassMultipleChoiceListAnswers;
 		
 		private EntityRef<tbl_Unit> _tbl_Unit;
 		
@@ -708,6 +760,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		public tbl_Class()
 		{
 			this._tbl_Employees = new EntitySet<tbl_Employee>(new Action<tbl_Employee>(this.attach_tbl_Employees), new Action<tbl_Employee>(this.detach_tbl_Employees));
+			this._ReportForClassMultipleChoiceListAnswers = new EntitySet<ReportForClassMultipleChoiceListAnswer>(new Action<ReportForClassMultipleChoiceListAnswer>(this.attach_ReportForClassMultipleChoiceListAnswers), new Action<ReportForClassMultipleChoiceListAnswer>(this.detach_ReportForClassMultipleChoiceListAnswers));
 			this._tbl_Unit = default(EntityRef<tbl_Unit>);
 			OnCreated();
 		}
@@ -793,6 +846,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClassMultipleChoiceListAnswer", Storage="_ReportForClassMultipleChoiceListAnswers", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className")]
+		public EntitySet<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this._ReportForClassMultipleChoiceListAnswers;
+			}
+			set
+			{
+				this._ReportForClassMultipleChoiceListAnswers.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Unit_tbl_Class", Storage="_tbl_Unit", ThisKey="companyId,unitName", OtherKey="companyId,unitName", IsForeignKey=true)]
 		public tbl_Unit tbl_Unit
 		{
@@ -856,6 +922,18 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_tbl_Employees(tbl_Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Class = null;
+		}
+		
+		private void attach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Class = this;
+		}
+		
+		private void detach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Class = null;
@@ -1039,6 +1117,10 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_ConnectorAnswer> _tbl_ConnectorAnswers;
 		
+		private EntitySet<ReportForClassMultipleChoiceListAnswer> _ReportForClassMultipleChoiceListAnswers;
+		
+		private EntitySet<ReportForCompanyMultipleChoiceListAnswer> _ReportForCompanyMultipleChoiceListAnswers;
+		
 		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
 		
     #region Extensibility Method Definitions
@@ -1064,6 +1146,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		public tbl_IntentionalAnswer()
 		{
 			this._tbl_ConnectorAnswers = new EntitySet<tbl_ConnectorAnswer>(new Action<tbl_ConnectorAnswer>(this.attach_tbl_ConnectorAnswers), new Action<tbl_ConnectorAnswer>(this.detach_tbl_ConnectorAnswers));
+			this._ReportForClassMultipleChoiceListAnswers = new EntitySet<ReportForClassMultipleChoiceListAnswer>(new Action<ReportForClassMultipleChoiceListAnswer>(this.attach_ReportForClassMultipleChoiceListAnswers), new Action<ReportForClassMultipleChoiceListAnswer>(this.detach_ReportForClassMultipleChoiceListAnswers));
+			this._ReportForCompanyMultipleChoiceListAnswers = new EntitySet<ReportForCompanyMultipleChoiceListAnswer>(new Action<ReportForCompanyMultipleChoiceListAnswer>(this.attach_ReportForCompanyMultipleChoiceListAnswers), new Action<ReportForCompanyMultipleChoiceListAnswer>(this.detach_ReportForCompanyMultipleChoiceListAnswers));
 			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
 			OnCreated();
 		}
@@ -1233,6 +1317,32 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer", Storage="_ReportForClassMultipleChoiceListAnswers", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId")]
+		public EntitySet<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this._ReportForClassMultipleChoiceListAnswers;
+			}
+			set
+			{
+				this._ReportForClassMultipleChoiceListAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForCompanyMultipleChoiceListAnswer", Storage="_ReportForCompanyMultipleChoiceListAnswers", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId")]
+		public EntitySet<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this._ReportForCompanyMultipleChoiceListAnswers;
+			}
+			set
+			{
+				this._ReportForCompanyMultipleChoiceListAnswers.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer", Storage="_tbl_IntentionalQuestion", ThisKey="FormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
 		public tbl_IntentionalQuestion tbl_IntentionalQuestion
 		{
@@ -1298,6 +1408,30 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_tbl_ConnectorAnswers(tbl_ConnectorAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalAnswer = null;
+		}
+		
+		private void attach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalAnswer = this;
+		}
+		
+		private void detach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalAnswer = null;
+		}
+		
+		private void attach_ReportForCompanyMultipleChoiceListAnswers(ReportForCompanyMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalAnswer = this;
+		}
+		
+		private void detach_ReportForCompanyMultipleChoiceListAnswers(ReportForCompanyMultipleChoiceListAnswer entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_IntentionalAnswer = null;
@@ -4746,6 +4880,678 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this.SendPropertyChanging();
 			entity.tbl_TypeQuestion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForClassMultipleChoiceListAnswer")]
+	public partial class ReportForClassMultipleChoiceListAnswer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private int _AnswerId;
+		
+		private int _companyId;
+		
+		private string _unitName;
+		
+		private string _className;
+		
+		private int _numberOfMarket;
+		
+		private int _numberOfShowTotal;
+		
+		private EntityRef<tbl_IntentionalAnswer> _tbl_IntentionalAnswer;
+		
+		private EntityRef<tbl_Class> _tbl_Class;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnAnswerIdChanging(int value);
+    partial void OnAnswerIdChanged();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnunitNameChanging(string value);
+    partial void OnunitNameChanged();
+    partial void OnclassNameChanging(string value);
+    partial void OnclassNameChanged();
+    partial void OnnumberOfMarketChanging(int value);
+    partial void OnnumberOfMarketChanged();
+    partial void OnnumberOfShowTotalChanging(int value);
+    partial void OnnumberOfShowTotalChanged();
+    #endregion
+		
+		public ReportForClassMultipleChoiceListAnswer()
+		{
+			this._tbl_IntentionalAnswer = default(EntityRef<tbl_IntentionalAnswer>);
+			this._tbl_Class = default(EntityRef<tbl_Class>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AnswerId
+		{
+			get
+			{
+				return this._AnswerId;
+			}
+			set
+			{
+				if ((this._AnswerId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnswerIdChanging(value);
+					this.SendPropertyChanging();
+					this._AnswerId = value;
+					this.SendPropertyChanged("AnswerId");
+					this.OnAnswerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitName", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string unitName
+		{
+			get
+			{
+				return this._unitName;
+			}
+			set
+			{
+				if ((this._unitName != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnunitNameChanging(value);
+					this.SendPropertyChanging();
+					this._unitName = value;
+					this.SendPropertyChanged("unitName");
+					this.OnunitNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_className", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string className
+		{
+			get
+			{
+				return this._className;
+			}
+			set
+			{
+				if ((this._className != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnclassNameChanging(value);
+					this.SendPropertyChanging();
+					this._className = value;
+					this.SendPropertyChanged("className");
+					this.OnclassNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfMarket", DbType="Int NOT NULL")]
+		public int numberOfMarket
+		{
+			get
+			{
+				return this._numberOfMarket;
+			}
+			set
+			{
+				if ((this._numberOfMarket != value))
+				{
+					this.OnnumberOfMarketChanging(value);
+					this.SendPropertyChanging();
+					this._numberOfMarket = value;
+					this.SendPropertyChanged("numberOfMarket");
+					this.OnnumberOfMarketChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfShowTotal", DbType="Int NOT NULL")]
+		public int numberOfShowTotal
+		{
+			get
+			{
+				return this._numberOfShowTotal;
+			}
+			set
+			{
+				if ((this._numberOfShowTotal != value))
+				{
+					this.OnnumberOfShowTotalChanging(value);
+					this.SendPropertyChanging();
+					this._numberOfShowTotal = value;
+					this.SendPropertyChanged("numberOfShowTotal");
+					this.OnnumberOfShowTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer", Storage="_tbl_IntentionalAnswer", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId", IsForeignKey=true)]
+		public tbl_IntentionalAnswer tbl_IntentionalAnswer
+		{
+			get
+			{
+				return this._tbl_IntentionalAnswer.Entity;
+			}
+			set
+			{
+				tbl_IntentionalAnswer previousValue = this._tbl_IntentionalAnswer.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalAnswer.Entity = null;
+						previousValue.ReportForClassMultipleChoiceListAnswers.Remove(this);
+					}
+					this._tbl_IntentionalAnswer.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassMultipleChoiceListAnswers.Add(this);
+						this._FormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+						this._AnswerId = value.AnswerId;
+					}
+					else
+					{
+						this._FormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+						this._AnswerId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalAnswer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClassMultipleChoiceListAnswer", Storage="_tbl_Class", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className", IsForeignKey=true)]
+		public tbl_Class tbl_Class
+		{
+			get
+			{
+				return this._tbl_Class.Entity;
+			}
+			set
+			{
+				tbl_Class previousValue = this._tbl_Class.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Class.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Class.Entity = null;
+						previousValue.ReportForClassMultipleChoiceListAnswers.Remove(this);
+					}
+					this._tbl_Class.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassMultipleChoiceListAnswers.Add(this);
+						this._companyId = value.companyId;
+						this._unitName = value.unitName;
+						this._className = value.className;
+					}
+					else
+					{
+						this._companyId = default(int);
+						this._unitName = default(string);
+						this._className = default(string);
+					}
+					this.SendPropertyChanged("tbl_Class");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForCompanyMultipleChoiceListAnswer")]
+	public partial class ReportForCompanyMultipleChoiceListAnswer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private int _AnswerId;
+		
+		private int _companyId;
+		
+		private int _numberOfMarket;
+		
+		private int _numberOfShowTotal;
+		
+		private EntityRef<tbl_Company> _tbl_Company;
+		
+		private EntityRef<tbl_IntentionalAnswer> _tbl_IntentionalAnswer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnAnswerIdChanging(int value);
+    partial void OnAnswerIdChanged();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnnumberOfMarketChanging(int value);
+    partial void OnnumberOfMarketChanged();
+    partial void OnnumberOfShowTotalChanging(int value);
+    partial void OnnumberOfShowTotalChanged();
+    #endregion
+		
+		public ReportForCompanyMultipleChoiceListAnswer()
+		{
+			this._tbl_Company = default(EntityRef<tbl_Company>);
+			this._tbl_IntentionalAnswer = default(EntityRef<tbl_IntentionalAnswer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int AnswerId
+		{
+			get
+			{
+				return this._AnswerId;
+			}
+			set
+			{
+				if ((this._AnswerId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnswerIdChanging(value);
+					this.SendPropertyChanging();
+					this._AnswerId = value;
+					this.SendPropertyChanged("AnswerId");
+					this.OnAnswerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._tbl_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfMarket", DbType="Int NOT NULL")]
+		public int numberOfMarket
+		{
+			get
+			{
+				return this._numberOfMarket;
+			}
+			set
+			{
+				if ((this._numberOfMarket != value))
+				{
+					this.OnnumberOfMarketChanging(value);
+					this.SendPropertyChanging();
+					this._numberOfMarket = value;
+					this.SendPropertyChanged("numberOfMarket");
+					this.OnnumberOfMarketChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfShowTotal", DbType="Int NOT NULL")]
+		public int numberOfShowTotal
+		{
+			get
+			{
+				return this._numberOfShowTotal;
+			}
+			set
+			{
+				if ((this._numberOfShowTotal != value))
+				{
+					this.OnnumberOfShowTotalChanging(value);
+					this.SendPropertyChanging();
+					this._numberOfShowTotal = value;
+					this.SendPropertyChanged("numberOfShowTotal");
+					this.OnnumberOfShowTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Company_ReportForCompanyMultipleChoiceListAnswer", Storage="_tbl_Company", ThisKey="companyId", OtherKey="companyId", IsForeignKey=true)]
+		public tbl_Company tbl_Company
+		{
+			get
+			{
+				return this._tbl_Company.Entity;
+			}
+			set
+			{
+				tbl_Company previousValue = this._tbl_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Company.Entity = null;
+						previousValue.ReportForCompanyMultipleChoiceListAnswers.Remove(this);
+					}
+					this._tbl_Company.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForCompanyMultipleChoiceListAnswers.Add(this);
+						this._companyId = value.companyId;
+					}
+					else
+					{
+						this._companyId = default(int);
+					}
+					this.SendPropertyChanged("tbl_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForCompanyMultipleChoiceListAnswer", Storage="_tbl_IntentionalAnswer", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId", IsForeignKey=true)]
+		public tbl_IntentionalAnswer tbl_IntentionalAnswer
+		{
+			get
+			{
+				return this._tbl_IntentionalAnswer.Entity;
+			}
+			set
+			{
+				tbl_IntentionalAnswer previousValue = this._tbl_IntentionalAnswer.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalAnswer.Entity = null;
+						previousValue.ReportForCompanyMultipleChoiceListAnswers.Remove(this);
+					}
+					this._tbl_IntentionalAnswer.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForCompanyMultipleChoiceListAnswers.Add(this);
+						this._FormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+						this._AnswerId = value.AnswerId;
+					}
+					else
+					{
+						this._FormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+						this._AnswerId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalAnswer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

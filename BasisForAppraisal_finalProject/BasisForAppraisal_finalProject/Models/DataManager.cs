@@ -112,6 +112,16 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.ReportForOrganiztionLines; }
         }
 
+
+        public Table<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswer
+        {
+            get { return manager.ReportForCompanyMultipleChoiceListAnswers; }
+        }
+        public Table<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswersProp
+        {
+            get { return manager.ReportForClassMultipleChoiceListAnswers; }
+        }
+
         //----------------------------------------------------------------------------------------------------------------------------------//
 
 
@@ -529,6 +539,35 @@ namespace BasisForAppraisal_finalProject.Models
             }
         }
 
+
+        public void SaveReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer line)
+        {
+            var lineFromDb = manager.ReportForCompanyMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == line.companyId && x.FormId == line.FormId  && x.AnswerId == line.AnswerId);
+            if (lineFromDb == null)
+            {
+                manager.ReportForCompanyMultipleChoiceListAnswers.InsertOnSubmit(line);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                manager.SubmitChanges();
+            }
+        }
+
+        public void SaveReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer line)
+        {
+            var lineFromDb = manager.ReportForClassMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == line.companyId && x.FormId == line.FormId && line.QuestionId == x.QuestionId && x.unitName == line.unitName && x.className == line.className && x.AnswerId == line.AnswerId);
+            if (lineFromDb == null)
+            {
+                manager.ReportForClassMultipleChoiceListAnswers.InsertOnSubmit(line);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                manager.SubmitChanges();
+            }
+        }
+
         public void EditReportForIndividual(string text, bool isClose, string IndividualId, int FormId)
         {
             var report = manager.ReportForIndividuals.SingleOrDefault(x => x.IndividualId == IndividualId && x.FormId == FormId);
@@ -605,14 +644,29 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
 
-        public ReportForOrganiztionLine GetReportOrganiztionLine(int formId,int OrganiztionId, int questionId)
+        public ReportForOrganiztionLine GetReportOrganiztionLine(int formId, int OrganiztionId, int questionId)
         {
             return manager.ReportForOrganiztionLines.FirstOrDefault(x => x.FormId == formId && x.CompanyId == OrganiztionId && x.QuestionId == questionId);
+        }
+
+        public ReportForCompanyMultipleChoiceListAnswer GetSingleLineReportForClassMultipleChoiceListAnswer(int formId, int OrganiztionId, int answerId)
+        {
+            return manager.ReportForCompanyMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == OrganiztionId && x.FormId == formId && x.AnswerId == answerId);
         }
 
         public List<ReportForIndividualLine> GetReportForIndividualLineForOrganiztion(int formId, int OrganiztionId)
         {
             return manager.ReportForIndividualLines.Where(x => x.FromId == formId && x.ReportForIndividual.CompanyId == OrganiztionId).ToList();
+        }
+
+        public List<ReportForClassMultipleChoiceListAnswer> GetReportForClassMultipleChoiceListAnswers(int formId, int OrganiztionId, string unit, string className)
+        {
+            return manager.ReportForClassMultipleChoiceListAnswers.Where(x => x.FormId == formId && x.companyId == OrganiztionId && x.unitName == unit && x.className == className).ToList();
+        }
+
+        public List<ReportForCompanyMultipleChoiceListAnswer> GetReportForCompanyMultipleChoiceListAnswers(int formId, int OrganiztionId)
+        {
+            return manager.ReportForCompanyMultipleChoiceListAnswers.Where(x => x.FormId == formId && x.companyId == OrganiztionId).ToList();
         }
 
        ////  ------------------------------- secutiry --------------------------------------------------------------//

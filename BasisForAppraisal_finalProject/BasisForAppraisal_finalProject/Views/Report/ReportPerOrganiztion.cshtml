@@ -69,7 +69,7 @@
 
 
 
-<input id="numberOfQuestions" value="@Model.ReportForOrganiztionLinesModel.Count" class="collapse"></input>
+<input id="numberOfQuestions" value="@Model.numberOfCharts" class="collapse"></input>
 <input id="Companyid" value="@Model.ReportForOrganiztionModel.CompanyId" class="collapse"></input>
 <input id="formid" value="@Model.ReportForOrganiztionModel.FormId" class="collapse"></input>
 <div dir="rtl" style="margin-top: 10%; align-items: center">
@@ -100,6 +100,15 @@
                     @*<button onclick="saveAsImg($('#' + @line.QuestionId.ToString()));">Save as PNG Image</button>*@
                     <div id="@line.QuestionId" class="col-sm-pull-1" style="border-bottom:groove"></div>
 
+                }
+                @if(c == "MultipleChoiceList")
+                {
+                    foreach (ReportForCompanyMultipleChoiceListAnswer line in Model.MultipleChoiceListAnswer)
+                {
+                    <div>@line.tbl_IntentionalAnswer.Text</div>
+                    <div id="@line.AnswerId" class="col-sm-pull-1" style="border-bottom:groove"></div>
+
+                }
                 }
             </div>
         }

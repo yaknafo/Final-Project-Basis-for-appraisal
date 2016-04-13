@@ -55,7 +55,8 @@ namespace BasisForAppraisal_finalProject.BL
             var organiztion = DMO.Companyies.FirstOrDefault(x => x.companyId == companyId);
             if (organiztion == null)
                 return;
-            var OrganiztionEmployessId = DMO.ConnectorAnswers.Where(x => x.companyId == organiztion.companyId && x.FormId == formId).Select(x => x.employeeOnId).ToList();
+            var OrganiztionEmployessId = DMO.ConnectorAnswers.Where(x => x.companyId == organiztion.companyId && x.FormId == formId).Select(x => x.employeeOnId).Distinct().ToList();
+
 
             // create report for invidual for all the employee in the company
             //TODO: this is so slow we need to with that something
@@ -73,6 +74,7 @@ namespace BasisForAppraisal_finalProject.BL
 
             // Create list of the queestions in the form
             var listOfReportLInes = new List<ReportForOrganiztionLine>();
+             var listOfReportLInesAnswers = new List<ReportForCompanyMultipleChoiceListAnswer>();
             var allQuestions = form.Sections.First().Questions;
  
                foreach (tbl_IntentionalQuestion question in allQuestions)
@@ -122,14 +124,40 @@ namespace BasisForAppraisal_finalProject.BL
 
             var MulitiChoiceListQuestion = questionsNotInRepostForIndividual.Where(x => x.QuestionType == "MultipleChoiceList").ToList();
 
+
+
             foreach(tbl_IntentionalQuestion q in MulitiChoiceListQuestion)
             {
                 var AnswerForQuestion = DMO.ConnectorAnswers.Where(x => x.QuestionId == q.QuestionId && x.companyId == companyId).ToList();
                 var groupByEmp = AnswerForQuestion.GroupBy(x => x.employeeOnId).ToList();
+                var answerGroupOrg = AnswerForQuestion.GroupBy(x => x.AnswerId).ToList();
                 var line = listOfReportLInes.FirstOrDefault(x => x.QuestionId == q.QuestionId);
                 foreach(var i in groupByEmp)
                 {
                     CountScoreForReportForOrganiztionLinesMulitiChoice(i.Count(), line);
+                }
+
+                int numberQuestionsOfFiller = 0;
+                if (OrganiztionEmployessId.Count != 0)
+                    numberQuestionsOfFiller = AnswerForQuestion.Count / OrganiztionEmployessId.Count;
+
+                foreach (var i in q.tbl_IntentionalAnswers)
+                {
+                    var answerLine = DMO.GetSingleLineReportForClassMultipleChoiceListAnswer(formId,companyId,i.AnswerId);
+                    if(answerLine == null)
+                    {
+                        answerLine = new ReportForCompanyMultipleChoiceListAnswer() { AnswerId = i.AnswerId, companyId = companyId, FormId = formId, QuestionId = q.QuestionId, SectionId = q.SectionId };
+
+                    }
+                    var listtOfAnswer = answerGroupOrg.FirstOrDefault(x => x.Key == i.AnswerId);
+                    int numberOfAnswer = 0;
+                    if (listtOfAnswer != null)
+                    {
+                        numberOfAnswer = listtOfAnswer.Count();
+                    }
+                    answerLine.numberOfMarket = numberOfAnswer;
+                    answerLine.numberOfShowTotal = numberQuestionsOfFiller;
+                    DMO.SaveReportForCompanyMultipleChoiceListAnswer(answerLine);
                 }
 
             }

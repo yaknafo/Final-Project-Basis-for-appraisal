@@ -20,6 +20,7 @@
       <Association Name="tbl_Company_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="companyId" OtherKey="companyId" Type="tbl_ConnectorFormFill" />
       <Association Name="tbl_Company_ReportForOrganiztion" Member="ReportForOrganiztions" ThisKey="companyId" OtherKey="CompanyId" Type="ReportForOrganiztion" />
       <Association Name="tbl_Company_ReportForIndividual" Member="ReportForIndividuals" ThisKey="companyId" OtherKey="CompanyId" Type="ReportForIndividual" />
+      <Association Name="tbl_Company_ReportForCompanyMultipleChoiceListAnswer" Member="ReportForCompanyMultipleChoiceListAnswers" ThisKey="companyId" OtherKey="companyId" Type="ReportForCompanyMultipleChoiceListAnswer" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Class" Member="tbl_Classes">
@@ -28,6 +29,7 @@
       <Column Name="unitName" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="className" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbl_Class_tbl_Employee" Member="tbl_Employees" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="tbl_Employee" />
+      <Association Name="tbl_Class_ReportForClassMultipleChoiceListAnswer" Member="ReportForClassMultipleChoiceListAnswers" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="ReportForClassMultipleChoiceListAnswer" />
       <Association Name="tbl_Unit_tbl_Class" Member="tbl_Unit" ThisKey="companyId,unitName" OtherKey="companyId,unitName" Type="tbl_Unit" IsForeignKey="true" />
     </Type>
   </Table>
@@ -49,6 +51,8 @@
       <Column Name="AnswerOption" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Score" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="tbl_IntentionalAnswer_tbl_ConnectorAnswer" Member="tbl_ConnectorAnswers" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_ConnectorAnswer" />
+      <Association Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer" Member="ReportForClassMultipleChoiceListAnswers" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="ReportForClassMultipleChoiceListAnswer" />
+      <Association Name="tbl_IntentionalAnswer_ReportForCompanyMultipleChoiceListAnswer" Member="ReportForCompanyMultipleChoiceListAnswers" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="ReportForCompanyMultipleChoiceListAnswer" />
       <Association Name="tbl_IntentionalQuestion_tbl_IntentionalAnswer" Member="tbl_IntentionalQuestion" ThisKey="FormId,SectionId,QuestionId" OtherKey="FormId,SectionId,QuestionId" Type="tbl_IntentionalQuestion" IsForeignKey="true" />
     </Type>
   </Table>
@@ -198,6 +202,34 @@
       <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="tbl_TypeQuestion_tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions" ThisKey="Name" OtherKey="QuestionType" Type="tbl_IntentionalQuestion" />
       <Association Name="tbl_TypeQuestion_ReportForOrganiztionLine" Member="ReportForOrganiztionLines" ThisKey="Name" OtherKey="TypeQuestionName" Type="ReportForOrganiztionLine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportForClassMultipleChoiceListAnswer" Member="ReportForClassMultipleChoiceListAnswers">
+    <Type Name="ReportForClassMultipleChoiceListAnswer">
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnswerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="unitName" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="className" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="numberOfMarket" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numberOfShowTotal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer" Member="tbl_IntentionalAnswer" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_IntentionalAnswer" IsForeignKey="true" />
+      <Association Name="tbl_Class_ReportForClassMultipleChoiceListAnswer" Member="tbl_Class" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="tbl_Class" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportForCompanyMultipleChoiceListAnswer" Member="ReportForCompanyMultipleChoiceListAnswers">
+    <Type Name="ReportForCompanyMultipleChoiceListAnswer">
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SectionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AnswerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="numberOfMarket" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numberOfShowTotal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_Company_ReportForCompanyMultipleChoiceListAnswer" Member="tbl_Company" ThisKey="companyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
+      <Association Name="tbl_IntentionalAnswer_ReportForCompanyMultipleChoiceListAnswer" Member="tbl_IntentionalAnswer" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_IntentionalAnswer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

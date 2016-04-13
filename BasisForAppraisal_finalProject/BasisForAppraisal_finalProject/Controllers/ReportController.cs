@@ -89,6 +89,12 @@ namespace BasisForAppraisal_finalProject.Controllers
                 var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = r.QuestionId, TypeQuestion = r.TypeQuestionName, HighScore = r.HighScore, MidScore = r.MidScore, LowScore = r.LowScore,TitleQuestion=r.tbl_IntentionalQuestion.Title };
                 data.Add(tempLine);
             }
+            var answers = dm.GetReportForCompanyMultipleChoiceListAnswers(form, companyId);
+            foreach(ReportForCompanyMultipleChoiceListAnswer r in answers)
+            {
+                var answerReport = new ReportForOrganiztionLinesViewModel() { QuestionId = r.AnswerId, HighScore = r.numberOfMarket, MidScore = 0, LowScore = r.numberOfShowTotal - r.numberOfMarket, TitleQuestion = r.tbl_IntentionalAnswer.Text };
+                data.Add(answerReport);
+            }
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

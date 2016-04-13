@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BasisForAppraisal_finalProject.DBML;
+using BasisForAppraisal_finalProject.Models;
 
 namespace BasisForAppraisal_finalProject.ViewModel.ExportData
 {
@@ -16,8 +17,12 @@ namespace BasisForAppraisal_finalProject.ViewModel.ExportData
 
         public List<tbl_TypeQuestion> Categories { set; get; }
 
+        public List<ReportForCompanyMultipleChoiceListAnswer> MultipleChoiceListAnswer { set; get; }
+
         public Dictionary<string, List<ReportForOrganiztionLine>> CategoriesDictionaryLines { set; get; }
 
+
+        public int numberOfCharts { set; get; }
         public ReportForOrgViewModel(ReportForOrganiztion report)
         {
             ReportForOrganiztionModel = report;
@@ -31,7 +36,11 @@ namespace BasisForAppraisal_finalProject.ViewModel.ExportData
                 CategoriesDictionaryLines.Add(c.Name, listOfLines);
 
             }
+            var dm = new DataManager();
+            MultipleChoiceListAnswer = dm.GetReportForCompanyMultipleChoiceListAnswers(report.FormId, report.CompanyId);
 
+
+            numberOfCharts = ReportForOrganiztionLinesModel.Count + MultipleChoiceListAnswer.Count;
         }
     }
 }
