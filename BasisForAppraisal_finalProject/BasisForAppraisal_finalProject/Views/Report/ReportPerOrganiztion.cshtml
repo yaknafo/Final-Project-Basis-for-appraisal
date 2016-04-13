@@ -10,13 +10,13 @@
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(GetLines);
 
-    function GetLines() {  
-        var Companyid =  +document.getElementById('Companyid').value; 
-        var formid =  +document.getElementById('formid').value; 
-        var getReportColumnsParams = {  
-            "companyId": Companyid  ,
-            "form":formid
-        };  
+    function GetLines() {
+        var Companyid = +document.getElementById('Companyid').value;
+        var formid = +document.getElementById('formid').value;
+        var getReportColumnsParams = {
+            "companyId": Companyid,
+            "form": formid
+        };
         $.ajax({
             type: "Get",
             traditional: true,
@@ -31,7 +31,8 @@
                 console.log(xhr.responseText);
                 alert("Error has occurred..");
             }
-        })};
+        })
+    };
 
     function drawChart(list) {
 
@@ -55,17 +56,54 @@
             chart.draw(data, options);
         }
     }
+
+
 </script>
+
+<script>
+    function changeCatgory() {
+        var btnActive = $(".catgoryNameBtn").select();
+        alert(btnActive.text)
+        var num = null;
+
+        num = +this.innerHTML;
+        alert("Value is " + this.Text);
+
+    }
+</script>
+
 <input id="numberOfQuestions" value="@Model.ReportForOrganiztionLinesModel.Count" class="collapse"></input>
 <input id="Companyid" value="@Model.ReportForOrganiztionModel.CompanyId" class="collapse"></input>
 <input id="formid" value="@Model.ReportForOrganiztionModel.FormId" class="collapse"></input>
-<div dir="rtl" style="margin-top:10%">
-        <div class="row">
-            @foreach (ReportForOrganiztionLine line in Model.ReportForOrganiztionLinesModel)
-            {
-                <div>@line.tbl_IntentionalQuestion.Title</div>
-                <div id="@line.QuestionId" class="col-sm-pull-1" style="border-bottom:groove"></div>
+<div dir="rtl" style="margin-top: 10%; align-items: center">
 
+    <ul class="nav nav-tabs" role="tablist">
+        @foreach (string catgoryName in Model.Categories)
+        {
+
+            if (catgoryName.StartsWith("Int"))
+            {
+                <li role="presentation" class="active"><a href="#@catgoryName" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName</a></li>
             }
-        </div>
+            else
+            {
+                <li role="presentation"><a href="#@catgoryName" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName</a></li>
+            }
+        }
+    </ul>
+
+    <div class="tab-content">
+        @foreach (string c in Model.CategoriesDictionaryLines.Keys)
+        {
+
+            <div role="tabpanel" class="row tab-pane fade in active" id="@c">
+                @foreach (ReportForOrganiztionLine line in Model.CategoriesDictionaryLines[c])
+                {
+                    <div>@line.tbl_IntentionalQuestion.Title</div>
+                    <div id="@line.QuestionId" class="col-sm-pull-1" style="border-bottom:groove"></div>
+
+                }
+            </div>
+        }
+    </div>
 </div>

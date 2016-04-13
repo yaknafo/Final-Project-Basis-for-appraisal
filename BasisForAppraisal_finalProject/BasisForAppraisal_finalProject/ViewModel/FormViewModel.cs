@@ -221,7 +221,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         {
             get
             {
-                return socialStatus ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("social status")).FirstOrDefault();
+                return socialStatus ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("socialstatus")).FirstOrDefault();
             }
             set
             {
@@ -234,7 +234,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
         {
             get
             {
-                return employmentStatus ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("employment status")).FirstOrDefault();
+                return employmentStatus ?? DM.TypeQuestions.Where(x => x.Name.ToLower().Equals("employmentstatus")).FirstOrDefault();
             }
             set
             {
