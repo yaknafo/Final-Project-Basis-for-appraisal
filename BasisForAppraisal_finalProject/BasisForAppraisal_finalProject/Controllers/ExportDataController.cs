@@ -141,7 +141,13 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
        
-
+        //------------------------------------------------------- For Org Report cascade ------------------------------///
+        public PartialViewResult GetUnitCascadeCompanyOrg(int id)
+        {
+            var dManager = new DataMangerCompany();
+            ViewData["ListDataUnit"] = GetDropDownUnit(dManager.getUnitsForCompany(id).Distinct().ToList());
+            return PartialView("_UnitsForOrgCbx", id.ToString());
+        }
        public void ExportClientsListToExcel()
        {
            var grid = new System.Web.UI.WebControls.GridView();
@@ -182,6 +188,17 @@ namespace BasisForAppraisal_finalProject.Controllers
            List<SelectListItem> items = new List<SelectListItem>();
            com.ForEach(x => items.Add(new SelectListItem { Text = x.comapnyName, Value = x.companyId.ToString() }));
            items.Add(new SelectListItem { Text = ".....", Value = "", Selected = true });
+           return items;
+       }
+
+
+       public List<SelectListItem> GetLevelInOrg()
+       {
+           List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "ארגון", Value = "1" , Selected = true});
+           items.Add(new SelectListItem { Text = "שנה" ,Value = "2" });
+           items.Add(new SelectListItem { Text = "מחזור" ,Value = "3" });
+           
            return items;
        }
 
@@ -234,11 +251,12 @@ namespace BasisForAppraisal_finalProject.Controllers
         {
             var dManager = new DataManager();
             ViewData["ListData"] = GetDropDownCompany(dManager.Companyies.ToList());
+            ViewData["Levels"] = GetLevelInOrg();
             return View();
         }
 
         [HttpPost]
-        public ActionResult ReportForOrganiztion(int Companyiesa, List<FormCheckBoxViewModel> formCheckList, bool noCalculation= true)
+        public ActionResult ReportForOrganiztion(int Companyiesa, List<FormCheckBoxViewModel> formCheckList,int levels,string units="", string cls ="", bool noCalculation = true)
         {
             var dManager = new DataManager();
             var reportBL = new ReportBL();
@@ -249,13 +267,29 @@ namespace BasisForAppraisal_finalProject.Controllers
                 return View();
             }
             if (!noCalculation)
+                if(levels == 1)
             reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId);
+                else if (levels == 3)
+                {
+                    var empIds = dManager.Employees.Where(x => x.companyId == Companyiesa && x.unitName == units && x.className == cls &&  !x.IsAccompanied && !x.IsManger.Value).Select(x => x.employeeId).ToList();
+
+                    reportBL.CalculateReportForClass(Companyiesa, form.FormId,units,cls,empIds);
+                    return RedirectToAction("ReportPerClass", "Report", new { companyId = Companyiesa, forms = form.FormId, unit= units, cls=cls });
+                }
+
             return RedirectToAction("ReportPerOrganiztion", "Report", new { companyId = Companyiesa, forms = form.FormId });
         }
+
+        /// <summary>
+        /// Get Froms For Organiztion
+        /// </summary>
+        /// <param name="organiztionid"></param>
+        /// <returns></returns>
         public PartialViewResult GetFromsForOrganiztion(int organiztionid)
         {
             var dManager = new DataMangerCompany();
             var res = dManager.ConnectorAnswer.Where(x => x.companyId == organiztionid).Select(s => s.tbl_ConnectorFormFill.tblForm).Distinct().ToList();
+
             var formCheckBoxList = new List<FormCheckBoxViewModel>();
 
             res.ForEach(x => formCheckBoxList.Add(new FormCheckBoxViewModel { IsSelected = false, FormId = x.formId, FormName = x.FormName }));

@@ -1,0 +1,21 @@
+﻿@model string
+@Html.DropDownList("units", ViewData["ListDataUnit"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "units" })
+<div id="co" title=@Model.ToString()></div>
+<script type="text/javascript">
+    $("#units").change(function () {
+        var id = $(this).val();
+        if (id != null) {
+            $.ajax(
+                {
+                    url: '@Url.Action("GetclassCascadeUnitEmp")',
+                    type: "get",
+                    data: { id: id, unit: $('#co').attr("title") }
+
+                }).done(function (data) {
+                    $("#class").html(data);
+                });
+        }
+    });
+
+
+</script>  

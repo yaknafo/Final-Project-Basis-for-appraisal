@@ -1,0 +1,132 @@
+﻿@model  BasisForAppraisal_finalProject.ViewModel.ExportData.ReportForClassViewModel
+
+@using BasisForAppraisal_finalProject.DBML;
+@{
+    ViewBag.Title = "ReportPerClass";
+}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(GetLines);
+
+    function GetLines() {
+        var Companyid = +document.getElementById('Companyid').value;
+        var formid = +document.getElementById('formid').value;
+        var unitName = document.getElementById('unitName').value;
+        var className = document.getElementById('className').value;
+        var getReportColumnsParams = {
+            "companyId": Companyid,
+            "form": formid,
+            "unit":unitName,
+            "cls": className
+        };
+        $.ajax({
+            type: "Get",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: 'GetReportsLinesForClass',
+            data: getReportColumnsParams,
+            success: function (data) {
+                drawChart(data);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        })
+    };
+
+    function drawChart(list) {
+
+        var numberOfQuestions = +document.getElementById('numberOfQuestions').value;
+        for (i = 0; i < numberOfQuestions; i++) {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['עומד בצפיות', list[i].HighScore],
+              ['עומד חלקית בצפיות', list[i].MidScore],
+              ['לא עוד בציפיות', list[i].LowScore],
+            ]);
+
+            var options = {
+                //title: list[i].TitleQuestion,
+                pieHole: 0.2,
+                colors: ['#4CC417', '#C0C0C0', '#FF0000'],
+                pieSliceTextStyle: {
+                color: 'black',
+            },
+            };
+
+
+            var chart_div = document.getElementById(list[i].QuestionId);
+            var chart = new google.visualization.PieChart(document.getElementById(list[i].QuestionId));
+
+
+            // Wait for the chart to finish drawing before calling the getImageURI() method.
+            //google.visualization.events.addListener(chart, 'ready', function () {
+            //    chart_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+            //    console.log(chart_div.innerHTML);
+            //});
+
+            chart.draw(data, options);
+        }
+    }
+</script>
+
+
+
+<input id="numberOfQuestions" value="@Model.numberOfCharts" class="collapse"></input>
+<input id="Companyid" value="@Model.ReportForClassModel.companyId" class="collapse"></input>
+<input id="formid" value="@Model.ReportForClassModel.FormId" class="collapse"></input>
+<input id="unitName" value="@Model.ReportForClassModel.unitName" class="collapse"></input>
+<input id="className" value="@Model.ReportForClassModel.className" class="collapse"></input>
+<div dir="rtl" style="margin-top: 10%; align-items: center">
+    <div class="row" style="border:inset">
+        <br />
+        <h2 class="col-lg-12">ארגון: @Model.ReportForClassModel.companyId</h2>
+        <h2 class="col-lg-12">יחידה: @Model.ReportForClassModel.unitName</h2>
+        <h2 class="col-lg-12">מחזור: @Model.ReportForClassModel.className</h2>
+        <h2 class="col-lg-12">שאלון: @Model.ReportForClassModel.tblForm.FormName </h2>
+        <h4 class="col-lg-12">עודכן לאחרונה: @Model.ReportForClassModel.LastCalculationDate.ToString("MMMM dd, yyyy")</h4>
+    </div>
+    <ul class="nav nav-tabs" role="tablist">
+        @foreach (tbl_TypeQuestion catgoryName in Model.Categories)
+        {
+
+            if (catgoryName.Name.StartsWith("Int"))
+            {
+                <li role="presentation" class="active"><a href="#@catgoryName.Name" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName.Description</a></li>
+            }
+            else
+            {
+                <li role="presentation"><a href="#@catgoryName.Name" aria-controls="profile" role="tab" data-toggle="tab">@catgoryName.Description</a></li>
+            }
+        }
+    </ul>
+
+    <div class="tab-content">
+        @foreach (string c in Model.CategoriesDictionaryLines.Keys)
+        {
+
+            <div role="tabpanel" class="row tab-pane fade in active" id="@c">
+                @foreach (ReportForClassLine line in Model.CategoriesDictionaryLines[c])
+                {
+                    <div>@line.tbl_IntentionalQuestion.Title</div>
+                    @*<button onclick="saveAsImg($('#' + @line.QuestionId.ToString()));">Save as PNG Image</button>*@
+                    <div id="@line.QuestionId" class="col-sm-pull-3" style="border-bottom:groove"></div>
+
+                }
+                @if (c == "MultipleChoiceList")
+                {
+                    foreach (ReportForClassMultipleChoiceListAnswer line in Model.MultipleChoiceListAnswer)
+                    {
+                        <div>@line.tbl_IntentionalAnswer.Text</div>
+                        <div id="@line.AnswerId" class="col-sm-pull-1" style="border-bottom:groove"></div>
+
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>

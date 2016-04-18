@@ -77,6 +77,18 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(viewModel);
         }
 
+
+        public ActionResult ReportPerClass(int companyId, int forms,string unit , string cls)
+        {
+            var dm = new DataManager();
+            var reportForClass = dm.ReportForClasses.SingleOrDefault(x => x.companyId == companyId && x.FormId == forms && x.unitName == unit && x.className == cls);
+            if (reportForClass == null)
+                return View();
+            var viewModel = new ReportForClassViewModel(reportForClass);
+            return View(viewModel);
+        }
+
+
         public JsonResult GetReportsLines(int companyId, int form )
         {
 
@@ -91,6 +103,28 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             var answers = dm.GetReportForCompanyMultipleChoiceListAnswers(form, companyId);
             foreach(ReportForCompanyMultipleChoiceListAnswer r in answers)
+            {
+                var answerReport = new ReportForOrganiztionLinesViewModel() { QuestionId = r.AnswerId, HighScore = r.numberOfMarket, MidScore = 0, LowScore = r.numberOfShowTotal - r.numberOfMarket, TitleQuestion = r.tbl_IntentionalAnswer.Text };
+                data.Add(answerReport);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult GetReportsLinesForClass(int companyId, int form, string unit, string cls)
+        {
+
+            var dm = new DataManager();
+            var reportForOrganiztion = dm.ReportForClasses.SingleOrDefault(x => x.companyId == companyId && x.FormId == form && x.unitName == unit && x.className == cls);
+            var data = new List<ReportForOrganiztionLinesViewModel>();
+            var listData = reportForOrganiztion.ReportForClassLines.ToArray();
+            foreach (ReportForClassLine r in listData)
+            {
+                var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = r.QuestionId, TypeQuestion = r.TypeQuestionName, HighScore = r.HighScore, MidScore = r.MidScore, LowScore = r.LowScore, TitleQuestion = r.tbl_IntentionalQuestion.Title };
+                data.Add(tempLine);
+            }
+            var answers = dm.GetReportForClassMultipleChoiceListAnswers(form, companyId,unit,cls);
+            foreach (ReportForClassMultipleChoiceListAnswer r in answers)
             {
                 var answerReport = new ReportForOrganiztionLinesViewModel() { QuestionId = r.AnswerId, HighScore = r.numberOfMarket, MidScore = 0, LowScore = r.numberOfShowTotal - r.numberOfMarket, TitleQuestion = r.tbl_IntentionalAnswer.Text };
                 data.Add(answerReport);

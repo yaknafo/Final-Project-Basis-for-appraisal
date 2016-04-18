@@ -75,12 +75,18 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void Inserttbl_TypeQuestion(tbl_TypeQuestion instance);
     partial void Updatetbl_TypeQuestion(tbl_TypeQuestion instance);
     partial void Deletetbl_TypeQuestion(tbl_TypeQuestion instance);
-    partial void InsertReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
-    partial void UpdateReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
-    partial void DeleteReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
     partial void InsertReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer instance);
     partial void UpdateReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer instance);
     partial void DeleteReportForCompanyMultipleChoiceListAnswer(ReportForCompanyMultipleChoiceListAnswer instance);
+    partial void InsertReportForClass(ReportForClass instance);
+    partial void UpdateReportForClass(ReportForClass instance);
+    partial void DeleteReportForClass(ReportForClass instance);
+    partial void InsertReportForClassLine(ReportForClassLine instance);
+    partial void UpdateReportForClassLine(ReportForClassLine instance);
+    partial void DeleteReportForClassLine(ReportForClassLine instance);
+    partial void InsertReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
+    partial void UpdateReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
+    partial void DeleteReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -233,19 +239,35 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
-		{
-			get
-			{
-				return this.GetTable<ReportForClassMultipleChoiceListAnswer>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswers
 		{
 			get
 			{
 				return this.GetTable<ReportForCompanyMultipleChoiceListAnswer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForClass> ReportForClasses
+		{
+			get
+			{
+				return this.GetTable<ReportForClass>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForClassLine> ReportForClassLines
+		{
+			get
+			{
+				return this.GetTable<ReportForClassLine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this.GetTable<ReportForClassMultipleChoiceListAnswer>();
 			}
 		}
 	}
@@ -741,6 +763,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_Employee> _tbl_Employees;
 		
+		private EntitySet<ReportForClass> _ReportForClasses;
+		
 		private EntitySet<ReportForClassMultipleChoiceListAnswer> _ReportForClassMultipleChoiceListAnswers;
 		
 		private EntityRef<tbl_Unit> _tbl_Unit;
@@ -760,6 +784,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		public tbl_Class()
 		{
 			this._tbl_Employees = new EntitySet<tbl_Employee>(new Action<tbl_Employee>(this.attach_tbl_Employees), new Action<tbl_Employee>(this.detach_tbl_Employees));
+			this._ReportForClasses = new EntitySet<ReportForClass>(new Action<ReportForClass>(this.attach_ReportForClasses), new Action<ReportForClass>(this.detach_ReportForClasses));
 			this._ReportForClassMultipleChoiceListAnswers = new EntitySet<ReportForClassMultipleChoiceListAnswer>(new Action<ReportForClassMultipleChoiceListAnswer>(this.attach_ReportForClassMultipleChoiceListAnswers), new Action<ReportForClassMultipleChoiceListAnswer>(this.detach_ReportForClassMultipleChoiceListAnswers));
 			this._tbl_Unit = default(EntityRef<tbl_Unit>);
 			OnCreated();
@@ -846,6 +871,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClass", Storage="_ReportForClasses", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className")]
+		public EntitySet<ReportForClass> ReportForClasses
+		{
+			get
+			{
+				return this._ReportForClasses;
+			}
+			set
+			{
+				this._ReportForClasses.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClassMultipleChoiceListAnswer", Storage="_ReportForClassMultipleChoiceListAnswers", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className")]
 		public EntitySet<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
 		{
@@ -922,6 +960,18 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_tbl_Employees(tbl_Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Class = null;
+		}
+		
+		private void attach_ReportForClasses(ReportForClass entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Class = this;
+		}
+		
+		private void detach_ReportForClasses(ReportForClass entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Class = null;
@@ -1117,9 +1167,9 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<tbl_ConnectorAnswer> _tbl_ConnectorAnswers;
 		
-		private EntitySet<ReportForClassMultipleChoiceListAnswer> _ReportForClassMultipleChoiceListAnswers;
-		
 		private EntitySet<ReportForCompanyMultipleChoiceListAnswer> _ReportForCompanyMultipleChoiceListAnswers;
+		
+		private EntitySet<ReportForClassMultipleChoiceListAnswer> _ReportForClassMultipleChoiceListAnswers;
 		
 		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
 		
@@ -1146,8 +1196,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		public tbl_IntentionalAnswer()
 		{
 			this._tbl_ConnectorAnswers = new EntitySet<tbl_ConnectorAnswer>(new Action<tbl_ConnectorAnswer>(this.attach_tbl_ConnectorAnswers), new Action<tbl_ConnectorAnswer>(this.detach_tbl_ConnectorAnswers));
-			this._ReportForClassMultipleChoiceListAnswers = new EntitySet<ReportForClassMultipleChoiceListAnswer>(new Action<ReportForClassMultipleChoiceListAnswer>(this.attach_ReportForClassMultipleChoiceListAnswers), new Action<ReportForClassMultipleChoiceListAnswer>(this.detach_ReportForClassMultipleChoiceListAnswers));
 			this._ReportForCompanyMultipleChoiceListAnswers = new EntitySet<ReportForCompanyMultipleChoiceListAnswer>(new Action<ReportForCompanyMultipleChoiceListAnswer>(this.attach_ReportForCompanyMultipleChoiceListAnswers), new Action<ReportForCompanyMultipleChoiceListAnswer>(this.detach_ReportForCompanyMultipleChoiceListAnswers));
+			this._ReportForClassMultipleChoiceListAnswers = new EntitySet<ReportForClassMultipleChoiceListAnswer>(new Action<ReportForClassMultipleChoiceListAnswer>(this.attach_ReportForClassMultipleChoiceListAnswers), new Action<ReportForClassMultipleChoiceListAnswer>(this.detach_ReportForClassMultipleChoiceListAnswers));
 			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
 			OnCreated();
 		}
@@ -1317,19 +1367,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer", Storage="_ReportForClassMultipleChoiceListAnswers", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId")]
-		public EntitySet<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
-		{
-			get
-			{
-				return this._ReportForClassMultipleChoiceListAnswers;
-			}
-			set
-			{
-				this._ReportForClassMultipleChoiceListAnswers.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForCompanyMultipleChoiceListAnswer", Storage="_ReportForCompanyMultipleChoiceListAnswers", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId")]
 		public EntitySet<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswers
 		{
@@ -1340,6 +1377,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			set
 			{
 				this._ReportForCompanyMultipleChoiceListAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer", Storage="_ReportForClassMultipleChoiceListAnswers", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId")]
+		public EntitySet<ReportForClassMultipleChoiceListAnswer> ReportForClassMultipleChoiceListAnswers
+		{
+			get
+			{
+				return this._ReportForClassMultipleChoiceListAnswers;
+			}
+			set
+			{
+				this._ReportForClassMultipleChoiceListAnswers.Assign(value);
 			}
 		}
 		
@@ -1413,18 +1463,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			entity.tbl_IntentionalAnswer = null;
 		}
 		
-		private void attach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_IntentionalAnswer = this;
-		}
-		
-		private void detach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_IntentionalAnswer = null;
-		}
-		
 		private void attach_ReportForCompanyMultipleChoiceListAnswers(ReportForCompanyMultipleChoiceListAnswer entity)
 		{
 			this.SendPropertyChanging();
@@ -1432,6 +1470,18 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_ReportForCompanyMultipleChoiceListAnswers(ReportForCompanyMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalAnswer = null;
+		}
+		
+		private void attach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalAnswer = this;
+		}
+		
+		private void detach_ReportForClassMultipleChoiceListAnswers(ReportForClassMultipleChoiceListAnswer entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_IntentionalAnswer = null;
@@ -2955,6 +3005,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<ReportForIndividual> _ReportForIndividuals;
 		
+		private EntitySet<ReportForClass> _ReportForClasses;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2979,6 +3031,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
 			this._ReportForOrganiztions = new EntitySet<ReportForOrganiztion>(new Action<ReportForOrganiztion>(this.attach_ReportForOrganiztions), new Action<ReportForOrganiztion>(this.detach_ReportForOrganiztions));
 			this._ReportForIndividuals = new EntitySet<ReportForIndividual>(new Action<ReportForIndividual>(this.attach_ReportForIndividuals), new Action<ReportForIndividual>(this.detach_ReportForIndividuals));
+			this._ReportForClasses = new EntitySet<ReportForClass>(new Action<ReportForClass>(this.attach_ReportForClasses), new Action<ReportForClass>(this.detach_ReportForClasses));
 			OnCreated();
 		}
 		
@@ -3154,6 +3207,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForClass", Storage="_ReportForClasses", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<ReportForClass> ReportForClasses
+		{
+			get
+			{
+				return this._ReportForClasses;
+			}
+			set
+			{
+				this._ReportForClasses.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3221,6 +3287,18 @@ namespace BasisForAppraisal_finalProject.DBML
 			this.SendPropertyChanging();
 			entity.tblForm = null;
 		}
+		
+		private void attach_ReportForClasses(ReportForClass entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_ReportForClasses(ReportForClass entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalQuestion")]
@@ -3260,6 +3338,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		private EntitySet<ReportForIndividualLine> _ReportForIndividualLines;
 		
 		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
+		
+		private EntitySet<ReportForClassLine> _ReportForClassLines;
 		
 		private EntityRef<tbl_Section> _tbl_Section;
 		
@@ -3302,6 +3382,7 @@ namespace BasisForAppraisal_finalProject.DBML
 			this._tbl_IntentionalAnswers = new EntitySet<tbl_IntentionalAnswer>(new Action<tbl_IntentionalAnswer>(this.attach_tbl_IntentionalAnswers), new Action<tbl_IntentionalAnswer>(this.detach_tbl_IntentionalAnswers));
 			this._ReportForIndividualLines = new EntitySet<ReportForIndividualLine>(new Action<ReportForIndividualLine>(this.attach_ReportForIndividualLines), new Action<ReportForIndividualLine>(this.detach_ReportForIndividualLines));
 			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
+			this._ReportForClassLines = new EntitySet<ReportForClassLine>(new Action<ReportForClassLine>(this.attach_ReportForClassLines), new Action<ReportForClassLine>(this.detach_ReportForClassLines));
 			this._tbl_Section = default(EntityRef<tbl_Section>);
 			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
 			OnCreated();
@@ -3618,6 +3699,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForClassLine", Storage="_ReportForClassLines", ThisKey="FormId,SectionId,QuestionId", OtherKey="QuestioFormId,SectionId,QuestionId")]
+		public EntitySet<ReportForClassLine> ReportForClassLines
+		{
+			get
+			{
+				return this._ReportForClassLines;
+			}
+			set
+			{
+				this._ReportForClassLines.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Section_tbl_IntentionalQuestion", Storage="_tbl_Section", ThisKey="FormId,SectionId", OtherKey="FormId,SectionId", IsForeignKey=true)]
 		public tbl_Section tbl_Section
 		{
@@ -3739,6 +3833,18 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 		
 		private void detach_ReportForOrganiztionLines(ReportForOrganiztionLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalQuestion = null;
+		}
+		
+		private void attach_ReportForClassLines(ReportForClassLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_IntentionalQuestion = this;
+		}
+		
+		private void detach_ReportForClassLines(ReportForClassLine entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_IntentionalQuestion = null;
@@ -4755,6 +4861,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<ReportForOrganiztionLine> _ReportForOrganiztionLines;
 		
+		private EntitySet<ReportForClassLine> _ReportForClassLines;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4769,6 +4877,7 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this._tbl_IntentionalQuestions = new EntitySet<tbl_IntentionalQuestion>(new Action<tbl_IntentionalQuestion>(this.attach_tbl_IntentionalQuestions), new Action<tbl_IntentionalQuestion>(this.detach_tbl_IntentionalQuestions));
 			this._ReportForOrganiztionLines = new EntitySet<ReportForOrganiztionLine>(new Action<ReportForOrganiztionLine>(this.attach_ReportForOrganiztionLines), new Action<ReportForOrganiztionLine>(this.detach_ReportForOrganiztionLines));
+			this._ReportForClassLines = new EntitySet<ReportForClassLine>(new Action<ReportForClassLine>(this.attach_ReportForClassLines), new Action<ReportForClassLine>(this.detach_ReportForClassLines));
 			OnCreated();
 		}
 		
@@ -4838,6 +4947,19 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForClassLine", Storage="_ReportForClassLines", ThisKey="Name", OtherKey="TypeQuestionName")]
+		public EntitySet<ReportForClassLine> ReportForClassLines
+		{
+			get
+			{
+				return this._ReportForClassLines;
+			}
+			set
+			{
+				this._ReportForClassLines.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4881,371 +5003,17 @@ namespace BasisForAppraisal_finalProject.DBML
 			this.SendPropertyChanging();
 			entity.tbl_TypeQuestion = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForClassMultipleChoiceListAnswer")]
-	public partial class ReportForClassMultipleChoiceListAnswer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _FormId;
-		
-		private int _SectionId;
-		
-		private int _QuestionId;
-		
-		private int _AnswerId;
-		
-		private int _companyId;
-		
-		private string _unitName;
-		
-		private string _className;
-		
-		private int _numberOfMarket;
-		
-		private int _numberOfShowTotal;
-		
-		private EntityRef<tbl_IntentionalAnswer> _tbl_IntentionalAnswer;
-		
-		private EntityRef<tbl_Class> _tbl_Class;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnFormIdChanging(int value);
-    partial void OnFormIdChanged();
-    partial void OnSectionIdChanging(int value);
-    partial void OnSectionIdChanged();
-    partial void OnQuestionIdChanging(int value);
-    partial void OnQuestionIdChanged();
-    partial void OnAnswerIdChanging(int value);
-    partial void OnAnswerIdChanged();
-    partial void OncompanyIdChanging(int value);
-    partial void OncompanyIdChanged();
-    partial void OnunitNameChanging(string value);
-    partial void OnunitNameChanged();
-    partial void OnclassNameChanging(string value);
-    partial void OnclassNameChanged();
-    partial void OnnumberOfMarketChanging(int value);
-    partial void OnnumberOfMarketChanged();
-    partial void OnnumberOfShowTotalChanging(int value);
-    partial void OnnumberOfShowTotalChanged();
-    #endregion
-		
-		public ReportForClassMultipleChoiceListAnswer()
+		private void attach_ReportForClassLines(ReportForClassLine entity)
 		{
-			this._tbl_IntentionalAnswer = default(EntityRef<tbl_IntentionalAnswer>);
-			this._tbl_Class = default(EntityRef<tbl_Class>);
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int FormId
+		private void detach_ReportForClassLines(ReportForClassLine entity)
 		{
-			get
-			{
-				return this._FormId;
-			}
-			set
-			{
-				if ((this._FormId != value))
-				{
-					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFormIdChanging(value);
-					this.SendPropertyChanging();
-					this._FormId = value;
-					this.SendPropertyChanged("FormId");
-					this.OnFormIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int SectionId
-		{
-			get
-			{
-				return this._SectionId;
-			}
-			set
-			{
-				if ((this._SectionId != value))
-				{
-					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSectionIdChanging(value);
-					this.SendPropertyChanging();
-					this._SectionId = value;
-					this.SendPropertyChanged("SectionId");
-					this.OnSectionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int QuestionId
-		{
-			get
-			{
-				return this._QuestionId;
-			}
-			set
-			{
-				if ((this._QuestionId != value))
-				{
-					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestionIdChanging(value);
-					this.SendPropertyChanging();
-					this._QuestionId = value;
-					this.SendPropertyChanged("QuestionId");
-					this.OnQuestionIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AnswerId
-		{
-			get
-			{
-				return this._AnswerId;
-			}
-			set
-			{
-				if ((this._AnswerId != value))
-				{
-					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAnswerIdChanging(value);
-					this.SendPropertyChanging();
-					this._AnswerId = value;
-					this.SendPropertyChanged("AnswerId");
-					this.OnAnswerIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int companyId
-		{
-			get
-			{
-				return this._companyId;
-			}
-			set
-			{
-				if ((this._companyId != value))
-				{
-					if (this._tbl_Class.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OncompanyIdChanging(value);
-					this.SendPropertyChanging();
-					this._companyId = value;
-					this.SendPropertyChanged("companyId");
-					this.OncompanyIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitName", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string unitName
-		{
-			get
-			{
-				return this._unitName;
-			}
-			set
-			{
-				if ((this._unitName != value))
-				{
-					if (this._tbl_Class.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnunitNameChanging(value);
-					this.SendPropertyChanging();
-					this._unitName = value;
-					this.SendPropertyChanged("unitName");
-					this.OnunitNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_className", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string className
-		{
-			get
-			{
-				return this._className;
-			}
-			set
-			{
-				if ((this._className != value))
-				{
-					if (this._tbl_Class.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnclassNameChanging(value);
-					this.SendPropertyChanging();
-					this._className = value;
-					this.SendPropertyChanged("className");
-					this.OnclassNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfMarket", DbType="Int NOT NULL")]
-		public int numberOfMarket
-		{
-			get
-			{
-				return this._numberOfMarket;
-			}
-			set
-			{
-				if ((this._numberOfMarket != value))
-				{
-					this.OnnumberOfMarketChanging(value);
-					this.SendPropertyChanging();
-					this._numberOfMarket = value;
-					this.SendPropertyChanged("numberOfMarket");
-					this.OnnumberOfMarketChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfShowTotal", DbType="Int NOT NULL")]
-		public int numberOfShowTotal
-		{
-			get
-			{
-				return this._numberOfShowTotal;
-			}
-			set
-			{
-				if ((this._numberOfShowTotal != value))
-				{
-					this.OnnumberOfShowTotalChanging(value);
-					this.SendPropertyChanging();
-					this._numberOfShowTotal = value;
-					this.SendPropertyChanged("numberOfShowTotal");
-					this.OnnumberOfShowTotalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer", Storage="_tbl_IntentionalAnswer", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId", IsForeignKey=true)]
-		public tbl_IntentionalAnswer tbl_IntentionalAnswer
-		{
-			get
-			{
-				return this._tbl_IntentionalAnswer.Entity;
-			}
-			set
-			{
-				tbl_IntentionalAnswer previousValue = this._tbl_IntentionalAnswer.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_IntentionalAnswer.Entity = null;
-						previousValue.ReportForClassMultipleChoiceListAnswers.Remove(this);
-					}
-					this._tbl_IntentionalAnswer.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForClassMultipleChoiceListAnswers.Add(this);
-						this._FormId = value.FormId;
-						this._SectionId = value.SectionId;
-						this._QuestionId = value.QuestionId;
-						this._AnswerId = value.AnswerId;
-					}
-					else
-					{
-						this._FormId = default(int);
-						this._SectionId = default(int);
-						this._QuestionId = default(int);
-						this._AnswerId = default(int);
-					}
-					this.SendPropertyChanged("tbl_IntentionalAnswer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClassMultipleChoiceListAnswer", Storage="_tbl_Class", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className", IsForeignKey=true)]
-		public tbl_Class tbl_Class
-		{
-			get
-			{
-				return this._tbl_Class.Entity;
-			}
-			set
-			{
-				tbl_Class previousValue = this._tbl_Class.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Class.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Class.Entity = null;
-						previousValue.ReportForClassMultipleChoiceListAnswers.Remove(this);
-					}
-					this._tbl_Class.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForClassMultipleChoiceListAnswers.Add(this);
-						this._companyId = value.companyId;
-						this._unitName = value.unitName;
-						this._className = value.className;
-					}
-					else
-					{
-						this._companyId = default(int);
-						this._unitName = default(string);
-						this._className = default(string);
-					}
-					this.SendPropertyChanged("tbl_Class");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.tbl_TypeQuestion = null;
 		}
 	}
 	
@@ -5530,6 +5298,1155 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._AnswerId = default(int);
 					}
 					this.SendPropertyChanged("tbl_IntentionalAnswer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForClass")]
+	public partial class ReportForClass : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _companyId;
+		
+		private string _unitName;
+		
+		private string _className;
+		
+		private int _FormId;
+		
+		private System.DateTime _CreationDate;
+		
+		private System.DateTime _LastCalculationDate;
+		
+		private bool _Isclose;
+		
+		private EntitySet<ReportForClassLine> _ReportForClassLines;
+		
+		private EntityRef<tblForm> _tblForm;
+		
+		private EntityRef<tbl_Class> _tbl_Class;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnunitNameChanging(string value);
+    partial void OnunitNameChanged();
+    partial void OnclassNameChanging(string value);
+    partial void OnclassNameChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnCreationDateChanging(System.DateTime value);
+    partial void OnCreationDateChanged();
+    partial void OnLastCalculationDateChanging(System.DateTime value);
+    partial void OnLastCalculationDateChanged();
+    partial void OnIscloseChanging(bool value);
+    partial void OnIscloseChanged();
+    #endregion
+		
+		public ReportForClass()
+		{
+			this._ReportForClassLines = new EntitySet<ReportForClassLine>(new Action<ReportForClassLine>(this.attach_ReportForClassLines), new Action<ReportForClassLine>(this.detach_ReportForClassLines));
+			this._tblForm = default(EntityRef<tblForm>);
+			this._tbl_Class = default(EntityRef<tbl_Class>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitName", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string unitName
+		{
+			get
+			{
+				return this._unitName;
+			}
+			set
+			{
+				if ((this._unitName != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnunitNameChanging(value);
+					this.SendPropertyChanging();
+					this._unitName = value;
+					this.SendPropertyChanged("unitName");
+					this.OnunitNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_className", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string className
+		{
+			get
+			{
+				return this._className;
+			}
+			set
+			{
+				if ((this._className != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnclassNameChanging(value);
+					this.SendPropertyChanging();
+					this._className = value;
+					this.SendPropertyChanged("className");
+					this.OnclassNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tblForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreationDate", DbType="Date NOT NULL")]
+		public System.DateTime CreationDate
+		{
+			get
+			{
+				return this._CreationDate;
+			}
+			set
+			{
+				if ((this._CreationDate != value))
+				{
+					this.OnCreationDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreationDate = value;
+					this.SendPropertyChanged("CreationDate");
+					this.OnCreationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastCalculationDate", DbType="Date NOT NULL")]
+		public System.DateTime LastCalculationDate
+		{
+			get
+			{
+				return this._LastCalculationDate;
+			}
+			set
+			{
+				if ((this._LastCalculationDate != value))
+				{
+					this.OnLastCalculationDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastCalculationDate = value;
+					this.SendPropertyChanged("LastCalculationDate");
+					this.OnLastCalculationDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Isclose", DbType="Bit NOT NULL")]
+		public bool Isclose
+		{
+			get
+			{
+				return this._Isclose;
+			}
+			set
+			{
+				if ((this._Isclose != value))
+				{
+					this.OnIscloseChanging(value);
+					this.SendPropertyChanging();
+					this._Isclose = value;
+					this.SendPropertyChanged("Isclose");
+					this.OnIscloseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForClass_ReportForClassLine", Storage="_ReportForClassLines", ThisKey="companyId,unitName,className,FormId", OtherKey="companyId,unitName,className,FormId")]
+		public EntitySet<ReportForClassLine> ReportForClassLines
+		{
+			get
+			{
+				return this._ReportForClassLines;
+			}
+			set
+			{
+				this._ReportForClassLines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForClass", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.ReportForClasses.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClasses.Add(this);
+						this._FormId = value.formId;
+					}
+					else
+					{
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClass", Storage="_tbl_Class", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className", IsForeignKey=true)]
+		public tbl_Class tbl_Class
+		{
+			get
+			{
+				return this._tbl_Class.Entity;
+			}
+			set
+			{
+				tbl_Class previousValue = this._tbl_Class.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Class.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Class.Entity = null;
+						previousValue.ReportForClasses.Remove(this);
+					}
+					this._tbl_Class.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClasses.Add(this);
+						this._companyId = value.companyId;
+						this._unitName = value.unitName;
+						this._className = value.className;
+					}
+					else
+					{
+						this._companyId = default(int);
+						this._unitName = default(string);
+						this._className = default(string);
+					}
+					this.SendPropertyChanged("tbl_Class");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ReportForClassLines(ReportForClassLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.ReportForClass = this;
+		}
+		
+		private void detach_ReportForClassLines(ReportForClassLine entity)
+		{
+			this.SendPropertyChanging();
+			entity.ReportForClass = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForClassLines")]
+	public partial class ReportForClassLine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _companyId;
+		
+		private string _unitName;
+		
+		private string _className;
+		
+		private int _FormId;
+		
+		private int _QuestioFormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private int _HighScore;
+		
+		private int _LowScore;
+		
+		private string _TypeQuestionName;
+		
+		private int _MidScore;
+		
+		private EntityRef<tbl_TypeQuestion> _tbl_TypeQuestion;
+		
+		private EntityRef<ReportForClass> _ReportForClass;
+		
+		private EntityRef<tbl_IntentionalQuestion> _tbl_IntentionalQuestion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnunitNameChanging(string value);
+    partial void OnunitNameChanged();
+    partial void OnclassNameChanging(string value);
+    partial void OnclassNameChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnQuestioFormIdChanging(int value);
+    partial void OnQuestioFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnHighScoreChanging(int value);
+    partial void OnHighScoreChanged();
+    partial void OnLowScoreChanging(int value);
+    partial void OnLowScoreChanged();
+    partial void OnTypeQuestionNameChanging(string value);
+    partial void OnTypeQuestionNameChanged();
+    partial void OnMidScoreChanging(int value);
+    partial void OnMidScoreChanged();
+    #endregion
+		
+		public ReportForClassLine()
+		{
+			this._tbl_TypeQuestion = default(EntityRef<tbl_TypeQuestion>);
+			this._ReportForClass = default(EntityRef<ReportForClass>);
+			this._tbl_IntentionalQuestion = default(EntityRef<tbl_IntentionalQuestion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._ReportForClass.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitName", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string unitName
+		{
+			get
+			{
+				return this._unitName;
+			}
+			set
+			{
+				if ((this._unitName != value))
+				{
+					if (this._ReportForClass.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnunitNameChanging(value);
+					this.SendPropertyChanging();
+					this._unitName = value;
+					this.SendPropertyChanged("unitName");
+					this.OnunitNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_className", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string className
+		{
+			get
+			{
+				return this._className;
+			}
+			set
+			{
+				if ((this._className != value))
+				{
+					if (this._ReportForClass.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnclassNameChanging(value);
+					this.SendPropertyChanging();
+					this._className = value;
+					this.SendPropertyChanged("className");
+					this.OnclassNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._ReportForClass.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestioFormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestioFormId
+		{
+			get
+			{
+				return this._QuestioFormId;
+			}
+			set
+			{
+				if ((this._QuestioFormId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestioFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestioFormId = value;
+					this.SendPropertyChanged("QuestioFormId");
+					this.OnQuestioFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HighScore", DbType="Int NOT NULL")]
+		public int HighScore
+		{
+			get
+			{
+				return this._HighScore;
+			}
+			set
+			{
+				if ((this._HighScore != value))
+				{
+					this.OnHighScoreChanging(value);
+					this.SendPropertyChanging();
+					this._HighScore = value;
+					this.SendPropertyChanged("HighScore");
+					this.OnHighScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LowScore", DbType="Int NOT NULL")]
+		public int LowScore
+		{
+			get
+			{
+				return this._LowScore;
+			}
+			set
+			{
+				if ((this._LowScore != value))
+				{
+					this.OnLowScoreChanging(value);
+					this.SendPropertyChanging();
+					this._LowScore = value;
+					this.SendPropertyChanged("LowScore");
+					this.OnLowScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeQuestionName", DbType="VarChar(300) NOT NULL", CanBeNull=false)]
+		public string TypeQuestionName
+		{
+			get
+			{
+				return this._TypeQuestionName;
+			}
+			set
+			{
+				if ((this._TypeQuestionName != value))
+				{
+					if (this._tbl_TypeQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTypeQuestionNameChanging(value);
+					this.SendPropertyChanging();
+					this._TypeQuestionName = value;
+					this.SendPropertyChanged("TypeQuestionName");
+					this.OnTypeQuestionNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MidScore", DbType="Int NOT NULL")]
+		public int MidScore
+		{
+			get
+			{
+				return this._MidScore;
+			}
+			set
+			{
+				if ((this._MidScore != value))
+				{
+					this.OnMidScoreChanging(value);
+					this.SendPropertyChanging();
+					this._MidScore = value;
+					this.SendPropertyChanged("MidScore");
+					this.OnMidScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TypeQuestion_ReportForClassLine", Storage="_tbl_TypeQuestion", ThisKey="TypeQuestionName", OtherKey="Name", IsForeignKey=true)]
+		public tbl_TypeQuestion tbl_TypeQuestion
+		{
+			get
+			{
+				return this._tbl_TypeQuestion.Entity;
+			}
+			set
+			{
+				tbl_TypeQuestion previousValue = this._tbl_TypeQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_TypeQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_TypeQuestion.Entity = null;
+						previousValue.ReportForClassLines.Remove(this);
+					}
+					this._tbl_TypeQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassLines.Add(this);
+						this._TypeQuestionName = value.Name;
+					}
+					else
+					{
+						this._TypeQuestionName = default(string);
+					}
+					this.SendPropertyChanged("tbl_TypeQuestion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ReportForClass_ReportForClassLine", Storage="_ReportForClass", ThisKey="companyId,unitName,className,FormId", OtherKey="companyId,unitName,className,FormId", IsForeignKey=true)]
+		public ReportForClass ReportForClass
+		{
+			get
+			{
+				return this._ReportForClass.Entity;
+			}
+			set
+			{
+				ReportForClass previousValue = this._ReportForClass.Entity;
+				if (((previousValue != value) 
+							|| (this._ReportForClass.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ReportForClass.Entity = null;
+						previousValue.ReportForClassLines.Remove(this);
+					}
+					this._ReportForClass.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassLines.Add(this);
+						this._companyId = value.companyId;
+						this._unitName = value.unitName;
+						this._className = value.className;
+						this._FormId = value.FormId;
+					}
+					else
+					{
+						this._companyId = default(int);
+						this._unitName = default(string);
+						this._className = default(string);
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("ReportForClass");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalQuestion_ReportForClassLine", Storage="_tbl_IntentionalQuestion", ThisKey="QuestioFormId,SectionId,QuestionId", OtherKey="FormId,SectionId,QuestionId", IsForeignKey=true)]
+		public tbl_IntentionalQuestion tbl_IntentionalQuestion
+		{
+			get
+			{
+				return this._tbl_IntentionalQuestion.Entity;
+			}
+			set
+			{
+				tbl_IntentionalQuestion previousValue = this._tbl_IntentionalQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalQuestion.Entity = null;
+						previousValue.ReportForClassLines.Remove(this);
+					}
+					this._tbl_IntentionalQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassLines.Add(this);
+						this._QuestioFormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+					}
+					else
+					{
+						this._QuestioFormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReportForClassMultipleChoiceListAnswer")]
+	public partial class ReportForClassMultipleChoiceListAnswer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FormId;
+		
+		private int _SectionId;
+		
+		private int _QuestionId;
+		
+		private int _AnswerId;
+		
+		private int _companyId;
+		
+		private string _unitName;
+		
+		private string _className;
+		
+		private int _numberOfMarket;
+		
+		private int _numberOfShowTotal;
+		
+		private EntityRef<tbl_IntentionalAnswer> _tbl_IntentionalAnswer;
+		
+		private EntityRef<tbl_Class> _tbl_Class;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnSectionIdChanging(int value);
+    partial void OnSectionIdChanged();
+    partial void OnQuestionIdChanging(int value);
+    partial void OnQuestionIdChanged();
+    partial void OnAnswerIdChanging(int value);
+    partial void OnAnswerIdChanged();
+    partial void OncompanyIdChanging(int value);
+    partial void OncompanyIdChanged();
+    partial void OnunitNameChanging(string value);
+    partial void OnunitNameChanged();
+    partial void OnclassNameChanging(string value);
+    partial void OnclassNameChanged();
+    partial void OnnumberOfMarketChanging(int value);
+    partial void OnnumberOfMarketChanged();
+    partial void OnnumberOfShowTotalChanging(int value);
+    partial void OnnumberOfShowTotalChanged();
+    #endregion
+		
+		public ReportForClassMultipleChoiceListAnswer()
+		{
+			this._tbl_IntentionalAnswer = default(EntityRef<tbl_IntentionalAnswer>);
+			this._tbl_Class = default(EntityRef<tbl_Class>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int SectionId
+		{
+			get
+			{
+				return this._SectionId;
+			}
+			set
+			{
+				if ((this._SectionId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSectionIdChanging(value);
+					this.SendPropertyChanging();
+					this._SectionId = value;
+					this.SendPropertyChanged("SectionId");
+					this.OnSectionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionId
+		{
+			get
+			{
+				return this._QuestionId;
+			}
+			set
+			{
+				if ((this._QuestionId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIdChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionId = value;
+					this.SendPropertyChanged("QuestionId");
+					this.OnQuestionIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AnswerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int AnswerId
+		{
+			get
+			{
+				return this._AnswerId;
+			}
+			set
+			{
+				if ((this._AnswerId != value))
+				{
+					if (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnswerIdChanging(value);
+					this.SendPropertyChanging();
+					this._AnswerId = value;
+					this.SendPropertyChanged("AnswerId");
+					this.OnAnswerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_companyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int companyId
+		{
+			get
+			{
+				return this._companyId;
+			}
+			set
+			{
+				if ((this._companyId != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncompanyIdChanging(value);
+					this.SendPropertyChanging();
+					this._companyId = value;
+					this.SendPropertyChanged("companyId");
+					this.OncompanyIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_unitName", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string unitName
+		{
+			get
+			{
+				return this._unitName;
+			}
+			set
+			{
+				if ((this._unitName != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnunitNameChanging(value);
+					this.SendPropertyChanging();
+					this._unitName = value;
+					this.SendPropertyChanged("unitName");
+					this.OnunitNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_className", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string className
+		{
+			get
+			{
+				return this._className;
+			}
+			set
+			{
+				if ((this._className != value))
+				{
+					if (this._tbl_Class.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnclassNameChanging(value);
+					this.SendPropertyChanging();
+					this._className = value;
+					this.SendPropertyChanged("className");
+					this.OnclassNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfMarket", DbType="Int NOT NULL")]
+		public int numberOfMarket
+		{
+			get
+			{
+				return this._numberOfMarket;
+			}
+			set
+			{
+				if ((this._numberOfMarket != value))
+				{
+					this.OnnumberOfMarketChanging(value);
+					this.SendPropertyChanging();
+					this._numberOfMarket = value;
+					this.SendPropertyChanged("numberOfMarket");
+					this.OnnumberOfMarketChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_numberOfShowTotal", DbType="Int NOT NULL")]
+		public int numberOfShowTotal
+		{
+			get
+			{
+				return this._numberOfShowTotal;
+			}
+			set
+			{
+				if ((this._numberOfShowTotal != value))
+				{
+					this.OnnumberOfShowTotalChanging(value);
+					this.SendPropertyChanging();
+					this._numberOfShowTotal = value;
+					this.SendPropertyChanged("numberOfShowTotal");
+					this.OnnumberOfShowTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer", Storage="_tbl_IntentionalAnswer", ThisKey="FormId,SectionId,QuestionId,AnswerId", OtherKey="FormId,SectionId,QuestionId,AnswerId", IsForeignKey=true)]
+		public tbl_IntentionalAnswer tbl_IntentionalAnswer
+		{
+			get
+			{
+				return this._tbl_IntentionalAnswer.Entity;
+			}
+			set
+			{
+				tbl_IntentionalAnswer previousValue = this._tbl_IntentionalAnswer.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_IntentionalAnswer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_IntentionalAnswer.Entity = null;
+						previousValue.ReportForClassMultipleChoiceListAnswers.Remove(this);
+					}
+					this._tbl_IntentionalAnswer.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassMultipleChoiceListAnswers.Add(this);
+						this._FormId = value.FormId;
+						this._SectionId = value.SectionId;
+						this._QuestionId = value.QuestionId;
+						this._AnswerId = value.AnswerId;
+					}
+					else
+					{
+						this._FormId = default(int);
+						this._SectionId = default(int);
+						this._QuestionId = default(int);
+						this._AnswerId = default(int);
+					}
+					this.SendPropertyChanged("tbl_IntentionalAnswer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClassMultipleChoiceListAnswer", Storage="_tbl_Class", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className", IsForeignKey=true)]
+		public tbl_Class tbl_Class
+		{
+			get
+			{
+				return this._tbl_Class.Entity;
+			}
+			set
+			{
+				tbl_Class previousValue = this._tbl_Class.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Class.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Class.Entity = null;
+						previousValue.ReportForClassMultipleChoiceListAnswers.Remove(this);
+					}
+					this._tbl_Class.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClassMultipleChoiceListAnswers.Add(this);
+						this._companyId = value.companyId;
+						this._unitName = value.unitName;
+						this._className = value.className;
+					}
+					else
+					{
+						this._companyId = default(int);
+						this._unitName = default(string);
+						this._className = default(string);
+					}
+					this.SendPropertyChanged("tbl_Class");
 				}
 			}
 		}

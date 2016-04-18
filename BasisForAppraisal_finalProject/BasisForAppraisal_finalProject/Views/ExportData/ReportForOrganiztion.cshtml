@@ -16,15 +16,27 @@
 
 <div dir="rtl" style="margin-top:10%">
     <h2>דוח לארגון</h2>
+    <h4>רמה בארגון:</h4>
     @using (Html.BeginForm("ReportForOrganiztion", "ExportData", FormMethod.Post))
     {
+            @Html.DropDownList("levels", ViewData["Levels"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "levels" })
 
-        <table style="width:40%">
-            <tr>
-                <td style="margin-left:3%"> @Html.DropDownList("Companyiesa", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "Companyies" })</td>
+        <div style="width:40%; margin-top:2%">
+            <div class="row-border">
 
-            </tr>
-        </table>
+                <div  style="margin-left:3%">חברה:  @Html.DropDownList("Companyiesa", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "Companyies" })</div>
+
+            </div>
+
+            <div class="row-border" style=" margin-top:2%">
+
+                <div id="unitTd" class="collapse" style="margin-left:3%;">@*שנה:    @Html.DropDownList("units", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "units" })*@</div>
+            </div>
+            <div class="row-border" style=" margin-top:2%">
+                <div id="clsTd" class="collapse" style="margin-left:3%;">
+    <div id="class"></div>@*מחזור: @Html.DropDownList("units", ViewData["ListData"] as List<SelectListItem>, new { @class = "btn-lg dropdown-toggle", id = "units" })*@</div>
+            </div>
+        </div>
         
         <br />
         <div id="formCheckList" class="col-lg-5" style="margin-top:2%"></div>
@@ -36,7 +48,8 @@
 
         $("#Companyies").change(function () {
             var sv = $(this).val();
-            if (sv != null) {
+            var level = $("#levels").val();
+            if (sv != null && level >0) {
                 $.ajax(
                     {
                         url: '@Url.Action("GetFromsForOrganiztion")',
@@ -46,6 +59,39 @@
                     }).done(function (data) {
                         $("#formCheckList").html(data);
                     });
+            }
+             if (level > 1)
+            {
+                $.ajax(
+                   {
+                       url: '@Url.Action("GetUnitCascadeCompanyOrg")',
+                       type: "get",
+                       data: { id: sv }
+
+                   }).done(function (data) {
+                       $("#unitTd").html(data);
+                   });
+            }
+        });
+
+
+
+        $("#levels").change(function () {
+            var sv = $(this).val();
+            if (sv != null) {
+                if (sv == 1) {
+                    $("#unitTd").addClass("collapse");;
+                    $("#clsTd").addClass("collapse");
+                }
+                if (sv == 2) {
+                    $("#unitTd").removeClass("collapse");
+                    $("#clsTd").addClass("collapse");
+                }
+                if (sv == 3) {
+                    $("#unitTd").removeClass("collapse");
+                    $("#clsTd").removeClass("collapse");
+                }
+               
             }
         });
 

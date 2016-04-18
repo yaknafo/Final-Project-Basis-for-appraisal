@@ -112,6 +112,16 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.ReportForOrganiztionLines; }
         }
 
+        public Table<ReportForClass> ReportForClasses
+        {
+            get { return manager.ReportForClasses; }
+        }
+
+        public Table<ReportForClassLine> ReportForClassLines
+        {
+            get { return manager.ReportForClassLines; }
+        }
+
 
         public Table<ReportForCompanyMultipleChoiceListAnswer> ReportForCompanyMultipleChoiceListAnswer
         {
@@ -525,12 +535,45 @@ namespace BasisForAppraisal_finalProject.Models
         }
 
 
+        public void SaveReportForClass(ReportForClass report)
+        {
+            var reportFromDb = manager.ReportForClasses.SingleOrDefault(x => x.companyId == report.companyId && x.FormId == report.FormId && x.unitName == report.unitName&&x.className == report.className);
+            if (reportFromDb == null)
+            {
+                report.CreationDate = DateTime.Now;
+                report.LastCalculationDate = DateTime.Now;
+                manager.ReportForClasses.InsertOnSubmit(report);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                reportFromDb.LastCalculationDate = DateTime.Now;
+                manager.SubmitChanges();
+            }
+        }
+
+
         public void SaveReportForOrganiztionLines(ReportForOrganiztionLine line)
         {
             var lineFromDb = manager.ReportForOrganiztionLines.FirstOrDefault(x => x.CompanyId == line.CompanyId && x.FormId == line.FormId && line.QuestionId == x.QuestionId);
             if (lineFromDb == null)
             {
                 manager.ReportForOrganiztionLines.InsertOnSubmit(line);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                manager.SubmitChanges();
+            }
+        }
+
+
+        public void SaveReportForClassLines(ReportForClassLine line)
+        {
+            var lineFromDb = manager.ReportForClassLines.FirstOrDefault(x => x.companyId == line.companyId && x.unitName == line.unitName && x.className == line.className && x.FormId == line.FormId && line.QuestionId == x.QuestionId);
+            if (lineFromDb == null)
+            {
+                manager.ReportForClassLines.InsertOnSubmit(line);
                 manager.SubmitChanges();
             }
             else
@@ -649,15 +692,28 @@ namespace BasisForAppraisal_finalProject.Models
             return manager.ReportForOrganiztionLines.FirstOrDefault(x => x.FormId == formId && x.CompanyId == OrganiztionId && x.QuestionId == questionId);
         }
 
+
+        public ReportForClassLine GetReportClassLine(int formId, int OrganiztionId,string unitName, string className, int questionId)
+        {
+            return manager.ReportForClassLines.FirstOrDefault(x => x.FormId == formId && x.companyId == OrganiztionId && x.unitName == unitName && x.className == className && x.QuestionId == questionId);
+        }
+
         public ReportForCompanyMultipleChoiceListAnswer GetSingleLineReportForClassMultipleChoiceListAnswer(int formId, int OrganiztionId, int answerId)
         {
             return manager.ReportForCompanyMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == OrganiztionId && x.FormId == formId && x.AnswerId == answerId);
+        }
+
+
+        public ReportForClassMultipleChoiceListAnswer GetSingleLineReportForClassMultipleChoiceListAnswer(int formId, int OrganiztionId,string unit ,string cls,int answerId)
+        {
+            return manager.ReportForClassMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == OrganiztionId && x.FormId == formId &&x.unitName == unit  && x.className == cls && x.AnswerId == answerId);
         }
 
         public List<ReportForIndividualLine> GetReportForIndividualLineForOrganiztion(int formId, int OrganiztionId)
         {
             return manager.ReportForIndividualLines.Where(x => x.FromId == formId && x.ReportForIndividual.CompanyId == OrganiztionId).ToList();
         }
+
 
         public List<ReportForClassMultipleChoiceListAnswer> GetReportForClassMultipleChoiceListAnswers(int formId, int OrganiztionId, string unit, string className)
         {

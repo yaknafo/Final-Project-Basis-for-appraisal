@@ -246,6 +246,7 @@
     <Compile Include="ViewModel\Company\ClassUnitViewModel.cs" />
     <Compile Include="ViewModel\Company\FolderUnitPartialView.cs" />
     <Compile Include="ViewModel\ExportData\FormCheckBoxViewModel.cs" />
+    <Compile Include="ViewModel\ExportData\ReportForClassViewModel.cs" />
     <Compile Include="ViewModel\ExportData\ReportForOrganiztionLinesViewModel.cs" />
     <Compile Include="ViewModel\ExportData\ReportForOrgViewModel.cs" />
     <Compile Include="ViewModel\FormFillerViewModel.cs" />
@@ -312,6 +313,7 @@
     <Content Include="photos\HomePage\HomePage2.jpeg" />
     <Content Include="photos\HomePage\HomePage3.jpeg" />
     <Content Include="photos\HomePage\HomePage4.jpeg" />
+    <Content Include="photos\Logo\BasisForIcon.png" />
     <Content Include="photos\Logo\folder.gif" />
     <Content Include="photos\HomePage\Key-128.png" />
     <Content Include="photos\info.png" />
@@ -518,6 +520,8 @@
     <Content Include="Views\Report\EditorTemplates\ReportForOrganiztionLine.cshtml" />
     <Content Include="Views\Report\PieGraphForReportOrg.cshtml" />
     <Content Include="Views\ExportData\chartimage.cshtml" />
+    <Content Include="Views\ExportData\_UnitsForOrgCbx.cshtml" />
+    <Content Include="Views\Report\ReportPerClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
