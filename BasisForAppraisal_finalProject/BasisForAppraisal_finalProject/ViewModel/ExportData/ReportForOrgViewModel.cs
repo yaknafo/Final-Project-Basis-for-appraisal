@@ -43,6 +43,9 @@ namespace BasisForAppraisal_finalProject.ViewModel.ExportData
 
 
             numberOfCharts = ReportForOrganiztionLinesModel.Count + MultipleChoiceListAnswer.Count;
+            var SammaryQuestionReport = Categories.Count(x => x.Name == "Socialstatus" || x.Name == "EmploymentStatus");
+            numberOfCharts += SammaryQuestionReport;
+
         }
     }
 }

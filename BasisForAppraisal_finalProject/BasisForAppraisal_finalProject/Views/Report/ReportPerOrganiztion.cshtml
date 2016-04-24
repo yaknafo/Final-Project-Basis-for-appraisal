@@ -106,6 +106,12 @@
                     <div id="@line.QuestionId" class="col-sm-pull-1" style="border-bottom:groove"></div>
 
                 }
+                @if (c == "Socialstatus" || c == "EmploymentStatus")
+                {
+                    var r = (c == "Socialstatus") ? -1 : -2;
+                    <div>מסכם:@c </div>
+                    <div id="@r" class="col-sm-pull-1" style="border-bottom:groove"></div>
+                }
                 @if(c == "MultipleChoiceList")
                 {
                     foreach (ReportForCompanyMultipleChoiceListAnswer line in Model.MultipleChoiceListAnswer)

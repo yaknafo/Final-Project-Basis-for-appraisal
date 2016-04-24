@@ -101,6 +101,20 @@ namespace BasisForAppraisal_finalProject.Controllers
                 var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = r.QuestionId, TypeQuestion = r.TypeQuestionName, HighScore = r.HighScore, MidScore = r.MidScore, LowScore = r.LowScore,TitleQuestion=r.tbl_IntentionalQuestion.Title };
                 data.Add(tempLine);
             }
+
+            //--------------- Summary for 2 type of question scoial and working question
+            var SummaryCatgory = listData.Select(x => x.tbl_TypeQuestion).Where(x => x.Name == "Socialstatus" || x.Name == "EmploymentStatus").Distinct();
+            foreach (tbl_TypeQuestion ty in SummaryCatgory)
+            {
+                var allCatgoryQuestions = listData.Where(x => x.tbl_TypeQuestion == ty).ToList();
+                var highScore = allCatgoryQuestions.Sum(x => x.HighScore);
+                var midScore = allCatgoryQuestions.Sum(x => x.MidScore); ;
+                var lowScore = allCatgoryQuestions.Sum(x => x.LowScore);
+                var idForView = (ty.Name == "Socialstatus") ? -1 : -2;
+                var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = idForView, TypeQuestion = ty.Description, HighScore = highScore, MidScore = midScore, LowScore = lowScore, TitleQuestion = ty.Description };
+                data.Add(tempLine);
+            }
+
             var answers = dm.GetReportForCompanyMultipleChoiceListAnswers(form, companyId);
             foreach(ReportForCompanyMultipleChoiceListAnswer r in answers)
             {
@@ -123,6 +137,20 @@ namespace BasisForAppraisal_finalProject.Controllers
                 var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = r.QuestionId, TypeQuestion = r.TypeQuestionName, HighScore = r.HighScore, MidScore = r.MidScore, LowScore = r.LowScore, TitleQuestion = r.tbl_IntentionalQuestion.Title };
                 data.Add(tempLine);
             }
+
+            //--------------- Summary for 2 type of question scoial and working question
+            var SummaryCatgory = listData.Select(x => x.tbl_TypeQuestion).Where(x => x.Name == "Socialstatus" || x.Name == "EmploymentStatus").Distinct();
+            foreach(tbl_TypeQuestion ty in SummaryCatgory)
+            {
+                var allCatgoryQuestions = listData.Where(x => x.tbl_TypeQuestion == ty).ToList();
+                var highScore = allCatgoryQuestions.Sum(x => x.HighScore);
+                var midScore = allCatgoryQuestions.Sum(x => x.MidScore); ;
+                var lowScore = allCatgoryQuestions.Sum(x => x.LowScore); 
+                var idForView = (ty.Name== "Socialstatus") ? -1 : -2;
+                var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = idForView, TypeQuestion = ty.Description, HighScore = highScore, MidScore = midScore, LowScore = lowScore, TitleQuestion = ty.Description };
+                data.Add(tempLine);
+            }
+
             var answers = dm.GetReportForClassMultipleChoiceListAnswers(form, companyId,unit,cls);
             foreach (ReportForClassMultipleChoiceListAnswer r in answers)
             {
