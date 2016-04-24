@@ -20,7 +20,7 @@
     </div>
         @if (!Model.MandatoryQuestion)
         {
-            @Html.RadioButtonFor(a => a.selectedAnswer, -1, new { style = "height: 25px;  width:25px;"})
+            @Html.RadioButtonFor(a => a.selectedAnswer, -1, new { @readonly = "readonly", style = "height: 20px;  width:20px; " })
             <p>איני יכול להעריך</p>
         }
 

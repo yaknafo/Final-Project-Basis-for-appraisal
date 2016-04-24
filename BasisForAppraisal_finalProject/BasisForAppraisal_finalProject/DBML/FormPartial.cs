@@ -13,6 +13,8 @@ namespace BasisForAppraisal_finalProject.DBML
 
         private List<tbl_Company> companies;
 
+        private string introductionForForm;
+
 
 
         public List<tbl_Section> Sections
@@ -44,7 +46,17 @@ namespace BasisForAppraisal_finalProject.DBML
         }
 
 
-
+        public string IntroductionForForm
+        {
+            get
+            {
+                return introductionForForm;
+            }
+            set
+            {
+                introductionForForm = value;
+            }
+        }
 
         public List<tbl_Section> GetAllSections()
         {

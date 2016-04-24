@@ -67,7 +67,7 @@
     }*@
         @if (!Model.MandatoryQuestion && @Model.QuestionType != null && @Model.QuestionType.Contains("Intentional"))   
         {
-            @Html.RadioButtonFor(a => a.selectedAnswer, -1)
+            @Html.RadioButtonFor(a => a.selectedAnswer, -1, new { @readonly = "readonly", style = "height: 20px;  width:20px; " })
             <p>איני יכול להעריך</p>
         }
     

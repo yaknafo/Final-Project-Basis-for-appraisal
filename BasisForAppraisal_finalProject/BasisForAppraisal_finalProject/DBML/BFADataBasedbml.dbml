@@ -119,21 +119,6 @@
       <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividual" ThisKey="IndividualId,FromId" OtherKey="IndividualId,FormId" Type="ReportForIndividual" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tblForm" Member="tblForms">
-    <Type Name="tblForm">
-      <Column Name="formId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FormName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="lastChange" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Locked" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="LastUpdatedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="introduction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="tblForm_tbl_Section" Member="tbl_Sections" ThisKey="formId" OtherKey="FormId" Type="tbl_Section" />
-      <Association Name="tblForm_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="formId" OtherKey="formId" Type="tbl_ConnectorFormFill" />
-      <Association Name="tblForm_ReportForOrganiztion" Member="ReportForOrganiztions" ThisKey="formId" OtherKey="FormId" Type="ReportForOrganiztion" />
-      <Association Name="tblForm_ReportForIndividual" Member="ReportForIndividuals" ThisKey="formId" OtherKey="FormId" Type="ReportForIndividual" />
-      <Association Name="tblForm_ReportForClass" Member="ReportForClasses" ThisKey="formId" OtherKey="FormId" Type="ReportForClass" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_IntentionalQuestion" Member="tbl_IntentionalQuestions">
     <Type Name="tbl_IntentionalQuestion">
       <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -179,8 +164,8 @@
       <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ReportForIndividual_ReportForIndividualLine" Member="ReportForIndividualLines" ThisKey="IndividualId,FormId" OtherKey="IndividualId,FromId" Type="ReportForIndividualLine" />
       <Association Name="tbl_Company_ReportForIndividual" Member="tbl_Company" ThisKey="CompanyId" OtherKey="companyId" Type="tbl_Company" IsForeignKey="true" />
-      <Association Name="tblForm_ReportForIndividual" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
       <Association Name="tbl_Employee_ReportForIndividual" Member="tbl_Employee" ThisKey="IndividualId" OtherKey="employeeId" Type="tbl_Employee" IsForeignKey="true" />
+      <Association Name="tblForm_ReportForIndividual" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ReportForOrganiztionLines" Member="ReportForOrganiztionLines">
@@ -231,8 +216,8 @@
       <Column Name="LastCalculationDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Isclose" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="ReportForClass_ReportForClassLine" Member="ReportForClassLines" ThisKey="companyId,unitName,className,FormId" OtherKey="companyId,unitName,className,FormId" Type="ReportForClassLine" />
-      <Association Name="tblForm_ReportForClass" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
       <Association Name="tbl_Class_ReportForClass" Member="tbl_Class" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="tbl_Class" IsForeignKey="true" />
+      <Association Name="tblForm_ReportForClass" Member="tblForm" ThisKey="FormId" OtherKey="formId" Type="tblForm" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ReportForClassLines" Member="ReportForClassLines">
@@ -266,6 +251,24 @@
       <Column Name="numberOfShowTotal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="tbl_IntentionalAnswer_ReportForClassMultipleChoiceListAnswer" Member="tbl_IntentionalAnswer" ThisKey="FormId,SectionId,QuestionId,AnswerId" OtherKey="FormId,SectionId,QuestionId,AnswerId" Type="tbl_IntentionalAnswer" IsForeignKey="true" />
       <Association Name="tbl_Class_ReportForClassMultipleChoiceListAnswer" Member="tbl_Class" ThisKey="companyId,unitName,className" OtherKey="companyId,unitName,className" Type="tbl_Class" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblForm" Member="tblForms">
+    <Type Name="tblForm">
+      <Column Name="formId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FormName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="lastChange" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Locked" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="LastUpdatedBy" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="introduction" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IntroductionColleges" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IntroductionSupervisor" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IntroductionAccompanied" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="tblForm_tbl_Section" Member="tbl_Sections" ThisKey="formId" OtherKey="FormId" Type="tbl_Section" />
+      <Association Name="tblForm_tbl_ConnectorFormFill" Member="tbl_ConnectorFormFills" ThisKey="formId" OtherKey="formId" Type="tbl_ConnectorFormFill" />
+      <Association Name="tblForm_ReportForOrganiztion" Member="ReportForOrganiztions" ThisKey="formId" OtherKey="FormId" Type="ReportForOrganiztion" />
+      <Association Name="tblForm_ReportForIndividual" Member="ReportForIndividuals" ThisKey="formId" OtherKey="FormId" Type="ReportForIndividual" />
+      <Association Name="tblForm_ReportForClass" Member="ReportForClasses" ThisKey="formId" OtherKey="FormId" Type="ReportForClass" />
     </Type>
   </Table>
 </Database>

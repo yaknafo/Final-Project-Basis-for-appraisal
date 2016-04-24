@@ -57,9 +57,6 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void InsertReportForIndividualLine(ReportForIndividualLine instance);
     partial void UpdateReportForIndividualLine(ReportForIndividualLine instance);
     partial void DeleteReportForIndividualLine(ReportForIndividualLine instance);
-    partial void InserttblForm(tblForm instance);
-    partial void UpdatetblForm(tblForm instance);
-    partial void DeletetblForm(tblForm instance);
     partial void Inserttbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void Updatetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
     partial void Deletetbl_IntentionalQuestion(tbl_IntentionalQuestion instance);
@@ -87,6 +84,9 @@ namespace BasisForAppraisal_finalProject.DBML
     partial void InsertReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
     partial void UpdateReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
     partial void DeleteReportForClassMultipleChoiceListAnswer(ReportForClassMultipleChoiceListAnswer instance);
+    partial void InserttblForm(tblForm instance);
+    partial void UpdatetblForm(tblForm instance);
+    partial void DeletetblForm(tblForm instance);
     #endregion
 		
 		public BFADataBasedbmlDataContext() : 
@@ -191,14 +191,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		public System.Data.Linq.Table<tblForm> tblForms
-		{
-			get
-			{
-				return this.GetTable<tblForm>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_IntentionalQuestion> tbl_IntentionalQuestions
 		{
 			get
@@ -268,6 +260,14 @@ namespace BasisForAppraisal_finalProject.DBML
 			get
 			{
 				return this.GetTable<ReportForClassMultipleChoiceListAnswer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblForm> tblForms
+		{
+			get
+			{
+				return this.GetTable<tblForm>();
 			}
 		}
 	}
@@ -2979,328 +2979,6 @@ namespace BasisForAppraisal_finalProject.DBML
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblForm")]
-	public partial class tblForm : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _formId;
-		
-		private string _FormName;
-		
-		private System.Nullable<System.DateTime> _lastChange;
-		
-		private System.Nullable<bool> _Locked;
-		
-		private string _LastUpdatedBy;
-		
-		private string _introduction;
-		
-		private EntitySet<tbl_Section> _tbl_Sections;
-		
-		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
-		
-		private EntitySet<ReportForOrganiztion> _ReportForOrganiztions;
-		
-		private EntitySet<ReportForIndividual> _ReportForIndividuals;
-		
-		private EntitySet<ReportForClass> _ReportForClasses;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnformIdChanging(int value);
-    partial void OnformIdChanged();
-    partial void OnFormNameChanging(string value);
-    partial void OnFormNameChanged();
-    partial void OnlastChangeChanging(System.Nullable<System.DateTime> value);
-    partial void OnlastChangeChanged();
-    partial void OnLockedChanging(System.Nullable<bool> value);
-    partial void OnLockedChanged();
-    partial void OnLastUpdatedByChanging(string value);
-    partial void OnLastUpdatedByChanged();
-    partial void OnintroductionChanging(string value);
-    partial void OnintroductionChanged();
-    #endregion
-		
-		public tblForm()
-		{
-			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
-			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
-			this._ReportForOrganiztions = new EntitySet<ReportForOrganiztion>(new Action<ReportForOrganiztion>(this.attach_ReportForOrganiztions), new Action<ReportForOrganiztion>(this.detach_ReportForOrganiztions));
-			this._ReportForIndividuals = new EntitySet<ReportForIndividual>(new Action<ReportForIndividual>(this.attach_ReportForIndividuals), new Action<ReportForIndividual>(this.detach_ReportForIndividuals));
-			this._ReportForClasses = new EntitySet<ReportForClass>(new Action<ReportForClass>(this.attach_ReportForClasses), new Action<ReportForClass>(this.detach_ReportForClasses));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_formId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int formId
-		{
-			get
-			{
-				return this._formId;
-			}
-			set
-			{
-				if ((this._formId != value))
-				{
-					this.OnformIdChanging(value);
-					this.SendPropertyChanging();
-					this._formId = value;
-					this.SendPropertyChanged("formId");
-					this.OnformIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string FormName
-		{
-			get
-			{
-				return this._FormName;
-			}
-			set
-			{
-				if ((this._FormName != value))
-				{
-					this.OnFormNameChanging(value);
-					this.SendPropertyChanging();
-					this._FormName = value;
-					this.SendPropertyChanged("FormName");
-					this.OnFormNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChange", DbType="DateTime")]
-		public System.Nullable<System.DateTime> lastChange
-		{
-			get
-			{
-				return this._lastChange;
-			}
-			set
-			{
-				if ((this._lastChange != value))
-				{
-					this.OnlastChangeChanging(value);
-					this.SendPropertyChanging();
-					this._lastChange = value;
-					this.SendPropertyChanged("lastChange");
-					this.OnlastChangeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Locked", DbType="Bit")]
-		public System.Nullable<bool> Locked
-		{
-			get
-			{
-				return this._Locked;
-			}
-			set
-			{
-				if ((this._Locked != value))
-				{
-					this.OnLockedChanging(value);
-					this.SendPropertyChanging();
-					this._Locked = value;
-					this.SendPropertyChanged("Locked");
-					this.OnLockedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdatedBy", DbType="VarChar(MAX)")]
-		public string LastUpdatedBy
-		{
-			get
-			{
-				return this._LastUpdatedBy;
-			}
-			set
-			{
-				if ((this._LastUpdatedBy != value))
-				{
-					this.OnLastUpdatedByChanging(value);
-					this.SendPropertyChanging();
-					this._LastUpdatedBy = value;
-					this.SendPropertyChanged("LastUpdatedBy");
-					this.OnLastUpdatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_introduction", DbType="VarChar(MAX)")]
-		public string introduction
-		{
-			get
-			{
-				return this._introduction;
-			}
-			set
-			{
-				if ((this._introduction != value))
-				{
-					this.OnintroductionChanging(value);
-					this.SendPropertyChanging();
-					this._introduction = value;
-					this.SendPropertyChanged("introduction");
-					this.OnintroductionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="FormId")]
-		public EntitySet<tbl_Section> tbl_Sections
-		{
-			get
-			{
-				return this._tbl_Sections;
-			}
-			set
-			{
-				this._tbl_Sections.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_ConnectorFormFill", Storage="_tbl_ConnectorFormFills", ThisKey="formId", OtherKey="formId")]
-		public EntitySet<tbl_ConnectorFormFill> tbl_ConnectorFormFills
-		{
-			get
-			{
-				return this._tbl_ConnectorFormFills;
-			}
-			set
-			{
-				this._tbl_ConnectorFormFills.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForOrganiztion", Storage="_ReportForOrganiztions", ThisKey="formId", OtherKey="FormId")]
-		public EntitySet<ReportForOrganiztion> ReportForOrganiztions
-		{
-			get
-			{
-				return this._ReportForOrganiztions;
-			}
-			set
-			{
-				this._ReportForOrganiztions.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_ReportForIndividuals", ThisKey="formId", OtherKey="FormId")]
-		public EntitySet<ReportForIndividual> ReportForIndividuals
-		{
-			get
-			{
-				return this._ReportForIndividuals;
-			}
-			set
-			{
-				this._ReportForIndividuals.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForClass", Storage="_ReportForClasses", ThisKey="formId", OtherKey="FormId")]
-		public EntitySet<ReportForClass> ReportForClasses
-		{
-			get
-			{
-				return this._ReportForClasses;
-			}
-			set
-			{
-				this._ReportForClasses.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_Sections(tbl_Section entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_tbl_Sections(tbl_Section entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-		
-		private void attach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-		
-		private void attach_ReportForOrganiztions(ReportForOrganiztion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_ReportForOrganiztions(ReportForOrganiztion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-		
-		private void attach_ReportForIndividuals(ReportForIndividual entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_ReportForIndividuals(ReportForIndividual entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-		
-		private void attach_ReportForClasses(ReportForClass entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = this;
-		}
-		
-		private void detach_ReportForClasses(ReportForClass entity)
-		{
-			this.SendPropertyChanging();
-			entity.tblForm = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_IntentionalQuestion")]
 	public partial class tbl_IntentionalQuestion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4141,9 +3819,9 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntityRef<tbl_Company> _tbl_Company;
 		
-		private EntityRef<tblForm> _tblForm;
-		
 		private EntityRef<tbl_Employee> _tbl_Employee;
+		
+		private EntityRef<tblForm> _tblForm;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4167,8 +3845,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		{
 			this._ReportForIndividualLines = new EntitySet<ReportForIndividualLine>(new Action<ReportForIndividualLine>(this.attach_ReportForIndividualLines), new Action<ReportForIndividualLine>(this.detach_ReportForIndividualLines));
 			this._tbl_Company = default(EntityRef<tbl_Company>);
-			this._tblForm = default(EntityRef<tblForm>);
 			this._tbl_Employee = default(EntityRef<tbl_Employee>);
+			this._tblForm = default(EntityRef<tblForm>);
 			OnCreated();
 		}
 		
@@ -4351,40 +4029,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
-		public tblForm tblForm
-		{
-			get
-			{
-				return this._tblForm.Entity;
-			}
-			set
-			{
-				tblForm previousValue = this._tblForm.Entity;
-				if (((previousValue != value) 
-							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tblForm.Entity = null;
-						previousValue.ReportForIndividuals.Remove(this);
-					}
-					this._tblForm.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForIndividuals.Add(this);
-						this._FormId = value.formId;
-					}
-					else
-					{
-						this._FormId = default(int);
-					}
-					this.SendPropertyChanged("tblForm");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_ReportForIndividual", Storage="_tbl_Employee", ThisKey="IndividualId", OtherKey="employeeId", IsForeignKey=true)]
 		public tbl_Employee tbl_Employee
 		{
@@ -4415,6 +4059,40 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._IndividualId = default(string);
 					}
 					this.SendPropertyChanged("tbl_Employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.ReportForIndividuals.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForIndividuals.Add(this);
+						this._FormId = value.formId;
+					}
+					else
+					{
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
 				}
 			}
 		}
@@ -5345,9 +5023,9 @@ namespace BasisForAppraisal_finalProject.DBML
 		
 		private EntitySet<ReportForClassLine> _ReportForClassLines;
 		
-		private EntityRef<tblForm> _tblForm;
-		
 		private EntityRef<tbl_Class> _tbl_Class;
+		
+		private EntityRef<tblForm> _tblForm;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -5372,8 +5050,8 @@ namespace BasisForAppraisal_finalProject.DBML
 		public ReportForClass()
 		{
 			this._ReportForClassLines = new EntitySet<ReportForClassLine>(new Action<ReportForClassLine>(this.attach_ReportForClassLines), new Action<ReportForClassLine>(this.detach_ReportForClassLines));
-			this._tblForm = default(EntityRef<tblForm>);
 			this._tbl_Class = default(EntityRef<tbl_Class>);
+			this._tblForm = default(EntityRef<tblForm>);
 			OnCreated();
 		}
 		
@@ -5546,40 +5224,6 @@ namespace BasisForAppraisal_finalProject.DBML
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForClass", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
-		public tblForm tblForm
-		{
-			get
-			{
-				return this._tblForm.Entity;
-			}
-			set
-			{
-				tblForm previousValue = this._tblForm.Entity;
-				if (((previousValue != value) 
-							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tblForm.Entity = null;
-						previousValue.ReportForClasses.Remove(this);
-					}
-					this._tblForm.Entity = value;
-					if ((value != null))
-					{
-						value.ReportForClasses.Add(this);
-						this._FormId = value.formId;
-					}
-					else
-					{
-						this._FormId = default(int);
-					}
-					this.SendPropertyChanged("tblForm");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Class_ReportForClass", Storage="_tbl_Class", ThisKey="companyId,unitName,className", OtherKey="companyId,unitName,className", IsForeignKey=true)]
 		public tbl_Class tbl_Class
 		{
@@ -5614,6 +5258,40 @@ namespace BasisForAppraisal_finalProject.DBML
 						this._className = default(string);
 					}
 					this.SendPropertyChanged("tbl_Class");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForClass", Storage="_tblForm", ThisKey="FormId", OtherKey="formId", IsForeignKey=true)]
+		public tblForm tblForm
+		{
+			get
+			{
+				return this._tblForm.Entity;
+			}
+			set
+			{
+				tblForm previousValue = this._tblForm.Entity;
+				if (((previousValue != value) 
+							|| (this._tblForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tblForm.Entity = null;
+						previousValue.ReportForClasses.Remove(this);
+					}
+					this._tblForm.Entity = value;
+					if ((value != null))
+					{
+						value.ReportForClasses.Add(this);
+						this._FormId = value.formId;
+					}
+					else
+					{
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("tblForm");
 				}
 			}
 		}
@@ -6469,6 +6147,400 @@ namespace BasisForAppraisal_finalProject.DBML
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tblForm")]
+	public partial class tblForm : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _formId;
+		
+		private string _FormName;
+		
+		private System.Nullable<System.DateTime> _lastChange;
+		
+		private System.Nullable<bool> _Locked;
+		
+		private string _LastUpdatedBy;
+		
+		private string _introduction;
+		
+		private string _IntroductionColleges;
+		
+		private string _IntroductionSupervisor;
+		
+		private string _IntroductionAccompanied;
+		
+		private EntitySet<tbl_Section> _tbl_Sections;
+		
+		private EntitySet<tbl_ConnectorFormFill> _tbl_ConnectorFormFills;
+		
+		private EntitySet<ReportForOrganiztion> _ReportForOrganiztions;
+		
+		private EntitySet<ReportForIndividual> _ReportForIndividuals;
+		
+		private EntitySet<ReportForClass> _ReportForClasses;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnformIdChanging(int value);
+    partial void OnformIdChanged();
+    partial void OnFormNameChanging(string value);
+    partial void OnFormNameChanged();
+    partial void OnlastChangeChanging(System.Nullable<System.DateTime> value);
+    partial void OnlastChangeChanged();
+    partial void OnLockedChanging(System.Nullable<bool> value);
+    partial void OnLockedChanged();
+    partial void OnLastUpdatedByChanging(string value);
+    partial void OnLastUpdatedByChanged();
+    partial void OnintroductionChanging(string value);
+    partial void OnintroductionChanged();
+    partial void OnIntroductionCollegesChanging(string value);
+    partial void OnIntroductionCollegesChanged();
+    partial void OnIntroductionSupervisorChanging(string value);
+    partial void OnIntroductionSupervisorChanged();
+    partial void OnIntroductionAccompaniedChanging(string value);
+    partial void OnIntroductionAccompaniedChanged();
+    #endregion
+		
+		public tblForm()
+		{
+			this._tbl_Sections = new EntitySet<tbl_Section>(new Action<tbl_Section>(this.attach_tbl_Sections), new Action<tbl_Section>(this.detach_tbl_Sections));
+			this._tbl_ConnectorFormFills = new EntitySet<tbl_ConnectorFormFill>(new Action<tbl_ConnectorFormFill>(this.attach_tbl_ConnectorFormFills), new Action<tbl_ConnectorFormFill>(this.detach_tbl_ConnectorFormFills));
+			this._ReportForOrganiztions = new EntitySet<ReportForOrganiztion>(new Action<ReportForOrganiztion>(this.attach_ReportForOrganiztions), new Action<ReportForOrganiztion>(this.detach_ReportForOrganiztions));
+			this._ReportForIndividuals = new EntitySet<ReportForIndividual>(new Action<ReportForIndividual>(this.attach_ReportForIndividuals), new Action<ReportForIndividual>(this.detach_ReportForIndividuals));
+			this._ReportForClasses = new EntitySet<ReportForClass>(new Action<ReportForClass>(this.attach_ReportForClasses), new Action<ReportForClass>(this.detach_ReportForClasses));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_formId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int formId
+		{
+			get
+			{
+				return this._formId;
+			}
+			set
+			{
+				if ((this._formId != value))
+				{
+					this.OnformIdChanging(value);
+					this.SendPropertyChanging();
+					this._formId = value;
+					this.SendPropertyChanged("formId");
+					this.OnformIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormName", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string FormName
+		{
+			get
+			{
+				return this._FormName;
+			}
+			set
+			{
+				if ((this._FormName != value))
+				{
+					this.OnFormNameChanging(value);
+					this.SendPropertyChanging();
+					this._FormName = value;
+					this.SendPropertyChanged("FormName");
+					this.OnFormNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastChange", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lastChange
+		{
+			get
+			{
+				return this._lastChange;
+			}
+			set
+			{
+				if ((this._lastChange != value))
+				{
+					this.OnlastChangeChanging(value);
+					this.SendPropertyChanging();
+					this._lastChange = value;
+					this.SendPropertyChanged("lastChange");
+					this.OnlastChangeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Locked", DbType="Bit")]
+		public System.Nullable<bool> Locked
+		{
+			get
+			{
+				return this._Locked;
+			}
+			set
+			{
+				if ((this._Locked != value))
+				{
+					this.OnLockedChanging(value);
+					this.SendPropertyChanging();
+					this._Locked = value;
+					this.SendPropertyChanged("Locked");
+					this.OnLockedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastUpdatedBy", DbType="VarChar(MAX)")]
+		public string LastUpdatedBy
+		{
+			get
+			{
+				return this._LastUpdatedBy;
+			}
+			set
+			{
+				if ((this._LastUpdatedBy != value))
+				{
+					this.OnLastUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._LastUpdatedBy = value;
+					this.SendPropertyChanged("LastUpdatedBy");
+					this.OnLastUpdatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_introduction", DbType="VarChar(MAX)")]
+		public string introduction
+		{
+			get
+			{
+				return this._introduction;
+			}
+			set
+			{
+				if ((this._introduction != value))
+				{
+					this.OnintroductionChanging(value);
+					this.SendPropertyChanging();
+					this._introduction = value;
+					this.SendPropertyChanged("introduction");
+					this.OnintroductionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntroductionColleges", DbType="VarChar(MAX)")]
+		public string IntroductionColleges
+		{
+			get
+			{
+				return this._IntroductionColleges;
+			}
+			set
+			{
+				if ((this._IntroductionColleges != value))
+				{
+					this.OnIntroductionCollegesChanging(value);
+					this.SendPropertyChanging();
+					this._IntroductionColleges = value;
+					this.SendPropertyChanged("IntroductionColleges");
+					this.OnIntroductionCollegesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntroductionSupervisor", DbType="VarChar(MAX)")]
+		public string IntroductionSupervisor
+		{
+			get
+			{
+				return this._IntroductionSupervisor;
+			}
+			set
+			{
+				if ((this._IntroductionSupervisor != value))
+				{
+					this.OnIntroductionSupervisorChanging(value);
+					this.SendPropertyChanging();
+					this._IntroductionSupervisor = value;
+					this.SendPropertyChanged("IntroductionSupervisor");
+					this.OnIntroductionSupervisorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IntroductionAccompanied", DbType="VarChar(MAX)")]
+		public string IntroductionAccompanied
+		{
+			get
+			{
+				return this._IntroductionAccompanied;
+			}
+			set
+			{
+				if ((this._IntroductionAccompanied != value))
+				{
+					this.OnIntroductionAccompaniedChanging(value);
+					this.SendPropertyChanging();
+					this._IntroductionAccompanied = value;
+					this.SendPropertyChanged("IntroductionAccompanied");
+					this.OnIntroductionAccompaniedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_Section", Storage="_tbl_Sections", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<tbl_Section> tbl_Sections
+		{
+			get
+			{
+				return this._tbl_Sections;
+			}
+			set
+			{
+				this._tbl_Sections.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_tbl_ConnectorFormFill", Storage="_tbl_ConnectorFormFills", ThisKey="formId", OtherKey="formId")]
+		public EntitySet<tbl_ConnectorFormFill> tbl_ConnectorFormFills
+		{
+			get
+			{
+				return this._tbl_ConnectorFormFills;
+			}
+			set
+			{
+				this._tbl_ConnectorFormFills.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForOrganiztion", Storage="_ReportForOrganiztions", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<ReportForOrganiztion> ReportForOrganiztions
+		{
+			get
+			{
+				return this._ReportForOrganiztions;
+			}
+			set
+			{
+				this._ReportForOrganiztions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForIndividual", Storage="_ReportForIndividuals", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<ReportForIndividual> ReportForIndividuals
+		{
+			get
+			{
+				return this._ReportForIndividuals;
+			}
+			set
+			{
+				this._ReportForIndividuals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tblForm_ReportForClass", Storage="_ReportForClasses", ThisKey="formId", OtherKey="FormId")]
+		public EntitySet<ReportForClass> ReportForClasses
+		{
+			get
+			{
+				return this._ReportForClasses;
+			}
+			set
+			{
+				this._ReportForClasses.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_Sections(tbl_Section entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_tbl_Sections(tbl_Section entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
+		private void attach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_tbl_ConnectorFormFills(tbl_ConnectorFormFill entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
+		private void attach_ReportForOrganiztions(ReportForOrganiztion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_ReportForOrganiztions(ReportForOrganiztion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
+		private void attach_ReportForIndividuals(ReportForIndividual entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_ReportForIndividuals(ReportForIndividual entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
+		}
+		
+		private void attach_ReportForClasses(ReportForClass entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = this;
+		}
+		
+		private void detach_ReportForClasses(ReportForClass entity)
+		{
+			this.SendPropertyChanging();
+			entity.tblForm = null;
 		}
 	}
 }

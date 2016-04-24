@@ -52,6 +52,7 @@ namespace BasisForAppraisal_finalProject.ViewModel
             this.CompanyId = connector.companyId;
             this.FormIdConnector = connector.formId;
             FillterQuestions();
+            FillterIntroduction();
             
 	    }
 
@@ -65,6 +66,21 @@ namespace BasisForAppraisal_finalProject.ViewModel
                 questions = questions.Where(x => x.ForSelf).ToList();
             else
                 questions = questions.Where(x => x.Forcolleagues).ToList();
+
+        }
+
+
+        public void FillterIntroduction()
+        {
+            if (dm.IsManager(FillBy))
+                this.From.IntroductionForForm = this.From.IntroductionSupervisor;
+            else if (dm.IsAccompanied(FillBy))
+                this.From.IntroductionForForm = this.From.IntroductionAccompanied;
+            else if (FillBy.Equals(FillOn))
+                this.From.IntroductionForForm = this.From.introduction;
+            else
+                this.From.IntroductionForForm = this.From.IntroductionColleges;
+
 
         }
 

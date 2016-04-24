@@ -19,7 +19,7 @@
         {
             if(Model.selectedAnswer == 0)
             { 
-            @Html.RadioButtonFor(a => a.selectedAnswer, -1, new { @checked = "true" })
+            @Html.RadioButtonFor(a => a.selectedAnswer, -1, new { @checked = "true", @readonly = "readonly", style = "height: 20px;  width:20px; " })
             <p>איני יכול להעריך</p>
         }
         }
