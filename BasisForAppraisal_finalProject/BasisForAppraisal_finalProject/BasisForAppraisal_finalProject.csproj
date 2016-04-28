@@ -88,6 +88,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -192,6 +196,7 @@
     <Compile Include="BL\ReportBL.cs" />
     <Compile Include="Common\Constans\ResultOperationConstans.cs" />
     <Compile Include="Common\Constans\RolesConstans.cs" />
+    <Compile Include="Common\IIS\LifeSaver.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArrayList.cs" />
     <Compile Include="Controllers\Enum\WorkShopActions.cs" />

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.Authorize;
+using BasisForAppraisal_finalProject.Common.IIS;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
@@ -28,6 +29,12 @@ namespace BasisForAppraisal_finalProject.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult LifeSaverForIIS()
+        {
+            LifeSaver.RecycleAppPools();
+            return RedirectToAction("Index");
         }
     }
 }
