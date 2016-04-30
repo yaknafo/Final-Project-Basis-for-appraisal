@@ -35,6 +35,8 @@ namespace BasisForAppraisal_finalProject.Models
          public bool IsClose { get; set; }
 
          public string Leader { get; set; }
+
+         public bool IsLeader { get; set; }
          
 
          public FormReportPerEmployee()

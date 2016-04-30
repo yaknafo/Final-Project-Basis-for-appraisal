@@ -7,10 +7,12 @@ using BasisForAppraisal_finalProject.DBML;
 using BasisForAppraisal_finalProject.Models;
 using BasisForAppraisal_finalProject.ViewModel;
 using System.Threading.Tasks;
+using BasisForAppraisal_finalProject.Authorize;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
-  
+      [CustomAuthorizeAttribute(RolesArray = new []{"Guest","Admin"})]
+
     public class FormFillerController : Controller
     {
         private DataManager DM = new DataManager();

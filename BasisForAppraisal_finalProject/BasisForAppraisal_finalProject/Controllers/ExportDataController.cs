@@ -10,9 +10,11 @@ using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BasisForAppraisal_finalProject.BL;
+using BasisForAppraisal_finalProject.Authorize;
 
 namespace BasisForAppraisal_finalProject.Controllers
 {
+    [CustomAuthorizeAttribute(Roles = "Admin")]
     public class ExportDataController : Controller
     {
 

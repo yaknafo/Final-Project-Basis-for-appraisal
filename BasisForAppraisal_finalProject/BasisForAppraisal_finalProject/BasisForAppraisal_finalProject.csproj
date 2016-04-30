@@ -257,6 +257,7 @@
     <Compile Include="ViewModel\ExportData\ReportForUnitViewModel.cs" />
     <Compile Include="ViewModel\FormFillerViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
+    <Compile Include="ViewModel\Guest\GuestMainViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
     <Compile Include="ViewModel\QuestionPreview.cs" />
     <Compile Include="Common\Enum\QuestionType.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
     <Content Include="JS\GoogleCharts\PieChart.js" />
+    <Content Include="JS\Guest\GuestMain.js" />
     <Content Include="photos\addQues.png" />
     <Content Include="photos\backTo.png" />
     <Content Include="photos\deleteQ.png" />
@@ -529,6 +531,7 @@
     <Content Include="Views\ExportData\_UnitsForOrgCbx.cshtml" />
     <Content Include="Views\Report\ReportPerClass.cshtml" />
     <Content Include="Views\Report\ReportPerUnit.cshtml" />
+    <Content Include="Views\Guest\ReportPerEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />
