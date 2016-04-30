@@ -123,15 +123,16 @@
         </div>
         if(Model.IsLeader)
         { 
-    <div>
+    <div class="pull-right">
         <table>
             <tr>
-                <td class="col-lg-4">@Html.CheckBoxFor(x => x.IsClose, new { @cols = 120, @rows = 20 })</td>
-                <td class ="col-lg-4"><h4>זמין לשגריר    </h4></td>
+                <td class="col-lg-4">@Html.CheckBoxFor(x => x.IsClose, new { style = "height: 30px;  width:30px; margin-left:20px;" })</td>
+                <td><h4 style="margin-right:5%">זמין לשגריר   </h4></td>
+                <td><input type="submit" value="Save" class="btn-primary btn-lg"></td>
             </tr>
         </table>
 
-        <input type="submit" value="Save" class="btn-primary btn-lg">
+      
     </div>
         }
     }

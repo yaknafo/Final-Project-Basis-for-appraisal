@@ -67,7 +67,7 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             else
             {
-                viewModelGuest.Reports = MD.ReportForIndividuals.Where(x => x.IndividualId == empa.employeeId).ToList();
+                viewModelGuest.Reports = MD.ReportForIndividuals.Where(x => x.IndividualId == empa.employeeId && x.IsClose).ToList();
             }
 
             return View(viewModelGuest);
