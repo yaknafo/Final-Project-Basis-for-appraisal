@@ -229,7 +229,7 @@ namespace BasisForAppraisal_finalProject.BL
             {
                 line.HighScore = 0;
                 line.LowScore = 0;
-               // line.MidScore = 0;
+                line.MidScore = 0;
             }
 
 
