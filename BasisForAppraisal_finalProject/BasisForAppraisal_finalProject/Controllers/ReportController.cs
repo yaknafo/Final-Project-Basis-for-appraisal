@@ -67,13 +67,25 @@ namespace BasisForAppraisal_finalProject.Controllers
         }
 
 
-        public ActionResult ReportPerOrganiztion(int companyId, int forms)
+        public ActionResult ReportPerOrganiztion(int companyId, int forms, bool img = false)
         {
             var dm = new DataManager();
             var reportForOrganiztion = dm.ReportForOrganiztions.SingleOrDefault(x => x.CompanyId == companyId && x.FormId == forms);
             if (reportForOrganiztion == null)
                 return View();
             var viewModel = new ReportForOrgViewModel(reportForOrganiztion);
+            viewModel.IsImg = img;
+            return View(viewModel);
+        }
+
+        public ActionResult ReportPerOrganiztionImg(int companyId, int forms, bool img = false)
+        {
+            var dm = new DataManager();
+            var reportForOrganiztion = dm.ReportForOrganiztions.SingleOrDefault(x => x.CompanyId == companyId && x.FormId == forms);
+            if (reportForOrganiztion == null)
+                return View();
+            var viewModel = new ReportForOrgViewModel(reportForOrganiztion);
+            viewModel.IsImg = img;
             return View(viewModel);
         }
 
@@ -88,7 +100,27 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(viewModel);
         }
 
+        public ActionResult ReportPerClassImg(int companyId, int forms, string unit, string cls)
+        {
+            var dm = new DataManager();
+            var reportForClass = dm.ReportForClasses.SingleOrDefault(x => x.companyId == companyId && x.FormId == forms && x.unitName == unit && x.className == cls);
+            if (reportForClass == null)
+                return View();
+            var viewModel = new ReportForClassViewModel(reportForClass);
+            return View(viewModel);
+        }
+
         public ActionResult ReportPerUnit(int companyId, int forms, string unit)
+        {
+            var dm = new DataManager();
+            var reportForUnit = dm.GetReportUnit(forms, companyId, unit);
+            if (reportForUnit == null)
+                return View();
+            var viewModel = new ReportForUnitViewModel(reportForUnit);
+            return View(viewModel);
+        }
+
+        public ActionResult ReportPerUnitImg(int companyId, int forms, string unit)
         {
             var dm = new DataManager();
             var reportForUnit = dm.GetReportUnit(forms, companyId, unit);

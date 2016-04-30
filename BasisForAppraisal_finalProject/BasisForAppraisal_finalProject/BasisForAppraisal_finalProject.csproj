@@ -532,6 +532,9 @@
     <Content Include="Views\Report\ReportPerClass.cshtml" />
     <Content Include="Views\Report\ReportPerUnit.cshtml" />
     <Content Include="Views\Guest\ReportPerEmployee.cshtml" />
+    <Content Include="Views\Report\ReportPerOrganiztionImg.cshtml" />
+    <Content Include="Views\Report\ReportPerClassImg.cshtml" />
+    <Content Include="Views\Report\ReportPerUnitImg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

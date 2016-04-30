@@ -21,6 +21,8 @@ namespace BasisForAppraisal_finalProject.ViewModel.ExportData
 
         public Dictionary<string, List<ReportForOrganiztionLine>> CategoriesDictionaryLines { set; get; }
 
+        public bool IsImg { set; get; }
+
         
 
 
