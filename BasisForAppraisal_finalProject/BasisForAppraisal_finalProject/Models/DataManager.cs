@@ -112,6 +112,17 @@ namespace BasisForAppraisal_finalProject.Models
             get { return manager.ReportForOrganiztionLines; }
         }
 
+        public Table<ReportForUnit> ReportForUnites
+        {
+            get { return manager.ReportForUnits; }
+        }
+
+        public Table<ReportForUnitLine> ReportForUnitLines
+        {
+            get { return manager.ReportForUnitLines; }
+        }
+
+
         public Table<ReportForClass> ReportForClasses
         {
             get { return manager.ReportForClasses; }
@@ -728,6 +739,80 @@ namespace BasisForAppraisal_finalProject.Models
             return manager.ReportForCompanyMultipleChoiceListAnswers.Where(x => x.FormId == formId && x.companyId == OrganiztionId).ToList();
         }
 
+
+
+        //--------- Report For Unit
+        public void SaveReportForUnit(ReportForUnit report)
+        {
+            var reportFromDb = manager.ReportForUnits.SingleOrDefault(x => x.companyId == report.companyId && x.FormId == report.FormId && x.unitName == report.unitName);
+            if (reportFromDb == null)
+            {
+                report.CreationDate = DateTime.Now;
+                report.LastCalculationDate = DateTime.Now;
+                manager.ReportForUnits.InsertOnSubmit(report);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                reportFromDb.LastCalculationDate = DateTime.Now;
+                manager.SubmitChanges();
+            }
+        }
+
+        public void SaveReportForUnitLines(ReportForUnitLine line)
+        {
+            var lineFromDb = manager.ReportForUnitLines.FirstOrDefault(x => x.companyId == line.companyId && x.unitName == line.unitName && x.FormId == line.FormId && line.QuestionId == x.QuestionId);
+            if (lineFromDb == null)
+            {
+                manager.ReportForUnitLines.InsertOnSubmit(line);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                manager.SubmitChanges();
+            }
+        }
+
+        public void SaveReportForUnitMultipleChoiceListAnswer(ReportForUnitMultipleChoiceListAnswer line)
+        {
+            var lineFromDb = manager.ReportForUnitMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == line.companyId && x.FormId == line.FormId && line.QuestionId == x.QuestionId && x.unitName == line.unitName && x.AnswerId == line.AnswerId);
+            if (lineFromDb == null)
+            {
+                manager.ReportForUnitMultipleChoiceListAnswers.InsertOnSubmit(line);
+                manager.SubmitChanges();
+            }
+            else
+            {
+                manager.SubmitChanges();
+            }
+        }
+
+        //--Get
+
+        public ReportForUnit GetReportUnit(int formId, int OrganiztionId, string unitName)
+        {
+            return manager.ReportForUnits.FirstOrDefault(x => x.FormId == formId && x.companyId == OrganiztionId && x.unitName == unitName);
+        }
+
+        public ReportForUnitLine GetReportUnitLine(int formId, int OrganiztionId, string unitName, int questionId)
+        {
+            return manager.ReportForUnitLines.FirstOrDefault(x => x.FormId == formId && x.companyId == OrganiztionId && x.unitName == unitName && x.QuestionId == questionId);
+        }
+
+        public ReportForUnitMultipleChoiceListAnswer GetSingleLineReportForUnitMultipleChoiceListAnswer(int formId, int OrganiztionId, string unit, int answerId)
+        {
+            return manager.ReportForUnitMultipleChoiceListAnswers.FirstOrDefault(x => x.companyId == OrganiztionId && x.FormId == formId && x.unitName == unit && x.AnswerId == answerId);
+        }
+
+        public List<ReportForUnitMultipleChoiceListAnswer> GetReportForUnitMultipleChoiceListAnswers(int formId, int OrganiztionId, string unit)
+        {
+            return manager.ReportForUnitMultipleChoiceListAnswers.Where(x => x.FormId == formId && x.companyId == OrganiztionId && x.unitName == unit).ToList();
+        }
+
+
+
+
+
        ////  ------------------------------- secutiry --------------------------------------------------------------//
 
         public bool IsManager(string id){
@@ -738,6 +823,7 @@ namespace BasisForAppraisal_finalProject.Models
         {
             return (bool)Employees.FirstOrDefault(x => x.employeeId == id).IsAccompanied;
         }
+
 
        // public async void CreateRole(string roleName)
        // {

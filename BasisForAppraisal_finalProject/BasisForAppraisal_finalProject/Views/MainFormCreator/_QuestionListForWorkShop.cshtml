@@ -5,5 +5,11 @@
 @Html.EditorFor(x => x.CurrentSection)
 @Html.EditorForModel();
 </div>
+<div>
+    <!--------------------------------------Error & sucess  section      -->
+    @Html.Partial("_Failed")
+    @Html.Partial("_Success")
+    <!--------------------------------------Error & sucess  section      -->
+</div>
 <!--       List of question -------------------------------------------------------------->
 <div id="edit">@Html.EditorFor(a => a.Questions)</div>

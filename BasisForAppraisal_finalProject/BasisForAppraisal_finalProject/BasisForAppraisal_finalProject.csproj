@@ -254,6 +254,7 @@
     <Compile Include="ViewModel\ExportData\ReportForClassViewModel.cs" />
     <Compile Include="ViewModel\ExportData\ReportForOrganiztionLinesViewModel.cs" />
     <Compile Include="ViewModel\ExportData\ReportForOrgViewModel.cs" />
+    <Compile Include="ViewModel\ExportData\ReportForUnitViewModel.cs" />
     <Compile Include="ViewModel\FormFillerViewModel.cs" />
     <Compile Include="ViewModel\FormViewModel.cs" />
     <Compile Include="ViewModel\ManageFormViewModel.cs" />
@@ -527,6 +528,7 @@
     <Content Include="Views\ExportData\chartimage.cshtml" />
     <Content Include="Views\ExportData\_UnitsForOrgCbx.cshtml" />
     <Content Include="Views\Report\ReportPerClass.cshtml" />
+    <Content Include="Views\Report\ReportPerUnit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBML\Pratical\" />

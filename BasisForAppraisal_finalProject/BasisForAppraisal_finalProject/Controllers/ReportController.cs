@@ -88,6 +88,16 @@ namespace BasisForAppraisal_finalProject.Controllers
             return View(viewModel);
         }
 
+        public ActionResult ReportPerUnit(int companyId, int forms, string unit)
+        {
+            var dm = new DataManager();
+            var reportForUnit = dm.GetReportUnit(forms, companyId, unit);
+            if (reportForUnit == null)
+                return View();
+            var viewModel = new ReportForUnitViewModel(reportForUnit);
+            return View(viewModel);
+        }
+
 
         public JsonResult GetReportsLines(int companyId, int form )
         {
@@ -124,6 +134,40 @@ namespace BasisForAppraisal_finalProject.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetReportsLinesForUnit(int companyId, int form, string unit)
+        {
+
+            var dm = new DataManager();
+            var reportForUnit = dm.ReportForUnites.SingleOrDefault(x => x.companyId == companyId && x.FormId == form && x.unitName == unit);
+            var data = new List<ReportForOrganiztionLinesViewModel>();
+            var listData = reportForUnit.ReportForUnitLines.ToArray();
+            foreach (ReportForUnitLine r in listData)
+            {
+                var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = r.QuestionId, TypeQuestion = r.TypeQuestionName, HighScore = r.HighScore, MidScore = r.MidScore, LowScore = r.LowScore, TitleQuestion = r.tbl_IntentionalQuestion.Title };
+                data.Add(tempLine);
+            }
+
+            //--------------- Summary for 2 type of question scoial and working question
+            var SummaryCatgory = listData.Select(x => x.tbl_TypeQuestion).Where(x => x.Name == "Socialstatus" || x.Name == "EmploymentStatus").Distinct();
+            foreach (tbl_TypeQuestion ty in SummaryCatgory)
+            {
+                var allCatgoryQuestions = listData.Where(x => x.tbl_TypeQuestion == ty).ToList();
+                var highScore = allCatgoryQuestions.Sum(x => x.HighScore);
+                var midScore = allCatgoryQuestions.Sum(x => x.MidScore); ;
+                var lowScore = allCatgoryQuestions.Sum(x => x.LowScore);
+                var idForView = (ty.Name == "Socialstatus") ? -1 : -2;
+                var tempLine = new ReportForOrganiztionLinesViewModel() { QuestionId = idForView, TypeQuestion = ty.Description, HighScore = highScore, MidScore = midScore, LowScore = lowScore, TitleQuestion = ty.Description };
+                data.Add(tempLine);
+            }
+
+            var answers = dm.GetReportForUnitMultipleChoiceListAnswers(form, companyId, unit);
+            foreach (ReportForUnitMultipleChoiceListAnswer r in answers)
+            {
+                var answerReport = new ReportForOrganiztionLinesViewModel() { QuestionId = r.AnswerId, HighScore = r.numberOfMarket, MidScore = 0, LowScore = r.numberOfShowTotal - r.numberOfMarket, TitleQuestion = r.tbl_IntentionalAnswer.Text };
+                data.Add(answerReport);
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult GetReportsLinesForClass(int companyId, int form, string unit, string cls)
         {

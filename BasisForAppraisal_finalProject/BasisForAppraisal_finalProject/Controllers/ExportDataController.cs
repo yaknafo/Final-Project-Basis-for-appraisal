@@ -268,7 +268,17 @@ namespace BasisForAppraisal_finalProject.Controllers
             }
             if (!noCalculation)
                 if(levels == 1)
-            reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId);
+                {
+                    reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId);
+                }
+                // for Unit
+                else if (levels == 2)
+                {
+                    var empIds = dManager.Employees.Where(x => x.companyId == Companyiesa && x.unitName == units && !x.IsAccompanied && !x.IsManger.Value).Select(x => x.employeeId).ToList();
+                    reportBL.CalculateReportForUnit(Companyiesa, form.FormId, units, empIds);
+                    return RedirectToAction("ReportPerUnit", "Report", new { companyId = Companyiesa, forms = form.FormId, unit = units});
+                }
+                // for Class
                 else if (levels == 3)
                 {
                     var empIds = dManager.Employees.Where(x => x.companyId == Companyiesa && x.unitName == units && x.className == cls &&  !x.IsAccompanied && !x.IsManger.Value).Select(x => x.employeeId).ToList();
