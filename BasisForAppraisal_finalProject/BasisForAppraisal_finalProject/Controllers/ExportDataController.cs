@@ -271,21 +271,24 @@ namespace BasisForAppraisal_finalProject.Controllers
             if (!noCalculation)
                 if(levels == 1)
                 {
-                    reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId);
+                    var empIds = dManager.Employees.Where(x => x.companyId == Companyiesa  && !x.IsAccompanied && !x.IsManger.Value).Select(x => x.employeeId).ToList();
+                    var empIdsFillter = dManager.ConnectorAnswers.Where(x => empIds.Contains(x.employeeOnId)).Select(x => x.employeeOnId).Distinct().ToList();
+                    reportBL.CalculateReportForOrganiztion(Companyiesa, form.FormId, empIdsFillter);
                 }
                 // for Unit
                 else if (levels == 2)
                 {
                     var empIds = dManager.Employees.Where(x => x.companyId == Companyiesa && x.unitName == units && !x.IsAccompanied && !x.IsManger.Value).Select(x => x.employeeId).ToList();
-                    reportBL.CalculateReportForUnit(Companyiesa, form.FormId, units, empIds);
+                    var empIdsFillter = dManager.ConnectorAnswers.Where(x => empIds.Contains(x.employeeOnId)).Select(x => x.employeeOnId).Distinct().ToList();
+                    reportBL.CalculateReportForUnit(Companyiesa, form.FormId, units, empIdsFillter);
                     return RedirectToAction("ReportPerUnit", "Report", new { companyId = Companyiesa, forms = form.FormId, unit = units});
                 }
                 // for Class
                 else if (levels == 3)
                 {
                     var empIds = dManager.Employees.Where(x => x.companyId == Companyiesa && x.unitName == units && x.className == cls &&  !x.IsAccompanied && !x.IsManger.Value).Select(x => x.employeeId).ToList();
-
-                    reportBL.CalculateReportForClass(Companyiesa, form.FormId,units,cls,empIds);
+                    var empIdsFillter = dManager.ConnectorAnswers.Where(x => empIds.Contains(x.employeeOnId)).Select(x => x.employeeOnId).Distinct().ToList();
+                    reportBL.CalculateReportForClass(Companyiesa, form.FormId, units, cls, empIdsFillter);
                     return RedirectToAction("ReportPerClass", "Report", new { companyId = Companyiesa, forms = form.FormId, unit= units, cls=cls });
                 }
 

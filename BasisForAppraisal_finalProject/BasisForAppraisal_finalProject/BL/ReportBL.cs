@@ -52,18 +52,17 @@ namespace BasisForAppraisal_finalProject.BL
 
         //---------------------------- Calculate --------------------------------------------------------------
 
-        public void CalculateReportForOrganiztion(int companyId, int formId)
+        public void CalculateReportForOrganiztion(int companyId, int formId, List<string> empIds)
         {
             DataManager DMO = new DataManager();
             var organiztion = DMO.Companyies.FirstOrDefault(x => x.companyId == companyId);
             if (organiztion == null)
                 return;
-            var OrganiztionEmployessId = DMO.ConnectorAnswers.Where(x => x.companyId == organiztion.companyId && x.FormId == formId).Select(x => x.employeeOnId).Distinct().ToList();
 
 
             // create report for invidual for all the employee in the company
             //TODO: this is so slow we need to with that something
-           OrganiztionEmployessId.ForEach(x => ReportPerEmployee(x, formId));
+            empIds.ForEach(x => ReportPerEmployee(x, formId));
 
             var report = new ReportForOrganiztion() { CompanyId = organiztion.companyId, FormId = formId };
             DMO.SaveReportForOrganiztion(report);
@@ -141,8 +140,8 @@ namespace BasisForAppraisal_finalProject.BL
                 }
 
                 int numberQuestionsOfFiller = 0;
-                if (OrganiztionEmployessId.Count != 0)
-                    numberQuestionsOfFiller = OrganiztionEmployessId.Count;
+                if (empIds.Count != 0)
+                    numberQuestionsOfFiller = empIds.Count;
 
                 foreach (var i in q.tbl_IntentionalAnswers)
                 {
