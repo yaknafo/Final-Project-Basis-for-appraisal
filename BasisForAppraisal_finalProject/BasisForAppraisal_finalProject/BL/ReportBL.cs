@@ -142,7 +142,7 @@ namespace BasisForAppraisal_finalProject.BL
 
                 int numberQuestionsOfFiller = 0;
                 if (OrganiztionEmployessId.Count != 0)
-                    numberQuestionsOfFiller = AnswerForQuestion.Count / OrganiztionEmployessId.Count;
+                    numberQuestionsOfFiller = OrganiztionEmployessId.Count;
 
                 foreach (var i in q.tbl_IntentionalAnswers)
                 {
